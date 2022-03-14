@@ -15,6 +15,10 @@ const count = ref(0)
     +
     <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
   </p>
+  <p>
+    <router-link to="/">Go to Home</router-link>
+    <router-link to="/login">Go to Login</router-link>
+  </p>
 
   <p>See <code>README.md</code> for more information.</p>
 
