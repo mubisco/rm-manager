@@ -4,20 +4,17 @@
 </script>
 
 <template>
-  <img
-    alt="Vue logo"
-    src="@/UI/assets/logo.png"
-  >
+  <div class="flex">
+    <h1 class="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+    <div class="text-center">
+      <img
+        class="mx-auto mt-2"
+        alt="Vue logo"
+        src="@/UI/assets/logo.png"
+      >
+    </div>
+  </div>
   <router-view />
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
