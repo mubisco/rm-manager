@@ -3,4 +3,6 @@ import router from '@/UI/router/index'
 import App from '@/UI/App.vue'
 import './index.css'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
