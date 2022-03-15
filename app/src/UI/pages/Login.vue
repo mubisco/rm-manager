@@ -3,6 +3,6 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 </script>
 
-<template>
-  <h1>This should be login page</h1>
+<template lang="pug">
+h1 This is the login
 </template>
