@@ -34,12 +34,6 @@
         <h2 class="headline font-weight-bold mb-5">
           What's next?
         </h2>
-        <p>
-          <router-link :to="{ name: 'Home' }">Go to Home</router-link>
-        </p>
-        <p>
-          <router-link :to="{ name: 'Login' }">Go to Login</router-link>
-        </p>
 
         <v-row justify="center">
           <a
