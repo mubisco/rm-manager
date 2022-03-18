@@ -1,13 +1,32 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import router from '@/UI/router/index'
+
+const loading = ref(false)
 const valid = ref(false)
 const email = ref('')
 const password = ref('')
+const showLoginError = ref(false)
 const canLogin = computed(() => !emailError.value && password.value !== '')
 const emailError = computed(():boolean => {
   const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
   return email.value !== '' && !email.value.match(regexEmail);
 })
+
+const onLoginButtonClicked = async ():Promise<void> => {
+  loading.value = true
+  const response = await fetch('/api/login', {
+    method: 'POST',
+    body: JSON.stringify({ email: email.value, pass: password.value })
+  })
+  if (response.status === 403) {
+    showLoginError.value = true;
+    loading.value = false
+    return
+  }
+  // const parsedResponse = await response.json();
+  router.push({ name: 'Dashboard' })
+}
 </script>
 
 <template>
@@ -60,11 +79,21 @@ const emailError = computed(():boolean => {
       <v-btn
         v-cy:login-button
         color="primary"
-        variant="contained-text"
+        :prepend-icon="loading ? 'mdi-loading' : ''"
+        variant="contained"
         :disabled="!canLogin"
+        @click="onLoginButtonClicked"
       >
         Login
       </v-btn>
     </v-card-actions>
   </v-card>
+  <v-snackbar
+    v-model="showLoginError"
+    v-cy:login-error
+    timeout="3000"
+    color="error"
+  >
+    Login not allowed. User/Pass wrong.
+  </v-snackbar>
 </template>

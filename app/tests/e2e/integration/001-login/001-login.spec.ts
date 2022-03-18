@@ -37,4 +37,13 @@ describe('GIVEN a login page', () => {
       cy.get('[data-cy="login-button"]').should('not.be.disabled');
     })
   })
+  context('WHEN I click login button', () => {
+    before(() => {
+      cy.intercept('POST', '/api/login', { delay: 500 }).as('loginRoute');
+      cy.get('[data-cy="login-button"]').click();
+    })
+    it('THEN should show loading icon', () => {
+      cy.get('[data-cy="login-button"]').get('i').should('exist')
+    })
+  })
 })
