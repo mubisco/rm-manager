@@ -3,6 +3,11 @@
 
 <template>
   <div class="mt-8 d-flex justify-center">
-    <login-form />
+    <h1>
+      <v-icon color="primary">
+        mdi-wrench
+      </v-icon>
+      Forgot password page --- UNDER CONSTRUCTION ---
+    </h1>
   </div>
 </template>
