@@ -15,7 +15,9 @@ defineEmits<{ (eventName: 'drawer:toggle'): void }>()
         @click="() => $emit('drawer:toggle')"
       />
     </template>
-    <v-app-bar-title>SIR</v-app-bar-title>
+    <v-app-bar-title tag="div">
+      SIR
+    </v-app-bar-title>
     <template #append>
       <v-btn
         icon="mdi-account"
