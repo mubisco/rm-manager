@@ -12,16 +12,13 @@ defineEmits<{ (eventName: 'drawer:toggle'): void }>()
   >
     <template #prepend>
       <v-app-bar-nav-icon
-        color="primary"
         @click="() => $emit('drawer:toggle')"
       />
-
-      <v-app-bar-title>SIR</v-app-bar-title>
     </template>
+    <v-app-bar-title>SIR</v-app-bar-title>
     <template #append>
       <v-btn
         icon="mdi-account"
-        color="primary"
         :to="{ name: 'Login' }"
       />
     </template>
