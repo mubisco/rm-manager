@@ -3,7 +3,11 @@ import { ref, computed } from 'vue'
 const valid = ref(false)
 const email = ref('')
 const password = ref('')
-const canLogin = computed(() => email.value != '' && password.value !== '')
+const canLogin = computed(() => !emailError.value && password.value !== '')
+const emailError = computed(():boolean => {
+  const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+  return email.value !== '' && !email.value.match(regexEmail);
+})
 </script>
 
 <template>
@@ -28,6 +32,7 @@ const canLogin = computed(() => email.value != '' && password.value !== '')
             variant="outlined"
             color="primary"
             required
+            :error="emailError"
           />
         </div>
         <div>
@@ -41,11 +46,13 @@ const canLogin = computed(() => email.value != '' && password.value !== '')
             required
           />
         </div>
-        <p
-          v-cy:login-forgot
-          class="text-right"
-        >
-          Forgot your password?
+        <p class="text-right">
+          <router-link
+            v-cy:login-forgot
+            :to="{name: 'ForgotPassword'}"
+          >
+            Forgot your password?
+          </router-link>
         </p>
       </v-form>
     </v-card-text>
@@ -53,6 +60,7 @@ const canLogin = computed(() => email.value != '' && password.value !== '')
       <v-btn
         v-cy:login-button
         color="primary"
+        variant="contained-text"
         :disabled="!canLogin"
       >
         Login
