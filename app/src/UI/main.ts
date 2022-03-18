@@ -6,7 +6,16 @@ import App from '@/UI/layout/App.vue'
 
 loadFonts()
 
-createApp(App)
-  .use(vuetify)
-  .use(router)
-  .mount('#app')
+const app = createApp(App)
+app.directive('cy', {
+  // en función de la variable NODE_ENV escupo o no el valor
+  beforeMount: (el, binding) => {
+    el.dataset.cy = binding.arg
+  },
+  updated: (el, binding) => {
+    el.dataset.cy = binding.arg
+  }
+})
+app.use(vuetify)
+app.use(router)
+app.mount('#app')

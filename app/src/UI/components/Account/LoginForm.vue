@@ -16,10 +16,14 @@ const canLogin = computed(() => email.value != '' && password.value !== '')
       </v-card-header-text>
     </v-card-header>
     <v-card-text>
-      <v-form v-model="valid">
+      <v-form
+        v-model="valid"
+        v-cy:login-form
+      >
         <div>
           <v-text-field
             v-model="email"
+            v-cy:login-email
             label="E-mail"
             variant="outlined"
             color="primary"
@@ -29,6 +33,7 @@ const canLogin = computed(() => email.value != '' && password.value !== '')
         <div>
           <v-text-field
             v-model="password"
+            v-cy:login-password
             label="Password"
             variant="outlined"
             color="primary"
@@ -36,13 +41,17 @@ const canLogin = computed(() => email.value != '' && password.value !== '')
             required
           />
         </div>
-        <p class="text-right">
+        <p
+          v-cy:login-forgot
+          class="text-right"
+        >
           Forgot your password?
         </p>
       </v-form>
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
       <v-btn
+        v-cy:login-button
         color="primary"
         :disabled="!canLogin"
       >
