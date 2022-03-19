@@ -1,0 +1,10 @@
+{
+  "login": {
+    "title": "Iniciar sesión",
+    "email": "Email",
+    "password": "Contraseña",
+    "forgot-password": "¿Olvidaste tu contraseña?",
+    "action": "Iniciar sesión",
+    "error": "Usuario/Contraseña no válidos. Comprueba los datos introducidos"
+  }
+}

@@ -34,7 +34,7 @@ const onLoginButtonClicked = async ():Promise<void> => {
     <v-card-header>
       <v-card-header-text>
         <v-card-title class="text-primary">
-          Login
+          {{ $t('login.title') }}
         </v-card-title>
       </v-card-header-text>
     </v-card-header>
@@ -47,7 +47,7 @@ const onLoginButtonClicked = async ():Promise<void> => {
           <v-text-field
             v-model="email"
             v-cy:login-email
-            label="E-mail"
+            :label="$t('login.email')"
             variant="outlined"
             color="primary"
             required
@@ -58,7 +58,7 @@ const onLoginButtonClicked = async ():Promise<void> => {
           <v-text-field
             v-model="password"
             v-cy:login-password
-            label="Password"
+            :label="$t('login.password')"
             variant="outlined"
             color="primary"
             type="password"
@@ -70,7 +70,7 @@ const onLoginButtonClicked = async ():Promise<void> => {
             v-cy:login-forgot
             :to="{name: 'ForgotPassword'}"
           >
-            Forgot your password?
+            {{ $t('login.forgot-password') }}
           </router-link>
         </p>
       </v-form>
@@ -84,7 +84,7 @@ const onLoginButtonClicked = async ():Promise<void> => {
         :disabled="!canLogin"
         @click="onLoginButtonClicked"
       >
-        Login
+        {{ $t('login.action') }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -94,6 +94,6 @@ const onLoginButtonClicked = async ():Promise<void> => {
     timeout="3000"
     color="error"
   >
-    Login not allowed. User/Pass wrong.
+    {{ $t('login.error') }}
   </v-snackbar>
 </template>

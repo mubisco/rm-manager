@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from '@vuetify/vite-plugin'
 import path from 'path'
+import vueI18n from '@intlify/vite-plugin-vue-i18n'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +12,10 @@ export default defineConfig({
     vuetify({
       autoImport: true,
     }),
+    vueI18n({
+      globalSFCScope: true,
+      include: path.resolve(__dirname, './src/UI/plugins/locales/**')
+    })
   ],
   define: { 'process.env': {} },
   resolve: {
