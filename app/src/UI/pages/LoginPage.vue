@@ -9,14 +9,12 @@ const loading = ref(false)
 const userStore = useUsers();
 
 const onLoginButtonClicked = async (email: string, password: string):Promise<void> => {
-  console.log(email, password);
   loading.value = true
   const loginResult = await userStore.login(email, password);
   showLoginError.value = !loginResult
   loading.value = false
   if (loginResult === true) {
     router.push({ name: 'Dashboard' })
-    return
   }
 }
 </script>
