@@ -2,24 +2,22 @@
 import { ref } from 'vue'
 import LoginForm from '@/UI/components/Account/LoginForm.vue'
 import router from '@/UI/router/index'
+import { useUsers } from '@/UI/stores/user'
 
 const showLoginError = ref(false)
 const loading = ref(false)
+const userStore = useUsers();
 
 const onLoginButtonClicked = async (email: string, password: string):Promise<void> => {
   console.log(email, password);
   loading.value = true
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    body: JSON.stringify({ email: email, pass: password })
-  })
-  if (response.status === 403) {
-    showLoginError.value = true;
-    loading.value = false
+  const loginResult = await userStore.login(email, password);
+  showLoginError.value = !loginResult
+  loading.value = false
+  if (loginResult === true) {
+    router.push({ name: 'Dashboard' })
     return
   }
-  // const parsedResponse = await response.json();
-  router.push({ name: 'Dashboard' })
 }
 </script>
 

@@ -4,6 +4,7 @@ import { loadFonts } from '@/UI/plugins/webfontloader'
 import { i18n } from '@/UI/plugins/i18n'
 import router from '@/UI/router/index'
 import App from '@/UI/layout/App.vue'
+import { createPinia } from 'pinia'
 
 loadFonts()
 
@@ -18,6 +19,7 @@ app.directive('cy', {
     el.dataset.cy = binding.arg
   }
 })
+app.use(createPinia())
 app.use(vuetify)
 app.use(i18n)
 app.use(router)
