@@ -1,32 +1,16 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import router from '@/UI/router/index'
+import { ref, computed, defineEmits, defineProps } from 'vue'
 
-const loading = ref(false)
-const valid = ref(false)
+defineProps<{ loading: boolean }>()
+defineEmits<{ (eventName: 'login-button-clicked', email: string, password: string): Promise<void> }>()
 const email = ref('')
 const password = ref('')
-const showLoginError = ref(false)
 const canLogin = computed(() => !emailError.value && password.value !== '')
 const emailError = computed(():boolean => {
   const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
   return email.value !== '' && !email.value.match(regexEmail);
 })
 
-const onLoginButtonClicked = async ():Promise<void> => {
-  loading.value = true
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    body: JSON.stringify({ email: email.value, pass: password.value })
-  })
-  if (response.status === 403) {
-    showLoginError.value = true;
-    loading.value = false
-    return
-  }
-  // const parsedResponse = await response.json();
-  router.push({ name: 'Dashboard' })
-}
 </script>
 
 <template>
@@ -40,7 +24,6 @@ const onLoginButtonClicked = async ():Promise<void> => {
     </v-card-header>
     <v-card-text>
       <v-form
-        v-model="valid"
         v-cy:login-form
       >
         <div>
@@ -52,6 +35,7 @@ const onLoginButtonClicked = async ():Promise<void> => {
             color="primary"
             required
             :error="emailError"
+            :disabled="loading"
           />
         </div>
         <div>
@@ -63,6 +47,7 @@ const onLoginButtonClicked = async ():Promise<void> => {
             color="primary"
             type="password"
             required
+            :disabled="loading"
           />
         </div>
         <p class="text-right">
@@ -81,19 +66,11 @@ const onLoginButtonClicked = async ():Promise<void> => {
         color="primary"
         :prepend-icon="loading ? 'mdi-loading' : ''"
         variant="contained"
-        :disabled="!canLogin"
-        @click="onLoginButtonClicked"
+        :disabled="!canLogin || loading"
+        @click="$emit('login-button-clicked', email, password)"
       >
         {{ $t('login.action') }}
       </v-btn>
     </v-card-actions>
   </v-card>
-  <v-snackbar
-    v-model="showLoginError"
-    v-cy:login-error
-    timeout="3000"
-    color="error"
-  >
-    {{ $t('login.error') }}
-  </v-snackbar>
 </template>

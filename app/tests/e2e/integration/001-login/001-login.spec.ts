@@ -9,7 +9,7 @@ describe('GIVEN a login page', () => {
       cy.get('[data-cy="login-password"]').should('exist');
       cy.get('[data-cy="login-forgot"]').should('exist');
       cy.get('[data-cy="login-button"]').should('exist');
-      cy.get('[data-cy="login-button"]').contains('Login').should('be.disabled')
+      cy.get('[data-cy="login-button"]').should('be.disabled')
     })
   })
   context('WHEN I fill email field with wrong value', () => {
