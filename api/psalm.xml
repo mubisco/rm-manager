@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<psalm errorLevel="1">
+  <!--  project configuration -->
+
+  <projectFiles>
+    <directory name="src"/>
+    <ignoreFiles>
+      <directory name="vendor"/>
+      <directory name="tests"/>
+    </ignoreFiles>
+  </projectFiles>
+  <plugins>
+    <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
+      <containerXml>var/cache/dev/App_KernelDevDebugContainer.xml</containerXml>
+      <containerXml>var/cache/dev/App_KernelTestDebugContainer.xml</containerXml>
+    </pluginClass>
+  <pluginClass xmlns="https://getpsalm.org/schema/config" class="Psalm\PhpUnitPlugin\Plugin"/></plugins>
+</psalm>
