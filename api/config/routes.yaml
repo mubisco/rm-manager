@@ -1,5 +1,5 @@
 controllers:
-    resource: ../src/Controller/
+    resource: ../src/Ready/Infrastructure/EntryPoint/Api/ReadyController.php
     type: annotation
 
 kernel:
