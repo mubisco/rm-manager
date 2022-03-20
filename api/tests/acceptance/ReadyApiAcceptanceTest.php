@@ -2,22 +2,37 @@
 
 namespace App\Tests\acceptance;
 
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ReadyApiAcceptanceTest extends WebTestCase
 {
+    private KernelBrowser $client;
+
     /** @test */
-    public function asClientIWantToQueueSimpleMail(): void
+    public function asUserIWantCheckIfApiIsUpAndReady(): void
     {
-        $client = self::createClient();
-        $client->request(
+        $this->givenASingleUser();
+        $this->whenIRequestReadyEnpoint();
+        $this->thenItShouldReturnProperResponse();
+    }
+    private function givenASingleUser(): void
+    {
+        $this->client = self::createClient();
+    }
+    private function whenIRequestReadyEnpoint(): void
+    {
+        $this->client->request(
             'GET',
             'api/ready',
             [],
             [],
             ['CONTENT-TYPE' => 'json/application']
         );
-        $response = json_decode($client->getResponse()->getContent(), true);
+    }
+    private function thenItShouldReturnProperResponse(): void
+    {
+        $response = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertResponseStatusCodeSame(200);
         $this->assertEquals(['ready' => true], $response);
     }
