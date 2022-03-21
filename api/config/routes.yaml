@@ -1,7 +1,3 @@
-controllers:
-    resource: ../src/Ready/Infrastructure/EntryPoint/Api/ReadyController.php
-    type: annotation
-
 kernel:
     resource: ../src/Kernel.php
     type: annotation

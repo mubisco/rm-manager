@@ -2,9 +2,10 @@
 
 namespace App\Ready\Infrastructure\EntryPoint\Api;
 
+use App\Shared\Infrastructure\ControllerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ReadyController
+final class ReadyController implements ControllerInterface
 {
     public function index(): JsonResponse
     {
