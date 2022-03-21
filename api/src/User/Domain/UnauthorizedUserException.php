@@ -2,8 +2,8 @@
 
 namespace App\User\Domain;
 
-use InvalidArgumentException;
+use Exception;
 
-class UnauthorizedUserException extends InvalidArgumentException
+class UnauthorizedUserException extends Exception
 {
 }

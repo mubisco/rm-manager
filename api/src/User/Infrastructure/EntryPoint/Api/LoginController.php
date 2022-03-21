@@ -5,6 +5,8 @@ namespace App\User\Infrastructure\EntryPoint\Api;
 use App\Shared\Infrastructure\ControllerInterface;
 use App\User\Application\Command\LoginCommand;
 use App\User\Domain\UnauthorizedUserException;
+use App\User\Domain\WrongUserEmailException;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -30,6 +32,8 @@ final class LoginController implements ControllerInterface
             return new JsonResponse($response, 200);
         } catch (UnauthorizedUserException) {
             return new JsonResponse(['message' => 'UNAUTHORIZED_USER'], 403);
+        } catch (WrongUserEmailException) {
+            return new JsonResponse(['message' => 'BAD_PARAMS'], 400);
         }
     }
 }

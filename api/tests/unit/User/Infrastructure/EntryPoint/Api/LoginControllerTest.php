@@ -5,6 +5,8 @@ namespace App\User\Infrastructure\EntryPoint\Api;
 use App\User\Application\Command\LoginCommand;
 use App\User\Application\Command\LoginDto;
 use App\User\Domain\UnauthorizedUserException;
+use App\User\Domain\WrongUserEmailException;
+use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,6 +23,19 @@ class LoginControllerTest extends TestCase
     {
         $this->messengerBusInterface = $this->createMock(MessageBusInterface::class);
         $this->sut = new LoginController($this->messengerBusInterface);
+    }
+    public function testShouldThrowInvalidArgumentException(): void
+    {
+        $request = $this->buildRequest('some.email@server.net', 'anyPassword');
+        $command = new LoginCommand('some.email@server.net', 'anyPassword');
+        $this->messengerBusInterface
+            ->method('dispatch')
+            ->with($command)
+            ->willThrowException(new WrongUserEmailException('Mecachis'));
+        $result = $this->sut->login($request);
+        $this->assertInstanceOf(JsonResponse::class, $result);
+        $this->assertEquals(400, $result->getStatusCode());
+        $this->assertEquals('{"message":"BAD_PARAMS"}', $result->getContent());
     }
     public function testShouldThrowUnauthorizedException(): void
     {

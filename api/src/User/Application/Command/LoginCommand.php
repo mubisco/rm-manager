@@ -12,4 +12,14 @@ final class LoginCommand
         $this->email = $email;
         $this->password = $password;
     }
+
+    public function email(): string
+    {
+        return $this->email;
+    }
+
+    public function password(): string
+    {
+        return $this->password;
+    }
 }
