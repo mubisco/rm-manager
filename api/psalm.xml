@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!DOCTYPE psalm>
 <psalm errorLevel="1">
   <!--  project configuration -->
   <projectFiles>
