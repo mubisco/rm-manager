@@ -5,17 +5,19 @@ namespace App\User\Infrastructure\Persistence\Doctrine;
 use App\User\Domain\User;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints\Ulid;
+use Symfony\Component\Uid\Ulid;
 
 class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface, User
 {
+    private Ulid $userId;
+
     public function __construct(
-        private Ulid $userId,
         private string $email,
         private string $username,
         private string $password,
         private array $roles,
     ) {
+        $this->userId = new Ulid();
     }
 
     /**
@@ -61,6 +63,11 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function userId(): string
+    {
+        return $this->userId->__toString();
     }
 
     public function user(): string
