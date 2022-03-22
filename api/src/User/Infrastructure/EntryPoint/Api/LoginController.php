@@ -4,20 +4,19 @@ namespace App\User\Infrastructure\EntryPoint\Api;
 
 use App\Shared\Infrastructure\ControllerInterface;
 use App\User\Application\Command\LoginCommand;
+use App\User\Application\Command\LoginDto;
 use App\User\Domain\UnauthorizedUserException;
 use App\User\Domain\WrongUserEmailException;
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 final class LoginController implements ControllerInterface
 {
-    public MessageBusInterface $commandBus;
-
-    public function __construct(MessageBusInterface $commandBus)
-    {
-        $this->commandBus = $commandBus;
+    public function __construct(
+        private MessageBusInterface $commandBus
+    ) {
     }
     public function login(Request $request): JsonResponse
     {
@@ -27,9 +26,12 @@ final class LoginController implements ControllerInterface
                 (string) $requestData['email'],
                 (string) $requestData['password']
             );
-            $result = $this->commandBus->dispatch($command);
-            $response = $result->getMessage();
-            return new JsonResponse($response, 200);
+            $envelope = $this->commandBus->dispatch($command);
+            /** @var HandledStamp */
+            $handledStamp = $envelope->last(HandledStamp::class);
+            /** @var LoginDto */
+            $data = $handledStamp->getResult();
+            return new JsonResponse($data, 200);
         } catch (UnauthorizedUserException) {
             return new JsonResponse(['message' => 'UNAUTHORIZED_USER'], 403);
         } catch (WrongUserEmailException) {

@@ -11,15 +11,23 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 class DoctrineUserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public ManagerRegistry $registry;
+    public UserPasswordHasherInterface $userPasswordHasherInterface;
+
+    public function __construct(
+        ManagerRegistry $registry,
+        UserPasswordHasherInterface $userPasswordHasherInterface
+    ) {
         parent::__construct($registry, DoctrineUser::class);
+        $this->registry = $registry;
+        $this->userPasswordHasherInterface = $userPasswordHasherInterface;
     }
 
     /**
@@ -54,7 +62,6 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
         if (!$user instanceof DoctrineUser) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
-
         $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
@@ -66,12 +73,15 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
         $user = $this->createQueryBuilder('u')
             ->andWhere('u.email = :email')
             ->setParameter('email', $userEmail->value())
-            ->andWhere('u.password = :password')
-            ->setParameter('password', $userPassword->value())
+            //->andWhere('u.password = :password')
+            //->setParameter('password', $userPassword->value())
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
         if ($user === null) {
+            throw new UnauthorizedUserException('Not authorized!!!');
+        }
+        $result = $this->userPasswordHasherInterface->isPasswordValid($user, $userPassword->value());
+        if (!$result) {
             throw new UnauthorizedUserException('Not authorized!!!');
         }
         return $user;

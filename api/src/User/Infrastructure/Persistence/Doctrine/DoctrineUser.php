@@ -72,12 +72,12 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
 
     public function user(): string
     {
-        return $this->email;
+        return $this->username;
     }
 
     public function role(): string
     {
-        return 'ADMIN';
+        return (string) $this->roles[0];
     }
 
     public function token(): string
