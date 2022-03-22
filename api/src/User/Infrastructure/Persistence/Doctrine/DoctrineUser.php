@@ -42,6 +42,11 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         return array_unique($roles);
     }
 
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */

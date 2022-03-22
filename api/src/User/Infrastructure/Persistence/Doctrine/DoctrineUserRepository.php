@@ -73,8 +73,6 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
         $user = $this->createQueryBuilder('u')
             ->andWhere('u.email = :email')
             ->setParameter('email', $userEmail->value())
-            //->andWhere('u.password = :password')
-            //->setParameter('password', $userPassword->value())
             ->getQuery()
             ->getOneOrNullResult();
         if ($user === null) {

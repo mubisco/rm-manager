@@ -13,7 +13,7 @@ class LoginAcceptanceTest extends WebTestCase
     public function asNonAuthenticatedUserIWantToLogin(): void
     {
         $this->givenANonAuthenticatedUser();
-        $this->whenITryToLogInWith('xaninverno@gmail.com', 'myPassword');
+        $this->whenITryToLogInWith('mubisco', 'patatas');
         $this->thenItShouldReturnProperResponse();
     }
     private function givenANonAuthenticatedUser()
