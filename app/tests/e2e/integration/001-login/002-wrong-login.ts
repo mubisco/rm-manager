@@ -8,11 +8,9 @@ describe('GIVEN a login page', () => {
       cy.intercept('POST', '/api/login', {
         delay: 500,
         body: { message: 'NOT_AUTH' },
-        statusCode: 403
-      }).as('loginRoute');
-      cy.get('[data-cy="login-email"]').type('xan.bellon@gmail.com')
-      cy.get('[data-cy="login-password"]').type('holakease')
-      cy.get('[data-cy="login-button"]').click();
+        statusCode: 401
+      })
+      cy.customLogin('bad_user', 'holakease')
     })
     it('THEN should show error toast', () => {
       cy.get('[data-cy="login-error"]').should('exist');

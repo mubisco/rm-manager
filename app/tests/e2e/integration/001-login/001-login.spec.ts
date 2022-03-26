@@ -4,29 +4,29 @@ describe('GIVEN a login page', () => {
       cy.visit('http://localhost:3000/login')
   })
   context('WHEN I navigate to', () => {
-    it('THEN Should have email, pasword inputs, forgot link and login button disabled', () => {
-      cy.get('[data-cy="login-email"]').should('exist');
+    it('THEN Should have username, pasword inputs, forgot link and login button disabled', () => {
+      cy.get('[data-cy="login-username"]').should('exist');
       cy.get('[data-cy="login-password"]').should('exist');
       cy.get('[data-cy="login-forgot"]').should('exist');
       cy.get('[data-cy="login-button"]').should('exist');
       cy.get('[data-cy="login-button"]').should('be.disabled')
     })
   })
-  context('WHEN I fill email field with wrong value', () => {
+  context('WHEN I fill username field with wrong value', () => {
     before(() => {
-      cy.get('[data-cy="login-email"]').type('holakease')
+      cy.get('[data-cy="login-username"]').type('xaninverno@server.net')
     })
     it('THEN should show lint field with error color', () => {
-      cy.get('[data-cy="login-email"]').should('have.class', 'v-input--error')
+      cy.get('[data-cy="login-username"]').should('have.class', 'v-input--error')
     })
   })
-  context('WHEN I fill email field with valid value', () => {
+  context('WHEN I fill username field with valid value', () => {
     before(() => {
-      cy.get('[data-cy="login-email"]').clear();
-      cy.get('[data-cy="login-email"]').type('xan.bellon@gmail.com')
+      cy.get('[data-cy="login-username"]').clear();
+      cy.get('[data-cy="login-username"]').type('username')
     })
-    it('THEN should show not lint email with error color', () => {
-      cy.get('[data-cy="login-email"]').should('not.have.class', 'v-input--error')
+    it('THEN should show not lint username with error color', () => {
+      cy.get('[data-cy="login-username"]').should('not.have.class', 'v-input--error')
     })
   })
   context('WHEN I fill password field', () => {

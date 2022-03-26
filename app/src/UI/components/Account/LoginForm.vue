@@ -2,13 +2,13 @@
 import { ref, computed, defineEmits, defineProps } from 'vue'
 
 defineProps<{ loading: boolean }>()
-defineEmits<{ (eventName: 'login-button-clicked', email: string, password: string): Promise<void> }>()
-const email = ref('')
+defineEmits<{ (eventName: 'login-button-clicked', username: string, password: string): Promise<void> }>()
+const username = ref('')
 const password = ref('')
 const canLogin = computed(() => !emailError.value && password.value !== '')
 const emailError = computed(():boolean => {
-  const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-  return email.value !== '' && !email.value.match(regexEmail);
+  const regexEmail = /^[0-9a-zA-Z_]*$/
+  return username.value !== '' && !username.value.match(regexEmail);
 })
 
 </script>
@@ -28,9 +28,9 @@ const emailError = computed(():boolean => {
       >
         <div>
           <v-text-field
-            v-model="email"
-            v-cy:login-email
-            :label="$t('login.email')"
+            v-model="username"
+            v-cy:login-username
+            :label="$t('login.username')"
             variant="outlined"
             color="primary"
             required
@@ -67,7 +67,7 @@ const emailError = computed(():boolean => {
         :prepend-icon="loading ? 'mdi-loading' : ''"
         variant="contained"
         :disabled="!canLogin || loading"
-        @click="$emit('login-button-clicked', email, password)"
+        @click="$emit('login-button-clicked', username, password)"
       >
         {{ $t('login.action') }}
       </v-btn>
