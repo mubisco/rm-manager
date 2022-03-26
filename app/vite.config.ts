@@ -29,19 +29,6 @@ export default defineConfig({
     setupFiles: 'tests/test-setup.js',
     deps: {
       inline: ['@vue', '@vueuse', 'vue-demi', 'vuetify'],
-    },
+    }
   }
-  /* remove the need to specify .vue files https://vitejs.dev/config/#resolve-extensions
-  resolve: {
-    extensions: [
-      '.js',
-      '.json',
-      '.jsx',
-      '.mjs',
-      '.ts',
-      '.tsx',
-      '.vue',
-    ]
-  },
-  */
 })

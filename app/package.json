@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vite preview",
     "build": "vite build",
-    "test:unit": "vitest --config ./vitest.config.ts",
+    "test:unit": "vitest",
     "test:cypress": "cypress open",
     "test:e2e": "start-server-and-test dev http-get://localhost:3000 cypress",
     "cypress": "cypress run",
