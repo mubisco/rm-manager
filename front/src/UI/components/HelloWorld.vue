@@ -15,7 +15,7 @@
           Welcome to Vuetify V3 Alpha
         </h1>
 
-          <h4>Vite Preview</h4>
+        <h4>Vite Preview</h4>
 
         <p class="subheading font-weight-regular">
           For help and collaboration with other Vuetify developers,

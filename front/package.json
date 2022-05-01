@@ -12,6 +12,7 @@
     "coverage": "vitest run --coverage",
     "dev": "vite",
     "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore .",
+    "fix:script": "eslint --fix --ext .ts,vue --ignore-path .gitignore .",
     "preview": "vite preview"
   },
   "dependencies": {

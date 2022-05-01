@@ -65,3 +65,18 @@ shell-front: ##  Access to frontend shell
 
 shell-db: ##  Access to database shell
 	@$(DOCKER_COMPOSE) exec database mysql ${dbStringConnection}
+
+tests-back:
+	@$(DOCKER_COMPOSE) exec backend composer run tests
+tests-front:
+	@$(DOCKER_COMPOSE) exec frontend npm run test:unit
+lint-back:
+	@$(DOCKER_COMPOSE) exec backend composer run lint
+lint-front:
+	@$(DOCKER_COMPOSE) exec frontend npm run lint:script
+fix-back:
+	@$(DOCKER_COMPOSE) exec backend composer run fix
+fix-front:
+	@$(DOCKER_COMPOSE) exec frontend npm run fix:script
+psalm:
+	@$(DOCKER_COMPOSE) exec backend composer run psalm
