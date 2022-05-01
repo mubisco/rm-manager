@@ -71,7 +71,10 @@
           "@php vendor/bin/phpcbf"
         ],
         "tests": [
-          "bin/phpunit"
+          "bin/phpunit --testsuite unit"
+        ],
+        "tests-acceptance": [
+          "bin/phpunit --testsuite acceptance"
         ],
         "psalm": [
           "@php vendor/bin/psalm "

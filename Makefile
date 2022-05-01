@@ -68,8 +68,12 @@ shell-db: ##  Access to database shell
 
 tests-back:
 	@$(DOCKER_COMPOSE) exec backend composer run tests
+tests-back-acceptance:
+	@$(DOCKER_COMPOSE) exec backend composer run tests-acceptance
 tests-front:
 	@$(DOCKER_COMPOSE) exec frontend npm run test:unit
+tests: tests-front tests-back
+
 lint-back:
 	@$(DOCKER_COMPOSE) exec backend composer run lint
 lint-front:
