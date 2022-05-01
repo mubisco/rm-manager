@@ -1,9 +1,10 @@
 /// <reference types="cypress" />
 
 import tokens from '../../fixtures/tokens.json'
+import routes from '../../fixtures/routes.json'
 
 const prepareLoginResponse = (expectedResponse: string): void => {
-  cy.intercept('/api/login', (req) => {
+  cy.intercept(routes.back + '/api/login', (req) => {
     req.reply({
       statusCode: 200,
       body: {token: expectedResponse },
@@ -13,7 +14,7 @@ const prepareLoginResponse = (expectedResponse: string): void => {
 }
 describe('GIVEN a login page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/login')
+    cy.visit(routes.front + '/login')
   })
   context('WHEN I try to login as an Admin', () => {
     beforeEach(() => {

@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
+import routes from '../../fixtures/routes.json'
+
 describe('GIVEN a login page', () => {
   before(() => {
-      cy.visit('http://localhost:3000/login')
+    cy.visit(routes.front + '/login')
   })
   context('WHEN I navigate to', () => {
     it('THEN Should have username, pasword inputs, forgot link and login button disabled', () => {
@@ -39,7 +41,7 @@ describe('GIVEN a login page', () => {
   })
   context('WHEN I click login button', () => {
     before(() => {
-      cy.intercept('POST', '/api/login', { delay: 500 }).as('loginRoute');
+      cy.intercept('POST', routes.back + '/api/login', { delay: 500 }).as('loginRoute');
       cy.get('[data-cy="login-button"]').click();
     })
     it('THEN should show loading icon', () => {

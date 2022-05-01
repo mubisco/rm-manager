@@ -1,0 +1,4 @@
+{
+  "front": "http://localhost:5000",
+  "back": "http://localhost:8000"
+}

@@ -1,11 +1,13 @@
 /// <reference types="cypress" />
+import routes from '../../fixtures/routes.json'
+
 describe('GIVEN a login page', () => {
   before(() => {
-      cy.visit('http://localhost:3000/login')
+    cy.visit(routes.front + '/login')
   })
   context('WHEN I click login button with wrong params', () => {
     before(() => {
-      cy.intercept('POST', '/api/login', {
+      cy.intercept('POST', routes.back + '/api/login', {
         delay: 500,
         body: { message: 'NOT_AUTH' },
         statusCode: 401
