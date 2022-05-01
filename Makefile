@@ -77,6 +77,6 @@ lint-front:
 fix-back:
 	@$(DOCKER_COMPOSE) exec backend composer run fix
 fix-front:
-	@$(DOCKER_COMPOSE) exec frontend npm run fix:script
+	@$(DOCKER_COMPOSE) exec frontend npm run lint:script
 psalm:
 	@$(DOCKER_COMPOSE) exec backend composer run psalm
