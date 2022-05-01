@@ -10,9 +10,5 @@ describe('Testing Username', () => {
     const sut = new Username('username');
     expect(sut.value()).toBe('username');
   })
-  test('Should return proper username from diff instance', () => {
-    const sut = new Username('mubisco');
-    expect(sut.value()).toBe('mubisco');
-  })
 })
 

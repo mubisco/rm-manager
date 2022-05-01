@@ -27,6 +27,7 @@ export default defineConfig({
     environment: 'jsdom',
     include: ['tests/**/*.test.ts'],
     setupFiles: 'tests/test-setup.js',
+    clearMocks: true,
     deps: {
       inline: ['@vue', '@vueuse', 'vue-demi', 'vuetify'],
     }
