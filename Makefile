@@ -8,13 +8,7 @@ default: info
 
 .PHONY: info
 info:
-ifneq ($(OS),Windows_NT)
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-27s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
-else
-	@echo "---------------------------------------------------------------------"
-	@echo "  ANDA, ANDA... INSTALA UN SISTEMA OPERATIVO DE VERDAD..."
-	@echo "---------------------------------------------------------------------"
-endif
 
 start:DOCKER_COMMAND=up -d ##    Start containers
 stop:DOCKER_COMMAND=down ##    Stop containers
@@ -24,6 +18,13 @@ build-images:DOCKER_COMMAND=build
 rebuild-images:DOCKER_COMMAND=build --no-cache
 build: stop build-images ##  Builds all images using cache if available
 rebuild: stop rebuild-images ##  Rebuilds all images from scratch (without cache)
+
+rebuild-front:TARGET=frontend
+rebuild-back:TARGET=backend
+rebuild-db:TARGET=database ##  Rebuilds database image
+rebuild-common rebuild-db rebuild-back rebuild-front:
+	@$(DOCKER_COMPOSE) build --no-cache $(TARGET)
+	@$(DOCKER_COMPOSE) up --build --force-recreate --no-deps -d $(TARGET)
 
 
 doco stop start status build-images rebuild-images:
