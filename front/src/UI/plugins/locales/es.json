@@ -2,6 +2,7 @@
   "login": {
     "title": "Iniciar sesión",
     "email": "Email",
+    "username": "Nombre de usuario",
     "password": "Contraseña",
     "forgot-password": "¿Olvidaste tu contraseña?",
     "action": "Iniciar sesión",
