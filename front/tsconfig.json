@@ -13,7 +13,8 @@
     "lib": ["esnext", "dom"],
     "types": [
       "vite-plugin-vue-i18n/client",
-      "jest"
+      "jest",
+      "node"
     ],
     "baseUrl": ".",
     "paths": {
