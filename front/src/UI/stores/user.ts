@@ -27,10 +27,14 @@ export const useUsers = defineStore('users', {
   getters: {
   },
   actions: {
-    async login(email: string, password: string): Promise<boolean> {
+    async login(username: string, password: string): Promise<boolean> {
       const response = await fetch(import.meta.env.VITE_API_URL + '/api/login', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
         method: 'POST',
-        body: JSON.stringify({ email: email, pass: password })
+        body: JSON.stringify({ username, password })
       })
       if (response.status === 200) {
         const parsedResponse = await response.json();
