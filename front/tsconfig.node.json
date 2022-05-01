@@ -3,6 +3,7 @@
     "composite": true,
     "module": "esnext",
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
