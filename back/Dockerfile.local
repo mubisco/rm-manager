@@ -1,0 +1,19 @@
+FROM xbellon/gf_php:0.0.11
+
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+ARG PORT=8000
+
+EXPOSE ${PORT}
+
+
+WORKDIR /app
+
+RUN mkdir -p /home/jwt
+COPY .docker/private.pem /home/jwt
+COPY .docker/public.pem /home/jwt
+
+RUN useradd -m -u ${USER_ID} gfuser -s /bin/bash
+
+RUN mkdir -p /home/gfuser/.ssh
+ENV HOME /home/gfuser

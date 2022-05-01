@@ -17,6 +17,10 @@ export default defineConfig({
       include: path.resolve(__dirname, './src/UI/plugins/locales/**')
     })
   ],
+  server: {
+    host: true,
+    port: 5000
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {
