@@ -17,8 +17,12 @@ export const useUsers = defineStore('users', {
   actions: {
     async login(username: string, password: string): Promise<boolean> {
       const command = new LoginUserCommand(username, password)
-      await loginUserCommandHandler.handle(command)
-      return true
+      try {
+        await loginUserCommandHandler.handle(command)
+        return true
+      } catch {
+        return false
+      }
     },
     async refreshToken(): Promise<void> {
       const response = await fetch('/api/login/renew', {
