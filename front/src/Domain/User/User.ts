@@ -12,8 +12,8 @@ const parseJwt = (token: string): { username: string, role: UserRole } => {
   const role = roles.filter((current: string) => {
     return current !== 'ROLE_USER'
   })
-  if (roles.length === 0) {
-    roles[0] = 'ROLE_USER'
+  if (role.length === 0) {
+    role[0] = 'ROLE_USER'
   }
   return { username, role: parseRole(role[0]) }
 };

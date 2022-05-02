@@ -8,6 +8,7 @@
     "test:unit": "vitest",
     "test:cypress": "cypress open",
     "test:e2e": "start-server-and-test dev http-get://localhost:5000 cypress",
+    "e2e": "start-server-and-test dev http-get://localhost:5000 cypress",
     "cypress": "cypress run",
     "coverage": "vitest run --coverage",
     "dev": "vite",

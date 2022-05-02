@@ -1,4 +1,4 @@
-import path from 'path'
+const path = require('path')
 const { startDevServer } = require("@cypress/vite-dev-server");
 
 module.exports = (on, config) => {

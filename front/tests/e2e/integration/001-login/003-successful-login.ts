@@ -24,12 +24,11 @@ describe('GIVEN a login page', () => {
       cy.customLogin('admin_user', 'holakease')
       cy.location('pathname').should('match', /\/dashboard/);
       cy.wait('@loginRoute').then(() => {
-        const token = localStorage.getItem('token')
-        expect(token).to.be.eq(tokens.admin)
         const rawUserData = localStorage.getItem('userData')
         const userData = rawUserData ? JSON.parse(rawUserData) : {}
         expect(userData?.role).to.be.eq('ADMIN')
         expect(userData?.username).to.be.eq('mubisco')
+        expect(userData?.token).to.be.eq(tokens.admin)
       })
     })
   })
@@ -40,12 +39,11 @@ describe('GIVEN a login page', () => {
     it('THEN should navigate to master dashboard page', () => {
       cy.customLogin('master_user', 'holakease')
       cy.wait('@loginRoute').then(() => {
-        const token = localStorage.getItem('token')
-        expect(token).to.be.eq(tokens.master)
         const rawUserData = localStorage.getItem('userData')
         const userData = rawUserData ? JSON.parse(rawUserData) : {}
         expect(userData?.role).to.be.eq('MASTER')
         expect(userData?.username).to.be.eq('dungeon_master')
+        expect(userData?.token).to.be.eq(tokens.master)
       })
       cy.location('pathname').should('match', /\/dashboard/);
     })
@@ -57,12 +55,12 @@ describe('GIVEN a login page', () => {
     it('THEN should navigate to player dashboard page', () => {
       cy.customLogin('player_user', 'holakease')
       cy.wait('@loginRoute').then(() => {
-        const token = localStorage.getItem('token')
-        expect(token).to.be.eq(tokens.player)
         const rawUserData = localStorage.getItem('userData')
         const userData = rawUserData ? JSON.parse(rawUserData) : {}
+        console.log('asd', rawUserData)
         expect(userData?.role).to.be.eq('USER')
         expect(userData?.username).to.be.eq('mindundi')
+        expect(userData?.token).to.be.eq(tokens.player)
       })
       cy.location('pathname').should('match', /\/dashboard/);
     })

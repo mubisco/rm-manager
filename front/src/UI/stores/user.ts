@@ -1,23 +1,11 @@
+import {LoginUserCommand} from '@/Application/Command/User/LoginUserCommand';
+import {LoginUserCommandHandler} from '@/Application/Command/User/LoginUserCommandHandler';
+import {AxiosUserClient} from '@/Infrastructure/User/Client/AxiosUserClient';
+import {StorageUserRepository} from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository';
 import { defineStore } from 'pinia'
 
-const parseRole = (role: string): string => {
-  return role.replace('ROLE_', '');
-}
-const parseJwt = (token: string): { username: string, role: string } => {
-  const parsedData = JSON.parse(atob(token.split('.')[1]));
-  const username = parsedData ? parsedData.username : '';
-  const roles: string[] = parsedData ? parsedData.roles : [];
-  if (roles.length === 0) {
-    return { username, role: '' }
-  }
-  if (roles.length === 1) {
-    return { username, role: parseRole(roles[0]) }
-  }
-  const role = roles.filter((current: string) => {
-    return current !== 'ROLE_USER'
-  })
-  return { username, role: parseRole(role[0]) }
-};
+const loginUserCommandHandler = new LoginUserCommandHandler(new AxiosUserClient(), new StorageUserRepository());
+
 export const useUsers = defineStore('users', {
   state: () => ({
     token: '',
@@ -28,20 +16,9 @@ export const useUsers = defineStore('users', {
   },
   actions: {
     async login(username: string, password: string): Promise<boolean> {
-      const response = await fetch(import.meta.env.VITE_API_URL + '/api/login', {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({ username, password })
-      })
-      if (response.status === 200) {
-        const parsedResponse = await response.json();
-        localStorage.setItem('token', parsedResponse.token)
-        localStorage.setItem('userData', JSON.stringify(parseJwt(parsedResponse.token)))
-      }
-      return response.status === 200
+      const command = new LoginUserCommand(username, password)
+      await loginUserCommandHandler.handle(command)
+      return true
     },
     async refreshToken(): Promise<void> {
       const response = await fetch('/api/login/renew', {
