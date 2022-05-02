@@ -6,7 +6,7 @@ const parseRole = (role: string): UserRole => {
   return UserRole[parsedRole as keyof typeof UserRole]
 }
 const parseJwt = (token: string): { username: string, role: UserRole } => {
-  const parsedData = JSON.parse(atob(token.split('.')[1]));
+  const parsedData = JSON.parse(window.atob(token.split('.')[1]));
   const username = parsedData ? parsedData.username : '';
   const roles: string[] = parsedData ? parsedData.roles : [];
   const role = roles.filter((current: string) => {
@@ -21,20 +21,25 @@ const parseJwt = (token: string): { username: string, role: UserRole } => {
 export class User {
   private _username: Username
   private _role: UserRole
+  private _token: string
 
   public static fromToken(token: string): User
   {
     const data = parseJwt(token);
-    return new this(new Username(data.username), data.role)
+    return new this(new Username(data.username), data.role, token)
   }
-  constructor (username: Username, role: UserRole) {
+  constructor (username: Username, role: UserRole, token: string) {
     this._username = username
     this._role = role
+    this._token = token
   }
   public username(): string {
     return this._username.value()
   }
   public role(): string {
     return this._role
+  }
+  public token(): string {
+    return this._token
   }
 }

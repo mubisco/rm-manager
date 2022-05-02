@@ -46,9 +46,12 @@ describe('LoginUserCommandTest', () => {
     await expect(sut.handle(command)).rejects.toThrow(UserRepositoryError)
   })
   test('Should return true if user stored properly', async () => {
-    const mockedUser = new User(new Username('mubisco'), UserRole.ADMIN);
+    const mockedUser = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken');
     mockedUserClient.login.mockReturnValue(mockedUser)
     mockedUserRepository.store.mockReturnValue(mockedUser)
-    await expect(sut.handle(command)).resolves.toBe(true)
+    const result = await sut.handle(command)
+    expect(result.username).toBe('mubisco')
+    expect(result.role).toBe('ADMIN')
+    expect(result.token).toBe('aToken')
   })
 })

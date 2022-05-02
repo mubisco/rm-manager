@@ -5,11 +5,11 @@ import { UserRole } from '@/Domain/User/UserRole'
 
 describe('Testing User', () => {
   test('Should be of proper class', () => {
-    const sut = new User(new Username('mubisco'), UserRole.ADMIN)
+    const sut = new User(new Username('mubisco'), UserRole.ADMIN, '')
     expect(sut).toBeInstanceOf(User)
   })
   test('Should return proper data', () => {
-    const sut = new User(new Username('mubisco'), UserRole.ADMIN)
+    const sut = new User(new Username('mubisco'), UserRole.ADMIN, '')
     expect(sut.username()).toBe('mubisco')
     expect(sut.role()).toBe('ADMIN')
   })
@@ -18,5 +18,6 @@ describe('Testing User', () => {
     const sut = User.fromToken(token)
     expect(sut.username()).toBe('mubisco')
     expect(sut.role()).toBe('ADMIN')
+    expect(sut.token()).toBe(token)
   })
 })
