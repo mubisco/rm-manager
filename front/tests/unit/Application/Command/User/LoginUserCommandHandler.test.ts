@@ -13,12 +13,16 @@ const mockedUserClient = {
   login: vi.fn()
 }
 
+const mockedUserRepository = {
+  store: vi.fn()
+}
+
 describe('LoginUserCommandTest', () => {
   let sut: LoginUserCommandHandler
   let command: LoginUserCommand
 
   beforeEach(() => {
-    sut = new LoginUserCommandHandler(mockedUserClient)
+    sut = new LoginUserCommandHandler(mockedUserClient, mockedUserRepository)
     command = new LoginUserCommand('username', 'password')
   })
   test('Should be of proper class', () => {
@@ -38,6 +42,13 @@ describe('LoginUserCommandTest', () => {
   })
   test('Should throw Error if user cannot be stored', async () => {
     mockedUserClient.login.mockReturnValue(new User(new Username('mubisco'), UserRole.ADMIN))
+    mockedUserRepository.store.mockRejectedValue(new UserRepositoryError('UserRepositoryError'))
     await expect(sut.handle(command)).rejects.toThrow(UserRepositoryError)
+  })
+  test('Should return true if user stored properly', async () => {
+    const mockedUser = new User(new Username('mubisco'), UserRole.ADMIN);
+    mockedUserClient.login.mockReturnValue(mockedUser)
+    mockedUserRepository.store.mockReturnValue(mockedUser)
+    await expect(sut.handle(command)).resolves.toBe(true)
   })
 })

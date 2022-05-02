@@ -2,18 +2,20 @@ import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand'
 import { Username } from '@/Domain/User/Username'
 import { Userpassword } from '@/Domain/User/Userpassword'
 import { UserClient } from '@/Domain/User/UserClient'
-import { UserRepositoryError } from '@/Domain/User/UserRepositoryError'
+import { UserRepository } from '@/Domain/User/UserRepository'
 
 export class LoginUserCommandHandler {
   constructor(
-    private userClient: UserClient
+    private userClient: UserClient,
+    private userRepository: UserRepository
   ) {
   }
 
-  public async handle(command: LoginUserCommand): Promise<void> {
+  public async handle(command: LoginUserCommand): Promise<boolean> {
     const username = new Username(command.username())
     const password = new Userpassword(command.password())
-    await this.userClient.login(username, password)
-    throw new UserRepositoryError('mes')
+    const user = await this.userClient.login(username, password)
+    await this.userRepository.store(user)
+    return true
   }
 }

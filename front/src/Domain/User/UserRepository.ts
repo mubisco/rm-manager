@@ -1,5 +1,5 @@
 import { User } from '@/Domain/User/User'
 
 export interface UserRepository {
-  store(user: User): User
+  async store(user: User): Promise<User>
 }

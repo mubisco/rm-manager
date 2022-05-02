@@ -37,7 +37,7 @@ describe('GIVEN a login page', () => {
     beforeEach(() => {
       prepareLoginResponse(tokens.master)
     })
-    it('THEN should navigate to admin dashboard page', () => {
+    it('THEN should navigate to master dashboard page', () => {
       cy.customLogin('master_user', 'holakease')
       cy.wait('@loginRoute').then(() => {
         const token = localStorage.getItem('token')
@@ -54,7 +54,7 @@ describe('GIVEN a login page', () => {
     beforeEach(() => {
       prepareLoginResponse(tokens.player)
     })
-    it('THEN should navigate to admin dashboard page', () => {
+    it('THEN should navigate to player dashboard page', () => {
       cy.customLogin('player_user', 'holakease')
       cy.wait('@loginRoute').then(() => {
         const token = localStorage.getItem('token')
