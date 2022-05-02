@@ -5,9 +5,9 @@
     "baseUrl": "../../node_modules",
     "target": "es6",
     "lib": ["es5", "es6", "dom", "dom.iterable"],
-    "types": ["cypress"],
+    "types": ["cypress", "node"],
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.spec.ts", "**/*.ts"]
 }

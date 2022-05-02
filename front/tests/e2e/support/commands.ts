@@ -26,7 +26,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('customLogin', (email, password) => {
+Cypress.Commands.add('customLogin', (email: string, password: string): void => {
   cy.get('[data-cy="login-username"]').type(email)
   cy.get('[data-cy="login-password"]').type(password)
   cy.get('[data-cy="login-button"]').click();
