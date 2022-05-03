@@ -2,11 +2,11 @@
 import { ref } from 'vue'
 import LoginForm from '@/UI/components/Account/LoginForm.vue'
 import router from '@/UI/router/index'
-import { useUsers } from '@/UI/stores/user'
+import { useUserStore } from '@/UI/stores/user'
 
 const showLoginError = ref(false)
 const loading = ref(false)
-const userStore = useUsers();
+const userStore = useUserStore();
 
 const onLoginButtonClicked = async (email: string, password: string):Promise<void> => {
   loading.value = true

@@ -18,9 +18,11 @@ describe('GIVEN a login page', () => {
       }).as('loginRoute');
       cy.customLogin('mubisco', 'password')
     })
-    it('THEN I should see logout button on left menu', () => {
-    })
     it('THEN I should see logout button on top bar', () => {
+      cy.get('[data-cy="logout-top-button"]').should('exist')
+    })
+    it('AND THEN I should see logout button on left menu', () => {
+      cy.get('[data-cy="logout-left-button"]').should('exist')
     })
   })
 })
