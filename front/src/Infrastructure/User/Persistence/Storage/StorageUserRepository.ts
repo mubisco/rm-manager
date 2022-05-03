@@ -11,4 +11,7 @@ export class StorageUserRepository implements UserRepository {
     localStorage.setItem('userData', JSON.stringify(data))
     return user
   }
+  remove(): void {
+    localStorage.removeItem('userData')
+  }
 }

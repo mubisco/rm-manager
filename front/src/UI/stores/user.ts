@@ -1,10 +1,13 @@
-import {LoginUserCommand} from '@/Application/Command/User/LoginUserCommand';
+import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand';
 import { LoginUserCommandHandler } from '@/Application/Command/User/LoginUserCommandHandler';
+import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand';
+import { LogoutUserCommandHandler } from '@/Application/Command/User/LogoutUserCommandHandler';
 import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient';
 import { StorageUserRepository } from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository';
 import { defineStore } from 'pinia'
 
 const loginUserCommandHandler = new LoginUserCommandHandler(new AxiosUserClient(), new StorageUserRepository());
+const logoutUserCommandHandler = new LogoutUserCommandHandler(new StorageUserRepository());
 
 export const useUserStore = defineStore('users', {
   state: () => ({
@@ -25,11 +28,14 @@ export const useUserStore = defineStore('users', {
         this.role = response.role
         return true
       } catch {
-        this.username = ''
-        this.token = ''
-        this.role = ''
+        this.$reset()
         return false
       }
+    },
+    async logout(): Promise<void> {
+      const command = new LogoutUserCommand()
+      logoutUserCommandHandler.handle(command)
+      this.$reset()
     },
     async refreshToken(): Promise<void> {
       const response = await fetch('/api/login/renew', {

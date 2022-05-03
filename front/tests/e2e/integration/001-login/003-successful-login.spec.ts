@@ -57,7 +57,6 @@ describe('GIVEN a login page', () => {
       cy.wait('@loginRoute').then(() => {
         const rawUserData = localStorage.getItem('userData')
         const userData = rawUserData ? JSON.parse(rawUserData) : {}
-        console.log('asd', rawUserData)
         expect(userData?.role).to.be.eq('USER')
         expect(userData?.username).to.be.eq('mindundi')
         expect(userData?.token).to.be.eq(tokens.player)

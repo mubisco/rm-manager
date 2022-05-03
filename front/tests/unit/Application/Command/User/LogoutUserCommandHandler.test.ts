@@ -1,0 +1,33 @@
+import { describe, test, expect, vi, beforeEach } from 'vitest'
+import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand'
+import { LogoutUserCommandHandler } from '@/Application/Command/User/LogoutUserCommandHandler'
+import { UserRepositoryError } from '@/Domain/User/UserRepositoryError'
+
+const mockedUserRepository = {
+  store: vi.fn(),
+  remove: vi.fn()
+}
+
+describe('Testing LogoutUserCommandHandler', () => {
+  let sut: LogoutUserCommandHandler
+  let command: LogoutUserCommand
+
+  beforeEach(() => {
+    sut = new LogoutUserCommandHandler(mockedUserRepository)
+    command = new LogoutUserCommand()
+  })
+  test('Should be of proper class', () => {
+    expect(sut).toBeInstanceOf(LogoutUserCommandHandler)
+  })
+  test('Should throw error if user cannot be deleted', () => {
+    mockedUserRepository.remove.mockImplementationOnce(() => { throw new UserRepositoryError('UserRepositoryError') })
+    expect(() => {
+      sut.handle(command)
+    }).toThrow(UserRepositoryError)
+  })
+  test('Should return true if user deleted properly', () => {
+    mockedUserRepository.remove.mockReturnValue(true)
+    const response = sut.handle(command)
+    expect(response).toBe(true)
+  })
+})

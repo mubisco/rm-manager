@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue'
-import { useUserStore } from '@/UI/stores/user'
-import { storeToRefs } from 'pinia'
+import { useLogout } from './useLogout'
 
 defineProps<{ drawerOpened: boolean }>()
 defineEmits<{ (eventName: 'drawer:toggle'): void }>()
 
-const { isLogged } = storeToRefs(useUserStore())
+const { isLogged, onLogoutButtonClicked } = useLogout()
 </script>
 <template>
   <v-app-bar
@@ -15,6 +14,7 @@ const { isLogged } = storeToRefs(useUserStore())
   >
     <template #prepend>
       <v-app-bar-nav-icon
+        v-cy:left-drawer-button
         @click="() => $emit('drawer:toggle')"
       />
     </template>
@@ -24,6 +24,7 @@ const { isLogged } = storeToRefs(useUserStore())
     <template #append>
       <v-btn
         v-if="!isLogged"
+        v-cy:login-top-button
         icon="mdi-account"
         :to="{ name: 'Login' }"
       />
@@ -31,6 +32,7 @@ const { isLogged } = storeToRefs(useUserStore())
         v-if="isLogged"
         v-cy:logout-top-button
         icon="mdi-logout-variant"
+        @click="onLogoutButtonClicked"
       />
     </template>
   </v-app-bar>

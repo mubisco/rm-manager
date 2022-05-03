@@ -14,7 +14,8 @@ const mockedUserClient = {
 }
 
 const mockedUserRepository = {
-  store: vi.fn()
+  store: vi.fn(),
+  remove: vi.fn()
 }
 
 describe('LoginUserCommandTest', () => {
@@ -41,7 +42,7 @@ describe('LoginUserCommandTest', () => {
     await expect(sut.handle(command)).rejects.toThrow(UserClientError)
   })
   test('Should throw Error if user cannot be stored', async () => {
-    mockedUserClient.login.mockReturnValue(new User(new Username('mubisco'), UserRole.ADMIN))
+    mockedUserClient.login.mockReturnValue(new User(new Username('mubisco'), UserRole.ADMIN, ''))
     mockedUserRepository.store.mockRejectedValue(new UserRepositoryError('UserRepositoryError'))
     await expect(sut.handle(command)).rejects.toThrow(UserRepositoryError)
   })

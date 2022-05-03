@@ -25,5 +25,3 @@ dist-ssr
 
 tests/e2e/videos
 tests/e2e/screenshots
-
-.vim/*

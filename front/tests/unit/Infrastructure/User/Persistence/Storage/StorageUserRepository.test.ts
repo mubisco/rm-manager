@@ -9,13 +9,6 @@ describe('Testing StorageUserRepository', () => {
     const sut = new StorageUserRepository()
     expect(sut).toBeInstanceOf(StorageUserRepository)
   })
-  /*
-  test('Should throw error if User cannot be stored', async () => {
-    const sut = new StorageUserRepository()
-    const user = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken')
-    expect(sut.store(user)).rejects.toThrowError(UserRepositoryError)
-  })
-  */
   test('Should return user when stored', async () => {
     const sut = new StorageUserRepository()
     const user = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken')
@@ -32,4 +25,11 @@ describe('Testing StorageUserRepository', () => {
     expect(data.role).toBe('ADMIN')
     expect(data.token).toBe('aToken')
   })
+  test('Should remove data in localStorage', async () => {
+    localStorage.setItem('userData', '{}')
+    const sut = new StorageUserRepository()
+    await sut.remove()
+    const rawData = localStorage.getItem('userData')
+    expect(rawData).toBeNull()
+  });
 })

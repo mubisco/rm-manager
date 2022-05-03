@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useUserStore } from '@/UI/stores/user'
-import { storeToRefs } from 'pinia'
-
-const { isLogged } = storeToRefs(useUserStore())
+import { useLogout } from './useLogout'
+const { isLogged, onLogoutButtonClicked } = useLogout()
 </script>
 <template>
   <v-list
@@ -17,6 +15,7 @@ const { isLogged } = storeToRefs(useUserStore())
     />
     <v-list-item
       v-if="!isLogged"
+      v-cy:login-left-button
       prepend-icon="mdi-account"
       title="Login"
       value="login"
@@ -28,7 +27,7 @@ const { isLogged } = storeToRefs(useUserStore())
       prepend-icon="mdi-logout-variant"
       title="Logout"
       value="logout"
-      :to="{ name: 'Login' }"
+      @click="onLogoutButtonClicked"
     />
   </v-list>
 </template>
