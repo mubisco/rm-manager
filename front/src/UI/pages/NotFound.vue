@@ -1,3 +1,5 @@
+<script setup lang="ts">
+</script>
 <template>
   <h1
     v-cy:page-not-found
