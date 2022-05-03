@@ -2,7 +2,7 @@
 
 import routes from '../../fixtures/routes.json'
 
-describe('GIVEN a unauthenticade user', () => {
+describe('GIVEN a unauthenticated user', () => {
   context('WHEN I try to access admin dashboard', () => {
     before(() => {
       cy.visit(routes.front + '/dashboard')

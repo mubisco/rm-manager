@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/UI/pages/Home.vue'
 import LoginPage from '@/UI/pages/LoginPage.vue'
+import PageNotFound from '@/UI/pages/NotFound.vue'
 import ForgotPasswordPage from '@/UI/pages/ForgotPasswordPage.vue'
 import DashboardPage from '@/UI/pages/DashboardPage.vue'
 import pinia from '@/UI/stores/store'
@@ -33,11 +34,11 @@ const routes = [
     component: DashboardPage,
     meta: { requiresAuth: true }
   },
-  /*{
+  {
     path: '/:catchAll(.*)*',
     name: "PageNotFound",
     component: PageNotFound,
-  },*/
+  }
 ]
 
 const router = createRouter({
