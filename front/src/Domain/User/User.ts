@@ -22,16 +22,18 @@ export class User {
   private _username: Username
   private _role: UserRole
   private _token: string
+  private _refreshToken: string
 
-  public static fromToken(token: string): User
+  public static fromTokens(token: string, refresh: string): User
   {
     const data = parseJwt(token);
-    return new this(new Username(data.username), data.role, token)
+    return new this(new Username(data.username), data.role, token, refresh)
   }
-  constructor (username: Username, role: UserRole, token: string) {
+  constructor (username: Username, role: UserRole, token: string, refreshToken: string) {
     this._username = username
     this._role = role
     this._token = token
+    this._refreshToken = refreshToken
   }
   public username(): string {
     return this._username.value()
@@ -41,5 +43,8 @@ export class User {
   }
   public token(): string {
     return this._token
+  }
+  public refreshToken(): string {
+    return this._refreshToken
   }
 }

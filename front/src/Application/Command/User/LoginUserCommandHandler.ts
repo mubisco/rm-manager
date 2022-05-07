@@ -20,7 +20,8 @@ export class LoginUserCommandHandler {
     return {
       username: user.username(),
       role: user.role(),
-      token: user.token()
+      token: user.token(),
+      refreshToken: user.refreshToken()
     }
   }
 }

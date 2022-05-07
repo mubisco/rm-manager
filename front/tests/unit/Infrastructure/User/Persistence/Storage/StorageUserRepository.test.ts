@@ -11,24 +11,25 @@ describe('Testing StorageUserRepository', () => {
   })
   test('Should return user when stored', async () => {
     const sut = new StorageUserRepository()
-    const user = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken')
+    const user = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken', 'refreshToken')
     const result = await sut.store(user)
     expect(result).toBe(user)
   })
   test('Should store data in localstorage', async () => {
     const sut = new StorageUserRepository()
-    const user = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken')
+    const user = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken', 'refreshToken')
     await sut.store(user)
     const rawData = localStorage.getItem('userData')
     const data = rawData !== null ? JSON.parse(rawData) : {}
     expect(data.username).toBe('mubisco')
     expect(data.role).toBe('ADMIN')
     expect(data.token).toBe('aToken')
+    expect(data.refreshToken).toBe('refreshToken')
   })
-  test('Should remove data in localStorage', async () => {
+  test('Should remove data in localStorage', () => {
     localStorage.setItem('userData', '{}')
     const sut = new StorageUserRepository()
-    await sut.remove()
+    sut.remove()
     const rawData = localStorage.getItem('userData')
     expect(rawData).toBeNull()
   });

@@ -26,7 +26,7 @@ describe('Testing AxiosUserClient', () => {
   test('Should return User if connection goes well', async () => {
     const sut = new AxiosUserClient()
     axios.post.mockResolvedValue({
-      data: { token: tokenExamples.admin }
+      data: { token: tokenExamples.admin, refresh_token: 'refreshToken' }
     })
     await expect(sut.login(new Username('mubisco'), new Userpassword('patatas'))).resolves.toBeInstanceOf(User)
   })

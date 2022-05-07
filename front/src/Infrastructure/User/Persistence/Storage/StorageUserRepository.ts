@@ -6,7 +6,8 @@ export class StorageUserRepository implements UserRepository {
     const data = {
       username: user.username(),
       role: user.role(),
-      token: user.token()
+      token: user.token(),
+      refreshToken: user.refreshToken()
     }
     localStorage.setItem('userData', JSON.stringify(data))
     return user

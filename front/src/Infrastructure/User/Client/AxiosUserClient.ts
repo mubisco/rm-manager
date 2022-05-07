@@ -7,6 +7,7 @@ import axios from 'axios'
 
 interface AxiosUserResponse {
   token: string;
+  refresh_token: string;
 }
 
 export class AxiosUserClient implements UserClient{
@@ -18,7 +19,7 @@ export class AxiosUserClient implements UserClient{
     }
     try {
       const response = await axios.post<AxiosUserResponse>(baseUrl, data)
-      return User.fromToken(response.data.token)
+      return User.fromTokens(response.data.token, response.data.refresh_token)
     } catch (err) {
       if (err instanceof Error) {
         throw new UserClientError(err.message)

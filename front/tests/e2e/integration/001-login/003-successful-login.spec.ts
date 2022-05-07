@@ -7,7 +7,7 @@ const prepareLoginResponse = (expectedResponse: string): void => {
   cy.intercept(routes.back + '/api/login', (req) => {
     req.reply({
       statusCode: 200,
-      body: {token: expectedResponse },
+      body: {token: expectedResponse, refresh_token: 'aVeryLargeToken' },
       delay: 500,
     })
   }).as('loginRoute');
@@ -29,6 +29,7 @@ describe('GIVEN a login page', () => {
         expect(userData?.role).to.be.eq('ADMIN')
         expect(userData?.username).to.be.eq('mubisco')
         expect(userData?.token).to.be.eq(tokens.admin)
+        expect(userData?.refreshToken).to.be.eq('aVeryLargeToken')
       })
     })
   })

@@ -13,7 +13,8 @@ export const useUserStore = defineStore('users', {
   state: () => ({
     token: '',
     username: '',
-    role: ''
+    role: '',
+    refreshToken: ''
   }),
   getters: {
     isLogged: state => state.username !== '' && state.role !== ''
@@ -25,6 +26,7 @@ export const useUserStore = defineStore('users', {
         const response = await loginUserCommandHandler.handle(command)
         this.username = response.username
         this.token = response.token
+        this.refreshToken = response.refreshToken
         this.role = response.role
         return true
       } catch {
