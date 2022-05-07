@@ -27,7 +27,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
      */
     public function getUserIdentifier(): string
     {
-        return $this->email;
+        return $this->username;
     }
 
     /**

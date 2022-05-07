@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE doctrine-mapping>
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+          xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                              https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+  <entity name="App\User\Infrastructure\Persistence\Doctrine\RefreshToken" table="refresh_tokens">
+  </entity>
+</doctrine-mapping>

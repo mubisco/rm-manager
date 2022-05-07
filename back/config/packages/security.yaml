@@ -17,24 +17,17 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-        login:
-            pattern: ^/api/login
+        api:
+            pattern: ^/api
             stateless: true
+            entry_point: jwt
             json_login:
                 check_path: /api/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        api:
-            pattern: ^/api
-            stateless: true
             jwt: ~
-
+            refresh_jwt:
+                check_path: /api/token/refresh
         main:
             lazy: true
             provider: app_user_provider
@@ -44,7 +37,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/api/login,              roles: PUBLIC_ACCESS }
+        - { path: ^/api/(login|token/refresh),              roles: PUBLIC_ACCESS }
         - { path: ^/api/ready/admin,        roles: ROLE_ADMIN }
         - { path: ^/api/ready/master,       roles: ROLE_MASTER }
         - { path: ^/api/ready/player,       roles: ROLE_USER }
