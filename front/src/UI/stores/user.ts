@@ -39,8 +39,8 @@ export const useUserStore = defineStore('users', {
       logoutUserCommandHandler.handle(command)
       this.$reset()
     },
-    async refreshToken(): Promise<void> {
-      const response = await fetch('/api/login/renew', {
+    async refresh(): Promise<void> {
+      const response = await fetch('/api/token/refresh', {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${this.token}` }
       })
