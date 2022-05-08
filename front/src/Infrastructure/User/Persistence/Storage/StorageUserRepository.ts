@@ -7,9 +7,9 @@ export class StorageUserRepository implements UserRepository {
       username: user.username(),
       role: user.role(),
       token: user.token(),
-      refreshToken: user.refreshToken()
     }
     localStorage.setItem('userData', JSON.stringify(data))
+    localStorage.setItem('refreshToken', user.refreshToken())
     return user
   }
   remove(): void {

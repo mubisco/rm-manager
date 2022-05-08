@@ -13,8 +13,7 @@ export const useUserStore = defineStore('users', {
   state: () => ({
     token: '',
     username: '',
-    role: '',
-    refreshToken: ''
+    role: ''
   }),
   getters: {
     isLogged: state => state.username !== '' && state.role !== ''
@@ -26,7 +25,6 @@ export const useUserStore = defineStore('users', {
         const response = await loginUserCommandHandler.handle(command)
         this.username = response.username
         this.token = response.token
-        this.refreshToken = response.refreshToken
         this.role = response.role
         return true
       } catch {
@@ -39,15 +37,34 @@ export const useUserStore = defineStore('users', {
       logoutUserCommandHandler.handle(command)
       this.$reset()
     },
-    async refresh(): Promise<void> {
-      const response = await fetch('/api/token/refresh', {
-        method: 'GET',
-        headers: { 'Authorization': `Bearer ${this.token}` }
-      })
-      if (response.status !== 200) {
-        this.token = ''
+    async refresh(): Promise<boolean> {
+      const refreshToken = window.localStorage.getItem('refreshToken')
+      if (!refreshToken) {
+        return false
       }
-      // const parsedReponse = await response.json();
+      const data = { refresh_token: refreshToken }
+      const response = await fetch(import.meta.env.VITE_API_URL + '/api/token/refresh', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      if (response.status === 200) {
+        const responseData = await response.json()
+        this.token = responseData.token
+        this.username = 'mubisco'
+        this.role = 'ADMIN'
+        const userData = {
+          username: this.username,
+          token: this.token,
+          role: this.role
+        }
+        window.localStorage.setItem('userData', JSON.stringify(userData))
+        window.localStorage.setItem('refreshToken', responseData.refresh_token)
+        return true
+      } else {
+        window.localStorage.removeItem('userData')
+        window.localStorage.removeItem('refreshToken')
+        return false
+      }
     }
   }
 })

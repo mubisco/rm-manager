@@ -20,17 +20,26 @@ describe('Testing StorageUserRepository', () => {
     const user = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken', 'refreshToken')
     await sut.store(user)
     const rawData = localStorage.getItem('userData')
+    const refreshToken = localStorage.getItem('refreshToken')
     const data = rawData !== null ? JSON.parse(rawData) : {}
     expect(data.username).toBe('mubisco')
     expect(data.role).toBe('ADMIN')
     expect(data.token).toBe('aToken')
-    expect(data.refreshToken).toBe('refreshToken')
+    expect(refreshToken).toBe('refreshToken')
   })
-  test('Should remove data in localStorage', () => {
+  test('Should remove user data in localStorage', () => {
     localStorage.setItem('userData', '{}')
     const sut = new StorageUserRepository()
     sut.remove()
     const rawData = localStorage.getItem('userData')
     expect(rawData).toBeNull()
+  });
+  test('Should not remove refreshToken from localStorage', () => {
+    localStorage.setItem('userData', '{}')
+    localStorage.setItem('refreshToken', 'AVeryLargeToken')
+    const sut = new StorageUserRepository()
+    sut.remove()
+    const token = localStorage.getItem('refreshToken')
+    expect(token).toBe('AVeryLargeToken')
   });
 })

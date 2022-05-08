@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import LoginForm from '@/UI/components/Account/LoginForm.vue'
 import router from '@/UI/router/index'
 import { useUserStore } from '@/UI/stores/user'
@@ -17,6 +17,13 @@ const onLoginButtonClicked = async (email: string, password: string):Promise<voi
     router.push({ name: 'Dashboard' })
   }
 }
+
+onMounted(async () => {
+  const userIsLogged = await userStore.refresh()
+  if (userIsLogged) {
+    router.push({ name: 'Dashboard' })
+  }
+})
 </script>
 
 <template>

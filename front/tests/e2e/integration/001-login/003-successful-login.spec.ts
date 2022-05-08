@@ -19,9 +19,9 @@ describe('GIVEN a login page', () => {
   context('WHEN I try to login as an Admin', () => {
     beforeEach(() => {
       prepareLoginResponse(tokens.admin)
+      cy.customLogin('admin_user', 'holakease')
     })
     it('THEN should navigate to admin dashboard page', () => {
-      cy.customLogin('admin_user', 'holakease')
       cy.location('pathname').should('match', /\/dashboard/);
       cy.wait('@loginRoute').then(() => {
         const rawUserData = localStorage.getItem('userData')
@@ -29,16 +29,22 @@ describe('GIVEN a login page', () => {
         expect(userData?.role).to.be.eq('ADMIN')
         expect(userData?.username).to.be.eq('mubisco')
         expect(userData?.token).to.be.eq(tokens.admin)
-        expect(userData?.refreshToken).to.be.eq('aVeryLargeToken')
+      })
+    })
+    it('AND THEN refresh token should be stored', () => {
+      cy.wait('@loginRoute').then(() => {
+        const refreshToken = localStorage.getItem('refreshToken')
+        expect(refreshToken).to.be.eq('aVeryLargeToken')
       })
     })
   })
   context('WHEN I try to login as a Master', () => {
     beforeEach(() => {
       prepareLoginResponse(tokens.master)
+      cy.customLogin('master_user', 'holakease')
     })
     it('THEN should navigate to master dashboard page', () => {
-      cy.customLogin('master_user', 'holakease')
+      cy.location('pathname').should('match', /\/dashboard/);
       cy.wait('@loginRoute').then(() => {
         const rawUserData = localStorage.getItem('userData')
         const userData = rawUserData ? JSON.parse(rawUserData) : {}
@@ -52,9 +58,10 @@ describe('GIVEN a login page', () => {
   context('WHEN I try to login as Player', () => {
     beforeEach(() => {
       prepareLoginResponse(tokens.player)
+      cy.customLogin('player_user', 'holakease')
     })
     it('THEN should navigate to player dashboard page', () => {
-      cy.customLogin('player_user', 'holakease')
+      cy.location('pathname').should('match', /\/dashboard/);
       cy.wait('@loginRoute').then(() => {
         const rawUserData = localStorage.getItem('userData')
         const userData = rawUserData ? JSON.parse(rawUserData) : {}

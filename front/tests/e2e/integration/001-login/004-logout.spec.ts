@@ -8,7 +8,7 @@ describe('GIVEN a logged page', () => {
     cy.intercept(routes.back + '/api/login', (req) => {
       req.reply({
         statusCode: 200,
-        body: {token: tokens.admin },
+        body: {token: tokens.admin, refresh_token: 'refreshToken' },
         delay: 500,
       })
     }).as('loginRoute');
@@ -33,9 +33,13 @@ describe('GIVEN a logged page', () => {
     it('AND THEN I should see logout button on top menu', () => {
       cy.get('[data-cy="login-top-button"]').should('exist')
     })
-    it('AND THEN user data should not be stored', () => {
+    it('AND THEN user data should not be on localStorage', () => {
       const rawUserData = localStorage.getItem('userData')
       expect(rawUserData).to.be.null
+    })
+    it('AND THEN refresh token should be on localStorage', () => {
+      const refreshToken = localStorage.getItem('refreshToken')
+      expect(refreshToken).to.be.eq('refreshToken')
     })
   })
   context('WHEN I click on left logout button login', () => {
