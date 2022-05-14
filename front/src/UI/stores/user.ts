@@ -4,10 +4,15 @@ import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand'
 import { LogoutUserCommandHandler } from '@/Application/Command/User/LogoutUserCommandHandler';
 import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient';
 import { StorageUserRepository } from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository';
+import { RefreshUserCommandHandler } from '@/Application/Command/User/RefreshUserCommandHandler';
 import { defineStore } from 'pinia'
+import {RefreshUserCommand} from '@/Application/Command/User/RefreshUserCommand';
 
-const loginUserCommandHandler = new LoginUserCommandHandler(new AxiosUserClient(), new StorageUserRepository());
-const logoutUserCommandHandler = new LogoutUserCommandHandler(new StorageUserRepository());
+const axiosUserClient = new AxiosUserClient()
+const storageUserRepository = new StorageUserRepository()
+const loginUserCommandHandler = new LoginUserCommandHandler(axiosUserClient, storageUserRepository)
+const logoutUserCommandHandler = new LogoutUserCommandHandler(storageUserRepository)
+const refreshUserCommandHandler = new RefreshUserCommandHandler(axiosUserClient, storageUserRepository)
 
 export const useUserStore = defineStore('users', {
   state: () => ({
@@ -27,7 +32,7 @@ export const useUserStore = defineStore('users', {
         this.token = response.token
         this.role = response.role
         return true
-      } catch {
+      } catch (e) {
         this.$reset()
         return false
       }
@@ -39,9 +44,18 @@ export const useUserStore = defineStore('users', {
     },
     async refresh(): Promise<boolean> {
       const refreshToken = window.localStorage.getItem('refreshToken')
-      if (!refreshToken) {
+      const command = new RefreshUserCommand(refreshToken ?? '')
+      try {
+        const response = await refreshUserCommandHandler.handle(command)
+        this.username = response.username
+        this.token = response.token
+        this.role = response.role
+        return true
+      } catch  {
+        this.$reset()
         return false
       }
+      /*
       const data = { refresh_token: refreshToken }
       const response = await fetch(import.meta.env.VITE_API_URL + '/api/token/refresh', {
         method: 'POST',
@@ -65,6 +79,7 @@ export const useUserStore = defineStore('users', {
         window.localStorage.removeItem('refreshToken')
         return false
       }
+    */
     }
   }
 })

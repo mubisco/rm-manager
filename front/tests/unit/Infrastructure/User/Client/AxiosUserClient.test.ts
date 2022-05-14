@@ -1,4 +1,4 @@
-import { describe, test, expect, vi } from 'vitest'
+import { describe, test, expect, beforeEach, vi } from 'vitest'
 import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
 import { Username } from '@/Domain/User/Username'
 import { Userpassword } from '@/Domain/User/Userpassword'
@@ -13,21 +13,33 @@ vi.mock('axios', () => ({
   }
 }))
 
+let sut: AxiosUserClient
+
 describe('Testing AxiosUserClient', () => {
+  beforeEach(() => {
+    sut = new AxiosUserClient()
+  })
   test('Should be of proper class', () => {
-    const sut = new AxiosUserClient()
     expect(sut).toBeInstanceOf(AxiosUserClient)
   })
   test('Should throw exception if login fails', async () => {
-    const sut = new AxiosUserClient()
     axios.post.mockRejectedValue(new Error('Message'))
     await expect(sut.login(new Username('mubisco'), new Userpassword('patatas'))).rejects.toThrow(UserClientError)
   })
   test('Should return User if connection goes well', async () => {
-    const sut = new AxiosUserClient()
     axios.post.mockResolvedValue({
       data: { token: tokenExamples.admin, refresh_token: 'refreshToken' }
     })
     await expect(sut.login(new Username('mubisco'), new Userpassword('patatas'))).resolves.toBeInstanceOf(User)
+  })
+  test('Should throw exception if refresh fails', async () => {
+    axios.post.mockRejectedValue(new Error('Message'))
+    await expect(sut.refresh('refreshToken')).rejects.toThrow(UserClientError)
+  })
+  test('Should return User if refresh call returns data', async () => {
+    axios.post.mockResolvedValue({
+      data: { token: tokenExamples.admin, refresh_token: 'refreshToken' }
+    })
+    await expect(sut.refresh('refreshToken')).resolves.toBeInstanceOf(User)
   })
 })

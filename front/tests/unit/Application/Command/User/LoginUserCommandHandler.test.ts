@@ -10,7 +10,8 @@ import { UserRole } from '@/Domain/User/UserRole'
 import { Username } from '@/Domain/User/Username'
 
 const mockedUserClient = {
-  login: vi.fn()
+  login: vi.fn(),
+  refresh: vi.fn()
 }
 
 const mockedUserRepository = {
