@@ -45,7 +45,8 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - ./front:/app
+      - ./front:/home/gfuser/app
+      - /home/gfuser/app/node_modules
     networks:
       - rm_next
 networks:

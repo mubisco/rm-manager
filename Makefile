@@ -1,5 +1,5 @@
 CURRENT_DIR:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-DOCKER_COMPOSE=USER_ID=${shell id -u} GID=${shell id -g} docker-compose
+DOCKER_COMPOSE=USER_ID=${shell id -u} GID=${shell id -g} docker compose
 dbStringConnection := -udb_user --password='db_pass' db_name
 
 default: info
@@ -61,7 +61,7 @@ shell-back: ##  Access to backend shell
 	@$(DOCKER_COMPOSE) exec backend bash
 
 shell-front: ##  Access to frontend shell
-	@$(DOCKER_COMPOSE) exec frontend /bin/sh
+	@$(DOCKER_COMPOSE) exec frontend /bin/zsh
 
 shell-db: ##  Access to database shell
 	@$(DOCKER_COMPOSE) exec database mysql ${dbStringConnection}
