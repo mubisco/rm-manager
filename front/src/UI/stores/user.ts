@@ -6,7 +6,7 @@ import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient';
 import { StorageUserRepository } from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository';
 import { RefreshUserCommandHandler } from '@/Application/Command/User/RefreshUserCommandHandler';
 import { defineStore } from 'pinia'
-import {RefreshUserCommand} from '@/Application/Command/User/RefreshUserCommand';
+import { RefreshUserCommand } from '@/Application/Command/User/RefreshUserCommand';
 
 const axiosUserClient = new AxiosUserClient()
 const storageUserRepository = new StorageUserRepository()
@@ -55,31 +55,6 @@ export const useUserStore = defineStore('users', {
         this.$reset()
         return false
       }
-      /*
-      const data = { refresh_token: refreshToken }
-      const response = await fetch(import.meta.env.VITE_API_URL + '/api/token/refresh', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      })
-      if (response.status === 200) {
-        const responseData = await response.json()
-        this.token = responseData.token
-        this.username = 'mubisco'
-        this.role = 'ADMIN'
-        const userData = {
-          username: this.username,
-          token: this.token,
-          role: this.role
-        }
-        window.localStorage.setItem('userData', JSON.stringify(userData))
-        window.localStorage.setItem('refreshToken', responseData.refresh_token)
-        return true
-      } else {
-        window.localStorage.removeItem('userData')
-        window.localStorage.removeItem('refreshToken')
-        return false
-      }
-    */
     }
   }
 })
