@@ -1,4 +1,4 @@
-FROM xbellon/sf-php_81:0.0.2
+FROM xbellon/sf-php_81:0.0.3
 
 ARG USER_ID=1000
 ARG GROUP_ID=1000
@@ -6,16 +6,10 @@ ARG PORT=8000
 
 EXPOSE ${PORT}
 
-
 WORKDIR /app
 
-RUN mkdir -p /home/jwt
-COPY .docker/private.pem /home/jwt
-COPY .docker/public.pem /home/jwt
-
-RUN adduser \
-  --disabled-password \
-  --uid="${USER_ID}" \
-  -s /bin/bash gfuser
+RUN mkdir -p /home/gfuser/jwt
+COPY .docker/private.pem /home/gfuser/jwt
+COPY .docker/public.pem /home/gfuser/jwt
 
 ENV HOME /home/gfuser
