@@ -55,6 +55,15 @@ export const useUserStore = defineStore('users', {
         this.$reset()
         return false
       }
+    },
+    loadFromStorage(): void {
+      const rawSavedUser = window.localStorage.getItem('userData')
+      if (rawSavedUser) {
+        const savedUser = JSON.parse(rawSavedUser)
+        this.username = savedUser.username
+        this.token = savedUser.token
+        this.role = savedUser.role
+      }
     }
   }
 })

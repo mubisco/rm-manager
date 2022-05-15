@@ -14,6 +14,12 @@ const { isLogged, onLogoutButtonClicked } = useLogout()
       :to="{ name: 'Home' }"
     />
     <v-list-item
+      prepend-icon="mdi-home"
+      title="Home"
+      value="home"
+      :to="{ name: 'ForgotPassword' }"
+    />
+    <v-list-item
       v-if="!isLogged"
       v-cy:login-left-button
       prepend-icon="mdi-account"

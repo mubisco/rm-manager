@@ -33,13 +33,7 @@ describe('Testing StorageUserRepository', () => {
     sut.remove()
     const rawData = localStorage.getItem('userData')
     expect(rawData).toBeNull()
-  });
-  test('Should not remove refreshToken from localStorage', () => {
-    localStorage.setItem('userData', '{}')
-    localStorage.setItem('refreshToken', 'AVeryLargeToken')
-    const sut = new StorageUserRepository()
-    sut.remove()
     const token = localStorage.getItem('refreshToken')
-    expect(token).toBe('AVeryLargeToken')
+    expect(token).toBeNull()
   });
 })

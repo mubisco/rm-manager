@@ -14,5 +14,6 @@ export class StorageUserRepository implements UserRepository {
   }
   remove(): void {
     localStorage.removeItem('userData')
+    localStorage.removeItem('refreshToken')
   }
 }

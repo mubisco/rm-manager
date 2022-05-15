@@ -7,5 +7,13 @@
     "forgot-password": "Forgot your password?",
     "action": "Login",
     "error": "User/Password wrong. Please review your credentials"
+  },
+  "forgotPassword": {
+    "title": "Recover password",
+    "username": "Username",
+    "action": "Confirm",
+    "notExists": "User {username} not found!! Please check the spelling and try again.",
+    "serverError": "Unexpected error. Please try again in a while.",
+    "resetOk": "User password reseted successfully. Please check your email to confirm password reset."
   }
 }

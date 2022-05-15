@@ -46,7 +46,10 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to) => {
+router.beforeEach((to, from) => {
+  if (!from.name) {
+    userStore.loadFromStorage()
+  }
   if (to.meta.requiresAuth && !userStore.isLogged) {
     return { path: '/login' }
   }

@@ -7,5 +7,13 @@
     "forgot-password": "¿Olvidaste tu contraseña?",
     "action": "Iniciar sesión",
     "error": "Usuario/Contraseña no válidos. Comprueba los datos introducidos"
+  },
+  "forgotPassword": {
+    "title": "Recuperar contraseña",
+    "username": "Nombre de usuario",
+    "action": "Confirmar",
+    "notExists": "Usuario {username} no encontrado. Por favor revisa si has introducido el usuario correcto.",
+    "serverError": "Error inesperado. Por favor prueba en otro momento.",
+    "resetOk": "Solicitud de reinicio de contraseña exitoso. En breve recibirás un email con las instrucciones para resetear tu contraseña"
   }
 }
