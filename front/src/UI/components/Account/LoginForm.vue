@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, defineEmits, defineProps } from 'vue'
+import LoadingButton from '@/UI/components/Shared/LoadingButton.vue'
 
 defineProps<{ loading: boolean }>()
 defineEmits<{ (eventName: 'login-button-clicked', username: string, password: string): Promise<void> }>()
@@ -61,16 +62,13 @@ const emailError = computed(():boolean => {
       </v-form>
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
-      <v-btn
+      <loading-button
         v-cy:login-button
-        color="primary"
-        :prepend-icon="loading ? 'mdi-loading' : ''"
-        variant="contained"
-        :disabled="!canLogin || loading"
-        @click="$emit('login-button-clicked', username, password)"
-      >
-        {{ $t('login.action') }}
-      </v-btn>
+        :button-label="$t('login.action')"
+        :enabled="canLogin"
+        :loading="loading"
+        @button-clicked="$emit('login-button-clicked', username, password)"
+      />
     </v-card-actions>
   </v-card>
 </template>
