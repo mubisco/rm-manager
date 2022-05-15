@@ -27,7 +27,7 @@ rebuild-common rebuild-db rebuild-back rebuild-front:
 	@$(DOCKER_COMPOSE) up --build --force-recreate --no-deps -d $(TARGET)
 
 
-doco stop start status build-images rebuild-images:
+doco stop start status build-images rebuild-images shell-front shell-back:
 	@$(DOCKER_COMPOSE) $(DOCKER_COMMAND)
 
 deps-install: npm-install composer-install ##  Install frontend and backend dependencies
@@ -57,11 +57,8 @@ db-restore: ##  Recreates database and import data from defined location
 	@echo "Importing new data..."
 	@docker exec -i database bash -l -c "mysql ${dbStringConnection}" < .docker/mysql/bd-dump.sql
 
-shell-back: ##  Access to backend shell
-	@$(DOCKER_COMPOSE) exec backend bash
-
-shell-front: ##  Access to frontend shell
-	@$(DOCKER_COMPOSE) exec frontend /bin/zsh
+shell-back:DOCKER_COMMAND=exec backend /bin/zsh ##  Access to backend shell
+shell-front:DOCKER_COMMAND=exec frontend /bin/zsh ##  Access to frontend shell
 
 shell-db: ##  Access to database shell
 	@$(DOCKER_COMPOSE) exec database mysql ${dbStringConnection}
