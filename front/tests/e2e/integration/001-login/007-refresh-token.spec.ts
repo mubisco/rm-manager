@@ -8,7 +8,6 @@ const prepareRefreshTokenResponse = (): void => {
     req.reply({
       statusCode: 200,
       body: {token: tokens.admin, refresh_token: 'anotherToken' },
-      delay: 500,
     })
   }).as('refreshTokenRoute');
 }
@@ -18,7 +17,6 @@ const prepareRefreshTokenResponseWithError = (): void => {
     req.reply({
       statusCode: 401,
       body: { message: 'asd' },
-      delay: 500,
     })
   }).as('refreshTokenRouteWithError');
 }
@@ -35,11 +33,6 @@ describe('GIVEN a unauthenticated user', () => {
     it('THEN should login and navigate to dashboard page', () => {
       cy.wait('@refreshTokenRoute').then(() => {
         cy.location('pathname').should('match', /\/dashboard/);
-        const rawUserData = localStorage.getItem('userData')
-        const userData = rawUserData ? JSON.parse(rawUserData) : {}
-        expect(userData?.role).to.be.eq('ADMIN')
-        expect(userData?.username).to.be.eq('mubisco')
-        expect(userData?.token).to.be.eq(tokens.admin)
       })
     })
     it('AND THEN user data should be on localStorage', () => {
@@ -52,8 +45,8 @@ describe('GIVEN a unauthenticated user', () => {
       })
     })
     it('AND THEN new refresh token should be updated', () => {
-      cy.wait('@refreshTokenRoute').then(() => {
-        const refreshToken = localStorage.getItem('refreshToken')
+      cy.wait(100).then(() => {
+        const refreshToken = window.localStorage.getItem('refreshToken')
         expect(refreshToken).to.be.eq('anotherToken')
       })
     })
@@ -79,7 +72,7 @@ describe('GIVEN a unauthenticated user', () => {
       })
     })
     it('AND THEN refresh token should not be stored', () => {
-      cy.wait('@refreshTokenRouteWithError').then(() => {
+      cy.wait(100).then(() => {
         const refreshToken = localStorage.getItem('refreshToken')
         expect(refreshToken).to.be.null
       })

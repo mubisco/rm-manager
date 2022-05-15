@@ -36,10 +36,8 @@ describe('GIVEN a logged page', () => {
     it('AND THEN user data should not be on localStorage', () => {
       const rawUserData = localStorage.getItem('userData')
       expect(rawUserData).to.be.null
-    })
-    it('AND THEN refresh token should be on localStorage', () => {
       const refreshToken = localStorage.getItem('refreshToken')
-      expect(refreshToken).to.be.eq('refreshToken')
+      expect(refreshToken).to.be.null
     })
   })
   context('WHEN I click on left logout button login', () => {

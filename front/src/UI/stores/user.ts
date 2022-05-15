@@ -52,6 +52,7 @@ export const useUserStore = defineStore('users', {
         this.role = response.role
         return true
       } catch  {
+        window.localStorage.removeItem('refreshToken')
         this.$reset()
         return false
       }
