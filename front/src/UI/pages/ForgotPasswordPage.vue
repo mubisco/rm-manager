@@ -3,14 +3,18 @@ import { ref, computed, onMounted } from 'vue'
 import { useUserStore } from '@/UI/stores/user'
 import router from '@/UI/router/index'
 import { useI18n } from 'vue-i18n'
+import { ResetPasswordCommandHandler } from '@/Application/Command/User/ResetPasswordCommandHandler'
+import { ResetPasswordCommand } from '@/Application/Command/User/ResetPasswordCommand'
+import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
+import { UserNotFoundError } from '@/Domain/User/UserNotFoundError'
 const { t } = useI18n()
 
 
 const userStore = useUserStore();
 const username = ref('')
 const snackbarBackground = ref('error')
-const showError = ref(false)
-const errorMessage = ref('')
+const showSnackbar = ref(false)
+const snackbarError = ref('')
 const buttonEnabled = computed(() => username.value !== '' && username.value.length > 3)
 
 onMounted(() => {
@@ -20,21 +24,23 @@ onMounted(() => {
 })
 
 const onRecoverButtonClicked = async () => {
-  console.log('onRecoverButtonClicked', username.value)
-  if (username.value === 'someUsername') {
-    errorMessage.value = t('forgotPassword.serverError')
-    snackbarBackground.value = 'error'
-  }
-  if (username.value === 'notExistantUser') {
-    errorMessage.value = t('forgotPassword.notExists', { username: username })
-    snackbarBackground.value = 'error'
-  }
-  if (username.value === 'existantUser') {
-    errorMessage.value = t('forgotPassword.resetOk')
+  const handler = new ResetPasswordCommandHandler(new AxiosUserClient())
+  const command = new ResetPasswordCommand(username.value)
+  try {
+    await handler.handle(command)
+    snackbarError.value = t('forgotPassword.resetOk')
     snackbarBackground.value = 'success'
+  } catch (err: unknown) {
+    if (err instanceof UserNotFoundError) {
+      snackbarError.value = t('forgotPassword.notExists', { username: username })
+      snackbarBackground.value = 'error'
+      return
+    }
+    snackbarError.value = t('forgotPassword.serverError')
+    snackbarBackground.value = 'error'
+  } finally {
+    showSnackbar.value = true
   }
-  console.log('onRecoverButtonClicked', errorMessage.value)
-  showError.value = true
 }
 </script>
 
@@ -75,12 +81,12 @@ const onRecoverButtonClicked = async () => {
       </v-card-actions>
     </v-card>
     <v-snackbar
-      v-model="showError"
+      v-model="showSnackbar"
       v-cy:recover-password-snackbar
       timeout="3000"
       :color="snackbarBackground"
     >
-      {{ errorMessage }}
+      {{ snackbarError }}
     </v-snackbar>
   </div>
 </template>

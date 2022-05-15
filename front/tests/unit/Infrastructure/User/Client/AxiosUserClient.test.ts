@@ -4,12 +4,14 @@ import { Username } from '@/Domain/User/Username'
 import { Userpassword } from '@/Domain/User/Userpassword'
 import { User } from '@/Domain/User/User'
 import { UserClientError } from '@/Domain/User/UserClientError'
+import { UserNotFoundError } from '@/Domain/User/UserNotFoundError'
 import axios from 'axios'
 import tokenExamples from './tokenExamples.json'
 
 vi.mock('axios', () => ({
   default: {
-    post: vi.fn()
+    post: vi.fn(),
+    put: vi.fn()
   }
 }))
 
@@ -41,5 +43,33 @@ describe('Testing AxiosUserClient', () => {
       data: { token: tokenExamples.admin, refresh_token: 'refreshToken' }
     })
     await expect(sut.refresh('refreshToken')).resolves.toBeInstanceOf(User)
+  })
+  test('Should throw error if client fails when resetting password', async () => {
+    const expectedError = new Error('Message')
+    expectedError.response = {
+      data: {},
+      statusText: '',
+      config: {},
+      headers: {},
+      status: 500
+    }
+    axios.put.mockRejectedValue(expectedError)
+    await expect(sut.resetPassword(new Username('mubisco'))).rejects.toThrow(UserClientError)
+  })
+  test('Should throw error if username to reset password does not exists', async () => {
+    const expectedError = new Error('Message')
+    expectedError.response = {
+      data: {},
+      statusText: '',
+      config: {},
+      headers: {},
+      status: 404
+    }
+    axios.put.mockRejectedValue(expectedError)
+    await expect(sut.resetPassword(new Username('mubisco'))).rejects.toThrow(UserNotFoundError)
+  })
+  test('Should return true if reset password done', async () => {
+    axios.put.mockResolvedValue()
+    await expect(sut.resetPassword(new Username('mubisco'))).resolves.toBe(true)
   })
 })

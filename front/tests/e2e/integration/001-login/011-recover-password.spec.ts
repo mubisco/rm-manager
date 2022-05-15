@@ -46,7 +46,7 @@ describe('GIVEN a recover password page', () => {
   })
   context('WHEN I enter a non existent user', () => {
     beforeEach(() => {
-      cy.intercept(routes.back + '/api/user/recover-password', (req) => {
+      cy.intercept(routes.back + '/api/user/reset-password', (req) => {
         req.reply({
           statusCode: 404,
           body: {error: 'User does not exists' },
@@ -57,13 +57,15 @@ describe('GIVEN a recover password page', () => {
     })
     it('THEN I should see an error message', () => {
       cy.get('[data-cy="recover-password-button"]').click()
-      cy.get('[data-cy="recover-password-snackbar"]').should('exist')
-      cy.get('[data-cy="recover-password-snackbar"]').contains('Usuario')
+      cy.wait('@recoverPasswordRoute').then(() => {
+        cy.get('[data-cy="recover-password-snackbar"]').should('exist')
+        cy.get('[data-cy="recover-password-snackbar"]').contains('Usuario')
+      })
     })
   })
   context('WHEN there is an error on server', () => {
     beforeEach(() => {
-      cy.intercept(routes.back + '/api/user/recover-password', (req) => {
+      cy.intercept(routes.back + '/api/user/reset-password', (req) => {
         req.reply({
           statusCode: 500,
           body: {error: 'UnexpectedError' },
@@ -74,13 +76,15 @@ describe('GIVEN a recover password page', () => {
     })
     it('THEN I should see an error message', () => {
       cy.get('[data-cy="recover-password-button"]').click()
-      cy.get('[data-cy="recover-password-snackbar"]').should('exist')
-      cy.get('[data-cy="recover-password-snackbar"]').contains('Error inesperado')
+      cy.wait('@recoverPasswordRoute').then(() => {
+        cy.get('[data-cy="recover-password-snackbar"]').should('exist')
+        cy.get('[data-cy="recover-password-snackbar"]').contains('Error inesperado')
+      })
     })
   })
   context('WHEN there I enter existant user', () => {
     beforeEach(() => {
-      cy.intercept(routes.back + '/api/user/recover-password', (req) => {
+      cy.intercept(routes.back + '/api/user/reset-password', (req) => {
         req.reply({
           statusCode: 200,
           body: {message: 'OK' },
@@ -91,8 +95,10 @@ describe('GIVEN a recover password page', () => {
     })
     it('THEN I should see a success message', () => {
       cy.get('[data-cy="recover-password-button"]').click()
-      cy.get('[data-cy="recover-password-snackbar"]').should('exist')
-      cy.get('[data-cy="recover-password-snackbar"]').children('.v-snackbar__wrapper').should('have.class', 'bg-success')
+      cy.wait('@recoverPasswordRoute').then(() => {
+        cy.get('[data-cy="recover-password-snackbar"]').should('exist')
+        cy.get('[data-cy="recover-password-snackbar"]').children('.v-snackbar__wrapper').should('have.class', 'bg-success')
+      })
     })
   })
 })

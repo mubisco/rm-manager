@@ -2,8 +2,9 @@ import { Username } from '@/Domain/User/Username'
 import { Userpassword } from '@/Domain/User/Userpassword'
 import { UserClient } from '@/Domain/User/UserClient'
 import { UserClientError } from '@/Domain/User/UserClientError'
+import { UserNotFoundError } from '@/Domain/User/UserNotFoundError'
 import { User } from '@/Domain/User/User'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 interface AxiosUserResponse {
   token: string;
@@ -15,6 +16,9 @@ interface AxiosLoginData {
 }
 interface AxiosTokenData {
   refresh_token: string;
+}
+interface AxiosResetPasswordData {
+  username: string;
 }
 const baseApiUrl = import.meta.env.VITE_API_URL
 
@@ -31,6 +35,21 @@ export class AxiosUserClient implements UserClient{
     const baseUrl = baseApiUrl + '/api/token/refresh'
     const data = { refresh_token: token }
     return this.makeAxiosPost(baseUrl, data)
+  }
+
+  async resetPassword(name: Username): Promise<boolean> {
+    const url = baseApiUrl + '/api/user/reset-password'
+    const data = { username: name.value() }
+    try {
+      await axios.put<AxiosResetPasswordData>(url, data)
+      return true
+    } catch (err: unknown) {
+      const error = err as AxiosError
+      if (error.response?.status === 404) {
+        throw new UserNotFoundError(error.message)
+      }
+      throw new UserClientError(error.message)
+    }
   }
 
   private async makeAxiosPost(url: string, data: AxiosLoginData|AxiosTokenData): Promise<User> {

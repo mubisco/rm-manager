@@ -1,4 +1,4 @@
-import { describe, test, expect, vi, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import { RefreshUserCommandHandler } from '@/Application/Command/User/RefreshUserCommandHandler'
 import { RefreshUserCommand } from '@/Application/Command/User/RefreshUserCommand'
 import { InvalidRefreshTokenError } from '@/Domain/User/InvalidRefreshTokenError'
@@ -7,19 +7,13 @@ import { UserRepositoryError } from '@/Domain/User/UserRepositoryError'
 import { User } from '@/Domain/User/User'
 import { UserRole } from '@/Domain/User/UserRole'
 import { Username } from '@/Domain/User/Username'
+import { mockUserClient, mockUserRepository } from './mockUtils'
 
 let command: RefreshUserCommand
 let sut: RefreshUserCommandHandler
 
-const mockedUserClient = {
-  refresh: vi.fn(),
-  login: vi.fn()
-}
-
-const mockedUserRepository = {
-  store: vi.fn(),
-  remove: vi.fn()
-}
+const mockedUserClient = mockUserClient()
+const mockedUserRepository = mockUserRepository()
 
 describe('Testing RefreshUserCommandHandler', () => {
   beforeEach(() => {

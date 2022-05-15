@@ -1,12 +1,10 @@
-import { describe, test, expect, vi, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach } from 'vitest'
 import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand'
 import { LogoutUserCommandHandler } from '@/Application/Command/User/LogoutUserCommandHandler'
 import { UserRepositoryError } from '@/Domain/User/UserRepositoryError'
+import { mockUserRepository } from './mockUtils'
 
-const mockedUserRepository = {
-  store: vi.fn(),
-  remove: vi.fn()
-}
+const mockedUserRepository = mockUserRepository()
 
 describe('Testing LogoutUserCommandHandler', () => {
   let sut: LogoutUserCommandHandler

@@ -1,4 +1,4 @@
-import { beforeEach, describe, test, expect, vi } from 'vitest'
+import { beforeEach, describe, test, expect } from 'vitest'
 import { LoginUserCommandHandler } from '@/Application/Command/User/LoginUserCommandHandler'
 import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand'
 import { InvalidUsernameError } from '@/Domain/User/InvalidUsernameError'
@@ -8,16 +8,10 @@ import { UserRepositoryError } from '@/Domain/User/UserRepositoryError'
 import { User } from '@/Domain/User/User'
 import { UserRole } from '@/Domain/User/UserRole'
 import { Username } from '@/Domain/User/Username'
+import { mockUserClient, mockUserRepository } from './mockUtils'
 
-const mockedUserClient = {
-  login: vi.fn(),
-  refresh: vi.fn()
-}
-
-const mockedUserRepository = {
-  store: vi.fn(),
-  remove: vi.fn()
-}
+const mockedUserClient = mockUserClient()
+const mockedUserRepository = mockUserRepository()
 
 describe('LoginUserCommandTest', () => {
   let sut: LoginUserCommandHandler

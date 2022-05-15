@@ -7,7 +7,6 @@ export class LogoutUserCommandHandler {
   ) {
   }
   public handle(command: LogoutUserCommand): boolean {
-    console.log('hanle logout')
     this.userRepository.remove()
     return true
   }
