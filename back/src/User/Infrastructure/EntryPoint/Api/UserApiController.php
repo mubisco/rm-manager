@@ -28,15 +28,15 @@ final class UserApiController implements ControllerInterface
         try {
             ($this->generateResetPasswordTokenCommandHandler)($command);
         } catch (WrongUsernameException) {
-            return new JsonResponse(['message' => 'WRONG_USERNAME'], Response::HTTP_BAD_REQUEST);
+            return $this->createResponse('WRONG_USERNAME', Response::HTTP_BAD_REQUEST);
         } catch (UserNotFoundException) {
-            return new JsonResponse(['message' => 'USER_NOT_FOUND'], Response::HTTP_NOT_FOUND);
+            return $this->createResponse('USER_NOT_FOUND', Response::HTTP_NOT_FOUND);
         } catch (PasswordNotReseteableException) {
-            return new JsonResponse(['message' => 'INTERNAL_ERROR'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->createResponse('INTERNAL_ERROR', Response::HTTP_INTERNAL_SERVER_ERROR);
         } catch (UserRepositoryException) {
-            return new JsonResponse(['message' => 'INTERNAL_ERROR'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->createResponse('INTERNAL_ERROR', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new JsonResponse(['message' => 'PASSWORD_RESET_OK'], Response::HTTP_OK);
+        return $this->createResponse('PASSWORD_RESET_OK', Response::HTTP_OK);
     }
 
     private function filterRequest(Request $request): string
@@ -47,5 +47,10 @@ final class UserApiController implements ControllerInterface
         /** @var string */
         $username = $content['username'] ?? '';
         return $username;
+    }
+
+    private function createResponse(string $message, int $statusCode): JsonResponse
+    {
+        return new JsonResponse(['message' => $message], $statusCode);
     }
 }
