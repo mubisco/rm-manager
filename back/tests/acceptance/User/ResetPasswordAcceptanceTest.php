@@ -4,6 +4,7 @@ namespace App\Tests\acceptance\User;
 
 use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
+use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -17,6 +18,7 @@ class ResetPasswordAcceptanceTest extends WebTestCase
         $this->givenAResetPasswordRequest();
         $this->whenUserRequestedExists();
         $this->thenIShouldReceiveA200Response();
+        $this->andUserHasResetPasswordToken();
     }
     /**
     public function asEmptyUserIWantToResetMyPassword(): void
@@ -37,6 +39,13 @@ class ResetPasswordAcceptanceTest extends WebTestCase
     {
         $this->client = self::createClient();
     }
+    private function andUserHasResetPasswordToken(): void
+    {
+        $repository = $this->client->getContainer()->get('test.userRepository');
+        /** @var DoctrineUser */
+        $user = $repository->byUsername(new Username('existinguser'));
+        $this->assertNotEmpty($user->passwordResetToken());
+    }
 
     private function whenUserRequestedDoesNotExists(): void
     {
@@ -49,7 +58,7 @@ class ResetPasswordAcceptanceTest extends WebTestCase
 
     private function whenUserRequestedExists(): void
     {
-        $this->buildRequest(['username' => 'existantUser']);
+        $this->buildRequest(['username' => 'existinguser']);
     }
 
     private function buildRequest(?array $content): void

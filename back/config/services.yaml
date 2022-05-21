@@ -38,3 +38,5 @@ services:
     Symfony\Component\Uid\Command\GenerateUuidCommand: ~
     Symfony\Component\Uid\Command\InspectUlidCommand: ~
     Symfony\Component\Uid\Command\InspectUuidCommand: ~
+
+    App\User\Domain\UserRepository: '@App\User\Infrastructure\Persistence\Doctrine\DoctrineUserRepository'
