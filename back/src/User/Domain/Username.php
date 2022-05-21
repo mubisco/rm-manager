@@ -6,7 +6,7 @@ namespace App\User\Domain;
 
 final class Username
 {
-    private const USERNAME_REGEX = '/^[0-9a-zA-Z_]*$/';
+    private const USERNAME_REGEX = '/^[0-9a-zA-Z_]{3,}$/';
 
     public function __construct(private string $value)
     {

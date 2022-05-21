@@ -20,24 +20,32 @@ class ResetPasswordAcceptanceTest extends WebTestCase
         $this->thenIShouldReceiveA200Response();
         $this->andUserHasResetPasswordToken();
     }
-    /**
+    /** @test */
     public function asEmptyUserIWantToResetMyPassword(): void
     {
         $this->givenAResetPasswordRequest();
         $this->whenRequestIsEmpty();
         $this->thenIShouldReceiveA400Response();
     }
-    public function asUserIWantToResetMyPassword(): void
+    /** @test */
+    public function asNonExistantUserIWantToResetMyPassword(): void
     {
         $this->givenAResetPasswordRequest();
-        $this->whenUserRequestedExists();
-        $this->thenIShouldReceiveA200Response();
+        $this->whenUserRequestedDoesNotExist();
+        $this->thenIShouldReceiveA404Response();
     }
-    */
 
     private function givenAResetPasswordRequest(): void
     {
         $this->client = self::createClient();
+    }
+    private function whenUserRequestedExists(): void
+    {
+        $this->buildRequest(['username' => 'existinguser']);
+    }
+    private function thenIShouldReceiveA200Response(): void
+    {
+        $this->assertResponseCode(200);
     }
     private function andUserHasResetPasswordToken(): void
     {
@@ -47,18 +55,18 @@ class ResetPasswordAcceptanceTest extends WebTestCase
         $this->assertNotEmpty($user->passwordResetToken());
     }
 
-    private function whenUserRequestedDoesNotExists(): void
-    {
-    }
-
     private function whenRequestIsEmpty(): void
     {
         $this->buildRequest(null);
     }
-
-    private function whenUserRequestedExists(): void
+    private function thenIShouldReceiveA400Response(): void
     {
-        $this->buildRequest(['username' => 'existinguser']);
+        $this->assertResponseCode(400);
+    }
+
+    private function whenUserRequestedDoesNotExist(): void
+    {
+        $this->buildRequest(['username' => 'notexistantuser']);
     }
 
     private function buildRequest(?array $content): void
@@ -82,15 +90,5 @@ class ResetPasswordAcceptanceTest extends WebTestCase
     {
         $this->client->getResponse()->getContent();
         $this->assertResponseStatusCodeSame($responseCode);
-    }
-
-    private function thenIShouldReceiveA400Response(): void
-    {
-        $this->assertResponseCode(400);
-    }
-
-    private function thenIShouldReceiveA200Response(): void
-    {
-        $this->assertResponseCode(200);
     }
 }

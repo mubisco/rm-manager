@@ -7,7 +7,10 @@ namespace App\User\Infrastructure\EntryPoint\Api;
 use App\Shared\Infrastructure\ControllerInterface;
 use App\User\Application\Command\GenerateResetPasswordTokenCommand;
 use App\User\Application\Command\GenerateResetPasswordTokenCommandHandler;
+use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\UserNotFoundException;
+use App\User\Domain\UserRepositoryException;
+use App\User\Domain\WrongUsernameException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,19 +27,16 @@ final class UserApiController implements ControllerInterface
         $command = new GenerateResetPasswordTokenCommand($userName);
         try {
             ($this->generateResetPasswordTokenCommandHandler)($command);
+        } catch (WrongUsernameException) {
+            return new JsonResponse(['message' => 'WRONG_USERNAME'], Response::HTTP_BAD_REQUEST);
         } catch (UserNotFoundException) {
             return new JsonResponse(['message' => 'USER_NOT_FOUND'], Response::HTTP_NOT_FOUND);
+        } catch (PasswordNotReseteableException) {
+            return new JsonResponse(['message' => 'INTERNAL_ERROR'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (UserRepositoryException) {
+            return new JsonResponse(['message' => 'INTERNAL_ERROR'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         return new JsonResponse(['message' => 'PASSWORD_RESET_OK'], Response::HTTP_OK);
-        /*
-        $username = $this->filterRequest($request);
-        if (!$username) {
-            return new JsonResponse(['message' => 'NO_USER'], Response::HTTP_BAD_REQUEST);
-        }
-        if ($username == 'nonExistantUser') {
-            return new JsonResponse(['message' => 'USER_NOT_FOUND'], Response::HTTP_NOT_FOUND);
-        }
-         */
     }
 
     private function filterRequest(Request $request): string

@@ -23,4 +23,10 @@ class UsernameTest extends TestCase
         $this->expectException(WrongUsernameException::class);
         new Username('bad username');
     }
+
+    public function testShouldThowExceptionIfEmtpyUsername(): void
+    {
+        $this->expectException(WrongUsernameException::class);
+        new Username('');
+    }
 }
