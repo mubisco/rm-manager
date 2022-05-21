@@ -3,3 +3,7 @@ services:
     test.userRepository:
         alias: App\User\Domain\UserRepository
         public: true
+
+    test.eventStore:
+        alias: App\Shared\Infrastructure\Event\DoctrineEventStore
+        public: true

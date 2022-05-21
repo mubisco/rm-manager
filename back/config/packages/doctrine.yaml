@@ -16,12 +16,18 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Infrastructure/Persistence/Doctrine/Mappings'
                 prefix: 'App\User\Infrastructure\Persistence\Doctrine'
                 alias: DoctrineUser
+            App\Shared\Domain\Event\Doctrine:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Shared/Infrastructure/Event/Mappings'
+                prefix: 'App\Shared\Domain\Event'
+                alias: StoredEvent
 
 when@test:
     doctrine:
         dbal:
             # "TEST_TOKEN" is typically set by ParaTest
-            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+            #dbname_suffix: '_test%env(default::TEST_TOKEN)%'
 
 when@prod:
     doctrine:

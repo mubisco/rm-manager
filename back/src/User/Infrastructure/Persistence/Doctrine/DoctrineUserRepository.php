@@ -2,10 +2,7 @@
 
 namespace App\User\Infrastructure\Persistence\Doctrine;
 
-use App\User\Domain\UnauthorizedUserException;
 use App\User\Domain\User;
-use App\User\Domain\UserEmail;
-use App\User\Domain\UserPassword;
 use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
 use App\User\Domain\UserNotFoundException;
@@ -20,16 +17,11 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 class DoctrineUserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserRepository
 {
-    public ManagerRegistry $registry;
-    public UserPasswordHasherInterface $userPasswordHasherInterface;
-
     public function __construct(
-        ManagerRegistry $registry,
-        UserPasswordHasherInterface $userPasswordHasherInterface
+        private ManagerRegistry $registry,
+        private UserPasswordHasherInterface $userPasswordHasherInterface
     ) {
         parent::__construct($registry, DoctrineUser::class);
-        $this->registry = $registry;
-        $this->userPasswordHasherInterface = $userPasswordHasherInterface;
     }
 
     /**
