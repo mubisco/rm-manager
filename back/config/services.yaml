@@ -38,4 +38,3 @@ services:
     Symfony\Component\Uid\Command\GenerateUuidCommand: ~
     Symfony\Component\Uid\Command\InspectUlidCommand: ~
     Symfony\Component\Uid\Command\InspectUuidCommand: ~
-

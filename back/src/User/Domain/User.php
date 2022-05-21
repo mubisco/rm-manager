@@ -6,6 +6,5 @@ interface User
 {
     public function userId(): string;
     public function user(): string;
-    public function role(): string;
-    public function token(): string;
+    public function generateResetPasswordToken(): string;
 }

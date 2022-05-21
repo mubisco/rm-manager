@@ -3,6 +3,8 @@
 namespace App\User\Infrastructure\Persistence\Doctrine;
 
 use App\User\Domain\User;
+use App\User\Domain\Username;
+use DateTimeImmutable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Ulid;
@@ -10,14 +12,20 @@ use Symfony\Component\Uid\Ulid;
 class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface, User
 {
     private Ulid $userId;
+    private DateTimeImmutable $createdAt;
+    private DateTimeImmutable $updatedAt;
 
     public function __construct(
         private string $email,
         private string $username,
         private string $password,
         private array $roles,
+        private ?string $resetPasswordToken,
+        private ?DateTimeImmutable $resetPasswordRequestedAt,
     ) {
         $this->userId = new Ulid();
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     /**
@@ -39,6 +47,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
+        /** @var array<array-key, string>*/
         return array_unique($roles);
     }
 
@@ -58,6 +67,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
     public function setPassword(string $password): self
     {
         $this->password = $password;
+        $this->updatedAt = new DateTimeImmutable();
         return $this;
     }
 
@@ -80,13 +90,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         return $this->username;
     }
 
-    public function role(): string
+    public function generateResetPasswordToken(): string
     {
-        return (string) $this->roles[0];
-    }
-
-    public function token(): string
-    {
-        return 'token';
     }
 }

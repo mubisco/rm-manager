@@ -11,5 +11,9 @@
     <field name="username" column="username" type="string" length="64" unique="true" />
     <field name="roles" column="roles" type="json" />
     <field name="password" column="password" type="string" />
+    <field name="createdAt" column="created_at" type="date_immutable" />
+    <field name="updatedAt" column="updated_at" type="date_immutable" />
+    <field name="resetPasswordToken" column="reset_password_token" type="string" length="64" nullable="true" />
+    <field name="resetPasswordRequestedAt" column="reset_password_requested_at" type="date_immutable" nullable="true" />
   </entity>
 </doctrine-mapping>

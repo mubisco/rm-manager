@@ -1,0 +1,5 @@
+services:
+    App\User\Domain\UserRepository: '@App\User\Domain\DummyUserRepository'
+    test.userRepository:
+        alias: App\User\Domain\UserRepository
+        public: true

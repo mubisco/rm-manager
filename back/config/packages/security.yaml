@@ -37,12 +37,13 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/api/(login|token/refresh),              roles: PUBLIC_ACCESS }
-        - { path: ^/api/ready/admin,        roles: ROLE_ADMIN }
-        - { path: ^/api/ready/master,       roles: ROLE_MASTER }
-        - { path: ^/api/ready/player,       roles: ROLE_USER }
-        - { path: ^/api/ready,              roles: PUBLIC_ACCESS }
-        - { path: ^/api,                    roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/user/reset-password, roles: PUBLIC_ACCESS }
+        - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
+        - { path: ^/api/ready/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/ready/master, roles: ROLE_MASTER }
+        - { path: ^/api/ready/player, roles: ROLE_USER }
+        - { path: ^/api/ready, roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

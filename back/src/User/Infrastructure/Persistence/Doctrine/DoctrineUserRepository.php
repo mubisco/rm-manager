@@ -7,6 +7,8 @@ use App\User\Domain\User;
 use App\User\Domain\UserEmail;
 use App\User\Domain\UserPassword;
 use App\User\Domain\UserRepository;
+use App\User\Domain\Username;
+use App\User\Domain\UserNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
@@ -60,16 +62,35 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof DoctrineUser) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(
+                sprintf('Instances of "%s" are not supported.', \get_class($user))
+            );
         }
         $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
     }
 
+    public function byUsername(Username $username): User
+    {
+        /** @var User[] */
+        $results = $this->findBy(['username' => $username->value()]);
+        if (empty($results)) {
+            throw new UserNotFoundException("Username {$username->value()} not found!!");
+        }
+        return $results[0];
+    }
+
+    public function update(User $user): User
+    {
+        $this->_em->flush();
+        return $user;
+    }
+
+    /*
     public function login(UserEmail $userEmail, UserPassword $userPassword): User
     {
-        /** @var DoctrineUser|null */
+        /** @var DoctrineUser|null
         $user = $this->createQueryBuilder('u')
             ->andWhere('u.email = :email')
             ->setParameter('email', $userEmail->value())
@@ -84,4 +105,5 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
         }
         return $user;
     }
+     */
 }

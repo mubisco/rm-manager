@@ -4,3 +4,9 @@ kernel:
 
 api_refresh_token:
     path: /api/token/refresh
+
+
+api_reset_password:
+    path: /api/user/reset-password
+    controller: App\User\Infrastructure\EntryPoint\Api\UserApiController::resetPassword
+    methods: PUT
