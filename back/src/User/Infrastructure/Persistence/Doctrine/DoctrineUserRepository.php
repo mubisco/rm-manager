@@ -3,6 +3,7 @@
 namespace App\User\Infrastructure\Persistence\Doctrine;
 
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
 use App\User\Domain\UserNotFoundException;
@@ -65,18 +66,28 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
 
     public function byUsername(Username $username): User
     {
-        /** @var User[] */
-        $results = $this->findBy(['username' => $username->value()]);
-        if (empty($results)) {
-            throw new UserNotFoundException("Username {$username->value()} not found!!");
-        }
-        return $results[0];
+        return $this->simpleSearch('username', $username->value());
     }
 
     public function update(User $user): User
     {
         $this->_em->flush();
         return $user;
+    }
+
+    public function ofId(UserId $userId): User
+    {
+        return $this->simpleSearch('userId', $userId->value());
+    }
+
+    private function simpleSearch(string $key, string $value): User
+    {
+        /** @var User[] */
+        $results = $this->findBy([$key => $value]);
+        if (empty($results)) {
+            throw new UserNotFoundException("User with {$key} {$value} not found!!");
+        }
+        return $results[0];
     }
 
     /*

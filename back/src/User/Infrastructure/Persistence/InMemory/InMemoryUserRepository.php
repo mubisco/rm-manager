@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\User\Infrastructure\Persistence\InMemory;
 
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
 use App\User\Domain\UserNotFoundException;
@@ -34,5 +35,17 @@ final class InMemoryUserRepository implements UserRepository
     public function update(User $user): User
     {
         return $user;
+    }
+
+    public function ofId(UserId $userId): User
+    {
+        foreach ($this->users as $user) {
+            if ($userId->equalsTo($user->userId())) {
+                return $user;
+            }
+        }
+        throw new UserNotFoundException(
+            "User with id {$userId->value()} not found"
+        );
     }
 }

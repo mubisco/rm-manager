@@ -15,7 +15,7 @@ class DoctrineUserTest extends TestCase
         $this->assertEquals($sut->user(), 'existinguser');
         $this->assertEquals($sut->passwordResetToken(), '');
         $this->assertEquals($sut->passwordResetTokenDate(), '');
-        $this->assertTrue(Ulid::isValid($sut->userId()));
+        $this->assertTrue(Ulid::isValid($sut->userId()->value()));
     }
 
     public function testShouldThrowExceptionIfPasswordTokenCannotBeReseted(): void

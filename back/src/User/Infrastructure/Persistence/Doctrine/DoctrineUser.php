@@ -4,7 +4,7 @@ namespace App\User\Infrastructure\Persistence\Doctrine;
 
 use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\User;
-use App\User\Domain\Username;
+use App\User\Domain\UserId;
 use DateTimeImmutable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -81,9 +81,9 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         // $this->plainPassword = null;
     }
 
-    public function userId(): string
+    public function userId(): UserId
     {
-        return $this->userId->__toString();
+        return UserId::fromString($this->userId->__toString());
     }
 
     public function user(): string
@@ -125,5 +125,10 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         }
 
         return $randomString;
+    }
+
+    public function mail(): string
+    {
+        return $this->email;
     }
 }

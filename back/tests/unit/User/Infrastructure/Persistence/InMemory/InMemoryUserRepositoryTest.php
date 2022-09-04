@@ -3,6 +3,7 @@
 namespace App\User\Infrastructure\Persistence\InMemory;
 
 use App\User\Domain\User;
+use App\User\Domain\UserId;
 use App\User\Domain\Username;
 use App\User\Domain\UserNotFoundException;
 use App\User\Domain\UserRepository;
@@ -42,5 +43,20 @@ class InMemoryUserRepositoryTest extends TestCase
         /** @var DoctrineUser */
         $refreshedUser = $sut->byUsername(new Username('existinguser'));
         $this->assertEquals($token, $refreshedUser->passwordResetToken());
+    }
+
+    public function testShouldThrowExceptionIfUserWithIdNotFound(): void
+    {
+        $this->expectException(UserNotFoundException::class);
+        $sut = new InMemoryUserRepository();
+        $sut->ofId(UserId::fromEmpty());
+    }
+
+    public function testShouldReturnProperUserOfId(): void
+    {
+        $sut = new InMemoryUserRepository();
+        $existingUser = $sut->byUsername(new Username('existinguser'));
+        $result = $sut->ofId($existingUser->userId());
+        $this->assertSame($existingUser, $result);
     }
 }
