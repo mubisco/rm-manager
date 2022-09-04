@@ -2,6 +2,8 @@
 
 namespace App\User\Domain;
 
+use App\Shared\Domain\Event\DomainEvent;
+
 interface User
 {
     public function userId(): UserId;
@@ -9,4 +11,6 @@ interface User
     public function generateResetPasswordToken(): string;
     public function mail(): string;
     public function passwordResetToken(): string;
+    /** @return DomainEvent[] */
+    public function pullEvents(): array;
 }

@@ -2,6 +2,8 @@
 
 namespace App\User\Application\Command;
 
+use App\Shared\Domain\Event\DomainEvent;
+use App\Tests\unit\User\Application\Command\SpyEventBus;
 use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\User;
 use App\User\Domain\UserNotFoundException;
@@ -16,13 +18,16 @@ class GenerateResetPasswordTokenCommandHandlerTest extends TestCase
     private GenerateResetPasswordTokenCommandHandler $sut;
     private GenerateResetPasswordTokenCommand $command;
     private MockObject|UserRepository $mockedRepository;
+    private SpyEventBus $eventBus;
 
     protected function setUp(): void
     {
+        $this->eventBus = new SpyEventBus();
         $this->mockedRepository = $this->createMock(UserRepository::class);
         $this->command = new GenerateResetPasswordTokenCommand('username');
         $this->sut = new GenerateResetPasswordTokenCommandHandler(
-            $this->mockedRepository
+            $this->mockedRepository,
+            $this->eventBus
         );
     }
     public function testShouldThrowExceptionIfUsernameProvidedWrong(): void
@@ -60,7 +65,14 @@ class GenerateResetPasswordTokenCommandHandlerTest extends TestCase
 
     public function testShouldFinishExecutionWhenNoErrors(): void
     {
+        $event = $this->createMock(DomainEvent::class);
+        /** @var MockObject|User */
+        $user = $this->createMock(User::class);
+        $user->method('pullEvents')
+             ->willReturn([$event]);
+        $this->mockedRepository->method('byUsername')->willReturn($user);
         ($this->sut)($this->command);
-        $this->assertTrue(true);
+        $this->assertNotEmpty($this->eventBus->events);
+        $this->assertEquals($this->eventBus->events, [$event]);
     }
 }

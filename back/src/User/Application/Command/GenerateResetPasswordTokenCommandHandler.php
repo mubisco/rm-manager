@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Application\Command;
 
+use App\Shared\Domain\Event\EventBus;
 use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\Username;
 use App\User\Domain\UserNotFoundException;
@@ -14,7 +15,8 @@ use App\User\Domain\WrongUsernameException;
 class GenerateResetPasswordTokenCommandHandler
 {
     public function __construct(
-        private UserRepository $userRepository
+        private UserRepository $userRepository,
+        private EventBus $eventBus
     ) {
     }
 
@@ -30,5 +32,6 @@ class GenerateResetPasswordTokenCommandHandler
         $user = $this->userRepository->byUsername($username);
         $user->generateResetPasswordToken();
         $this->userRepository->update($user);
+        $this->eventBus->sendEvents($user->pullEvents());
     }
 }
