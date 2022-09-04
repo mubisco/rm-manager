@@ -22,6 +22,7 @@ services:
 
         App\Shared\Infrastructure\ControllerInterface:
             tags: ['controller.service_arguments']
+
     unwrapper_transport_middleware:
         class: App\Symfony\Infrastructure\Middleware\UnwrapperTransportMiddleware
 
@@ -40,16 +41,3 @@ services:
     Symfony\Component\Uid\Command\InspectUuidCommand: ~
 
     App\User\Domain\UserRepository: '@App\User\Infrastructure\Persistence\Doctrine\DoctrineUserRepository'
-
-    App\Symfony\Infrastructure\EventListeners\KernelRequestListener:
-        arguments:
-            $subscribers:
-                - '@App\Shared\Domain\Event\PersistDomainEventSubscriber'
-        tags:
-            - { name: kernel.event_listener , event: kernel.request , method: onKernelRequest }
-    App\Symfony\Infrastructure\EventListeners\ConsoleDomainListeners:
-        arguments:
-            $subscribers:
-                - '@App\Shared\Domain\Event\PersistDomainEventSubscriber'
-        tags:
-            - { name: kernel.event_listener , event: console.command , method: onConsoleCommand }

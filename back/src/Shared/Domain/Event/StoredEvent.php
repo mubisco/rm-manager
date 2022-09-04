@@ -34,4 +34,8 @@ final class StoredEvent implements DomainEvent
     {
         return $this->eventId ?? 0;
     }
+
+    public function __toString(): string
+    {
+    }
 }

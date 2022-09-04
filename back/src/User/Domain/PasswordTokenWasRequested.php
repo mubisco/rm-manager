@@ -23,4 +23,11 @@ final class PasswordTokenWasRequested implements DomainEvent
     {
         return $this->userId;
     }
+
+    public function __toString(): string
+    {
+        return json_encode([
+            'userId' => $this->userId
+        ]);
+    }
 }

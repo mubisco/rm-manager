@@ -4,10 +4,8 @@ namespace App\Symfony\Infrastructure\Middleware;
 
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
-use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface;
-use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
 use Throwable;
 
 final class UnwrapperTransportMiddleware implements MiddlewareInterface
@@ -35,21 +33,5 @@ final class UnwrapperTransportMiddleware implements MiddlewareInterface
         }
 
         return null;
-    }
-
-    private function isLastRetry(Envelope $envelope, Throwable $nestedException): bool
-    {
-        if ($nestedException instanceof UnrecoverableMessageHandlingException) {
-            return true;
-        }
-
-        /** @var RedeliveryStamp|null $redeliveryStamp */
-        $redeliveryStamp = $envelope->last(RedeliveryStamp::class);
-
-        if ($redeliveryStamp === null) {
-            return false;
-        }
-
-        return $redeliveryStamp->getRetryCount() === $this->maxRetries;
     }
 }
