@@ -2,7 +2,9 @@
 
 namespace App\User\Infrastructure\Persistence\Doctrine;
 
+use App\Shared\Domain\Event\EventAware;
 use App\User\Domain\PasswordNotReseteableException;
+use App\User\Domain\PasswordTokenWasRequested;
 use App\User\Domain\User;
 use App\User\Domain\UserId;
 use DateTimeImmutable;
@@ -12,6 +14,8 @@ use Symfony\Component\Uid\Ulid;
 
 class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface, User
 {
+    use EventAware;
+
     private Ulid $userId;
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
@@ -100,6 +104,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         $hashedToken = hash_hmac("sha256", $this->createRandomString(25), $secret, false);
         $this->resetPasswordToken = $hashedToken;
         $this->resetPasswordRequestedAt = new DateTimeImmutable();
+        $this->addEvent(new PasswordTokenWasRequested($this->userId->__toString()));
         return $hashedToken;
     }
 
