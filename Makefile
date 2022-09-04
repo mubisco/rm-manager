@@ -1,7 +1,7 @@
 CURRENT_DIR:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 DOCKER = $(shell which docker)
 DOCKER_COMPOSE=USER_ID=${shell id -u} ${DOCKER} compose
-dbStringConnection := -udb_user --password='db_pass' db_name
+dbStringConnection := -uroot --password='root'
 
 default: info
 .PHONY: default
@@ -48,6 +48,10 @@ deps-back: ##  Install backend dependencies
 
 cache-clear: ##  Clears symfony cache
 	@$(DOCKER_COMPOSE) exec backend symfony console cache:clear
+
+testdb-recreate: ##  Drops tests schema database and restores it
+	@$(DOCKER_COMPOSE) exec backend symfony console doctrine:schema:drop --force --env=test
+	@$(DOCKER_COMPOSE) exec backend symfony console doctrine:schema:create --env=test
 
 doctrine-status:TARGET=migrations:status ##  Checks database sync with doctrine definitions
 doctrine-migrate:TARGET=migrations:migrate --no-interaction ##  Executes migration from doctrine

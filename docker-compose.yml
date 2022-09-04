@@ -21,11 +21,12 @@ services:
     image: mariadb:10.7.3
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
     environment:
-      MYSQL_DATABASE: db_name
-      MYSQL_USER: db_user
-      MYSQL_PASSWORD: db_pass
+      MYSQL_DATABASE: develop_db
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: root
     volumes:
+      - .docker/mysql/init:/docker-entrypoint-initdb.d
       - .docker/mysql/data:/var/lib/mysql
     ports:
       - 3500:3306
