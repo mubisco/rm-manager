@@ -19,5 +19,6 @@ class PersistibleEventTest extends TestCase
         $this->assertInstanceOf(PersistibleEventId::class, $sut->eventId());
         $this->assertEquals((string) $domainEvent, $sut->__toString());
         $this->assertEquals($domainEvent->occurredOn(), $sut->occurredOn());
+        $this->assertEquals(get_class($domainEvent), $sut->type());
     }
 }

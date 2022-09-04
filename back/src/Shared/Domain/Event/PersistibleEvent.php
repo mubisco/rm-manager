@@ -14,12 +14,14 @@ final class PersistibleEvent implements DomainEvent
     {
         return new self(
             (string) $event,
+            get_class($event),
             $event->occurredOn()
         );
     }
 
     private function __construct(
         private string $body,
+        private string $eventType,
         private DateTimeImmutable $ocurredOn
     ) {
         $this->eventId = PersistibleEventId::fromEmpty()->value();
@@ -38,5 +40,10 @@ final class PersistibleEvent implements DomainEvent
     public function occurredOn(): DateTimeImmutable
     {
         return $this->ocurredOn;
+    }
+
+    public function type(): string
+    {
+        return $this->eventType;
     }
 }

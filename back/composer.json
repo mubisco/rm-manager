@@ -77,6 +77,9 @@
         "tests": [
           "bin/phpunit --testsuite unit"
         ],
+        "tests-integration": [
+          "bin/phpunit --testsuite integration"
+        ],
         "tests-acceptance": [
           "bin/phpunit --testsuite acceptance"
         ],

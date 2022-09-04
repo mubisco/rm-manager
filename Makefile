@@ -53,6 +53,13 @@ testdb-recreate: ##  Drops tests schema database and restores it
 	@$(DOCKER_COMPOSE) exec backend symfony console doctrine:schema:drop --force --env=test
 	@$(DOCKER_COMPOSE) exec backend symfony console doctrine:schema:create --env=test
 
+testdb-status:TARGET=migrations:status ##  Checks database sync with doctrine definitions
+testdb-migrate:TARGET=migrations:migrate --no-interaction ##  Executes migration from doctrine
+testdb-dump:TARGET=schema:update --dump-sql ##  Shows difference between database and doctrine migrations
+testdb-diff:TARGET=migrations:diff ##  Creates migration with difference between database and doctrine
+testdb-common testdb-status testdb-migrate testdb-dump testdb-diff:
+	@$(DOCKER_COMPOSE) exec backend symfony console doctrine:$(TARGET) --env=test
+
 doctrine-status:TARGET=migrations:status ##  Checks database sync with doctrine definitions
 doctrine-migrate:TARGET=migrations:migrate --no-interaction ##  Executes migration from doctrine
 doctrine-dump:TARGET=schema:update --dump-sql ##  Shows difference between database and doctrine migrations
@@ -78,6 +85,10 @@ tests-back:
 	@$(DOCKER_COMPOSE) exec backend composer run tests
 tests-back-acceptance:
 	@$(DOCKER_COMPOSE) exec backend composer run tests-acceptance
+tests-back-integration:
+	@$(DOCKER_COMPOSE) exec backend symfony console doctrine:schema:drop --force --env=test
+	@$(DOCKER_COMPOSE) exec backend symfony console doctrine:schema:create --env=test
+	@$(DOCKER_COMPOSE) exec backend composer run tests-integration
 tests-front:
 	@$(DOCKER_COMPOSE) exec frontend npm run test:unit
 tests: tests-front tests-back

@@ -17,6 +17,16 @@ class PersistibleEventIdTest extends TestCase
         $sut = PersistibleEventId::fromEmpty();
         $this->assertTrue(Uuid::isValid($sut->value()));
     }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnDifferentIdOnEachInstance(): void
+    {
+        $sut = PersistibleEventId::fromEmpty();
+        $anotherSut = PersistibleEventId::fromEmpty();
+        $this->assertNotEquals($sut->value(), $anotherSut->value());
+    }
     /**
      * @test
      */

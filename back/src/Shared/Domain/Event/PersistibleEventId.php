@@ -13,9 +13,10 @@ final class PersistibleEventId
     {
         return new self($id);
     }
+
     public static function fromEmpty(): self
     {
-        return new self('64efd6b7-7f81-4434-9f88-299b9858281d');
+        return new self(Uuid::uuid4()->__toString());
     }
 
     private function __construct(private string $id)
