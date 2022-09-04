@@ -1,5 +1,6 @@
 CURRENT_DIR:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-DOCKER_COMPOSE=USER_ID=${shell id -u} GID=${shell id -g} docker compose
+DOCKER = $(shell which docker)
+DOCKER_COMPOSE=USER_ID=${shell id -u} ${DOCKER} compose
 dbStringConnection := -udb_user --password='db_pass' db_name
 
 default: info
@@ -28,15 +29,19 @@ rebuild-common rebuild-db rebuild-back rebuild-front:
 
 
 doco stop start status build-images rebuild-images shell-front shell-back:
-	@$(DOCKER_COMPOSE) $(DOCKER_COMMAND)
+	$(DOCKER_COMPOSE) $(DOCKER_COMMAND)
 
-deps-install: npm-install composer-install ##  Install frontend and backend dependencies
-npm-install: ##  Install frontend dependencies
+.PHONY: stats
+stats: ## - Check docker memory/cpu stats
+	@docker stats
+
+deps: deps-front deps-back ##  Install frontend and backend dependencies
+deps-front: ##  Install frontend dependencies
 	@echo "Installing frontend dependencies..."
 	@echo "---------------------------------"
 	@$(DOCKER_COMPOSE) exec frontend npm install
 
-composer-install: ##  Install backend dependencies
+deps-back: ##  Install backend dependencies
 	@echo "Installing backend dependencies..."
 	@echo "----------------------------------------"
 	@$(DOCKER_COMPOSE) exec backend composer install
@@ -63,6 +68,8 @@ shell-front:DOCKER_COMMAND=exec frontend /bin/zsh ##  Access to frontend shel
 shell-db: ##  Access to database shell
 	@$(DOCKER_COMPOSE) exec database mysql ${dbStringConnection}
 
+tests-back-coverage:
+	@$(DOCKER_COMPOSE) exec backend composer run tests -- --coverage-html=coverage
 tests-back:
 	@$(DOCKER_COMPOSE) exec backend composer run tests
 tests-back-acceptance:

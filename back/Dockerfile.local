@@ -16,6 +16,6 @@ USER gfuser
 ENV HOME /home/gfuser
 
 RUN mkdir -p /home/gfuser/jwt
-COPY --chown=gfuser .docker/private.pem /home/gfuser/jwt
-COPY --chown=gfuser .docker/public.pem /home/gfuser/jwt
+#COPY --chown=gfuser .docker/private.pem /home/gfuser/jwt
+#COPY --chown=gfuser .docker/public.pem /home/gfuser/jwt
 
