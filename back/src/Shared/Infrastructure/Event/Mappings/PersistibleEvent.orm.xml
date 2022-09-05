@@ -11,6 +11,6 @@
     </id>
     <field name="body" column="event_body" type="text" />
     <field name="eventType" column="event_type" type="string" />
-    <field name="ocurredOn" column="ocurred_on" type="date_immutable" nullable="false" />
+    <field name="ocurredOn" column="ocurred_on" type="datetime_immutable" nullable="false" />
   </entity>
 </doctrine-mapping>

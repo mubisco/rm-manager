@@ -11,7 +11,7 @@ framework:
               middleware:
                   - validation
                   - unwrapper_transport_middleware
-            event.bus:
+            event.async.bus:
               default_middleware: allow_no_handlers
               middleware:
                   - validation
