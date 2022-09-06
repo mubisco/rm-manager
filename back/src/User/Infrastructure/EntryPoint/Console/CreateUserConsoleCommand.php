@@ -42,21 +42,21 @@ final class CreateUserConsoleCommand extends Command
             InputArgument::REQUIRED,
             'User password. For initialization purposes'
         );
-
         $this->addOption(
             'role',
-            'r',
+            null,
             InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-            'Role for the user. Should be one or more of these: ROLE_USER, ROLE_ADMIN, ROLE_MASTER'
+            'Role for the user. Should be one or more of these: ROLE_USER, ROLE_ADMIN, ROLE_MASTER. ' .
+                'If no role passed, its assumed a ROLE_USER option'
         );
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $command = new CreateUserCommand(
-                array_merge($input->getArguments(), $input->getOptions())
-            );
+            $data = $input->getArguments();
+            $data['role'] = $input->getOption('role');
+            $command = new CreateUserCommand($data);
             $this->commandBus->dispatch($command);
         } catch (InvalidArgumentException $e) {
             $output->writeln($e->getMessage());
