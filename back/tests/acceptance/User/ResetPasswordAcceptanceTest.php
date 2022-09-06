@@ -2,7 +2,6 @@
 
 namespace App\Tests\acceptance\User;
 
-use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
 use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
