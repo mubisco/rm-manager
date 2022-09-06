@@ -12,7 +12,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./back:/app
+      - ./back:/home/developer/app
     networks:
       - rm_next
     command: symfony serve --port=8000

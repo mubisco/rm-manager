@@ -1,21 +1,17 @@
-FROM xbellon/sf-php_81:0.0.4
+FROM xbellon/sf-php_81:0.0.6
 
 ARG USER_ID=1000
-ARG GROUP_ID=1000
 ARG PORT=8000
 
 EXPOSE ${PORT}
 
 USER root
-RUN usermod -u ${USER_ID} gfuser
-RUN groupmod -g ${GROUP_ID} gfuser
+RUN usermod -u ${USER_ID} developer
 
-WORKDIR /app
+WORKDIR /home/developer/app
 
-USER gfuser
-ENV HOME /home/gfuser
+USER developer
+ENV HOME /home/developer
 
-RUN mkdir -p /home/gfuser/jwt
-#COPY --chown=gfuser .docker/private.pem /home/gfuser/jwt
-#COPY --chown=gfuser .docker/public.pem /home/gfuser/jwt
-
+RUN mkdir -p /home/developer/jwt
+RUN mkdir -p /home/developer/app
