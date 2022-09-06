@@ -59,4 +59,14 @@ class InMemoryUserRepositoryTest extends TestCase
         $result = $sut->ofId($existingUser->userId());
         $this->assertSame($existingUser, $result);
     }
+
+    public function testShouldStoreProperUser(): void
+    {
+        $user = new DoctrineUser('test@test.com', 'username', 'password', ['ROLE_USER'], null, null);
+        $sut = new InMemoryUserRepository();
+        $result = $sut->store($user);
+        $this->assertSame($user, $result);
+        $storedUser = $sut->ofId($user->userId());
+        $this->assertSame($user, $storedUser);
+    }
 }

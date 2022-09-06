@@ -90,23 +90,9 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
         return $results[0];
     }
 
-    /*
-    public function login(UserEmail $userEmail, UserPassword $userPassword): User
+    public function store(User $user): User
     {
-        /** @var DoctrineUser|null
-        $user = $this->createQueryBuilder('u')
-            ->andWhere('u.email = :email')
-            ->setParameter('email', $userEmail->value())
-            ->getQuery()
-            ->getOneOrNullResult();
-        if ($user === null) {
-            throw new UnauthorizedUserException('Not authorized!!!');
-        }
-        $result = $this->userPasswordHasherInterface->isPasswordValid($user, $userPassword->value());
-        if (!$result) {
-            throw new UnauthorizedUserException('Not authorized!!!');
-        }
+        $this->_em->persist($user);
         return $user;
     }
-     */
 }

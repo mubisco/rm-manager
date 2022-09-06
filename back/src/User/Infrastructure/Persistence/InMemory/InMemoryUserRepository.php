@@ -48,4 +48,10 @@ final class InMemoryUserRepository implements UserRepository
             "User with id {$userId->value()} not found"
         );
     }
+
+    public function store(User $user): User
+    {
+        $this->users[] = $user;
+        return $user;
+    }
 }
