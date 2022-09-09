@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Shared\Application\Events;
 
-use App\Shared\Application\EventHandlerInterface;
-use App\Shared\Domain\Event\DomainEvent;
+use App\Shared\Application\EventSyncHandlerInterface;
 use App\Shared\Domain\Event\PersistibleEvent;
 use App\Shared\Domain\Event\PersistibleEventRepository;
 use App\Shared\Domain\Event\PersistibleEventRepositoryException;
 
-final class PersistEventHandler implements EventHandlerInterface
+final class PersistEventHandler implements EventSyncHandlerInterface
 {
     public function __construct(private PersistibleEventRepository $persistibleEventRepository)
     {
@@ -19,10 +18,8 @@ final class PersistEventHandler implements EventHandlerInterface
     /**
      * @throws PersistibleEventRepositoryException
      */
-    public function __invoke(DomainEvent $domainEvent): void
+    public function __invoke(PersistibleEvent $event): void
     {
-        $this->persistibleEventRepository->store(
-            PersistibleEvent::fromDomainEvent($domainEvent)
-        );
+        $this->persistibleEventRepository->store($event);
     }
 }

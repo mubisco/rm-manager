@@ -2,6 +2,7 @@
 
 namespace App\Tests\acceptance\User;
 
+use App\User\Domain\Username;
 use App\User\Infrastructure\EntryPoint\Console\CreateUserConsoleCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -30,12 +31,12 @@ class CreateUserConsoleCommandAcceptanceTest extends KernelTestCase
             'name' => 'agapito',
             'mail' => 'test@test.com',
             'password' => 'simple-password',
-            '--role' => 'ROLE_USER'
+            '--role' => ['ROLE_USER']
         ]);
 
         $result = $commandTester->getStatusCode();
         $this->assertEquals(Command::SUCCESS, $result);
-        $createdUser = $userRepository->byUsername('test@test.com');
+        $createdUser = $userRepository->byUsername(new Username('agapito'));
         $this->assertEquals('test@test.com', $createdUser->mail());
     }
 }

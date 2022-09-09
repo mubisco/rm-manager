@@ -7,6 +7,7 @@ use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\PasswordTokenWasRequested;
 use App\User\Domain\User;
 use App\User\Domain\UserId;
+use App\User\Domain\UserWasCreated;
 use DateTimeImmutable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,6 +32,11 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         $this->userId = new Ulid();
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
+        $this->addEvent(new UserWasCreated(
+            (string) $this->userId,
+            $this->username,
+            $this->email
+        ));
     }
 
     /**

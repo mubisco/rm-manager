@@ -20,9 +20,13 @@ services:
             tags:
                 - { name: messenger.message_handler, bus: query.bus }
 
+        App\Shared\Application\EventSyncHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: event.sync.bus, from_transport: sync }
+
         App\Shared\Application\EventHandlerInterface:
             tags:
-                - { name: messenger.message_handler, bus: event.async.bus }
+                - { name: messenger.message_handler, bus: event.async.bus, from_transport: async }
 
         App\Shared\Infrastructure\ControllerInterface:
             tags: ['controller.service_arguments']

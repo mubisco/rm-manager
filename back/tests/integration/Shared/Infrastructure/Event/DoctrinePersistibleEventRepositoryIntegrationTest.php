@@ -45,8 +45,8 @@ class DoctrinePersistibleEventRepositoryIntegrationTest extends KernelTestCase
      */
     public function itShouldInsertProperEntity(): void
     {
-        $domainEvent = new PasswordTokenWasRequested('2a29e209-6e91-4e75-be03-867d62abe4c1');
-        $persistibleEvent = PersistibleEvent::fromDomainEvent($domainEvent);
+        $storableEvent = new PasswordTokenWasRequested('2a29e209-6e91-4e75-be03-867d62abe4c1');
+        $persistibleEvent = PersistibleEvent::fromStorableEvent($storableEvent);
         $result = $this->sut->store($persistibleEvent);
         $this->sut->ofId($persistibleEvent->eventId());
         $this->assertSame($persistibleEvent, $result);

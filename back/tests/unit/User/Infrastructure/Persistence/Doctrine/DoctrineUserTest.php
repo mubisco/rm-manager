@@ -4,7 +4,9 @@ namespace App\User\Infrastructure\Persistence\Doctrine;
 
 use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\PasswordTokenWasRequested;
+use App\User\Domain\UserWasCreated;
 use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Ulid;
 
@@ -22,7 +24,18 @@ class DoctrineUserTest extends TestCase
         $this->assertEquals($this->sut->passwordResetToken(), '');
         $this->assertEquals($this->sut->passwordResetTokenDate(), '');
         $this->assertTrue(Ulid::isValid($this->sut->userId()->value()));
-        $this->assertEmpty($this->sut->pullEvents());
+        $events = $this->sut->pullEvents();
+        $this->assertInstanceOf(UserWasCreated::class, $events[0]);
+        $event = $events[0];
+        $this->assertEquals($this->sut->userId()->value(), $event->userId);
+        $this->assertEquals('some@email.net', $event->mail);
+        $this->assertEquals('existinguser', $event->name);
+        $this->assertEquals(
+            '{"userId":"' . $this->sut->userId()->value() . '","name":"existinguser","mail":"some@email.net"}',
+            $event->__toString()
+        );
+        $now = new DateTimeImmutable();
+        $this->assertEquals($now->format('Y-m-d H'), $event->occurredOn()->format('Y-m-d H'));
     }
 
     public function testShouldThrowExceptionIfPasswordTokenCannotBeReseted(): void
@@ -43,6 +56,7 @@ class DoctrineUserTest extends TestCase
 
     public function testShouldGenerateEventWhenPasswordReset(): void
     {
+        $events = $this->sut->pullEvents();
         $this->sut->generateResetPasswordToken();
         $events = $this->sut->pullEvents();
         $this->assertNotEmpty($events);

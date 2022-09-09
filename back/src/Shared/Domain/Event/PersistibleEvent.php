@@ -6,7 +6,7 @@ namespace App\Shared\Domain\Event;
 
 use DateTimeImmutable;
 
-final class PersistibleEvent implements DomainEvent
+final class PersistibleEvent
 {
     private string $eventId;
 

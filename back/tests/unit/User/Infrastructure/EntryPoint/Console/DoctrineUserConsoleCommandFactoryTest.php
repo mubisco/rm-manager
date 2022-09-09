@@ -5,7 +5,6 @@ namespace App\Tests\unit\User\Infrastructure\EntryPoint\Console;
 use App\User\Domain\UserFactoryException;
 use App\User\Infrastructure\EntryPoint\Console\DoctrineUserConsoleCommandFactory;
 use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class DoctrineUserConsoleCommandFactoryTest extends TestCase

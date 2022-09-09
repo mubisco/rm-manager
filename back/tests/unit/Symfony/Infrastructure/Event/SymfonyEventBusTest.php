@@ -14,12 +14,14 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class SymfonyEventBusTest extends TestCase
 {
     private SymfonyEventBus $sut;
-    private MessageBusInterface|MockObject $busInterface;
+    private MessageBusInterface|MockObject $asyncBusInterface;
+    private MessageBusInterface|MockObject $syncBusInterface;
 
     protected function setUp(): void
     {
-        $this->busInterface = $this->createMock(MessageBusInterface::class);
-        $this->sut = new SymfonyEventBus($this->busInterface);
+        $this->asyncBusInterface = $this->createMock(MessageBusInterface::class);
+        $this->syncBusInterface = $this->createMock(MessageBusInterface::class);
+        $this->sut = new SymfonyEventBus($this->syncBusInterface, $this->asyncBusInterface);
     }
     /**
      * @test
@@ -42,12 +44,15 @@ class SymfonyEventBusTest extends TestCase
     /**
      * @test
      */
-    public function itShouldSendEventsThrougBus(): void
+    public function itShouldSendEventsThrougBuses(): void
     {
         $mockedEvent = $this->createMock(DomainEvent::class);
-        $this->busInterface->expects($this->once())
-                           ->method('dispatch')
-                           ->willReturn(new Envelope($mockedEvent));
+        $this->syncBusInterface->expects($this->once())
+                               ->method('dispatch')
+                               ->willReturn(new Envelope($mockedEvent));
+        $this->asyncBusInterface->expects($this->once())
+                                ->method('dispatch')
+                                ->willReturn(new Envelope($mockedEvent));
         $this->sut->sendEvents([$mockedEvent]);
     }
 }
