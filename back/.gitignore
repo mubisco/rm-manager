@@ -30,3 +30,5 @@
 ###< lexik/jwt-authentication-bundle ###
 #
 /.docker/*
+
+coverage/
