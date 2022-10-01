@@ -1,0 +1,15 @@
+default:
+  suites:
+    default:
+      paths:
+        features: 'tests/acceptance/features'
+      contexts:
+        - App\Tests\acceptance\context\ApiReadyContext
+
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/bootstrap.php
+    Behat\MinkExtension:
+      sessions:
+        symfony:
+          symfony: ~

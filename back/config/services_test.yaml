@@ -1,5 +1,13 @@
 services:
-    App\User\Domain\UserRepository: '@App\User\Infrastructure\Persistence\InMemory\InMemoryUserRepository'
-    test.userRepository:
-        alias: App\User\Domain\UserRepository
-        public: true
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\User\Domain\UserRepository: '@App\User\Infrastructure\Persistence\InMemory\InMemoryUserRepository'
+
+  test.userRepository:
+    alias: App\User\Domain\UserRepository
+    public: true
+
+  App\Tests\acceptance\context\:
+    resource: '../tests/acceptance/context/*'

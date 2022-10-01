@@ -88,6 +88,9 @@
         ],
         "psalm": [
           "@php vendor/bin/psalm "
+        ],
+        "behat": [
+          "@php vendor/bin/behat "
         ]
     },
     "conflict": {
@@ -101,6 +104,9 @@
         }
     },
     "require-dev": {
+        "friends-of-behat/mink-browserkit-driver": "^1.6",
+        "friends-of-behat/mink-extension": "^2.7",
+        "friends-of-behat/symfony-extension": "^2.3",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16.1",
         "psalm/plugin-symfony": "^3.1",
