@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\acceptance\context\User;
 
+use Behat\Gherkin\Node\TableNode;
 use App\User\Domain\Username;
 use App\User\Domain\UserRepository;
 use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
@@ -84,8 +85,6 @@ final class CreateUserContext implements Context
         /** @var DoctrineUser */
         $createdUser = $this->userRepository->byUsername(new Username($this->userName));
         Assert::assertEquals($this->mail, $createdUser->mail());
-        $roles = $createdUser->getRoles();
-        Assert::assertEquals($roles, $this->roles);
     }
 
     /**
@@ -94,5 +93,17 @@ final class CreateUserContext implements Context
     public function oneEventMustBeDispatched()
     {
         Assert::assertCount(1, $this->transport->getDispatchedMessages());
+    }
+
+    /**
+     * @Then The user must have proper <roles>
+     */
+    public function theUserMustHaveProperRoles(TableNode $table): void
+    {
+        $rawRoles = $table->getColumn(0)[0];
+        $expectedRoles = explode(',', $rawRoles);
+        /** @var DoctrineUser */
+        $createdUser = $this->userRepository->byUsername(new Username($this->userName));
+        Assert::assertEqualsCanonicalizing($expectedRoles, $createdUser->getRoles());
     }
 }
