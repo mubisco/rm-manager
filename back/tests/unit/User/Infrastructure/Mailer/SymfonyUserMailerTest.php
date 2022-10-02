@@ -2,6 +2,8 @@
 
 namespace App\Tests\unit\User\Infrastructure\Mailer;
 
+use App\User\Domain\PasswordTokenMailer;
+use App\User\Domain\PasswordTokenMailerException;
 use App\User\Domain\UserEmail;
 use App\User\Domain\Username;
 use App\User\Domain\WelcomeUserMailer;
@@ -29,6 +31,7 @@ class SymfonyUserMailerTest extends TestCase
     {
         $this->assertInstanceOf(SymfonyUserMailer::class, $this->sut);
         $this->assertInstanceOf(WelcomeUserMailer::class, $this->sut);
+        $this->assertInstanceOf(PasswordTokenMailer::class, $this->sut);
     }
 
     /**
@@ -47,6 +50,25 @@ class SymfonyUserMailerTest extends TestCase
     public function itShouldReturnTrueIfMailSent(): void
     {
         $result = $this->sut->sendWelcomeMail(new Username('agapito'), new UserEmail('test@test.com'));
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldThrowExceptionIfMailerFailsWhenSendingResetPasswordMail(): void
+    {
+        $this->expectException(PasswordTokenMailerException::class);
+        $this->mailer->method('send')->willThrowException(new TransportException('asd'));
+        $this->sut->send('agapito', 'test@test.com', 'aToken');
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnTrueIfMailSentWhenSendingResetPasswordMail(): void
+    {
+        $result = $this->sut->send('agapito', 'test@test.com', 'aToken');
         $this->assertTrue($result);
     }
 }
