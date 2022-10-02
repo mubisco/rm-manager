@@ -7,7 +7,6 @@ namespace App\Tests\acceptance\context\User;
 use App\User\Domain\Username;
 use App\User\Domain\UserNotFoundException;
 use App\User\Domain\UserRepository;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
