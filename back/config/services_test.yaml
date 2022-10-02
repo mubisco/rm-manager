@@ -5,6 +5,10 @@ services:
 
   App\User\Domain\UserRepository: '@App\User\Infrastructure\Persistence\InMemory\InMemoryUserRepository'
 
+  user.mailer:
+    alias: App\User\Infrastructure\Mailer\SymfonyUserMailer
+    public: true
+
   test.userRepository:
     alias: App\User\Domain\UserRepository
     public: true

@@ -25,7 +25,7 @@ final class SymfonyUserMailer implements WelcomeUserMailer, PasswordTokenMailer
         $email = (new TemplatedEmail())
             ->from('rpgmanager@mubisco.com')
             ->to($userEmail->value())
-            ->subject('Thanks for signging up')
+            ->subject('Thanks for signing up')
             ->htmlTemplate('emails/signup.html.twig')
             ->context(['username' => $username->value()]);
         try {
