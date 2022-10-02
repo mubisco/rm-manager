@@ -27,6 +27,7 @@ final class UserApiController implements ControllerInterface
         $command = new GenerateResetPasswordTokenCommand($userName);
         try {
             ($this->generateResetPasswordTokenCommandHandler)($command);
+            return $this->createResponse('PASSWORD_RESET_OK', Response::HTTP_OK);
         } catch (WrongUsernameException) {
             return $this->createResponse('WRONG_USERNAME', Response::HTTP_BAD_REQUEST);
         } catch (UserNotFoundException) {
@@ -36,7 +37,6 @@ final class UserApiController implements ControllerInterface
         } catch (UserRepositoryException) {
             return $this->createResponse('INTERNAL_ERROR', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return $this->createResponse('PASSWORD_RESET_OK', Response::HTTP_OK);
     }
 
     private function filterRequest(Request $request): string

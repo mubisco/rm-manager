@@ -6,6 +6,7 @@ namespace App\Tests\acceptance\context;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Session;
+use PHPUnit\Framework\Assert;
 use RuntimeException;
 
 final class ApiReadyContext implements Context
@@ -40,8 +41,6 @@ final class ApiReadyContext implements Context
     {
         $response = $this->session->getDriver()->getContent();
         $expectedResponse = json_encode(['ready' => true]);
-        if ($response != $expectedResponse) {
-            throw new RuntimeException("Response does not match expected value");
-        }
+        Assert::assertEquals($expectedResponse, $response);
     }
 }

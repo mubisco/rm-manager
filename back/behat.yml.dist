@@ -5,6 +5,8 @@ default:
         features: 'tests/acceptance/features'
       contexts:
         - App\Tests\acceptance\context\ApiReadyContext
+        - App\Tests\acceptance\context\User\CreateUserContext
+        - App\Tests\acceptance\context\User\ResetPasswordContext
 
   extensions:
     FriendsOfBehat\SymfonyExtension:

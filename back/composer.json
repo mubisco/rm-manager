@@ -91,6 +91,9 @@
         ],
         "behat": [
           "@php vendor/bin/behat "
+        ],
+        "behat-snippets": [
+          "@php vendor/bin/behat --snippets-for --append-snippets "
         ]
     },
     "conflict": {
