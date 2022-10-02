@@ -12,7 +12,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 
-final class SymfonyWelcomeUserMailer implements WelcomeUserMailer
+final class SymfonyUserMailer implements WelcomeUserMailer
 {
     public function __construct(
         private MailerInterface $mailer

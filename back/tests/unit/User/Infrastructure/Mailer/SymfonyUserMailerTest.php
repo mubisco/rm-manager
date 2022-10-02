@@ -6,28 +6,28 @@ use App\User\Domain\UserEmail;
 use App\User\Domain\Username;
 use App\User\Domain\WelcomeUserMailer;
 use App\User\Domain\WelcomeUserMailerException;
-use App\User\Infrastructure\Mailer\SymfonyWelcomeUserMailer;
+use App\User\Infrastructure\Mailer\SymfonyUserMailer;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\MailerInterface;
 
-class SymfonyWelcomeUserMailerTest extends TestCase
+class SymfonyUserMailerTest extends TestCase
 {
-    private SymfonyWelcomeUserMailer $sut;
+    private SymfonyUserMailer $sut;
     private MailerInterface|MockObject $mailer;
 
     protected function setUp(): void
     {
         $this->mailer = $this->createMock(MailerInterface::class);
-        $this->sut = new SymfonyWelcomeUserMailer($this->mailer);
+        $this->sut = new SymfonyUserMailer($this->mailer);
     }
     /**
      * @test
      */
     public function itShouldBeOfProperClass(): void
     {
-        $this->assertInstanceOf(SymfonyWelcomeUserMailer::class, $this->sut);
+        $this->assertInstanceOf(SymfonyUserMailer::class, $this->sut);
         $this->assertInstanceOf(WelcomeUserMailer::class, $this->sut);
     }
 
