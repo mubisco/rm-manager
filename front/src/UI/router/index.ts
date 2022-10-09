@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/UI/pages/Home.vue'
 import LoginPage from '@/UI/pages/LoginPage.vue'
+import ResetPasswordPage from '@/UI/pages/ResetPasswordPage.vue'
 import PageNotFound from '@/UI/pages/NotFound.vue'
 import ForgotPasswordPage from '@/UI/pages/ForgotPasswordPage.vue'
 import DashboardPage from '@/UI/pages/DashboardPage.vue'
@@ -20,6 +21,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: LoginPage,
+    meta: { requiresAuth: false }
+  },
+  {
+    path: '/reset-password/:token',
+    name: 'ResetPassword',
+    component: ResetPasswordPage,
     meta: { requiresAuth: false }
   },
   {

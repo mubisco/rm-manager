@@ -17,10 +17,10 @@ import routes from '../../fixtures/routes.json'
 
 describe('GIVEN a reset password page', () => {
   before(() => {
-    cy.visit(routes.front + '/reset-password/a-very-large-token')
   })
   context('WHEN I navigate to', () => {
     it('THEN I should see a loader while checking token', () => {
+      cy.visit(routes.front + '/reset-password/a-very-large-token')
       cy.get('[data-cy="reset-password-loader"]').should('exist');
     })
   })
