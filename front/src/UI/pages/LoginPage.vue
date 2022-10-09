@@ -35,10 +35,14 @@ onMounted(async () => {
   </div>
   <v-snackbar
     v-model="showLoginError"
-    v-cy:login-error
+    content-class="chamaquito"
     timeout="3000"
     color="error"
   >
-    {{ $t('login.error') }}
+    <span
+      v-cy:login-error
+    >
+      {{ $t('login.error') }}
+    </span>
   </v-snackbar>
 </template>

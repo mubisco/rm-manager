@@ -75,11 +75,12 @@ const onRecoverButtonClicked = async () => {
     </v-card>
     <v-snackbar
       v-model="showSnackbar"
-      v-cy:recover-password-snackbar
-      timeout="3000"
+      timeout="30000"
       :color="snackbarBackground"
     >
-      {{ snackbarError }}
+      <span v-cy:recover-password-snackbar>
+        {{ snackbarError }}
+      </span>
     </v-snackbar>
   </div>
 </template>

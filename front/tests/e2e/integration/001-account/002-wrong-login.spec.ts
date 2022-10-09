@@ -11,11 +11,13 @@ describe('GIVEN a login page', () => {
         delay: 500,
         body: { message: 'NOT_AUTH' },
         statusCode: 401
-      })
+      }).as('loginUrl')
       cy.customLogin('bad_user', 'holakease')
     })
     it('THEN should show error toast', () => {
-      cy.get('[data-cy="login-error"]').should('exist');
+      cy.wait('@loginUrl').then(() => {
+        cy.get('[data-cy="login-error"]').should('exist');
+      })
     })
   })
 })

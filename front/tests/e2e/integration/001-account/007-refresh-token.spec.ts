@@ -33,10 +33,6 @@ describe('GIVEN a unauthenticated user', () => {
     it('THEN should login and navigate to dashboard page', () => {
       cy.wait('@refreshTokenRoute').then(() => {
         cy.location('pathname').should('match', /\/dashboard/);
-      })
-    })
-    it('AND THEN user data should be on localStorage', () => {
-      cy.wait('@refreshTokenRoute').then(() => {
         const rawUserData = localStorage.getItem('userData')
         const userData = rawUserData ? JSON.parse(rawUserData) : {}
         expect(userData?.role).to.be.eq('ADMIN')

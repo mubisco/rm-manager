@@ -29,10 +29,6 @@ describe('GIVEN a login page', () => {
         expect(userData?.role).to.be.eq('ADMIN')
         expect(userData?.username).to.be.eq('mubisco')
         expect(userData?.token).to.be.eq(tokens.admin)
-      })
-    })
-    it('AND THEN refresh token should be stored', () => {
-      cy.wait('@loginRoute').then(() => {
         const refreshToken = localStorage.getItem('refreshToken')
         expect(refreshToken).to.be.eq('aVeryLargeToken')
       })

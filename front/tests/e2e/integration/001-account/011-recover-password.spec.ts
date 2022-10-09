@@ -97,7 +97,7 @@ describe('GIVEN a recover password page', () => {
       cy.get('[data-cy="recover-password-button"]').click()
       cy.wait('@recoverPasswordRoute').then(() => {
         cy.get('[data-cy="recover-password-snackbar"]').should('exist')
-        cy.get('[data-cy="recover-password-snackbar"]').children('.v-snackbar__wrapper').should('have.class', 'bg-success')
+        cy.get('[data-cy="recover-password-snackbar"]').parent().parent().should('have.class', 'bg-success')
       })
     })
   })
