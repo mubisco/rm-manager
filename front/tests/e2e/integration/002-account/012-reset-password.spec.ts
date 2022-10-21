@@ -1,27 +1,121 @@
-
 /// <reference types="cypress" />
 import routes from '../../fixtures/routes.json'
 
-// When loads i should see a loader
-// If token does not exists I should get a 404 error
-// If token has more than expiration time I should see a 400 error
-// If token exists I should see the reset password form
-//  Input for new password
-//  Input for repeat password
-//  Send button disabled
-// If I fill the fields with wrong password I should see an error
-// If I fill the fields properly the Submit button should be enabled
-// If I push the button and there is an error I should see the message
-// If I push the button and everything goes well I should see the confirm message
-//  And I should be redirected to login page
-
-describe('GIVEN a reset password page', () => {
-  before(() => {
-  })
-  context('WHEN I navigate to', () => {
-    it('THEN I should see a loader while checking token', () => {
+describe('GIVEN a non registered user', () => {
+  context('WHEN I navigate to reset password page', () => {
+    beforeEach(() => {
       cy.visit(routes.front + '/reset-password/a-very-large-token')
+    })
+    it('THEN I should see a loader while checking token', () => {
       cy.get('[data-cy="reset-password-loader"]').should('exist');
+    })
+  })
+  context('WHEN I navigate to with an non existing token', () => {
+    before(() => {
+      cy.intercept('GET', routes.back + '/api/account/check-token/a-very-large-token', {
+        delay: 500,
+        body: { message: 'NOT_AUTH' },
+        statusCode: 404
+      }).as('checkTokenUrl')
+    })
+    it('THEN I should see a error message', () => {
+      cy.visit(routes.front + '/reset-password/a-very-large-token')
+      cy.wait('@checkTokenUrl').then(() => {
+        cy.get('[data-cy="token-error"]').should('exist');
+      })
+    })
+  })
+  context('WHEN I navigate to with a valid token', () => {
+    it('THEN I should see reset password form', () => {
+      cy.intercept('GET', routes.back + '/api/account/check-token/a-very-large-token', {
+        delay: 500,
+        body: { message: 'NOT_AUTH' },
+        statusCode: 200
+      }).as('checkTokenUrl')
+      cy.visit(routes.front + '/reset-password/a-very-large-token')
+      cy.wait('@checkTokenUrl').then(() => {
+        cy.get('[data-cy="change-password-form"]').should('exist');
+        cy.get('[data-cy="new-password"]').should('exist');
+        cy.get('[data-cy="confirm-new-password"]').should('exist');
+        cy.get('[data-cy="send-new-password"]').should('exist');
+        cy.get('[data-cy="send-new-password"]').should('be.disabled')
+      })
+    })
+    context('AND I fill the two fields with different passwords', () => {
+      it('THEN I should see and warning error and button should be disabled', () => {
+        cy.intercept('GET', routes.back + '/api/account/check-token/a-very-large-token', {
+          delay: 500,
+          body: { message: 'NOT_AUTH' },
+          statusCode: 200
+        }).as('checkTokenUrl')
+        cy.visit(routes.front + '/reset-password/a-very-large-token')
+        cy.wait('@checkTokenUrl').then(() => {
+          cy.get('[data-cy="new-password"]').type('onePassword')
+          cy.get('[data-cy="confirm-new-password"]').type('anotherPassword');
+          cy.get('[data-cy="confirm-new-password"]').should('have.class', 'v-input--error')
+          cy.get('[data-cy="send-new-password"]').should('be.disabled')
+        })
+      })
+    })
+    context('AND I fill the two fields with same passwords', () => {
+      it('THEN send button should be enabled', () => {
+        cy.intercept('GET', routes.back + '/api/account/check-token/a-very-large-token', {
+          delay: 500,
+          body: { message: 'NOT_AUTH' },
+          statusCode: 200
+        }).as('checkTokenUrl')
+        cy.visit(routes.front + '/reset-password/a-very-large-token')
+        cy.wait('@checkTokenUrl').then(() => {
+          cy.get('[data-cy="new-password"]').type('onePassword')
+          cy.get('[data-cy="confirm-new-password"]').type('onePassword')
+          cy.get('[data-cy="send-new-password"]').should('be.enabled')
+        })
+      })
+    })
+    context('AND there is an error sending password', () => {
+      it('THEN send button should be enabled', () => {
+        cy.intercept('GET', routes.back + '/api/account/check-token/a-very-large-token', {
+          delay: 500,
+          body: { message: 'NOT_AUTH' },
+          statusCode: 200
+        }).as('checkTokenUrl')
+        cy.intercept('POST', routes.back + '/api/account/reset-password', {
+          delay: 500,
+          body: { message: 'NOT_AUTH' },
+          statusCode: 500
+        }).as('changePasswordUrl')
+        cy.visit(routes.front + '/reset-password/a-very-large-token')
+        cy.wait('@checkTokenUrl').then(() => {
+          cy.get('[data-cy="new-password"]').type('onePassword')
+          cy.get('[data-cy="confirm-new-password"]').type('onePassword');
+          cy.get('[data-cy="send-new-password"]').click()
+          cy.wait('@changePasswordUrl').then(() => {
+            cy.get('[data-cy="token-error"]').should('exist');
+          })
+        })
+      })
+    })
+    context('AND password is reset', () => {
+      it('THEN send button should be enabled', () => {
+        cy.intercept('GET', routes.back + '/api/account/check-token/a-very-large-token', {
+          delay: 500,
+          body: { message: 'NOT_AUTH' },
+          statusCode: 200
+        }).as('checkTokenUrl')
+        cy.intercept('POST', routes.back + '/api/account/reset-password', {
+          delay: 500,
+          body: { message: 'NOT_AUTH' },
+          statusCode: 200
+        }).as('changePasswordUrl')
+        cy.visit(routes.front + '/reset-password/a-very-large-token')
+        cy.wait('@checkTokenUrl').then(() => {
+          cy.get('[data-cy="new-password"]').type('onePassword')
+          cy.get('[data-cy="confirm-new-password"]').type('onePassword');
+          cy.get('[data-cy="send-new-password"]').click()
+          // cy.get('[data-cy="token-success"]').should('exist');
+          cy.location('pathname').should('match', /\/login/);
+        })
+      })
     })
   })
 })

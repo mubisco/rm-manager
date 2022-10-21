@@ -51,6 +51,22 @@ export class AxiosUserClient implements UserClient{
       throw new UserClientError(error.message)
     }
   }
+  async changePassword(password: Userpassword, token: string): Promise<boolean> {
+    const baseUrl = baseApiUrl + '/api/account/reset-password';
+    const data = {
+      'token': token,
+      'password': password.value()
+    }
+    try {
+      await axios.post(baseUrl, data)
+      return true
+    } catch (err) {
+      if (err instanceof Error) {
+        throw new UserClientError(err.message)
+      }
+      throw new Error('Undefined error: ' + <string> err)
+    }
+  }
 
   private async makeAxiosPost(url: string, data: AxiosLoginData|AxiosTokenData): Promise<User> {
     try {

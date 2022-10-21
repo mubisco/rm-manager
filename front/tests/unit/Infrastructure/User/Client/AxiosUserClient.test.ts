@@ -72,4 +72,21 @@ describe('Testing AxiosUserClient', () => {
     axios.put.mockResolvedValue()
     await expect(sut.resetPassword(new Username('mubisco'))).resolves.toBe(true)
   })
+
+  test('Should throw error if password cannot be changed', async () => {
+    const expectedError = new Error('Message')
+    expectedError.response = {
+      data: {},
+      statusText: '',
+      config: {},
+      headers: {},
+      status: 500
+    }
+    axios.post.mockRejectedValue(expectedError)
+    await expect(sut.changePassword(new Userpassword('s3cretP4ssword'), 'aToken')).rejects.toThrow(UserClientError)
+  })
+  test('Should return true if reset password done', async () => {
+    axios.post.mockResolvedValue(true)
+    await expect(sut.changePassword(new Userpassword('s3cretP4ssword'), 'aToken')).resolves.toBe(true)
+  })
 })

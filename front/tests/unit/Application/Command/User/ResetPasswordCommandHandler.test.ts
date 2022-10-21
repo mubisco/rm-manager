@@ -26,7 +26,7 @@ describe('Testing ResetPasswordCommandHandler', () => {
     await expect(sut.handle(command)).rejects.toThrow(UserNotFoundError)
   });
   test('Should return true if user does exists', async () => {
-    mockedUserClient.resetPassword.mockResolvedValue()
+    mockedUserClient.resetPassword.mockResolvedValue(true)
     await expect(sut.handle(command)).resolves.toBe(true)
   });
 })

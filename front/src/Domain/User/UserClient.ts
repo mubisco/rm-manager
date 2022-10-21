@@ -6,4 +6,5 @@ export interface UserClient {
   login(name: Username, pass: Userpassword): Promise<User>
   refresh(token: string): Promise<User>
   resetPassword(name: Username): Promise<boolean>
+  changePassword(name: Userpassword, token: string): Promise<boolean>
 }

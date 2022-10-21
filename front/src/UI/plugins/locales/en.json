@@ -15,5 +15,15 @@
     "notExists": "User {username} not found!! Please check the spelling and try again.",
     "serverError": "Unexpected error. Please try again in a while.",
     "resetOk": "User password reseted successfully. Please check your email to confirm password reset."
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "send": "Send"
+  },
+  "token": {
+    "error": "Error loading token, please try to reset again",
+    "success": "Password changed successfully"
   }
 }

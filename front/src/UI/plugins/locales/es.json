@@ -15,5 +15,15 @@
     "notExists": "Usuario {username} no encontrado. Por favor revisa si has introducido el usuario correcto.",
     "serverError": "Error inesperado. Por favor prueba en otro momento.",
     "resetOk": "Solicitud de reinicio de contraseña exitoso. En breve recibirás un email con las instrucciones para resetear tu contraseña"
+  },
+  "changePassword": {
+    "title": "Cambiar contraseña",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "send": "Envíar"
+  },
+  "token": {
+    "error": "Error cargando el token, por favor intenta resetearlo de nuevo",
+    "success": "Contraseña cambiada correctamente!!!"
   }
 }
