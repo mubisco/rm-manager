@@ -37,6 +37,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/user/check-password-token/*, roles: PUBLIC_ACCESS }
         - { path: ^/api/user/reset-password, roles: PUBLIC_ACCESS }
         - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
         - { path: ^/api/ready/admin, roles: ROLE_ADMIN }

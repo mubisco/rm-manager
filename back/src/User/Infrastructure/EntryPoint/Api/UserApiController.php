@@ -39,6 +39,11 @@ final class UserApiController implements ControllerInterface
         }
     }
 
+    public function checkPasswordToken(string $token): JsonResponse
+    {
+        return $this->createResponse('USER_NOT_FOUND', Response::HTTP_NOT_FOUND);
+    }
+
     private function filterRequest(Request $request): string
     {
         $rawContent = $request->getContent();

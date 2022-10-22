@@ -40,7 +40,7 @@ final class CheckPasswordTokenContext implements Context
     public function iCheckTheTokenValidity()
     {
         $request = Request::create(
-            '/api/account/check-token/a-non-existant-token',
+            '/api/user/check-password-token/a-non-existant-token',
             'GET',
             [],
             [],
