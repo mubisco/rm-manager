@@ -4,6 +4,7 @@ namespace App\User\Infrastructure\Persistence\Doctrine;
 
 use App\Shared\Domain\Event\EventAware;
 use App\User\Domain\PasswordNotReseteableException;
+use App\User\Domain\PasswordToken;
 use App\User\Domain\PasswordTokenWasRequested;
 use App\User\Domain\User;
 use App\User\Domain\UserId;
@@ -17,6 +18,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
 {
     use EventAware;
 
+    private const TOKEN_LIMIT_SECONDS = 3600;
     private Ulid $userId;
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
@@ -106,12 +108,11 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         if ($this->password == '') {
             throw new PasswordNotReseteableException('Could no reset empty password!!');
         }
-        $secret = 'someSecret';
-        $hashedToken = hash_hmac("sha256", $this->createRandomString(25), $secret, false);
-        $this->resetPasswordToken = $hashedToken;
+        $token = PasswordToken::fromEmpty();
+        $this->resetPasswordToken = $token->value();
         $this->resetPasswordRequestedAt = new DateTimeImmutable();
         $this->addEvent(new PasswordTokenWasRequested($this->userId->__toString()));
-        return $hashedToken;
+        return $this->resetPasswordToken;
     }
 
     public function passwordResetToken(): string
@@ -125,21 +126,19 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
             ? ''
             : $this->resetPasswordRequestedAt->format('Y-m-d H:i:s');
     }
-    private function createRandomString(int $n): string
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = '';
-
-        for ($i = 0; $i < $n; $i++) {
-            $index = rand(0, strlen($characters) - 1);
-            $randomString .= $characters[$index];
-        }
-
-        return $randomString;
-    }
 
     public function mail(): string
     {
         return $this->email;
+    }
+
+    public function isTokenExpired(): bool
+    {
+        if (is_null($this->resetPasswordRequestedAt)) {
+            return true;
+        }
+        $tokenTimestamp = $this->resetPasswordRequestedAt->getTimestamp();
+        $now = time();
+        return $now - $tokenTimestamp > self::TOKEN_LIMIT_SECONDS;
     }
 }

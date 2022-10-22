@@ -2,6 +2,9 @@
 
 namespace App\User\Infrastructure\Persistence\Doctrine;
 
+use App\User\Domain\PasswordToken;
+use App\User\Domain\PasswordTokenExpiredException;
+use App\User\Domain\PasswordTokenNotFoundException;
 use App\User\Domain\User;
 use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
@@ -94,5 +97,17 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
     {
         $this->_em->persist($user);
         return $user;
+    }
+
+    public function ofValidPasswordToken(PasswordToken $token): User
+    {
+        $userWithToken = $this->simpleSearch('resetPasswordToken', $token->value());
+        if (is_null($userWithToken)) {
+            throw new PasswordTokenNotFoundException("Token {$token->value()} not found!!!");
+        }
+        if ($userWithToken->isTokenExpired()) {
+            throw new PasswordTokenExpiredException("Token {$token->value()} expired!!!");
+        }
+        return $userWithToken;
     }
 }

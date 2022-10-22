@@ -66,4 +66,44 @@ class DoctrineUserTest extends TestCase
         $this->assertEquals($this->sut->userId()->value(), $event->userId());
         $this->assertEmpty($this->sut->pullEvents());
     }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnTrueIfTokenIsExpired(): void
+    {
+        $expiredTokenUser = new DoctrineUser(
+            'expired@token.net',
+            'expiredTokenUser',
+            'password',
+            ['ROLE_USER'],
+            '99c54fef52e9b2db8085d0f588ef8c96f8eb0f3f473456e939eaade887183507',
+            new DateTimeImmutable('2020-12-12')
+        );
+        $this->assertTrue($expiredTokenUser->isTokenExpired());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnFalseIfTokenIsExpired(): void
+    {
+        $expiredTokenUser = new DoctrineUser(
+            'reseteable@token.net',
+            'validTokenUser',
+            'password',
+            ['ROLE_USER'],
+            '10c54fef52e9b2db8085d0f588ef8c96f8eb0f3f473456e939eaade887183507',
+            new DateTimeImmutable()
+        );
+        $this->assertFalse($expiredTokenUser->isTokenExpired());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnTokenExpiredTrueIfNoTokenDefined(): void
+    {
+        $this->assertTrue($this->sut->isTokenExpired());
+    }
 }

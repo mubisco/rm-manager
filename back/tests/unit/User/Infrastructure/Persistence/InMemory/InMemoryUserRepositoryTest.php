@@ -2,6 +2,9 @@
 
 namespace App\User\Infrastructure\Persistence\InMemory;
 
+use App\User\Domain\PasswordToken;
+use App\User\Domain\PasswordTokenExpiredException;
+use App\User\Domain\PasswordTokenNotFoundException;
 use App\User\Domain\User;
 use App\User\Domain\UserId;
 use App\User\Domain\Username;
@@ -68,5 +71,37 @@ class InMemoryUserRepositoryTest extends TestCase
         $this->assertSame($user, $result);
         $storedUser = $sut->ofId($user->userId());
         $this->assertSame($user, $storedUser);
+    }
+    /**
+     * @test
+     */
+    public function itShouldThrowNotFoundExceptionIfTokenDoesNotExists(): void
+    {
+        $this->expectException(PasswordTokenNotFoundException::class);
+        $sut = new InMemoryUserRepository();
+        $token = PasswordToken::fromEmpty();
+        $sut->ofValidPasswordToken($token);
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldThrowExpiredExceptionIfTokenExpired(): void
+    {
+        $this->expectException(PasswordTokenExpiredException::class);
+        $sut = new InMemoryUserRepository();
+        $token = PasswordToken::fromString('99c54fef52e9b2db8085d0f588ef8c96f8eb0f3f473456e939eaade887183507');
+        $sut->ofValidPasswordToken($token);
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnProperUserWhenTokenExistsAndNotExpired(): void
+    {
+        $sut = new InMemoryUserRepository();
+        $token = PasswordToken::fromString('10c54fef52e9b2db8085d0f588ef8c96f8eb0f3f473456e939eaade887183507');
+        $result = $sut->ofValidPasswordToken($token);
+        $this->assertEquals('validTokenUser', $result->user());
     }
 }

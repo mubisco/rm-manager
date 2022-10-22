@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\acceptance\context\User;
 
-use Behat\Behat\Tester\Exception\PendingException;
-use App\User\Domain\UserNotFoundException;
 use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
 use Behat\Behat\Context\Context;
 use RuntimeException;
-use SebastianBergmann\Type\VoidType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
