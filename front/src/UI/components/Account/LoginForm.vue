@@ -3,26 +3,22 @@ import { ref, computed, defineEmits, defineProps } from 'vue'
 import LoadingButton from '@/UI/components/Shared/LoadingButton.vue'
 
 defineProps<{ loading: boolean }>()
-defineEmits<{ (eventName: 'login-button-clicked', username: string, password: string): Promise<void> }>()
+defineEmits<{(eventName: 'login-button-clicked', username: string, password: string): Promise<void> }>()
 const username = ref('')
 const password = ref('')
 const canLogin = computed(() => !emailError.value && password.value !== '')
 const emailError = computed(():boolean => {
   const regexEmail = /^[0-9a-zA-Z_]*$/
-  return username.value !== '' && !username.value.match(regexEmail);
+  return username.value !== '' && !username.value.match(regexEmail)
 })
 
 </script>
 
 <template>
-  <v-card width="550">
-    <v-card-header>
-      <v-card-header-text>
-        <v-card-title class="text-primary">
-          {{ $t('login.title') }}
-        </v-card-title>
-      </v-card-header-text>
-    </v-card-header>
+  <v-card
+    width="550"
+    :title="$t('login.title')"
+  >
     <v-card-text>
       <v-form
         v-cy:login-form

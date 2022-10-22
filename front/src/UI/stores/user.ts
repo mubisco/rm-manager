@@ -1,12 +1,12 @@
-import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand';
-import { LoginUserCommandHandler } from '@/Application/Command/User/LoginUserCommandHandler';
-import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand';
-import { LogoutUserCommandHandler } from '@/Application/Command/User/LogoutUserCommandHandler';
-import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient';
-import { StorageUserRepository } from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository';
-import { RefreshUserCommandHandler } from '@/Application/Command/User/RefreshUserCommandHandler';
+import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand'
+import { LoginUserCommandHandler } from '@/Application/Command/User/LoginUserCommandHandler'
+import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand'
+import { LogoutUserCommandHandler } from '@/Application/Command/User/LogoutUserCommandHandler'
+import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
+import { StorageUserRepository } from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository'
+import { RefreshUserCommandHandler } from '@/Application/Command/User/RefreshUserCommandHandler'
 import { defineStore } from 'pinia'
-import { RefreshUserCommand } from '@/Application/Command/User/RefreshUserCommand';
+import { RefreshUserCommand } from '@/Application/Command/User/RefreshUserCommand'
 
 const axiosUserClient = new AxiosUserClient()
 const storageUserRepository = new StorageUserRepository()
@@ -24,7 +24,7 @@ export const useUserStore = defineStore('users', {
     isLogged: state => state.username !== '' && state.role !== ''
   },
   actions: {
-    async login(username: string, password: string): Promise<boolean> {
+    async login (username: string, password: string): Promise<boolean> {
       const command = new LoginUserCommand(username, password)
       try {
         const response = await loginUserCommandHandler.handle(command)
@@ -37,12 +37,12 @@ export const useUserStore = defineStore('users', {
         return false
       }
     },
-    async logout(): Promise<void> {
+    async logout (): Promise<void> {
       const command = new LogoutUserCommand()
       logoutUserCommandHandler.handle(command)
       this.$reset()
     },
-    async refresh(): Promise<boolean> {
+    async refresh (): Promise<boolean> {
       const refreshToken = window.localStorage.getItem('refreshToken')
       const command = new RefreshUserCommand(refreshToken ?? '')
       try {
@@ -51,13 +51,13 @@ export const useUserStore = defineStore('users', {
         this.token = response.token
         this.role = response.role
         return true
-      } catch  {
+      } catch {
         window.localStorage.removeItem('refreshToken')
         this.$reset()
         return false
       }
     },
-    loadFromStorage(): void {
+    loadFromStorage (): void {
       const rawSavedUser = window.localStorage.getItem('userData')
       if (rawSavedUser) {
         const savedUser = JSON.parse(rawSavedUser)

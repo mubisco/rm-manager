@@ -6,13 +6,18 @@ import { UserClient } from '@/Domain/User/UserClient'
 import { UserRepository } from '@/Domain/User/UserRepository'
 
 export class LoginUserCommandHandler {
-  constructor(
-    private userClient: UserClient,
-    private userRepository: UserRepository
+  private userClient: UserClient
+  private userRepository: UserRepository
+
+  constructor (
+    userClient: UserClient,
+    userRepository: UserRepository
   ) {
+    this.userClient = userClient
+    this.userRepository = userRepository
   }
 
-  public async handle(command: LoginUserCommand): Promise<LoggedUserDto> {
+  public async handle (command: LoginUserCommand): Promise<LoggedUserDto> {
     const username = new Username(command.username())
     const password = new Userpassword(command.password())
     const user = await this.userClient.login(username, password)

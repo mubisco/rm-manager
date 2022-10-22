@@ -4,7 +4,7 @@ import ResetPasswordForm from '@/UI/components/Account/ResetPasswordForm.vue'
 import { useUserStore } from '@/UI/stores/user'
 import router from '@/UI/router/index'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
 onMounted(() => {
   if (userStore.isLogged) {

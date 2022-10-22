@@ -40,14 +40,10 @@ const onRecoverButtonClicked = async () => {
 
 <template>
   <div>
-    <v-card width="550">
-      <v-card-header>
-        <v-card-header-text>
-          <v-card-title class="text-primary">
-            {{ $t('forgotPassword.title') }}
-          </v-card-title>
-        </v-card-header-text>
-      </v-card-header>
+    <v-card
+      width="550"
+      :title="$t('forgotPassword.title')"
+    >
       <v-card-text>
         <v-form
           v-cy:recover-password-form

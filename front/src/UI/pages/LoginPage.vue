@@ -6,11 +6,11 @@ import { useUserStore } from '@/UI/stores/user'
 
 const showLoginError = ref(false)
 const loading = ref(false)
-const userStore = useUserStore();
+const userStore = useUserStore()
 
 const onLoginButtonClicked = async (email: string, password: string):Promise<void> => {
   loading.value = true
-  const loginResult = await userStore.login(email, password);
+  const loginResult = await userStore.login(email, password)
   showLoginError.value = !loginResult
   loading.value = false
   if (loginResult === true) {

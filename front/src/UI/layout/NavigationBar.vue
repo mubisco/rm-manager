@@ -3,7 +3,7 @@ import { defineEmits, defineProps } from 'vue'
 import { useLogout } from './useLogout'
 
 defineProps<{ drawerOpened: boolean }>()
-defineEmits<{ (eventName: 'drawer:toggle'): void }>()
+defineEmits<{(eventName: 'drawer:toggle'): void }>()
 
 const { isLogged, onLogoutButtonClicked } = useLogout()
 </script>

@@ -2,13 +2,13 @@ import { Username } from '@/Domain/User/Username'
 import { UserRole } from '@/Domain/User/UserRole'
 
 const parseRole = (role: string): UserRole => {
-  const parsedRole = role.replace('ROLE_', '');
+  const parsedRole = role.replace('ROLE_', '')
   return UserRole[parsedRole as keyof typeof UserRole]
 }
 const parseJwt = (token: string): { username: string, role: UserRole } => {
-  const parsedData = JSON.parse(window.atob(token.split('.')[1]));
-  const username = parsedData ? parsedData.username : '';
-  const roles: string[] = parsedData ? parsedData.roles : [];
+  const parsedData = JSON.parse(window.atob(token.split('.')[1]))
+  const username = parsedData ? parsedData.username : ''
+  const roles: string[] = parsedData ? parsedData.roles : []
   const role = roles.filter((current: string) => {
     return current !== 'ROLE_USER'
   })
@@ -16,7 +16,7 @@ const parseJwt = (token: string): { username: string, role: UserRole } => {
     role[0] = 'ROLE_USER'
   }
   return { username, role: parseRole(role[0]) }
-};
+}
 
 export class User {
   private _username: Username
@@ -24,27 +24,31 @@ export class User {
   private _token: string
   private _refreshToken: string
 
-  public static fromTokens(token: string, refresh: string): User
-  {
-    const data = parseJwt(token);
+  public static fromTokens (token: string, refresh: string): User {
+    const data = parseJwt(token)
     return new this(new Username(data.username), data.role, token, refresh)
   }
+
   constructor (username: Username, role: UserRole, token: string, refreshToken: string) {
     this._username = username
     this._role = role
     this._token = token
     this._refreshToken = refreshToken
   }
-  public username(): string {
+
+  public username (): string {
     return this._username.value()
   }
-  public role(): string {
+
+  public role (): string {
     return this._role
   }
-  public token(): string {
+
+  public token (): string {
     return this._token
   }
-  public refreshToken(): string {
+
+  public refreshToken (): string {
     return this._refreshToken
   }
 }

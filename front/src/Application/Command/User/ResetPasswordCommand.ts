@@ -1,7 +1,11 @@
 export class ResetPasswordCommand {
-  constructor(private _username: string) {
+  private _username: string
+
+  constructor (username: string) {
+    this._username = username
   }
-  username(): string {
+
+  username (): string {
     return this._username
   }
 }

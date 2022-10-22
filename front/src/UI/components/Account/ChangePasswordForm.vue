@@ -3,7 +3,7 @@ import LoadingButton from '@/UI/components/Shared/LoadingButton.vue'
 import { ref, computed, defineEmits, defineProps } from 'vue'
 
 defineProps<{ loading: boolean }>()
-defineEmits<{ (eventName: 'send-password-clicked', newPassword: string): Promise<void> }>()
+defineEmits<{(eventName: 'send-password-clicked', newPassword: string): Promise<void> }>()
 const newPassword = ref('')
 const confirmNewPassword = ref('')
 const errorOnConfirmPassword = computed(():boolean => {
@@ -15,14 +15,10 @@ const canResetPassword = computed(():boolean => {
 </script>
 
 <template>
-  <v-card width="550">
-    <v-card-header>
-      <v-card-header-text>
-        <v-card-title class="text-primary">
-          {{ $t('changePassword.title') }}
-        </v-card-title>
-      </v-card-header-text>
-    </v-card-header>
+  <v-card
+    width="550"
+    :title="$t('changePassword.title')"
+  >
     <v-card-text>
       <v-form
         v-cy:change-password-form

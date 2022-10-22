@@ -6,10 +6,12 @@ export class LoginUserCommand {
     this._username = username
     this._password = password
   }
-  public username(): string {
+
+  public username (): string {
     return this._username
   }
-  public password(): string {
+
+  public password (): string {
     return this._password
   }
 }

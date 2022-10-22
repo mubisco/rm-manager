@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/UI/pages/Home.vue'
+import Home from '@/UI/pages/HomePage.vue'
 import LoginPage from '@/UI/pages/LoginPage.vue'
 import ResetPasswordPage from '@/UI/pages/ResetPasswordPage.vue'
 import PageNotFound from '@/UI/pages/NotFound.vue'
@@ -43,14 +43,14 @@ const routes = [
   },
   {
     path: '/:catchAll(.*)*',
-    name: "PageNotFound",
-    component: PageNotFound,
+    name: 'PageNotFound',
+    component: PageNotFound
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 })
 
 router.beforeEach((to, from) => {

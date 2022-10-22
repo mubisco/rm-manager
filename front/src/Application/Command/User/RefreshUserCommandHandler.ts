@@ -5,13 +5,18 @@ import { UserClient } from '@/Domain/User/UserClient'
 import { UserRepository } from '@/Domain/User/UserRepository'
 
 export class RefreshUserCommandHandler {
-  constructor(
-    private userClient: UserClient,
-    private userRepository: UserRepository
-  ) {
+  private userClient: UserClient
+  private userRepository: UserRepository
 
+  constructor (
+    userClient: UserClient,
+    userRepository: UserRepository
+  ) {
+    this.userClient = userClient
+    this.userRepository = userRepository
   }
-  public async handle(command: RefreshUserCommand): Promise<LoggedUserDto> {
+
+  public async handle (command: RefreshUserCommand): Promise<LoggedUserDto> {
     if (command.token() === '') {
       throw new InvalidRefreshTokenError('Refresh token provided is empty')
     }

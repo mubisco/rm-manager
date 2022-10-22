@@ -8,7 +8,6 @@ import pinia from '@/UI/stores/store'
 
 loadFonts()
 
-
 const app = createApp(App)
 app.directive('cy', {
   // en función de la variable NODE_ENV escupo o no el valor

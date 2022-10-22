@@ -5,10 +5,11 @@ import { ResetPasswordCommand } from '@/Application/Command/User/ResetPasswordCo
 export class ResetPasswordCommandHandler {
   private client: UserClient
 
-  constructor(client: UserClient) {
+  constructor (client: UserClient) {
     this.client = client
   }
-  async handle(command: ResetPasswordCommand): Promise<boolean> {
+
+  async handle (command: ResetPasswordCommand): Promise<boolean> {
     const username = new Username(command.username())
     await this.client.resetPassword(username)
     return true
