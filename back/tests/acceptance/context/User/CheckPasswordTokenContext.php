@@ -79,4 +79,21 @@ final class CheckPasswordTokenContext implements Context
             );
         }
     }
+
+    /**
+     * @Given A non-auth user with a valid token
+     */
+    public function aNonAuthUserWithAValidToken()
+    {
+        $user = $this->userRepository->byUsername(new Username('validTokenUser'));
+        $this->token = $user->passwordResetToken();
+    }
+
+    /**
+     * @Then I should get OK response
+     */
+    public function iShouldGetOkResponse()
+    {
+        $this->checkStatusResponse(200);
+    }
 }

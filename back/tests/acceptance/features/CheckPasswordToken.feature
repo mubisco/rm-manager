@@ -13,3 +13,8 @@ Feature:
     When I check the token validity
     Then I should get the response from token expired
 
+  Scenario:
+    Given A non-auth user with a valid token
+    When I check the token validity
+    Then I should get OK response
+
