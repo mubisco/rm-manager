@@ -1,4 +1,7 @@
 {
+  "nav": {
+    "title": "RPG Man"
+  },
   "login": {
     "title": "Iniciar sesión",
     "email": "Email",

@@ -19,14 +19,13 @@ const { isLogged, onLogoutButtonClicked } = useLogout()
       />
     </template>
     <v-app-bar-title tag="div">
-      SIR
+      {{ $t('nav.title') }}
     </v-app-bar-title>
     <template #append>
       <v-btn
         v-if="!isLogged"
         v-cy:login-top-button
         icon="mdi-account"
-        :to="{ name: 'Login' }"
       />
       <v-btn
         v-if="isLogged"
