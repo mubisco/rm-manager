@@ -2,8 +2,8 @@ import { describe, test, expect, beforeEach, afterAll, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useUserStore } from '@/UI/stores/user'
 
-const fakeLoginSuccessResponse = {username: 'mubisco', token: 'asd', role: 'USER', refreshToken: 'refresh'}
-const fakeRefreshSuccessResponse = {username: 'mubisco', token: 'newToken', role: 'USER', refreshToken: 'newRefreshToken'}
+const fakeLoginSuccessResponse = { username: 'mubisco', token: 'asd', role: 'USER', refreshToken: 'refresh' }
+const fakeRefreshSuccessResponse = { username: 'mubisco', token: 'newToken', role: 'USER', refreshToken: 'newRefreshToken' }
 
 vi.mock('../../../../src/Application/Command/User/LoginUserCommandHandler.ts', () => {
   return {
@@ -93,7 +93,6 @@ describe('Testing user store', () => {
     expect(userStore.role).toBe('USER')
     expect(userStore.isLogged).toBe(true)
     const refreshToken = window.localStorage.getItem('refreshToken')
-    expect(refreshToken).toBe('newRefreshToken');
+    expect(refreshToken).toBe('newRefreshToken')
   })
 })
-

@@ -16,7 +16,7 @@ describe('GIVEN a login page', () => {
     })
     it('THEN should show error toast', () => {
       cy.wait('@loginUrl').then(() => {
-        cy.get('[data-cy="login-error"]').should('exist');
+        cy.get('[data-cy="login-error"]').should('exist')
       })
     })
   })

@@ -8,7 +8,7 @@ describe('GIVEN a unauthenticated user', () => {
       cy.visit(routes.front + '/dashboard')
     })
     it('THEN I should see Unauthorized page', () => {
-      cy.location('pathname').should('match', /\/login/);
+      cy.location('pathname').should('match', /\/login/)
     })
   })
 })

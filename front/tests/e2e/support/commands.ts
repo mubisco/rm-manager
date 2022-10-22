@@ -32,18 +32,18 @@ import routes from '../fixtures/routes.json'
 Cypress.Commands.add('customLogin', (email: string, password: string): void => {
   cy.get('[data-cy="login-username"]').type(email)
   cy.get('[data-cy="login-password"]').type(password)
-  cy.get('[data-cy="login-button"]').click();
+  cy.get('[data-cy="login-button"]').click()
 })
 
 Cypress.Commands.add('adminLogin', (): void => {
   cy.intercept(routes.back + '/api/login', (req) => {
     req.reply({
       statusCode: 200,
-      body: {token: tokens.admin, refresh_token: 'aVeryLargeToken' }
+      body: { token: tokens.admin, refresh_token: 'aVeryLargeToken' }
     })
-  }).as('adminLoginRoute');
+  }).as('adminLoginRoute')
   cy.visit(routes.front + '/login')
   cy.get('[data-cy="login-username"]').type('username')
   cy.get('[data-cy="login-password"]').type('aPassword')
-  cy.get('[data-cy="login-button"]').click();
+  cy.get('[data-cy="login-button"]').click()
 })

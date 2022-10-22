@@ -7,18 +7,18 @@ const prepareRefreshTokenResponse = (): void => {
   cy.intercept(backRoute, (req) => {
     req.reply({
       statusCode: 200,
-      body: {token: tokens.admin, refresh_token: 'anotherToken' },
+      body: { token: tokens.admin, refresh_token: 'anotherToken' }
     })
-  }).as('refreshTokenRoute');
+  }).as('refreshTokenRoute')
 }
 const prepareRefreshTokenResponseWithError = (): void => {
   const backRoute = routes.back + '/api/token/refresh'
   cy.intercept(backRoute, (req) => {
     req.reply({
       statusCode: 401,
-      body: { message: 'asd' },
+      body: { message: 'asd' }
     })
-  }).as('refreshTokenRouteWithError');
+  }).as('refreshTokenRouteWithError')
 }
 describe('GIVEN a unauthenticated user', () => {
   context('WHEN navigates to login page with a valid token', () => {
@@ -32,7 +32,7 @@ describe('GIVEN a unauthenticated user', () => {
     })
     it('THEN should login and navigate to dashboard page', () => {
       cy.wait('@refreshTokenRoute').then(() => {
-        cy.location('pathname').should('match', /\/dashboard/);
+        cy.location('pathname').should('match', /\/dashboard/)
         const rawUserData = localStorage.getItem('userData')
         const userData = rawUserData ? JSON.parse(rawUserData) : {}
         expect(userData?.role).to.be.eq('ADMIN')
@@ -58,7 +58,7 @@ describe('GIVEN a unauthenticated user', () => {
     })
     it('THEN should stay on login page', () => {
       cy.wait('@refreshTokenRouteWithError').then(() => {
-        cy.location('pathname').should('match', /\/login/);
+        cy.location('pathname').should('match', /\/login/)
       })
     })
     it('AND THEN user data should not be on localStorage', () => {
@@ -80,7 +80,7 @@ describe('GIVEN a unauthenticated user', () => {
       cy.visit(routes.front + '/login')
     })
     it('THEN should stay on login page', () => {
-      cy.location('pathname').should('match', /\/login/);
+      cy.location('pathname').should('match', /\/login/)
     })
   })
 })

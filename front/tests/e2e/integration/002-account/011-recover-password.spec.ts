@@ -24,7 +24,7 @@ describe('GIVEN an authenticated user', () => {
       cy.visit(routes.front + '/forgot-password')
     })
     it('THEN I should be redirected to dashboard', () => {
-      cy.location('pathname').should('match', /\/dashboard/);
+      cy.location('pathname').should('match', /\/dashboard/)
     })
   })
   after(() => {
@@ -49,10 +49,10 @@ describe('GIVEN a recover password page', () => {
       cy.intercept(routes.back + '/api/user/reset-password', (req) => {
         req.reply({
           statusCode: 404,
-          body: {error: 'User does not exists' },
-          delay: 500,
+          body: { error: 'User does not exists' },
+          delay: 500
         })
-      }).as('recoverPasswordRoute');
+      }).as('recoverPasswordRoute')
       cy.get('[data-cy="recover-password-input"]').type('notExistantUser')
     })
     it('THEN I should see an error message', () => {
@@ -68,10 +68,10 @@ describe('GIVEN a recover password page', () => {
       cy.intercept(routes.back + '/api/user/reset-password', (req) => {
         req.reply({
           statusCode: 500,
-          body: {error: 'UnexpectedError' },
-          delay: 500,
+          body: { error: 'UnexpectedError' },
+          delay: 500
         })
-      }).as('recoverPasswordRoute');
+      }).as('recoverPasswordRoute')
       cy.get('[data-cy="recover-password-input"]').type('someUsername')
     })
     it('THEN I should see an error message', () => {
@@ -87,10 +87,10 @@ describe('GIVEN a recover password page', () => {
       cy.intercept(routes.back + '/api/user/reset-password', (req) => {
         req.reply({
           statusCode: 200,
-          body: {message: 'OK' },
-          delay: 500,
+          body: { message: 'OK' },
+          delay: 500
         })
-      }).as('recoverPasswordRoute');
+      }).as('recoverPasswordRoute')
       cy.get('[data-cy="recover-password-input"]').type('existantUser')
     })
     it('THEN I should see a success message', () => {

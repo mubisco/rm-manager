@@ -8,10 +8,10 @@ describe('Testing Userpassword', () => {
     expect(sut).toBeInstanceOf(Userpassword)
   })
   test('Should throw error on bad format', () => {
-    expect(() => new Userpassword('xan')).toThrowError(InvalidPasswordError);
+    expect(() => new Userpassword('xan')).toThrowError(InvalidPasswordError)
   })
   test('Should return proper password value', () => {
-    const sut = new Userpassword('aL90ngpassword');
-    expect(sut.value()).toBe('aL90ngpassword');
+    const sut = new Userpassword('aL90ngpassword')
+    expect(sut.value()).toBe('aL90ngpassword')
   })
 })

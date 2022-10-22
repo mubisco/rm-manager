@@ -1,22 +1,22 @@
 global.CSS = {
-    supports: (k, v) => false,
+  supports: (k, v) => false
 }
 global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
+  constructor () {}
 
-  disconnect() {
-    return null;
+  disconnect () {
+    return null
   }
 
-  observe() {
-    return null;
+  observe () {
+    return null
   }
 
-  takeRecords() {
-    return null;
+  takeRecords () {
+    return null
   }
 
-  unobserve() {
-    return null;
+  unobserve () {
+    return null
   }
-};
+}

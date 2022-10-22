@@ -36,7 +36,7 @@ describe('Testing RefreshUserCommandHandler', () => {
     await expect(sut.handle(command)).rejects.toThrow(UserRepositoryError)
   })
   test('Should return true if user stored properly', async () => {
-    const mockedUser = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken', 'refreshToken');
+    const mockedUser = new User(new Username('mubisco'), UserRole.ADMIN, 'aToken', 'refreshToken')
     mockedUserClient.refresh.mockResolvedValue(mockedUser)
     mockedUserRepository.store.mockResolvedValue(mockedUser)
     const result = await sut.handle(command)
@@ -46,4 +46,3 @@ describe('Testing RefreshUserCommandHandler', () => {
     expect(result.refreshToken).toBe('refreshToken')
   })
 })
-

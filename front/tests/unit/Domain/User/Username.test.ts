@@ -4,11 +4,10 @@ import { InvalidUsernameError } from '@/Domain/User/InvalidUsernameError'
 
 describe('Testing Username', () => {
   test('Should throw error on bad format', () => {
-    expect(() => new Username('xan@gmail.com')).toThrowError(InvalidUsernameError);
+    expect(() => new Username('xan@gmail.com')).toThrowError(InvalidUsernameError)
   })
   test('Should return proper username', () => {
-    const sut = new Username('username');
-    expect(sut.value()).toBe('username');
+    const sut = new Username('username')
+    expect(sut.value()).toBe('username')
   })
 })
-

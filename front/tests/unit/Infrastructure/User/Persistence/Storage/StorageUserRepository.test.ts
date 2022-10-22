@@ -35,5 +35,5 @@ describe('Testing StorageUserRepository', () => {
     expect(rawData).toBeNull()
     const token = localStorage.getItem('refreshToken')
     expect(token).toBeNull()
-  });
+  })
 })

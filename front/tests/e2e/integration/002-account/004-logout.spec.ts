@@ -8,10 +8,10 @@ describe('GIVEN a logged page', () => {
     cy.intercept(routes.back + '/api/login', (req) => {
       req.reply({
         statusCode: 200,
-        body: {token: tokens.admin, refresh_token: 'refreshToken' },
-        delay: 500,
+        body: { token: tokens.admin, refresh_token: 'refreshToken' },
+        delay: 500
       })
-    }).as('loginRoute');
+    }).as('loginRoute')
     cy.visit(routes.front + '/login')
     cy.customLogin('mubisco', 'password')
   })
@@ -28,7 +28,7 @@ describe('GIVEN a logged page', () => {
       cy.get('[data-cy="logout-top-button"]').click()
     })
     it('THEN I should return to login page', () => {
-      cy.location('pathname').should('match', /\/login/);
+      cy.location('pathname').should('match', /\/login/)
     })
     it('AND THEN I should see logout button on top menu', () => {
       cy.get('[data-cy="login-top-button"]').should('exist')
@@ -45,7 +45,7 @@ describe('GIVEN a logged page', () => {
       cy.get('[data-cy="logout-left-button"]').click({ force: true })
     })
     it('THEN I should return to login page', () => {
-      cy.location('pathname').should('match', /\/login/);
+      cy.location('pathname').should('match', /\/login/)
     })
     it('AND THEN I should see logout button on top menu', () => {
       cy.get('[data-cy="login-left-button"]').should('exist')

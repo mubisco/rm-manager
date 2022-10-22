@@ -1,15 +1,14 @@
 import { AxiosPasswordTokenClient } from '@/Infrastructure/User/Client/AxiosPasswordTokenClient'
 import { describe, test, expect, vi } from 'vitest'
-import axios, {AxiosError} from 'axios'
-import {PasswordTokenNotFoundError} from '@/Domain/User/PasswordToken/PasswordTokenNotFoundError'
-import {PasswordTokenExpiredError} from '@/Domain/User/PasswordToken/PasswordTokenExpiredError'
+import axios, { AxiosError } from 'axios'
+import { PasswordTokenNotFoundError } from '@/Domain/User/PasswordToken/PasswordTokenNotFoundError'
+import { PasswordTokenExpiredError } from '@/Domain/User/PasswordToken/PasswordTokenExpiredError'
 
 vi.mock('axios', () => ({
   default: {
-    get: vi.fn(),
+    get: vi.fn()
   }
 }))
-
 
 describe('Testing AxiosPasswordTokenClient', () => {
   test('it should be of proper class', () => {
@@ -50,4 +49,3 @@ describe('Testing AxiosPasswordTokenClient', () => {
     await expect(sut.statusByToken('asd')).resolves.toBeTruthy()
   })
 })
-

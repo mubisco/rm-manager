@@ -5,7 +5,7 @@ import { Userpassword } from '@/Domain/User/Userpassword'
 import { User } from '@/Domain/User/User'
 import { UserClientError } from '@/Domain/User/UserClientError'
 import { UserNotFoundError } from '@/Domain/User/UserNotFoundError'
-import axios, {AxiosError} from 'axios'
+import axios, { AxiosError } from 'axios'
 import tokenExamples from './tokenExamples.json'
 
 vi.mock('axios', () => ({
@@ -26,7 +26,7 @@ const mockAxiosError = (statusCode: number) => {
     headers: {},
     status: statusCode
   }
-  return expectedError;
+  return expectedError
 }
 
 describe('Testing AxiosUserClient', () => {

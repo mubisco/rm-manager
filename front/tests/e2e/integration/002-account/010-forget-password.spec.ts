@@ -10,7 +10,7 @@ describe('GIVEN a login page', () => {
       cy.get('[data-cy="login-forgot"]').click()
     })
     it('THEN navigate to forgot-password page', () => {
-      cy.location('pathname').should('match', /\/forgot-password/);
+      cy.location('pathname').should('match', /\/forgot-password/)
     })
   })
 })

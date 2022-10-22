@@ -10,7 +10,7 @@ const mockSuccessfulTokenCheck = () => {
 }
 const fillPasswordProperly = () => {
   cy.get('[data-cy="new-password"]').type('onePassword')
-  cy.get('[data-cy="confirm-new-password"]').type('onePassword');
+  cy.get('[data-cy="confirm-new-password"]').type('onePassword')
 }
 
 describe('GIVEN a non registered user', () => {
@@ -19,7 +19,7 @@ describe('GIVEN a non registered user', () => {
       cy.visit(routes.front + '/reset-password/a-very-large-token')
     })
     it('THEN I should see a loader while checking token', () => {
-      cy.get('[data-cy="reset-password-loader"]').should('exist');
+      cy.get('[data-cy="reset-password-loader"]').should('exist')
     })
   })
   context('WHEN I navigate to with an non existing token', () => {
@@ -33,7 +33,7 @@ describe('GIVEN a non registered user', () => {
     it('THEN I should see a error message', () => {
       cy.visit(routes.front + '/reset-password/a-very-large-token')
       cy.wait('@checkTokenUrl').then(() => {
-        cy.get('[data-cy="token-error"]').should('exist');
+        cy.get('[data-cy="token-error"]').should('exist')
       })
     })
   })
@@ -42,21 +42,21 @@ describe('GIVEN a non registered user', () => {
       mockSuccessfulTokenCheck()
       cy.visit(routes.front + '/reset-password/a-very-large-token')
       cy.wait('@checkTokenUrl').then(() => {
-        cy.get('[data-cy="change-password-form"]').should('exist');
-        cy.get('[data-cy="new-password"]').should('exist');
-        cy.get('[data-cy="confirm-new-password"]').should('exist');
-        cy.get('[data-cy="send-new-password"]').should('exist');
+        cy.get('[data-cy="change-password-form"]').should('exist')
+        cy.get('[data-cy="new-password"]').should('exist')
+        cy.get('[data-cy="confirm-new-password"]').should('exist')
+        cy.get('[data-cy="send-new-password"]').should('exist')
         cy.get('[data-cy="send-new-password"]').should('be.disabled')
       })
     })
   })
   context('WHEN I fill the two fields with different passwords', () => {
     it('THEN I should see and warning error and button should be disabled', () => {
-    mockSuccessfulTokenCheck()
+      mockSuccessfulTokenCheck()
       cy.visit(routes.front + '/reset-password/a-very-large-token')
       cy.wait('@checkTokenUrl').then(() => {
         cy.get('[data-cy="new-password"]').type('onePassword')
-        cy.get('[data-cy="confirm-new-password"]').type('anotherPassword');
+        cy.get('[data-cy="confirm-new-password"]').type('anotherPassword')
         cy.get('[data-cy="confirm-new-password"]').should('have.class', 'v-input--error')
         cy.get('[data-cy="send-new-password"]').should('be.disabled')
       })
@@ -85,7 +85,7 @@ describe('GIVEN a non registered user', () => {
         fillPasswordProperly()
         cy.get('[data-cy="send-new-password"]').click()
         cy.wait('@changePasswordUrl').then(() => {
-          cy.get('[data-cy="token-error"]').should('exist');
+          cy.get('[data-cy="token-error"]').should('exist')
         })
       })
     })
@@ -103,7 +103,7 @@ describe('GIVEN a non registered user', () => {
         fillPasswordProperly()
         cy.get('[data-cy="send-new-password"]').click()
         // cy.get('[data-cy="token-success"]').should('exist');
-        cy.location('pathname').should('match', /\/login/);
+        cy.location('pathname').should('match', /\/login/)
       })
     })
   })
