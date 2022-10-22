@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Tests\acceptance\context\User;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use App\User\Domain\UserNotFoundException;
 use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
 use Behat\Behat\Context\Context;
 use RuntimeException;
+use SebastianBergmann\Type\VoidType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -17,6 +19,7 @@ final class CheckPasswordTokenContext implements Context
 {
     private UserRepository $userRepository;
     private ?Response $response = null;
+    private string $token = '';
 
     public function __construct(private KernelInterface $kernel)
     {
@@ -27,11 +30,7 @@ final class CheckPasswordTokenContext implements Context
      */
     public function aNonAuthUserWithANonExistantToken()
     {
-        try {
-            $this->userRepository->byUsername(new Username('agapito'));
-            throw new RuntimeException('User agapito exists');
-        } catch (UserNotFoundException) {
-        }
+        $this->token = 'a-non-existant-token';
     }
 
     /**
@@ -40,7 +39,7 @@ final class CheckPasswordTokenContext implements Context
     public function iCheckTheTokenValidity()
     {
         $request = Request::create(
-            '/api/user/check-password-token/a-non-existant-token',
+            '/api/user/check-password-token/' . $this->token,
             'GET',
             [],
             [],
@@ -55,10 +54,31 @@ final class CheckPasswordTokenContext implements Context
      */
     public function iShouldGetTheResponseFromTokenNotValid()
     {
-        if ($this->response->getStatusCode() != 404) {
+        $this->checkStatusResponse(404);
+    }
+
+    /**
+     * @Given A non-auth user with an expired token
+     */
+    public function aNonAuthUserWithAnExpiredToken()
+    {
+        $user = $this->userRepository->byUsername(new Username('expiredTokenUser'));
+        $this->token = $user->passwordResetToken();
+    }
+
+    /**
+     * @Then I should get the response from token expired
+     */
+    public function iShouldGetTheResponseFromTokenExpired()
+    {
+        $this->checkStatusResponse(400);
+    }
+
+    private function checkStatusResponse(int $statusCode): void
+    {
+        if ($this->response->getStatusCode() != $statusCode) {
             throw new RuntimeException(
-                'Response must be 404' .
-                ' and received ' . $this->response->getStatusCode()
+                "Response must be $statusCode and received {$this->response->getStatusCode()}"
             );
         }
     }

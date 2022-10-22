@@ -13,4 +13,5 @@ api_reset_password:
 
 api_check_password_token:
     path: /api/user/check-password-token/{token}
-    controller: App\User\Infrastructure\EntryPoint\Api\UserApiController::checkPasswordToken
+    controller: App\User\Infrastructure\EntryPoint\Api\CheckPasswordTokenController
+    methods: GET

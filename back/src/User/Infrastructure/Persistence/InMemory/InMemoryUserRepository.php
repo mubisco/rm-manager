@@ -10,6 +10,7 @@ use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
 use App\User\Domain\UserNotFoundException;
 use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
+use DateTimeImmutable;
 
 final class InMemoryUserRepository implements UserRepository
 {
@@ -19,7 +20,15 @@ final class InMemoryUserRepository implements UserRepository
     public function __construct()
     {
         $this->users = [
-            new DoctrineUser('some@email.net', 'existinguser', 'password', ['ROLE_USER'], null, null)
+            new DoctrineUser('some@email.net', 'existinguser', 'password', ['ROLE_USER'], null, null),
+            new DoctrineUser(
+                'expired@token.net',
+                'expiredTokenUser',
+                'password',
+                ['ROLE_USER'],
+                '99c54fef52e9b2db8085d0f588ef8c96f8eb0f3f473456e939eaade887183507',
+                new DateTimeImmutable('2020-12-12')
+            )
         ];
     }
     public function byUsername(Username $username): User
