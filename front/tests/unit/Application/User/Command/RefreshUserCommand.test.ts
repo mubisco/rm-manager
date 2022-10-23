@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { RefreshUserCommand } from '@/Application/Command/User/RefreshUserCommand'
+import { RefreshUserCommand } from '@/Application/User/Command/RefreshUserCommand'
 
 describe('Testing RefreshUserCommand', () => {
   test('Should be of proper class', () => {

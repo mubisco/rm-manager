@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { ResetPasswordCommand } from '@/Application/Command/User/ResetPasswordCommand'
+import { ResetPasswordCommand } from '@/Application/User/Command/ResetPasswordCommand'
 
 describe('Testing ResetPasswordCommand', () => {
   test('Should return proper username', () => {

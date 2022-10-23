@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand'
+import { LoginUserCommand } from '@/Application/User/Command/LoginUserCommand'
 
 describe('LoginUserCommand', () => {
   test('Should return proper data', () => {

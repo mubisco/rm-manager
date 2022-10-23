@@ -5,7 +5,7 @@ import { useUserStore } from '@/UI/stores/user'
 const fakeLoginSuccessResponse = { username: 'mubisco', token: 'asd', role: 'USER', refreshToken: 'refresh' }
 const fakeRefreshSuccessResponse = { username: 'mubisco', token: 'newToken', role: 'USER', refreshToken: 'newRefreshToken' }
 
-vi.mock('../../../../src/Application/Command/User/LoginUserCommandHandler.ts', () => {
+vi.mock('../../../../src/Application/User/Command/LoginUserCommandHandler.ts', () => {
   return {
     LoginUserCommandHandler: vi.fn(() => ({
       handle: vi.fn()
@@ -15,14 +15,14 @@ vi.mock('../../../../src/Application/Command/User/LoginUserCommandHandler.ts', (
     }))
   }
 })
-vi.mock('../../../../src/Application/Command/User/LogoutUserCommandHandler.ts', () => {
+vi.mock('../../../../src/Application/User/Command/LogoutUserCommandHandler.ts', () => {
   return {
     LogoutUserCommandHandler: vi.fn(() => ({
       handle: vi.fn()
     }))
   }
 })
-vi.mock('../../../../src/Application/Command/User/RefreshUserCommandHandler.ts', () => {
+vi.mock('../../../../src/Application/User/Command/RefreshUserCommandHandler.ts', () => {
   return {
     RefreshUserCommandHandler: vi.fn(() => ({
       handle: vi.fn()

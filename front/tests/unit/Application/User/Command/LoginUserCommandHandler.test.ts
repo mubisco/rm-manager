@@ -1,6 +1,6 @@
 import { beforeEach, describe, test, expect } from 'vitest'
-import { LoginUserCommandHandler } from '@/Application/Command/User/LoginUserCommandHandler'
-import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand'
+import { LoginUserCommandHandler } from '@/Application/User/Command/LoginUserCommandHandler'
+import { LoginUserCommand } from '@/Application/User/Command/LoginUserCommand'
 import { InvalidUsernameError } from '@/Domain/User/InvalidUsernameError'
 import { InvalidPasswordError } from '@/Domain/User/InvalidPasswordError'
 import { UserClientError } from '@/Domain/User/UserClientError'

@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand'
-import { LogoutUserCommandHandler } from '@/Application/Command/User/LogoutUserCommandHandler'
+import { LogoutUserCommand } from '@/Application/User/Command/LogoutUserCommand'
+import { LogoutUserCommandHandler } from '@/Application/User/Command/LogoutUserCommandHandler'
 import { UserRepositoryError } from '@/Domain/User/UserRepositoryError'
 import { mockUserRepository } from './mockUtils'
 

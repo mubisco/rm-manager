@@ -1,5 +1,5 @@
-import { ChangePasswordCommand } from '@/Application/Command/User/ChangePasswordCommand'
-import { ChangePasswordCommandHandler } from '@/Application/Command/User/ChangePasswordCommandHandler'
+import { ChangePasswordCommand } from '@/Application/User/Command/ChangePasswordCommand'
+import { ChangePasswordCommandHandler } from '@/Application/User/Command/ChangePasswordCommandHandler'
 import { InvalidPasswordError } from '@/Domain/User/InvalidPasswordError'
 import { InvalidTokenError } from '@/Domain/User/InvalidTokenError'
 import { UserClientError } from '@/Domain/User/UserClientError'

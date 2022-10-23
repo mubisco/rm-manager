@@ -1,4 +1,4 @@
-import { ChangePasswordCommand } from '@/Application/Command/User/ChangePasswordCommand'
+import { ChangePasswordCommand } from '@/Application/User/Command/ChangePasswordCommand'
 import { describe, test, expect } from 'vitest'
 
 describe('Testing ChangePasswordCommand', () => {

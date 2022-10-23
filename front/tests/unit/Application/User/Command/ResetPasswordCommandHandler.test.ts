@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import { ResetPasswordCommandHandler } from '@/Application/Command/User/ResetPasswordCommandHandler'
-import { ResetPasswordCommand } from '@/Application/Command/User/ResetPasswordCommand'
+import { ResetPasswordCommandHandler } from '@/Application/User/Command/ResetPasswordCommandHandler'
+import { ResetPasswordCommand } from '@/Application/User/Command/ResetPasswordCommand'
 import { UserClientError } from '@/Domain/User/UserClientError'
 import { UserNotFoundError } from '@/Domain/User/UserNotFoundError'
 import { mockUserClient } from './mockUtils'

@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import { RefreshUserCommandHandler } from '@/Application/Command/User/RefreshUserCommandHandler'
-import { RefreshUserCommand } from '@/Application/Command/User/RefreshUserCommand'
+import { RefreshUserCommandHandler } from '@/Application/User/Command/RefreshUserCommandHandler'
+import { RefreshUserCommand } from '@/Application/User/Command/RefreshUserCommand'
 import { InvalidRefreshTokenError } from '@/Domain/User/InvalidRefreshTokenError'
 import { UserClientError } from '@/Domain/User/UserClientError'
 import { UserRepositoryError } from '@/Domain/User/UserRepositoryError'
