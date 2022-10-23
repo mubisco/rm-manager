@@ -150,6 +150,8 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
     {
         try {
             $this->password = $passwordEncryptor->encryptPassword($this, $userPassword);
+            $this->resetPasswordToken = '';
+            $this->resetPasswordRequestedAt = null;
         } catch (PasswordEncryptorException $e) {
             throw new PasswordChangeException($e->getMessage(), $e->getCode(), $e);
         }

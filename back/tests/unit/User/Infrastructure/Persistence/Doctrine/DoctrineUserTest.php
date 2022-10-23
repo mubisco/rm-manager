@@ -130,8 +130,11 @@ class DoctrineUserTest extends TestCase
     public function itShouldUpdatePasswordProperly(): void
     {
         $this->passwordEncryptor->method('encryptPassword')->willReturn('updatedPassword');
+        $this->sut->generateResetPasswordToken();
         $this->sut->updatePassword($this->passwordEncryptor, new UserPassword('sz3curePassword'));
         $updatedPassword = $this->sut->getPassword();
         $this->assertEquals('updatedPassword', $updatedPassword);
+        $this->assertEquals('', $this->sut->passwordResetToken());
+        $this->assertEquals(null, $this->sut->passwordResetTokenDate());
     }
 }
