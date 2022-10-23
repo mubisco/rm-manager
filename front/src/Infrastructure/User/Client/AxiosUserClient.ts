@@ -54,13 +54,13 @@ export class AxiosUserClient implements UserClient {
   }
 
   async changePassword (password: Userpassword, token: string): Promise<boolean> {
-    const baseUrl = baseApiUrl + '/api/account/reset-password'
+    const baseUrl = baseApiUrl + '/api/user/password/change'
     const data = {
       token,
       password: password.value()
     }
     try {
-      await axios.post(baseUrl, data)
+      await axios.patch(baseUrl, data)
       return true
     } catch (err) {
       if (err instanceof Error) {

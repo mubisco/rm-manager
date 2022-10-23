@@ -11,6 +11,7 @@ import tokenExamples from './tokenExamples.json'
 vi.mock('axios', () => ({
   default: {
     post: vi.fn(),
+    patch: vi.fn(),
     put: vi.fn()
   }
 }))
@@ -71,11 +72,11 @@ describe('Testing AxiosUserClient', () => {
   })
 
   test('Should throw error if password cannot be changed', async () => {
-    axios.post.mockRejectedValue(mockAxiosError(500))
+    axios.patch.mockRejectedValue(mockAxiosError(500))
     await expect(sut.changePassword(new Userpassword('s3cretP4ssword'), 'aToken')).rejects.toThrow(UserClientError)
   })
   test('Should return true if reset password done', async () => {
-    axios.post.mockResolvedValue(true)
+    axios.patch.mockResolvedValue(true)
     await expect(sut.changePassword(new Userpassword('s3cretP4ssword'), 'aToken')).resolves.toBe(true)
   })
 })

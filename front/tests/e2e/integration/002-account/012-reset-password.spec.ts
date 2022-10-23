@@ -2,7 +2,7 @@
 import routes from '../../fixtures/routes.json'
 
 const mockSuccessfulTokenCheck = () => {
-  cy.intercept('GET', routes.back + '/api/account/check-token/a-very-large-token', {
+  cy.intercept('GET', routes.back + '/api/user/check-password-token/a-very-large-token', {
     delay: 500,
     body: { message: 'NOT_AUTH' },
     statusCode: 200
@@ -24,7 +24,7 @@ describe('GIVEN a non registered user', () => {
   })
   context('WHEN I navigate to with an non existing token', () => {
     before(() => {
-      cy.intercept('GET', routes.back + '/api/account/check-token/a-very-large-token', {
+      cy.intercept('GET', routes.back + '/api/user/check-password-token/a-very-large-token', {
         delay: 500,
         body: { message: 'NOT_AUTH' },
         statusCode: 404
@@ -75,7 +75,7 @@ describe('GIVEN a non registered user', () => {
   context('AND WHEN there is an error sending password', () => {
     it('THEN send button should be enabled', () => {
       mockSuccessfulTokenCheck()
-      cy.intercept('POST', routes.back + '/api/account/reset-password', {
+      cy.intercept('PATCH', routes.back + '/api/user/password/change', {
         delay: 500,
         body: { message: 'NOT_AUTH' },
         statusCode: 500
@@ -93,7 +93,7 @@ describe('GIVEN a non registered user', () => {
   context('AND WHEN password is reset', () => {
     it('THEN send button should be enabled', () => {
       mockSuccessfulTokenCheck()
-      cy.intercept('POST', routes.back + '/api/account/reset-password', {
+      cy.intercept('PATCH', routes.back + '/api/user/password/change', {
         delay: 500,
         body: { message: 'NOT_AUTH' },
         statusCode: 200

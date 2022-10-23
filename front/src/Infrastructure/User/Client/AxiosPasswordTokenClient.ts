@@ -7,7 +7,7 @@ const baseApiUrl = import.meta.env.VITE_API_URL
 
 export class AxiosPasswordTokenClient implements PasswordTokenRepository {
   public async statusByToken (token: string): Promise<boolean> {
-    const endpointUrl = baseApiUrl + '/api/account/check-token/' + token
+    const endpointUrl = baseApiUrl + '/api/user/check-password-token/' + token
     try {
       await axios.get(endpointUrl)
     } catch (e) {
