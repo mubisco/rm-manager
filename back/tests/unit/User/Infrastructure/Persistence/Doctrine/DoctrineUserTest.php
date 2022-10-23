@@ -2,20 +2,27 @@
 
 namespace App\User\Infrastructure\Persistence\Doctrine;
 
+use App\User\Domain\PasswordChangeException;
+use App\User\Domain\PasswordEncryptor;
+use App\User\Domain\PasswordEncryptorException;
 use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\PasswordTokenWasRequested;
+use App\User\Domain\UserPassword;
 use App\User\Domain\UserWasCreated;
 use DateTime;
 use DateTimeImmutable;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Ulid;
 
 class DoctrineUserTest extends TestCase
 {
     private DoctrineUser $sut;
+    private PasswordEncryptor|MockObject $passwordEncryptor;
 
     protected function setUp(): void
     {
+        $this->passwordEncryptor = $this->createMock(PasswordEncryptor::class);
         $this->sut = new DoctrineUser('some@email.net', 'existinguser', 'password', ['ROLE_USER'], null, null);
     }
     public function testShouldReturnProperValues()
@@ -105,5 +112,26 @@ class DoctrineUserTest extends TestCase
     public function itShouldReturnTokenExpiredTrueIfNoTokenDefined(): void
     {
         $this->assertTrue($this->sut->isTokenExpired());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldThrowExceptionIfPasswordCannotBeUpdated(): void
+    {
+        $this->expectException(PasswordChangeException::class);
+        $this->passwordEncryptor->method('encryptPassword')->willThrowException(new PasswordEncryptorException());
+        $this->sut->updatePassword($this->passwordEncryptor, new UserPassword('sz3curePassword'));
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldUpdatePasswordProperly(): void
+    {
+        $this->passwordEncryptor->method('encryptPassword')->willReturn('updatedPassword');
+        $this->sut->updatePassword($this->passwordEncryptor, new UserPassword('sz3curePassword'));
+        $updatedPassword = $this->sut->getPassword();
+        $this->assertEquals('updatedPassword', $updatedPassword);
     }
 }

@@ -15,3 +15,8 @@ api_check_password_token:
     path: /api/user/check-password-token/{token}
     controller: App\User\Infrastructure\EntryPoint\Api\CheckPasswordTokenController
     methods: GET
+
+api_change_password:
+    path: /api/user/password/change
+    controller: App\User\Infrastructure\EntryPoint\Api\ChangePasswordController
+    methods: PATCH

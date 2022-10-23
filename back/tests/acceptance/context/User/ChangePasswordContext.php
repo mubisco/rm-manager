@@ -6,17 +6,19 @@ namespace App\Tests\acceptance\context\User;
 
 use App\User\Domain\UserRepository;
 use App\User\Domain\Username;
+use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
 use Behat\Behat\Context\Context;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-final class CheckPasswordTokenContext implements Context
+final class ChangePasswordContext implements Context
 {
     private UserRepository $userRepository;
     private ?Response $response = null;
     private string $token = '';
+    private string $oldPassword = '';
 
     public function __construct(private KernelInterface $kernel)
     {
@@ -85,8 +87,10 @@ final class CheckPasswordTokenContext implements Context
      */
     public function aNonAuthUserWithAValidToken()
     {
+        /** @var DoctrineUser */
         $user = $this->userRepository->byUsername(new Username('validTokenUser'));
         $this->token = $user->passwordResetToken();
+        $this->oldPassword = $user->getPassword();
     }
 
     /**
@@ -95,5 +99,46 @@ final class CheckPasswordTokenContext implements Context
     public function iShouldGetOkResponse()
     {
         $this->checkStatusResponse(200);
+    }
+
+    /**
+     * @Given A non-auth user with a valid checked token
+     */
+    public function aNonAuthUserWithAValidCheckedToken()
+    {
+        $this->aNonAuthUserWithAValidToken();
+        $this->iCheckTheTokenValidity();
+        $this->iShouldGetOkResponse();
+    }
+
+    /**
+     * @When I request the password change
+     */
+    public function iRequestThePasswordChange()
+    {
+        $requestData = ['token' => $this->token, 'password' => 'n3wSecurePassword'];
+        $request = Request::create(
+            '/api/user/password/change',
+            'PATCH',
+            [],
+            [],
+            [],
+            ['CONTENT-TYPE' => 'json/application'],
+            json_encode($requestData)
+        );
+        $this->response = $this->kernel->handle($request);
+    }
+
+    /**
+     * @Then The user should have password updated
+     */
+    public function theUserShouldHavePasswordUpdated()
+    {
+        $this->iShouldGetOkResponse();
+        /** @var DoctrineUser */
+        $user = $this->userRepository->byUsername(new Username('validTokenUser'));
+        if ($user->getPassword() == $this->oldPassword) {
+            throw new RuntimeException('Old password and new password are the same');
+        }
     }
 }

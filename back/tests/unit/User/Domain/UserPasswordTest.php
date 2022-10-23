@@ -9,12 +9,12 @@ class UserPasswordTest extends TestCase
     public function testShouldThrowExceptionIfValueNotValid(): void
     {
         $this->expectException(WrongPasswordFormatException::class);
-        new UserPassword('wrongPassword');
+        new UserPassword('anotherPass');
     }
 
     public function testShouldReturnProperValue(): void
     {
-        $sut = new UserPassword('asdasf');
-        $this->assertEquals('asdasf', $sut->value());
+        $sut = new UserPassword('aVeryS3cureP4ssw0rd');
+        $this->assertEquals('aVeryS3cureP4ssw0rd', $sut->value());
     }
 }

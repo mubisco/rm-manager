@@ -1,7 +1,7 @@
 Feature:
   In order to change my password
   As a non-auth user
-  I want to check if my reset token is valid
+  I want to change my password
 
   Scenario:
     Given A non-auth user with a non existant token
@@ -17,4 +17,9 @@ Feature:
     Given A non-auth user with a valid token
     When I check the token validity
     Then I should get OK response
+
+  Scenario:
+    Given A non-auth user with a valid checked token
+    When I request the password change
+    Then The user should have password updated
 

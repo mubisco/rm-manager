@@ -12,6 +12,7 @@ interface User
     public function isTokenExpired(): bool;
     public function mail(): string;
     public function passwordResetToken(): string;
+    public function updatePassword(PasswordEncryptor $passwordEncryptor, UserPassword $userPassword): void;
     /** @return DomainEvent[] */
     public function pullEvents(): array;
 }

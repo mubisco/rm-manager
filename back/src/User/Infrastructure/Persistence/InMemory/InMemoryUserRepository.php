@@ -89,6 +89,6 @@ final class InMemoryUserRepository implements UserRepository
         if ($userWithToken->isTokenExpired()) {
             throw new PasswordTokenExpiredException("Token {$token->value()} expired!!!");
         }
-        return $user;
+        return $userWithToken;
     }
 }

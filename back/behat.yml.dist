@@ -7,7 +7,7 @@ default:
         - App\Tests\acceptance\context\ApiReadyContext
         - App\Tests\acceptance\context\User\CreateUserContext
         - App\Tests\acceptance\context\User\ResetPasswordContext
-        - App\Tests\acceptance\context\User\CheckPasswordTokenContext
+        - App\Tests\acceptance\context\User\ChangePasswordContext
 
   extensions:
     FriendsOfBehat\SymfonyExtension:

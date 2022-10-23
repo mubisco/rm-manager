@@ -3,11 +3,15 @@
 namespace App\User\Infrastructure\Persistence\Doctrine;
 
 use App\Shared\Domain\Event\EventAware;
+use App\User\Domain\PasswordChangeException;
+use App\User\Domain\PasswordEncryptor;
+use App\User\Domain\PasswordEncryptorException;
 use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\PasswordToken;
 use App\User\Domain\PasswordTokenWasRequested;
 use App\User\Domain\User;
 use App\User\Domain\UserId;
+use App\User\Domain\UserPassword;
 use App\User\Domain\UserWasCreated;
 use DateTimeImmutable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -140,5 +144,14 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         $tokenTimestamp = $this->resetPasswordRequestedAt->getTimestamp();
         $now = time();
         return $now - $tokenTimestamp > self::TOKEN_LIMIT_SECONDS;
+    }
+
+    public function updatePassword(PasswordEncryptor $passwordEncryptor, UserPassword $userPassword): void
+    {
+        try {
+            $this->password = $passwordEncryptor->encryptPassword($this, $userPassword);
+        } catch (PasswordEncryptorException $e) {
+            throw new PasswordChangeException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

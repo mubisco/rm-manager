@@ -8,7 +8,6 @@ use Behat\Gherkin\Node\TableNode;
 use App\User\Domain\Username;
 use App\User\Domain\UserRepository;
 use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
