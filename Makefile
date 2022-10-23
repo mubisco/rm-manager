@@ -28,7 +28,7 @@ rebuild-common rebuild-db rebuild-back rebuild-front:
 	@$(DOCKER_COMPOSE) up --build --force-recreate --no-deps -d $(TARGET)
 
 
-doco stop start status build-images rebuild-images shell-front shell-back:
+doco stop start status build-images rebuild-images shell-front shell-back shell-back-root:
 	$(DOCKER_COMPOSE) $(DOCKER_COMMAND)
 
 .PHONY: stats
@@ -74,6 +74,7 @@ db-restore: ##  Recreates database and import data from defined location
 	@docker exec -i database bash -l -c "mysql ${dbStringConnection}" < .docker/mysql/bd-dump.sql
 
 shell-back:DOCKER_COMMAND=exec backend /bin/zsh ##  Access to backend shell
+shell-back-root:DOCKER_COMMAND=exec -u 0 backend /bin/zsh
 shell-front:DOCKER_COMMAND=exec frontend /bin/zsh ##  Access to frontend shell
 
 shell-db: ##  Access to database shell

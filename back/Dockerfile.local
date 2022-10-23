@@ -1,4 +1,4 @@
-FROM xbellon/sf-php_81:0.0.6
+FROM xbellon/sf-php_81:0.0.8
 
 ARG USER_ID=1000
 ARG PORT=8000
