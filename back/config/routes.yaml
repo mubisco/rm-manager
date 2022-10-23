@@ -18,4 +18,4 @@ api_check_password_token:
 api_change_password:
     path: /api/user/password/change
     controller: App\User\Infrastructure\EntryPoint\Api\ChangePasswordController
-    methods: PATCH|OPTIONS
+    methods: PATCH
