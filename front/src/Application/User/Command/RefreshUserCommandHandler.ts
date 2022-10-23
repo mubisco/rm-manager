@@ -3,8 +3,9 @@ import { InvalidRefreshTokenError } from '@/Domain/User/InvalidRefreshTokenError
 import { RefreshUserCommand } from '@/Application/User/Command/RefreshUserCommand'
 import { UserClient } from '@/Domain/User/UserClient'
 import { UserRepository } from '@/Domain/User/UserRepository'
+import { UserHandler } from '@/Application/User/UserHandler'
 
-export class RefreshUserCommandHandler {
+export class RefreshUserCommandHandler implements UserHandler<RefreshUserCommand, Promise<LoggedUserDto>> {
   private userClient: UserClient
   private userRepository: UserRepository
 

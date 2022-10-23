@@ -1,8 +1,9 @@
 import { UserClient } from '@/Domain/User/UserClient'
 import { Username } from '@/Domain/User/Username'
+import { UserHandler } from '@/Application/User/UserHandler'
 import { ResetPasswordCommand } from '@/Application/User/Command/ResetPasswordCommand'
 
-export class ResetPasswordCommandHandler {
+export class ResetPasswordCommandHandler implements UserHandler<ResetPasswordCommand, Promise<boolean>> {
   private client: UserClient
 
   constructor (client: UserClient) {

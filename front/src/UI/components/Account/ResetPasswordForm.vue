@@ -2,22 +2,23 @@
 import { ref, computed } from 'vue'
 import router from '@/UI/router/index'
 import { useI18n } from 'vue-i18n'
-import { ResetPasswordCommandHandler } from '@/Application/User/Command/ResetPasswordCommandHandler'
 import { ResetPasswordCommand } from '@/Application/User/Command/ResetPasswordCommand'
-import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
 import { UserNotFoundError } from '@/Domain/User/UserNotFoundError'
 import LoadingButton from '@/UI/components/Shared/LoadingButton.vue'
 import { useSnackbarStore } from '@/UI/stores/snackbar'
+import { UserHandlerProvider } from '@/Application/User/UserHandlerProvider'
+import { UserHandlerItems } from '@/Application/User/UserHandlerItems'
 
 const snackbarStore = useSnackbarStore()
 const { t } = useI18n()
 const username = ref('')
 const loading = ref(false)
 const buttonEnabled = computed(() => username.value !== '' && username.value.length > 3)
+const userHandlerProvider = new UserHandlerProvider()
 
 const onRecoverButtonClicked = async () => {
   loading.value = true
-  const handler = new ResetPasswordCommandHandler(new AxiosUserClient())
+  const handler = userHandlerProvider.provide(UserHandlerItems.RESET_PASSWORD_COMMAND)
   const command = new ResetPasswordCommand(username.value)
   try {
     await handler.handle(command)

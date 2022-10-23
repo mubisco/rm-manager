@@ -2,25 +2,24 @@
 import { ref, onMounted } from 'vue'
 import router from '@/UI/router/index'
 import { useRoute } from 'vue-router'
-import { AxiosPasswordTokenClient } from '@/Infrastructure/User/Client/AxiosPasswordTokenClient'
 import { CheckResetPasswordTokenQuery } from '@/Application/User/Query/CheckResetPasswordTokenQuery'
-import { CheckResetPasswordTokenQueryHandler } from '@/Application/User/Query/CheckResetPasswordTokenQueryHandler'
 import ChangePasswordForm from '@/UI/components/Account/ChangePasswordForm.vue'
-import { ChangePasswordCommandHandler } from '@/Application/User/Command/ChangePasswordCommandHandler'
-import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
 import { ChangePasswordCommand } from '@/Application/User/Command/ChangePasswordCommand'
 import { useSnackbarStore } from '@/UI/stores/snackbar'
 import { useI18n } from 'vue-i18n'
+import { UserHandlerProvider } from '@/Application/User/UserHandlerProvider'
+import { UserHandlerItems } from '@/Application/User/UserHandlerItems'
 
 const snackbarStore = useSnackbarStore()
 const { t } = useI18n()
 const route = useRoute()
 const loading = ref(true)
 const sendingPassword = ref(false)
+const handlerProvider = new UserHandlerProvider()
 
 onMounted(async () => {
   const query = new CheckResetPasswordTokenQuery(route.params.token as string)
-  const queryHandler = new CheckResetPasswordTokenQueryHandler(new AxiosPasswordTokenClient())
+  const queryHandler = handlerProvider.provide(UserHandlerItems.CHECK_RESET_PASSWORD_TOKEN_QUERY)
   const response = await queryHandler.handle(query)
   if (response === 'NOT_FOUND') {
     snackbarStore.addMessage(t('token.error'), 'error')
@@ -32,7 +31,7 @@ onMounted(async () => {
 
 const onSendPasswordButtonClicked = async (newPassword: string):Promise<void> => {
   sendingPassword.value = true
-  const commandHandler = new ChangePasswordCommandHandler(new AxiosUserClient())
+  const commandHandler = handlerProvider.provide(UserHandlerItems.CHANGE_PASSWORD_COMMAND)
   const command = new ChangePasswordCommand(route.params.token as string, newPassword)
   try {
     await commandHandler.handle(command)

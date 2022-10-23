@@ -41,7 +41,7 @@ describe('GIVEN a login page', () => {
   })
   context('WHEN I click login button', () => {
     before(() => {
-      cy.intercept('POST', routes.back + '/api/login', { delay: 500 }).as('loginRoute')
+      cy.intercept('POST', routes.back + '/api/login', { delay: 1000 }).as('loginRoute')
       cy.get('[data-cy="login-button"]').click()
     })
     it('THEN should show loading icon', () => {

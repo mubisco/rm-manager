@@ -1,9 +1,10 @@
 import { InvalidTokenError } from '@/Domain/User/InvalidTokenError'
 import { UserClient } from '@/Domain/User/UserClient'
 import { Userpassword } from '@/Domain/User/Userpassword'
+import { UserHandler } from '../UserHandler'
 import { ChangePasswordCommand } from './ChangePasswordCommand'
 
-export class ChangePasswordCommandHandler {
+export class ChangePasswordCommandHandler implements UserHandler<ChangePasswordCommand, Promise<void>> {
   private _userClient: UserClient
 
   constructor (userClient: UserClient) {

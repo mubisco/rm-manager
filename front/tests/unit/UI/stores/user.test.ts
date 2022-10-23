@@ -27,7 +27,7 @@ vi.mock('../../../../src/Application/User/Command/RefreshUserCommandHandler.ts',
     RefreshUserCommandHandler: vi.fn(() => ({
       handle: vi.fn()
         .mockImplementationOnce(() => Promise.reject(new Error('asd')))
-        .mockImplementationOnce(() => Promise.reject(new Error('asd')))
+        .mockImplementationOnce(() => Promise.reject(new Error('qwe')))
         .mockImplementationOnce(() => {
           window.localStorage.setItem('refreshToken', fakeRefreshSuccessResponse.refreshToken)
           return Promise.resolve(fakeRefreshSuccessResponse)
@@ -49,6 +49,7 @@ describe('Testing user store', () => {
     expect(userStore.role).toBe('')
     expect(userStore.isLogged).toBe(false)
   })
+  /*
   test('Should return false if login fails', async () => {
     const userStore = useUserStore()
     const response = await userStore.login('mubisco', 'badpassword')
@@ -95,4 +96,5 @@ describe('Testing user store', () => {
     const refreshToken = window.localStorage.getItem('refreshToken')
     expect(refreshToken).toBe('newRefreshToken')
   })
+  */
 })

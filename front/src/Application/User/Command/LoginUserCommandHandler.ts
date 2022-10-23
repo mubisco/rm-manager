@@ -4,8 +4,9 @@ import { Username } from '@/Domain/User/Username'
 import { Userpassword } from '@/Domain/User/Userpassword'
 import { UserClient } from '@/Domain/User/UserClient'
 import { UserRepository } from '@/Domain/User/UserRepository'
+import { UserHandler } from '@/Application/User/UserHandler'
 
-export class LoginUserCommandHandler {
+export class LoginUserCommandHandler implements UserHandler<LoginUserCommand, Promise<LoggedUserDto>> {
   private userClient: UserClient
   private userRepository: UserRepository
 

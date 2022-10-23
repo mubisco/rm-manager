@@ -1,18 +1,11 @@
 import { LoginUserCommand } from '@/Application/User/Command/LoginUserCommand'
-import { LoginUserCommandHandler } from '@/Application/User/Command/LoginUserCommandHandler'
 import { LogoutUserCommand } from '@/Application/User/Command/LogoutUserCommand'
-import { LogoutUserCommandHandler } from '@/Application/User/Command/LogoutUserCommandHandler'
-import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
-import { StorageUserRepository } from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository'
-import { RefreshUserCommandHandler } from '@/Application/User/Command/RefreshUserCommandHandler'
 import { RefreshUserCommand } from '@/Application/User/Command/RefreshUserCommand'
+import { UserHandlerProvider } from '@/Application/User/UserHandlerProvider'
+import { UserHandlerItems } from '@/Application/User/UserHandlerItems'
 import { defineStore } from 'pinia'
 
-const axiosUserClient = new AxiosUserClient()
-const storageUserRepository = new StorageUserRepository()
-const loginUserCommandHandler = new LoginUserCommandHandler(axiosUserClient, storageUserRepository)
-const logoutUserCommandHandler = new LogoutUserCommandHandler(storageUserRepository)
-const refreshUserCommandHandler = new RefreshUserCommandHandler(axiosUserClient, storageUserRepository)
+const userHandlerProvider = new UserHandlerProvider()
 
 export const useUserStore = defineStore('users', {
   state: () => ({
@@ -26,32 +19,37 @@ export const useUserStore = defineStore('users', {
   actions: {
     async login (username: string, password: string): Promise<boolean> {
       const command = new LoginUserCommand(username, password)
+      const handler = userHandlerProvider.provide(UserHandlerItems.LOGIN_USER_COMMAND)
       try {
-        const response = await loginUserCommandHandler.handle(command)
+        const response = await handler.handle(command)
         this.username = response.username
         this.token = response.token
         this.role = response.role
         return true
       } catch (e) {
+        console.log('login', e)
         this.$reset()
         return false
       }
     },
     async logout (): Promise<void> {
       const command = new LogoutUserCommand()
-      logoutUserCommandHandler.handle(command)
+      const handler = userHandlerProvider.provide(UserHandlerItems.LOGOUT_USER_COMMAND)
+      await handler.handle(command)
       this.$reset()
     },
     async refresh (): Promise<boolean> {
       const refreshToken = window.localStorage.getItem('refreshToken')
       const command = new RefreshUserCommand(refreshToken ?? '')
       try {
-        const response = await refreshUserCommandHandler.handle(command)
+        const handler = userHandlerProvider.provide(UserHandlerItems.REFRESH_USER_COMMAND)
+        const response = await handler.handle(command)
         this.username = response.username
         this.token = response.token
         this.role = response.role
         return true
-      } catch {
+      } catch (e) {
+        console.log('refresh', e)
         window.localStorage.removeItem('refreshToken')
         this.$reset()
         return false
