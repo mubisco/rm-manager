@@ -37,7 +37,7 @@ class BcryptPasswordEncryptorTest extends TestCase
     public function itShouldThrowExceptionIfCannotEncryptPassword(): void
     {
         $this->expectException(PasswordEncryptorException::class);
-        $this->hasher->method('hash')->willThrowException(new InvalidPasswordException());
+        $this->hasher->method('hashPassword')->willThrowException(new InvalidPasswordException());
         $this->sut->encryptPassword(
             new DoctrineUser('ome@email.net', 'oneUsername', 'password', ['ROLE_USER'], null, null),
             new UserPassword('v3rySecret')
@@ -49,7 +49,7 @@ class BcryptPasswordEncryptorTest extends TestCase
      */
     public function itShouldEncryptPassword(): void
     {
-        $this->hasher->method('hash')->willReturn('hashedPassword');
+        $this->hasher->method('hashPassword')->willReturn('hashedPassword');
         $result = $this->sut->encryptPassword(
             new DoctrineUser('ome@email.net', 'oneUsername', 'password', ['ROLE_USER'], null, null),
             new UserPassword('v3rySecret')

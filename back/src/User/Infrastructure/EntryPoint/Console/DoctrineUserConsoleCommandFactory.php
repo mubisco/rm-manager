@@ -8,21 +8,31 @@ use App\User\Domain\User;
 use App\User\Domain\UserFactory;
 use App\User\Domain\UserFactoryException;
 use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class DoctrineUserConsoleCommandFactory implements UserFactory
 {
     private const ALLOWED_ROLES = ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_MASTER'];
+
+    public function __construct(private UserPasswordHasherInterface $hasher)
+    {
+    }
+
     public function make(array $data): User
     {
         $this->validateData($data);
-        return new DoctrineUser(
+        $rawPassword = (string) $data['password'];
+        $user = new DoctrineUser(
             (string) $data['mail'],
             (string) $data['name'],
-            (string) $data['password'],
+            $rawPassword,
             $this->parseRoles($data),
             null,
             null
         );
+        $hashedPassword = $this->hasher->hashPassword($user, $rawPassword);
+        $user->setPassword($hashedPassword);
+        return $user;
     }
 
     /**
