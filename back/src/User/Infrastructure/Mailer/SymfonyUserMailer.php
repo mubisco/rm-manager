@@ -17,7 +17,8 @@ use Symfony\Component\Mailer\MailerInterface;
 final class SymfonyUserMailer implements WelcomeUserMailer, PasswordTokenMailer
 {
     public function __construct(
-        private MailerInterface $mailer
+        private MailerInterface $mailer,
+        private string $frontBaseUrl
     ) {
     }
     public function sendWelcomeMail(Username $username, UserEmail $userEmail): bool
@@ -27,7 +28,7 @@ final class SymfonyUserMailer implements WelcomeUserMailer, PasswordTokenMailer
             ->to($userEmail->value())
             ->subject('Thanks for signing up')
             ->htmlTemplate('emails/signup.html.twig')
-            ->context(['username' => $username->value()]);
+            ->context(['username' => $username->value(), 'frontUrl' => $this->frontBaseUrl]);
         try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $e) {
@@ -43,7 +44,10 @@ final class SymfonyUserMailer implements WelcomeUserMailer, PasswordTokenMailer
             ->to($mailer)
             ->subject('Reset password requested')
             ->htmlTemplate('emails/reset.password.html.twig')
-            ->context(['username' => $username, 'token' => $token]);
+            ->context([
+                'username' => $username,
+                'tokenUrl' => $this->frontBaseUrl . '/reset-password/' . $token
+            ]);
         try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $e) {
