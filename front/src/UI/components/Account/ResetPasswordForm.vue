@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import router from '@/UI/router/index'
 import { useI18n } from 'vue-i18n'
 import { ResetPasswordCommandHandler } from '@/Application/Command/User/ResetPasswordCommandHandler'
 import { ResetPasswordCommand } from '@/Application/Command/User/ResetPasswordCommand'
 import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
 import { UserNotFoundError } from '@/Domain/User/UserNotFoundError'
 import LoadingButton from '@/UI/components/Shared/LoadingButton.vue'
-const { t } = useI18n()
+import { useSnackbarStore } from '@/UI/stores/snackbar'
 
+const snackbarStore = useSnackbarStore()
+const { t } = useI18n()
 const username = ref('')
-const snackbarBackground = ref('error')
-const showSnackbar = ref(false)
 const loading = ref(false)
-const snackbarError = ref('')
 const buttonEnabled = computed(() => username.value !== '' && username.value.length > 3)
 
 const onRecoverButtonClicked = async () => {
@@ -21,19 +21,17 @@ const onRecoverButtonClicked = async () => {
   const command = new ResetPasswordCommand(username.value)
   try {
     await handler.handle(command)
-    snackbarError.value = t('forgotPassword.resetOk')
-    snackbarBackground.value = 'success'
+    snackbarStore.addMessage(t('forgotPassword.resetOk'), 'success')
+    router.push({ name: 'Login' })
   } catch (err: unknown) {
     if (err instanceof UserNotFoundError) {
-      snackbarError.value = t('forgotPassword.notExists', { username: username.value })
-      snackbarBackground.value = 'error'
+      const message = t('forgotPassword.notExists', { username: username.value })
+      snackbarStore.addMessage(message, 'error')
       return
     }
-    snackbarError.value = t('forgotPassword.serverError')
-    snackbarBackground.value = 'error'
+    snackbarStore.addMessage(t('forgotPassword.serverError'), 'error')
   } finally {
     loading.value = false
-    showSnackbar.value = true
   }
 }
 </script>
@@ -69,14 +67,5 @@ const onRecoverButtonClicked = async () => {
         />
       </v-card-actions>
     </v-card>
-    <v-snackbar
-      v-model="showSnackbar"
-      timeout="30000"
-      :color="snackbarBackground"
-    >
-      <span v-cy:recover-password-snackbar>
-        {{ snackbarError }}
-      </span>
-    </v-snackbar>
   </div>
 </template>

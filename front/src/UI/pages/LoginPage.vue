@@ -1,20 +1,28 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import LoginForm from '@/UI/components/Account/LoginForm.vue'
 import router from '@/UI/router/index'
 import { useUserStore } from '@/UI/stores/user'
+import { useSnackbarStore } from '@/UI/stores/snackbar'
 
-const showLoginError = ref(false)
+const { t } = useI18n()
 const loading = ref(false)
 const userStore = useUserStore()
+const snackbarStore = useSnackbarStore()
 
 const onLoginButtonClicked = async (email: string, password: string):Promise<void> => {
   loading.value = true
   const loginResult = await userStore.login(email, password)
-  showLoginError.value = !loginResult
   loading.value = false
   if (loginResult === true) {
     router.push({ name: 'Dashboard' })
+  }
+  if (!loginResult) {
+    snackbarStore.addMessage(
+      t('login.error'),
+      'error'
+    )
   }
 }
 
@@ -33,16 +41,4 @@ onMounted(async () => {
       @login-button-clicked="onLoginButtonClicked"
     />
   </div>
-  <v-snackbar
-    v-model="showLoginError"
-    content-class="chamaquito"
-    timeout="3000"
-    color="error"
-  >
-    <span
-      v-cy:login-error
-    >
-      {{ $t('login.error') }}
-    </span>
-  </v-snackbar>
 </template>

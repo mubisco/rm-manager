@@ -23,10 +23,11 @@
     "title": "Cambiar contraseña",
     "newPassword": "Nueva contraseña",
     "confirmPassword": "Confirmar nueva contraseña",
+    "success": "Contraseña cambiada correctamente!",
+    "error": "Error cambiando constraseña. Por favor, inténtalo dentro de unos momentos.",
     "send": "Envíar"
   },
   "token": {
-    "error": "Error cargando el token, por favor intenta resetearlo de nuevo",
-    "success": "Contraseña cambiada correctamente!!!"
+    "error": "Error cargando el token, por favor intenta resetearlo de nuevo"
   }
 }

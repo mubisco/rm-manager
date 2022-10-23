@@ -9,10 +9,12 @@ import ChangePasswordForm from '@/UI/components/Account/ChangePasswordForm.vue'
 import { ChangePasswordCommandHandler } from '@/Application/Command/User/ChangePasswordCommandHandler'
 import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
 import { ChangePasswordCommand } from '@/Application/Command/User/ChangePasswordCommand'
+import { useSnackbarStore } from '@/UI/stores/snackbar'
+import { useI18n } from 'vue-i18n'
 
+const snackbarStore = useSnackbarStore()
+const { t } = useI18n()
 const route = useRoute()
-const showError = ref(false)
-const showSuccess = ref(false)
 const loading = ref(true)
 const sendingPassword = ref(false)
 
@@ -21,7 +23,7 @@ onMounted(async () => {
   const queryHandler = new CheckResetPasswordTokenQueryHandler(new AxiosPasswordTokenClient())
   const response = await queryHandler.handle(query)
   if (response === 'NOT_FOUND') {
-    showError.value = true
+    snackbarStore.addMessage(t('token.error'), 'error')
   }
   if (response === 'OK') {
     loading.value = false
@@ -35,11 +37,11 @@ const onSendPasswordButtonClicked = async (newPassword: string):Promise<void> =>
   try {
     await commandHandler.handle(command)
     sendingPassword.value = false
-    showSuccess.value = true
+    snackbarStore.addMessage(t('changePassword.success'), 'success')
     router.push({ name: 'Login' })
   } catch {
     loading.value = false
-    showError.value = true
+    snackbarStore.addMessage(t('changePassword.error'), 'error')
   }
 }
 
@@ -60,27 +62,5 @@ const onSendPasswordButtonClicked = async (newPassword: string):Promise<void> =>
       :loading="sendingPassword"
       @send-password-clicked="onSendPasswordButtonClicked"
     />
-    <v-snackbar
-      v-model="showError"
-      timeout="3000"
-      color="error"
-    >
-      <span
-        v-cy:token-error
-      >
-        {{ $t('token.error') }}
-      </span>
-    </v-snackbar>
-    <v-snackbar
-      v-model="showSuccess"
-      timeout="3000"
-      color="success"
-    >
-      <span
-        v-cy:token-success
-      >
-        {{ $t('token.success') }}
-      </span>
-    </v-snackbar>
   </div>
 </template>

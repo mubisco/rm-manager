@@ -23,10 +23,11 @@
     "title": "Change Password",
     "newPassword": "New Password",
     "confirmPassword": "Confirm New Password",
+    "success": "Password changed successfully",
+    "error": "Password could not be changed!!! Please try again in a while.",
     "send": "Send"
   },
   "token": {
-    "error": "Error loading token, please try to reset again",
-    "success": "Password changed successfully"
+    "error": "Error loading token, please try to reset again"
   }
 }

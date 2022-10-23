@@ -58,8 +58,8 @@ describe('GIVEN a recover password page', () => {
     it('THEN I should see an error message', () => {
       cy.get('[data-cy="recover-password-button"]').click()
       cy.wait('@recoverPasswordRoute').then(() => {
-        cy.get('[data-cy="recover-password-snackbar"]').should('exist')
-        cy.get('[data-cy="recover-password-snackbar"]').contains('Usuario')
+        cy.get('[data-cy="snackbar-message"]').should('exist')
+        cy.get('[data-cy="snackbar-message"]').contains('Usuario')
       })
     })
   })
@@ -77,8 +77,8 @@ describe('GIVEN a recover password page', () => {
     it('THEN I should see an error message', () => {
       cy.get('[data-cy="recover-password-button"]').click()
       cy.wait('@recoverPasswordRoute').then(() => {
-        cy.get('[data-cy="recover-password-snackbar"]').should('exist')
-        cy.get('[data-cy="recover-password-snackbar"]').contains('Error inesperado')
+        cy.get('[data-cy="snackbar-message"]').should('exist')
+        cy.get('[data-cy="snackbar-message"]').contains('Error inesperado')
       })
     })
   })
@@ -93,11 +93,12 @@ describe('GIVEN a recover password page', () => {
       }).as('recoverPasswordRoute')
       cy.get('[data-cy="recover-password-input"]').type('existantUser')
     })
-    it('THEN I should see a success message', () => {
+    it('THEN I should see a success message AND redirected to login page', () => {
       cy.get('[data-cy="recover-password-button"]').click()
       cy.wait('@recoverPasswordRoute').then(() => {
-        cy.get('[data-cy="recover-password-snackbar"]').should('exist')
-        cy.get('[data-cy="recover-password-snackbar"]').parent().parent().should('have.class', 'bg-success')
+        cy.get('[data-cy="snackbar-message"]').should('exist')
+        cy.get('[data-cy="snackbar-message"]').parent().parent().should('have.class', 'bg-success')
+        cy.location('pathname').should('match', /\/login/)
       })
     })
   })

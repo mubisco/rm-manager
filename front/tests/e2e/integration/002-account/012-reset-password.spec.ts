@@ -33,7 +33,7 @@ describe('GIVEN a non registered user', () => {
     it('THEN I should see a error message', () => {
       cy.visit(routes.front + '/reset-password/a-very-large-token')
       cy.wait('@checkTokenUrl').then(() => {
-        cy.get('[data-cy="token-error"]').should('exist')
+        cy.get('[data-cy="snackbar-message"]').should('exist')
       })
     })
   })
@@ -85,13 +85,13 @@ describe('GIVEN a non registered user', () => {
         fillPasswordProperly()
         cy.get('[data-cy="send-new-password"]').click()
         cy.wait('@changePasswordUrl').then(() => {
-          cy.get('[data-cy="token-error"]').should('exist')
+          cy.get('[data-cy="snackbar-message"]').should('exist')
         })
       })
     })
   })
   context('AND WHEN password is reset', () => {
-    it('THEN send button should be enabled', () => {
+    it('THEN I should see confirm message and redirected to login', () => {
       mockSuccessfulTokenCheck()
       cy.intercept('PATCH', routes.back + '/api/user/password/change', {
         delay: 500,
@@ -102,7 +102,7 @@ describe('GIVEN a non registered user', () => {
       cy.wait('@checkTokenUrl').then(() => {
         fillPasswordProperly()
         cy.get('[data-cy="send-new-password"]').click()
-        // cy.get('[data-cy="token-success"]').should('exist');
+        cy.get('[data-cy="snackbar-message"]').should('exist')
         cy.location('pathname').should('match', /\/login/)
       })
     })
