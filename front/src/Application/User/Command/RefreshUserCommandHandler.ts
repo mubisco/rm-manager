@@ -1,6 +1,6 @@
-import { LoggedUserDto } from '@/Application/Command/User/LoggedUserDto'
+import { LoggedUserDto } from '@/Application/User/Command/LoggedUserDto'
 import { InvalidRefreshTokenError } from '@/Domain/User/InvalidRefreshTokenError'
-import { RefreshUserCommand } from '@/Application/Command/User/RefreshUserCommand'
+import { RefreshUserCommand } from '@/Application/User/Command/RefreshUserCommand'
 import { UserClient } from '@/Domain/User/UserClient'
 import { UserRepository } from '@/Domain/User/UserRepository'
 

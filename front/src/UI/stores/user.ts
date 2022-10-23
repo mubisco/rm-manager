@@ -1,12 +1,12 @@
-import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand'
-import { LoginUserCommandHandler } from '@/Application/Command/User/LoginUserCommandHandler'
-import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand'
-import { LogoutUserCommandHandler } from '@/Application/Command/User/LogoutUserCommandHandler'
+import { LoginUserCommand } from '@/Application/User/Command/LoginUserCommand'
+import { LoginUserCommandHandler } from '@/Application/User/Command/LoginUserCommandHandler'
+import { LogoutUserCommand } from '@/Application/User/Command/LogoutUserCommand'
+import { LogoutUserCommandHandler } from '@/Application/User/Command/LogoutUserCommandHandler'
 import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
 import { StorageUserRepository } from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository'
-import { RefreshUserCommandHandler } from '@/Application/Command/User/RefreshUserCommandHandler'
+import { RefreshUserCommandHandler } from '@/Application/User/Command/RefreshUserCommandHandler'
+import { RefreshUserCommand } from '@/Application/User/Command/RefreshUserCommand'
 import { defineStore } from 'pinia'
-import { RefreshUserCommand } from '@/Application/Command/User/RefreshUserCommand'
 
 const axiosUserClient = new AxiosUserClient()
 const storageUserRepository = new StorageUserRepository()

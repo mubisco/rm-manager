@@ -1,5 +1,5 @@
-import { LoginUserCommand } from '@/Application/Command/User/LoginUserCommand'
-import { LoggedUserDto } from '@/Application/Command/User/LoggedUserDto'
+import { LoginUserCommand } from '@/Application/User/Command/LoginUserCommand'
+import { LoggedUserDto } from '@/Application/User/Command/LoggedUserDto'
 import { Username } from '@/Domain/User/Username'
 import { Userpassword } from '@/Domain/User/Userpassword'
 import { UserClient } from '@/Domain/User/UserClient'

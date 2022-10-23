@@ -1,4 +1,4 @@
-import { LogoutUserCommand } from '@/Application/Command/User/LogoutUserCommand'
+import { LogoutUserCommand } from '@/Application/User/Command/LogoutUserCommand'
 import { UserRepository } from '@/Domain/User/UserRepository'
 
 export class LogoutUserCommandHandler {

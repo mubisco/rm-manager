@@ -1,6 +1,6 @@
 import { UserClient } from '@/Domain/User/UserClient'
 import { Username } from '@/Domain/User/Username'
-import { ResetPasswordCommand } from '@/Application/Command/User/ResetPasswordCommand'
+import { ResetPasswordCommand } from '@/Application/User/Command/ResetPasswordCommand'
 
 export class ResetPasswordCommandHandler {
   private client: UserClient

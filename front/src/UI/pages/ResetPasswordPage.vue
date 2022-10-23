@@ -6,9 +6,9 @@ import { AxiosPasswordTokenClient } from '@/Infrastructure/User/Client/AxiosPass
 import { CheckResetPasswordTokenQuery } from '@/Application/User/Query/CheckResetPasswordTokenQuery'
 import { CheckResetPasswordTokenQueryHandler } from '@/Application/User/Query/CheckResetPasswordTokenQueryHandler'
 import ChangePasswordForm from '@/UI/components/Account/ChangePasswordForm.vue'
-import { ChangePasswordCommandHandler } from '@/Application/Command/User/ChangePasswordCommandHandler'
+import { ChangePasswordCommandHandler } from '@/Application/User/Command/ChangePasswordCommandHandler'
 import { AxiosUserClient } from '@/Infrastructure/User/Client/AxiosUserClient'
-import { ChangePasswordCommand } from '@/Application/Command/User/ChangePasswordCommand'
+import { ChangePasswordCommand } from '@/Application/User/Command/ChangePasswordCommand'
 import { useSnackbarStore } from '@/UI/stores/snackbar'
 import { useI18n } from 'vue-i18n'
 
