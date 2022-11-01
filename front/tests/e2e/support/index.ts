@@ -16,5 +16,17 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Custom command por login
+       */
+      customLogin(email: string, password: string): Chainable<Element>
+      adminLogin(): Chainable<Element>
+    }
+  }
+}
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
