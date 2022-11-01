@@ -31,6 +31,11 @@ rebuild-common rebuild-db rebuild-back rebuild-front:
 doco stop start status build-images rebuild-images shell-front shell-back shell-back-root:
 	$(DOCKER_COMPOSE) $(DOCKER_COMMAND)
 
+messenger-start:
+	@docker exec -i database bash -l -c "mysql ${dbStringConnection}" < .docker/mysql/clear-messenger-tables.sql
+	@$(DOCKER_COMPOSE) exec backend symfony console messenger:consume async -vv
+
+
 .PHONY: stats
 stats: ## - Check docker memory/cpu stats
 	@docker stats
