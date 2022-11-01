@@ -14,7 +14,10 @@ export const useUserStore = defineStore('users', {
     role: ''
   }),
   getters: {
-    isLogged: state => state.username !== '' && state.role !== ''
+    isLogged: state => state.username !== '' && state.role !== '',
+    userRole (state): string {
+      return this.isLogged ? state.role : ''
+    }
   },
   actions: {
     async login (username: string, password: string): Promise<boolean> {

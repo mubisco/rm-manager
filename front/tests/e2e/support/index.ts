@@ -24,6 +24,8 @@ declare global {
        */
       customLogin(email: string, password: string): Chainable<Element>
       adminLogin(): Chainable<Element>
+      masterLogin(): Chainable<Element>
+      playerLogin(): Chainable<Element>
     }
   }
 }
