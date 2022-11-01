@@ -4,7 +4,7 @@
 
 <template>
   <v-row>
-    <v-col sm="6">
+    <v-col md="6">
       <v-card
         title="My Characters"
       >
@@ -40,7 +40,7 @@
         </v-table>
       </v-card>
     </v-col>
-    <v-col sm="6">
+    <v-col md="6">
       <v-card
         title="My Games"
       >
