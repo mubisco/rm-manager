@@ -10,11 +10,13 @@ const { isLogged, onLogoutButtonClicked } = useLogout()
 <template>
   <v-app-bar
     app
-    color="primary"
+    theme="dark"
   >
     <template #prepend>
       <v-app-bar-nav-icon
         v-cy:left-drawer-button
+        icon="mdi-menu"
+        color="white"
         @click="() => $emit('drawer:toggle')"
       />
     </template>
@@ -25,12 +27,14 @@ const { isLogged, onLogoutButtonClicked } = useLogout()
       <v-btn
         v-if="!isLogged"
         v-cy:login-top-button
+        color="white"
         icon="mdi-account"
       />
       <v-btn
         v-if="isLogged"
         v-cy:logout-top-button
         icon="mdi-logout-variant"
+        color="white"
         @click="onLogoutButtonClicked"
       />
     </template>

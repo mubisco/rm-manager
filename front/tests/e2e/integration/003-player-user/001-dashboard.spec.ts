@@ -12,5 +12,8 @@ describe('GIVEN a player dashboard', () => {
     it('THEN I should see my character list', () => {
       cy.get('[data-cy="mypc-table"]').should('exist')
     })
+    it('AND THEN I should see my games list', () => {
+      cy.get('[data-cy="mygames-table"]').should('exist')
+    })
   })
 })
