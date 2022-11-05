@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// code...
 </script>
 
 <template>
@@ -15,6 +14,7 @@
           <th>Creation date</th>
           <th>Last update</th>
           <th>Status</th>
+          <th />
         </tr>
       </thead>
       <tbody>
@@ -25,6 +25,15 @@
           <td>01-21-2021</td>
           <td>01-21-2021</td>
           <td>Free</td>
+          <td>
+            <v-btn
+              v-cy:character-details-btn
+              icon="mdi-eye"
+              size="sm"
+              variant="text"
+              :to="{ name: 'Character', params: { characterId: 'e77590e9-96f4-434d-9071-afe87c290329' }}"
+            />
+          </td>
         </tr>
         <tr>
           <td>Chindasvinto II</td>
@@ -33,6 +42,13 @@
           <td>01-21-2021</td>
           <td>01-21-2021</td>
           <td>In a game</td>
+          <td>
+            <v-btn
+              icon="mdi-eye"
+              size="sm"
+              variant="text"
+            />
+          </td>
         </tr>
       </tbody>
     </v-table>

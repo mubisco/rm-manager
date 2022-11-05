@@ -5,6 +5,7 @@ import ResetPasswordPage from '@/UI/pages/ResetPasswordPage.vue'
 import PageNotFound from '@/UI/pages/NotFound.vue'
 import ForgotPasswordPage from '@/UI/pages/ForgotPasswordPage.vue'
 import DashboardPage from '@/UI/pages/DashboardPage.vue'
+import CharacterPage from '@/UI/pages/CharacterPage.vue'
 import pinia from '@/UI/stores/store'
 import { useUserStore } from '@/UI/stores/user'
 
@@ -39,6 +40,12 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: DashboardPage,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/character/:characterId',
+    name: 'Character',
+    component: CharacterPage,
     meta: { requiresAuth: true }
   },
   {
