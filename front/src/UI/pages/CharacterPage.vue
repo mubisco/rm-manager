@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import SummaryTab from '@/UI/components/Character/SummaryTab.vue'
+import SkillsTab from '@/UI/components/Character/SkillsTab.vue'
+import InventoryTab from '@/UI/components/Character/InventoryTab.vue'
+import NotesTab from '@/UI/components/Character/NotesTab.vue'
+import CombatTab from '@/UI/components/Character/CombatTab.vue'
+const characterTabs = ref(['summary', 'skills', 'inventory', 'notes', 'combat'])
 const tab = ref('one')
 </script>
 
@@ -8,31 +14,33 @@ const tab = ref('one')
     <v-tabs
       v-model="tab"
       v-cy:character-tab-menu
-      bg-color="primary"
     >
-      <v-tab value="one">
-        Item One
-      </v-tab>
-      <v-tab value="two">
-        Item Two
-      </v-tab>
-      <v-tab value="three">
-        Item Three
+      <v-tab
+        v-for="(tag, index) in characterTabs"
+        :key="index"
+        v-cy:character-tab-option
+        :value="tag"
+      >
+        {{ $t('character.tabs.' + tag) }}
       </v-tab>
     </v-tabs>
 
     <v-card-text>
       <v-window v-model="tab">
-        <v-window-item value="one">
-          One
+        <v-window-item value="summary">
+          <SummaryTab />
         </v-window-item>
-
-        <v-window-item value="two">
-          Two
+        <v-window-item value="skills">
+          <SkillsTab />
         </v-window-item>
-
-        <v-window-item value="three">
-          Three
+        <v-window-item value="inventory">
+          <InventoryTab />
+        </v-window-item>
+        <v-window-item value="notes">
+          <NotesTab />
+        </v-window-item>
+        <v-window-item value="combat">
+          <CombatTab />
         </v-window-item>
       </v-window>
     </v-card-text>

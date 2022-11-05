@@ -29,5 +29,14 @@
   },
   "token": {
     "error": "Error loading token, please try to reset again"
+  },
+  "character": {
+    "tabs": {
+      "summary": "Summary",
+      "skills": "Skills",
+      "inventory": "Inventory",
+      "notes": "Notes",
+      "combat": "Combat"
+    }
   }
 }

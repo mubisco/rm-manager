@@ -20,8 +20,9 @@ describe('GIVEN a player dashboard', () => {
     it('THEN I should go to character main page', () => {
       cy.location('pathname').should('match', /\/character/)
     })
-    it('AND THEN I should see character tab menu', () => {
+    it('AND THEN I should see character tab menu with five items', () => {
       cy.get('[data-cy="character-tab-menu"]').should('exist')
+      cy.get('[data-cy="character-tab-option"]').should('have.length', 5)
     })
   })
 })
