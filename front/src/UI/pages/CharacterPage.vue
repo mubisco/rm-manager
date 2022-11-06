@@ -10,6 +10,20 @@ const tab = ref('one')
 </script>
 
 <template>
+  <v-card
+    class="mb-2"
+  >
+    <template #title>
+      <div class="d-flex justify-space-between">
+        Samthilasian "Sam"
+        <v-chip
+          color="primary"
+        >
+          In Game
+        </v-chip>
+      </div>
+    </template>
+  </v-card>
   <v-card>
     <v-tabs
       v-model="tab"
