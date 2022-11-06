@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BasicInfo from '@/UI/components/Character/Sections/BasicInfo.vue'
+import StatsTable from '@/UI/components/Character/Sections/StatsTable.vue'
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import BasicInfo from '@/UI/components/Character/Sections/BasicInfo.vue'
         <BasicInfo />
       </v-col>
       <v-col cols="4">
+        <StatsTable />
       </v-col>
       <v-col cols="4">
       </v-col>

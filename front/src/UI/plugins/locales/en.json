@@ -37,6 +37,28 @@
       "inventory": "Inventory",
       "notes": "Notes",
       "combat": "Combat"
+    },
+    "sections": {
+      "stats": {
+        "title": "Características",
+        "stat": "Característica",
+        "value": "Valor",
+        "bonus": "Bono",
+        "racial": "Racial",
+        "special": "Especial",
+        "total": "Total",
+        "points": "PD"
+      }
+    },
+    "stats": {
+      "ST": "Fuerza",
+      "CO": "Constitución",
+      "AG": "Agilidad",
+      "QU": "Rapidez",
+      "SD": "Autodisciplina",
+      "RE": "Razonamiento",
+      "IN": "Intuición",
+      "PR": "Presencia"
     }
   }
 }

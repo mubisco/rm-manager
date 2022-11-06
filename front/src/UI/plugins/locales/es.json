@@ -37,6 +37,28 @@
       "inventory": "Inventario",
       "notes": "Notas",
       "combat": "Combate"
+    },
+    "sections": {
+      "stats": {
+        "title": "Stats",
+        "stat": "Stat",
+        "value": "Value",
+        "bonus": "Bonus",
+        "racial": "Racial",
+        "special": "Special",
+        "total": "Total",
+        "points": "PD"
+      }
+    },
+    "stats": {
+      "ST": "Strenght",
+      "CO": "Constitution",
+      "AG": "Agility",
+      "QU": "Quickness",
+      "SD": "Self Discipline",
+      "RE": "Reasoning",
+      "IN": "Insight",
+      "PR": "Presence"
     }
   }
 }
