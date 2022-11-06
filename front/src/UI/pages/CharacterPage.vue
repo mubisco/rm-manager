@@ -5,20 +5,25 @@ import SkillsTab from '@/UI/components/Character/SkillsTab.vue'
 import InventoryTab from '@/UI/components/Character/InventoryTab.vue'
 import NotesTab from '@/UI/components/Character/NotesTab.vue'
 import CombatTab from '@/UI/components/Character/CombatTab.vue'
-const characterTabs = ref(['summary', 'skills', 'inventory', 'notes', 'combat'])
+const characterTabs = ref([
+  { tag: 'summary', icon: 'mdi-chart-box' },
+  { tag: 'skills', icon: 'mdi-dice-d10' },
+  { tag: 'inventory', icon: 'mdi-bag-personal' },
+  { tag: 'notes', icon: 'mdi-note-edit' },
+  { tag: 'combat', icon: 'mdi-sword-cross' }
+])
 const tab = ref('one')
 </script>
 
 <template>
   <v-card
+    color="primary"
     class="mb-2"
   >
     <template #title>
       <div class="d-flex justify-space-between">
         Samthilasian "Sam"
-        <v-chip
-          color="primary"
-        >
+        <v-chip>
           In Game
         </v-chip>
       </div>
@@ -30,12 +35,15 @@ const tab = ref('one')
       v-cy:character-tab-menu
     >
       <v-tab
-        v-for="(tag, index) in characterTabs"
+        v-for="(characterTab, index) in characterTabs"
         :key="index"
         v-cy:character-tab-option
-        :value="tag"
+        :value="characterTab.tag"
       >
-        {{ $t('character.tabs.' + tag) }}
+        <v-icon class="mr-1">
+          {{ characterTab.icon }}
+        </v-icon>
+        {{ $t('character.tabs.' + characterTab.tag) }}
       </v-tab>
     </v-tabs>
 
