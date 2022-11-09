@@ -39,26 +39,37 @@
       "combat": "Combate"
     },
     "sections": {
+      "resistances": {
+        "title": "Tiradas de Resistencia",
+        "headings": {
+          "stamina": "Aguante",
+          "will": "Voluntad",
+          "magic": "Magia"
+        }
+      },
+      "talents": {
+        "title": "Capacidades profesionales & Talentos"
+      },
       "stats": {
-        "title": "Stats",
-        "stat": "Stat",
-        "value": "Value",
-        "bonus": "Bonus",
+        "title": "Características",
+        "stat": "Característica",
+        "value": "Valor",
+        "bonus": "Bono",
         "racial": "Racial",
-        "special": "Special",
+        "special": "Especial",
         "total": "Total",
         "points": "PD"
       }
     },
     "stats": {
-      "ST": "Strenght",
-      "CO": "Constitution",
-      "AG": "Agility",
-      "QU": "Quickness",
-      "SD": "Self Discipline",
-      "RE": "Reasoning",
-      "IN": "Insight",
-      "PR": "Presence"
+      "ST": "Fuerza",
+      "CO": "Constitución",
+      "AG": "Agilidad",
+      "QU": "Rapidez",
+      "SD": "Autodisciplina",
+      "RE": "Razonamiento",
+      "IN": "Intuición",
+      "PR": "Presencia"
     }
   }
 }

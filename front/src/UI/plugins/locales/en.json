@@ -39,26 +39,37 @@
       "combat": "Combat"
     },
     "sections": {
+      "resistances": {
+        "title": "Resistance Rolls",
+        "headings": {
+          "stamina": "Stamina",
+          "will": "Will",
+          "magic": "Magic"
+        }
+      },
+      "talents": {
+        "title": "Profesional Abilities & Talents"
+      },
       "stats": {
-        "title": "Características",
-        "stat": "Característica",
-        "value": "Valor",
-        "bonus": "Bono",
+        "title": "Stats",
+        "stat": "Stat",
+        "value": "Value",
+        "bonus": "Bonus",
         "racial": "Racial",
-        "special": "Especial",
+        "special": "Special",
         "total": "Total",
         "points": "PD"
       }
     },
     "stats": {
-      "ST": "Fuerza",
-      "CO": "Constitución",
-      "AG": "Agilidad",
-      "QU": "Rapidez",
-      "SD": "Autodisciplina",
-      "RE": "Razonamiento",
-      "IN": "Intuición",
-      "PR": "Presencia"
+      "ST": "Strenght",
+      "CO": "Constitution",
+      "AG": "Agility",
+      "QU": "Quickness",
+      "SD": "Self Discipline",
+      "RE": "Reasoning",
+      "IN": "Insight",
+      "PR": "Presence"
     }
   }
 }

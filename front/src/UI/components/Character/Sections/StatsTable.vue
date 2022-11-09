@@ -15,7 +15,7 @@ const statsValues = ref([
 ])
 
 const parseValue = (value: number): string => {
-  return value > 0 ? value : ''
+  return value > 0 ? value + '' : ''
 }
 
 const parseStatCode = (statCode: string): string => {
