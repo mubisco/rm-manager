@@ -8,7 +8,7 @@ const skillList = ref({
       { name: 'acting', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 },
       { name: 'dancing', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 },
       { name: 'mimicry', cost: 2, ranks: 0, statBonus: 30, specialBonus: 0 },
-      { name: 'play instrument()', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 }
+      { name: 'play instrument', subskill: 'Flute', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 }
     ],
     athletic: [
       { name: 'acrobatics', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 },
@@ -23,7 +23,7 @@ const skillList = ref({
     ],
     mystical: [
     ],
-    outdor: [
+    outdoor: [
     ],
     physical: [
     ],

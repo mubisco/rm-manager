@@ -1,5 +1,6 @@
 export interface Skill {
   name: string;
+  subskill?: string;
   cost: number;
   ranks: number;
   statBonus: number;

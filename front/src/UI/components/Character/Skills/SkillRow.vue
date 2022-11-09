@@ -16,12 +16,20 @@ const rankBonus = computed((): number => {
 const total = computed((): number => {
   return rankBonus.value + props.skill.statBonus + props.skill.specialBonus
 })
+
+const skillName = computed((): string => {
+  let name = ''
+  if (props.skill.subskill) {
+    name += ' (' + props.skill.subskill + ')'
+  }
+  return props.skill.name + name
+})
 </script>
 
 <template>
   <tr>
     <td>
-      {{ skill.name }}
+      {{ skillName }}
     </td>
     <td class="text-right">
       {{ skill.cost }}
