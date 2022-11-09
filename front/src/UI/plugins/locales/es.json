@@ -39,6 +39,15 @@
       "combat": "Combate"
     },
     "sections": {
+      "initiative": {
+        "title": "Iniciativa",
+        "headings": {
+          "stat": "Carac (Rp/Pe)",
+          "racial": "Raza",
+          "other": "Otro",
+          "total": "Total"
+        }
+      },
       "resistances": {
         "title": "Tiradas de Resistencia",
         "headings": {

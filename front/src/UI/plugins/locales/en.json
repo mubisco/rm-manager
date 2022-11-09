@@ -39,6 +39,15 @@
       "combat": "Combat"
     },
     "sections": {
+      "initiative": {
+        "title": "Inititative",
+        "headings": {
+          "stat": "Stat (Qu/In)",
+          "racial": "Raza",
+          "other": "Other",
+          "total": "Total"
+        }
+      },
       "resistances": {
         "title": "Resistance Rolls",
         "headings": {
