@@ -39,6 +39,19 @@
       "combat": "Combate"
     },
     "sections": {
+      "defense": {
+        "title": "Bonificación Defensiva",
+        "headings": {
+          "armor": "Armadura",
+          "bd": "BD",
+          "quickness": "Rp Bonus",
+          "magic": "Magia",
+          "chiDefense": "Def. Chi",
+          "shield": "Escudo",
+          "other": "Otros",
+          "total": "Total"
+        }
+      },
       "initiative": {
         "title": "Iniciativa",
         "headings": {

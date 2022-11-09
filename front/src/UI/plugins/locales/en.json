@@ -39,6 +39,19 @@
       "combat": "Combat"
     },
     "sections": {
+      "defense": {
+        "title": "Defensive Bonus",
+        "headings": {
+          "armor": "Armor",
+          "bd": "DB",
+          "quickness": "Qu Bonus",
+          "magic": "Mafic",
+          "chiDefense": "Chi Def.",
+          "shield": "Shield",
+          "other": "Other",
+          "total": "Total"
+        }
+      },
       "initiative": {
         "title": "Inititative",
         "headings": {
