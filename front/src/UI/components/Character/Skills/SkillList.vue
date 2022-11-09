@@ -14,28 +14,21 @@ watch(() => props.skills, (newSkills: SkillSet) => {
 </script>
 
 <template>
-  <v-card
-    flat
-    border
+  <v-expansion-panels
+    v-model="panelModel"
+    variant="accordion"
+    multiple
   >
-    <v-card-text>
-      <v-expansion-panels
-        v-model="panelModel"
-        variant="accordion"
-        multiple
-      >
-        <v-expansion-panel
-          v-for="(categorySkills, key) in skills"
-          :key="key"
-          :value="key"
-          :title="$t('character.skills.categories.' + key)"
-          :category="key + ''"
-        >
-          <v-expansion-panel-text>
-            <SkillTable :skills="categorySkills" />
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-      </v-expansion-panels>
-    </v-card-text>
-  </v-card>
+    <v-expansion-panel
+      v-for="(categorySkills, key) in skills"
+      :key="key"
+      :value="key"
+      :title="$t('character.skills.categories.' + key)"
+      :category="key + ''"
+    >
+      <v-expansion-panel-text>
+        <SkillTable :skills="categorySkills" />
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+  </v-expansion-panels>
 </template>
