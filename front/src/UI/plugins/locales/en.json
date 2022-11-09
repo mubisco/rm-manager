@@ -52,6 +52,10 @@
           "total": "Total"
         }
       },
+      "points": {
+        "hp": "Endurance Points",
+        "pp": "Power Points"
+      },
       "initiative": {
         "title": "Inititative",
         "headings": {

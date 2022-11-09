@@ -5,6 +5,7 @@ import ResistancesTable from '@/UI/components/Character/Sections/ResistancesTabl
 import TalentList from '@/UI/components/Character/Sections/TalentList.vue'
 import InitiativeSummary from '@/UI/components/Character/Sections/InitiativeSummary.vue'
 import DefensiveSummary from '@/UI/components/Character/Sections/DefensiveSummary.vue'
+import PointsStatus from '@/UI/components/Character/Sections/PointsStatus.vue'
 </script>
 
 <template>
@@ -33,6 +34,7 @@ import DefensiveSummary from '@/UI/components/Character/Sections/DefensiveSummar
         <DefensiveSummary />
       </v-col>
       <v-col cols="4">
+        <PointsStatus />
       </v-col>
       <v-col cols="4">
       </v-col>
