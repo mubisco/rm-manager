@@ -22,6 +22,12 @@ const skillSet = ref({
     { code: 'mimicry', name: 'Mímica', cost: 2, ranks: 0, statBonus: 30, specialBonus: 0 },
     { code: 'play_instrument', name: 'Tocar Instrumento', subskill: 'Flute', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 }
   ],
+  concentration: [
+    { code: 'acting', name: 'Actuar', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 },
+    { code: 'dancing', name: 'Bailar', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 },
+    { code: 'mimicry', name: 'Mímica', cost: 2, ranks: 0, statBonus: 30, specialBonus: 0 },
+    { code: 'play_instrument', name: 'Tocar Instrumento', subskill: 'Flute', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 }
+  ],
   general: [
     { code: 'acting', name: 'Actuar', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 },
     { code: 'dancing', name: 'Bailar', cost: 2, ranks: 3, statBonus: 30, specialBonus: 0 },
@@ -79,11 +85,11 @@ const extractSkillset = (categories: string[]): SkillSet => {
 }
 
 const firstColumnSkills = computed((): SkillSet => {
-  const selectedCategories = categories.value.slice(0, categories.value.length / 2)
+  const selectedCategories = categories.value.slice(0, Math.ceil(categories.value.length / 2))
   return extractSkillset(selectedCategories)
 })
 const secondColumnSkills = computed((): SkillSet => {
-  const selectedCategories = categories.value.slice(categories.value.length / 2)
+  const selectedCategories = categories.value.slice(Math.ceil(categories.value.length / 2))
   return extractSkillset(selectedCategories)
 })
 </script>

@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { SkillSet } from './SkillSet'
-import CategorySkillList from './CategorySkillList.vue'
-import { defineProps } from 'vue'
+import SkillTable from '@/UI/components/Character/Skills/SkillTable.vue'
+import { ref, defineProps, watch } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   skills: SkillSet
 }>()
+const panelModel = ref(Object.keys(props.skills))
+
+watch(() => props.skills, (newSkills: SkillSet) => {
+  panelModel.value = Object.keys(newSkills)
+})
 </script>
 
 <template>
@@ -15,14 +20,21 @@ defineProps<{
   >
     <v-card-text>
       <v-expansion-panels
+        v-model="panelModel"
         variant="accordion"
+        multiple
       >
-        <CategorySkillList
+        <v-expansion-panel
           v-for="(categorySkills, key) in skills"
           :key="key"
-          :category="key"
-          :skills="categorySkills"
-        />
+          :value="key"
+          :title="$t('character.skills.categories.' + key)"
+          :category="key + ''"
+        >
+          <v-expansion-panel-text>
+            <SkillTable :skills="categorySkills" />
+          </v-expansion-panel-text>
+        </v-expansion-panel>
       </v-expansion-panels>
     </v-card-text>
   </v-card>

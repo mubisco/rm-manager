@@ -102,6 +102,21 @@
         "points": "PD"
       }
     },
+    "skills": {
+      "categories": {
+        "artistic": "Artistic",
+        "athletic": "Athletic",
+        "combat": "Combat",
+        "concentration": "Concentration",
+        "general": "General",
+        "influence": "Influence",
+        "mystical": "Mystical",
+        "outdoor": "Outdorr",
+        "physical": "Physical",
+        "subterfuge": "Subterfuge",
+        "spells": "Spells"
+      }
+    },
     "stats": {
       "ST": "Strenght",
       "CO": "Constitution",
