@@ -1,4 +1,5 @@
 export interface Skill {
+  code: string;
   name: string;
   subskill?: string;
   cost: number;
