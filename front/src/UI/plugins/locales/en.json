@@ -56,6 +56,13 @@
         "hp": "Endurance Points",
         "pp": "Power Points"
       },
+      "languages": {
+        "headings": {
+          "languages": "Languages",
+          "written": "W",
+          "spoken": "S"
+        }
+      },
       "initiative": {
         "title": "Inititative",
         "headings": {
@@ -64,6 +71,14 @@
           "other": "Other",
           "total": "Total"
         }
+      },
+      "pace": {
+        "title": "Max Pace",
+        "walk": "Walk",
+        "run": "Run",
+        "fastRun": "Fast Run",
+        "sprint": "Sprint",
+        "dash": "Dash"
       },
       "resistances": {
         "title": "Resistance Rolls",

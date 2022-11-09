@@ -6,6 +6,8 @@ import TalentList from '@/UI/components/Character/Sections/TalentList.vue'
 import InitiativeSummary from '@/UI/components/Character/Sections/InitiativeSummary.vue'
 import DefensiveSummary from '@/UI/components/Character/Sections/DefensiveSummary.vue'
 import PointsStatus from '@/UI/components/Character/Sections/PointsStatus.vue'
+import LanguagesTable from '@/UI/components/Character/Sections/LanguagesTable.vue'
+import PaceTable from '@/UI/components/Character/Sections/PaceTable.vue'
 </script>
 
 <template>
@@ -36,7 +38,11 @@ import PointsStatus from '@/UI/components/Character/Sections/PointsStatus.vue'
       <v-col cols="4">
         <PointsStatus />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="2">
+        <PaceTable />
+      </v-col>
+      <v-col cols="2">
+        <LanguagesTable />
       </v-col>
     </v-row>
   </v-container>

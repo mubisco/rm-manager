@@ -56,6 +56,13 @@
         "hp": "Puntos de Fortaleza",
         "pp": "Puntos de Poder"
       },
+      "languages": {
+        "headings": {
+          "languages": "Idiomas",
+          "written": "E",
+          "spoken": "H"
+        }
+      },
       "initiative": {
         "title": "Iniciativa",
         "headings": {
@@ -64,6 +71,14 @@
           "other": "Otro",
           "total": "Total"
         }
+      },
+      "pace": {
+        "title": "Paso Max",
+        "walk": "Caminar",
+        "run": "Correr",
+        "fastRun": "Correr rápido",
+        "sprint": "Esprintar",
+        "dash": "Arrancada"
       },
       "resistances": {
         "title": "Tiradas de Resistencia",
