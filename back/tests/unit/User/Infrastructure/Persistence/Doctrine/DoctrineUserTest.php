@@ -28,6 +28,8 @@ class DoctrineUserTest extends TestCase
     public function testShouldReturnProperValues()
     {
         $this->assertEquals($this->sut->user(), 'existinguser');
+        $this->assertEquals('existinguser', $this->sut->getUsername());
+        $this->assertEquals('existinguser', $this->sut->getUserIdentifier());
         $this->assertEquals($this->sut->passwordResetToken(), '');
         $this->assertEquals($this->sut->passwordResetTokenDate(), '');
         $this->assertTrue(Ulid::isValid($this->sut->userId()->value()));
