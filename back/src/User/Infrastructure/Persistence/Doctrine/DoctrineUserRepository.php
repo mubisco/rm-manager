@@ -14,7 +14,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -23,7 +22,6 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
 {
     public function __construct(
         private ManagerRegistry $registry,
-        private UserPasswordHasherInterface $userPasswordHasherInterface
     ) {
         parent::__construct($registry, DoctrineUser::class);
     }
@@ -52,6 +50,18 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
         }
     }
 
+    public function update(User $user): User
+    {
+        $this->_em->flush();
+        return $user;
+    }
+
+    public function store(User $user): User
+    {
+        $this->_em->persist($user);
+        return $user;
+    }
+
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
@@ -72,12 +82,6 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
         return $this->simpleSearch('username', $username->value());
     }
 
-    public function update(User $user): User
-    {
-        $this->_em->flush();
-        return $user;
-    }
-
     public function ofId(UserId $userId): User
     {
         return $this->simpleSearch('userId', $userId->value());
@@ -93,21 +97,16 @@ class DoctrineUserRepository extends ServiceEntityRepository implements Password
         return $results[0];
     }
 
-    public function store(User $user): User
-    {
-        $this->_em->persist($user);
-        return $user;
-    }
-
     public function ofValidPasswordToken(PasswordToken $token): User
     {
-        $userWithToken = $this->simpleSearch('resetPasswordToken', $token->value());
-        if (is_null($userWithToken)) {
+        try {
+            $userWithToken = $this->simpleSearch('resetPasswordToken', $token->value());
+            if ($userWithToken->isTokenExpired()) {
+                throw new PasswordTokenExpiredException("Token {$token->value()} expired!!!");
+            }
+            return $userWithToken;
+        } catch (UserNotFoundException) {
             throw new PasswordTokenNotFoundException("Token {$token->value()} not found!!!");
         }
-        if ($userWithToken->isTokenExpired()) {
-            throw new PasswordTokenExpiredException("Token {$token->value()} expired!!!");
-        }
-        return $userWithToken;
     }
 }
