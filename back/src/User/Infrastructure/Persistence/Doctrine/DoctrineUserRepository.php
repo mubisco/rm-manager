@@ -18,10 +18,13 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
+/**
+ * @extends ServiceEntityRepository<DoctrineUser>
+ */
 class DoctrineUserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserRepository
 {
     public function __construct(
-        private ManagerRegistry $registry,
+        ManagerRegistry $registry,
     ) {
         parent::__construct($registry, DoctrineUser::class);
     }

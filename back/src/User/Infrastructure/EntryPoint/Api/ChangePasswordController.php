@@ -21,16 +21,29 @@ final class ChangePasswordController extends AbstractController implements Contr
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            $content = json_decode($request->getContent(), true);
-
-            $command = new ChangePasswordCommand(
-                $content['token'] ?? '',
-                $content['password'] ?? ''
-            );
+            $command = $this->parseRequest($request);
             $this->commandHandler->__invoke($command);
+            return new JsonResponse(['message' => 'OK'], 200);
         } catch (PasswordChangeException) {
             return new JsonResponse(['message' => 'Error changing password'], 500);
         }
-        return new JsonResponse(['message' => 'OK'], 200);
+    }
+
+    private function parseRequest(Request $request): ChangePasswordCommand
+    {
+        $content = (array) json_decode($request->getContent(), true);
+        $command = new ChangePasswordCommand(
+            $this->ensureRequestValue($content, 'token'),
+            $this->ensureRequestValue($content, 'password')
+        );
+        return $command;
+    }
+
+    private function ensureRequestValue(array $data, string $key): string
+    {
+        if (!isset($data[$key])) {
+            return '';
+        }
+        return (string) $data[$key];
     }
 }

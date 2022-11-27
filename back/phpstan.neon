@@ -1,0 +1,13 @@
+parameters:
+    level: 9
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - src/Symfony/Infrastructure/Migrations/*
+    symfony:
+        # container_xml_path: var/cache/dev/srcDevDebugProjectContainer.xml
+        # or with Symfony 4.2+
+        # container_xml_path: var/cache/dev/srcApp_KernelDevDebugContainer.xml
+        # or with Symfony 5+
+        container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml

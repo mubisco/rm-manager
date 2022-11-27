@@ -90,6 +90,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
 
     /**
      * @see UserInterface
+     * @psalm-suppress MissingReturnType
      */
     public function eraseCredentials()
     {
