@@ -22,7 +22,7 @@ class SymfonyUserMailerTest extends TestCase
     protected function setUp(): void
     {
         $this->mailer = $this->createMock(MailerInterface::class);
-        $this->sut = new SymfonyUserMailer($this->mailer);
+        $this->sut = new SymfonyUserMailer($this->mailer, 'https://www.google.es');
     }
     /**
      * @test
