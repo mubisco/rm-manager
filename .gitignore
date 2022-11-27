@@ -1,3 +1,4 @@
 /.docker/mysql/data
 /.docker/mysql/bd-dump.sql
 .vim/
+.php-cs-fixer.cache
