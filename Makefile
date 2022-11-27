@@ -89,6 +89,8 @@ tests-back-coverage:
 	@$(DOCKER_COMPOSE) exec backend composer run tests -- --coverage-html=coverage
 tests-back:
 	@$(DOCKER_COMPOSE) exec backend composer run tests
+tests-back-unit:
+	@$(DOCKER_COMPOSE) exec backend composer run tests-unit
 tests-back-acceptance:
 	@$(DOCKER_COMPOSE) exec backend composer run tests-acceptance
 tests-back-integration:
