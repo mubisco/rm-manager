@@ -8,6 +8,7 @@ default:
         - App\Tests\acceptance\context\User\CreateUserContext
         - App\Tests\acceptance\context\User\ResetPasswordContext
         - App\Tests\acceptance\context\User\ChangePasswordContext
+        - App\Tests\acceptance\context\User\ChangePasswordConsoleCommandContext
 
   extensions:
     FriendsOfBehat\SymfonyExtension:

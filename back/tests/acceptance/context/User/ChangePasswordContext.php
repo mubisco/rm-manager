@@ -27,7 +27,7 @@ final class ChangePasswordContext implements Context
     /**
      * @Given A non-auth user with a non existant token
      */
-    public function aNonAuthUserWithANonExistantToken()
+    public function aNonAuthUserWithANonExistantToken(): void
     {
         $this->token = 'a-non-existant-token';
     }
@@ -35,7 +35,7 @@ final class ChangePasswordContext implements Context
     /**
      * @When I check the token validity
      */
-    public function iCheckTheTokenValidity()
+    public function iCheckTheTokenValidity(): void
     {
         $request = Request::create(
             '/api/user/check-password-token/' . $this->token,
@@ -51,7 +51,7 @@ final class ChangePasswordContext implements Context
     /**
      * @Then I should get the response from token not valid
      */
-    public function iShouldGetTheResponseFromTokenNotValid()
+    public function iShouldGetTheResponseFromTokenNotValid(): void
     {
         $this->checkStatusResponse(404);
     }
@@ -59,7 +59,7 @@ final class ChangePasswordContext implements Context
     /**
      * @Given A non-auth user with an expired token
      */
-    public function aNonAuthUserWithAnExpiredToken()
+    public function aNonAuthUserWithAnExpiredToken(): void
     {
         $user = $this->userRepository->byUsername(new Username('expiredTokenUser'));
         $this->token = $user->passwordResetToken();
@@ -68,16 +68,16 @@ final class ChangePasswordContext implements Context
     /**
      * @Then I should get the response from token expired
      */
-    public function iShouldGetTheResponseFromTokenExpired()
+    public function iShouldGetTheResponseFromTokenExpired(): void
     {
         $this->checkStatusResponse(400);
     }
 
     private function checkStatusResponse(int $statusCode): void
     {
-        if ($this->response->getStatusCode() != $statusCode) {
+        if ($this->response?->getStatusCode() != $statusCode) {
             throw new RuntimeException(
-                "Response must be $statusCode and received {$this->response->getStatusCode()}"
+                "Response must be $statusCode and received {$this->response?->getStatusCode()}"
             );
         }
     }
@@ -85,7 +85,7 @@ final class ChangePasswordContext implements Context
     /**
      * @Given A non-auth user with a valid token
      */
-    public function aNonAuthUserWithAValidToken()
+    public function aNonAuthUserWithAValidToken(): void
     {
         /** @var DoctrineUser */
         $user = $this->userRepository->byUsername(new Username('validTokenUser'));
@@ -96,7 +96,7 @@ final class ChangePasswordContext implements Context
     /**
      * @Then I should get OK response
      */
-    public function iShouldGetOkResponse()
+    public function iShouldGetOkResponse(): void
     {
         $this->checkStatusResponse(200);
     }
@@ -104,7 +104,7 @@ final class ChangePasswordContext implements Context
     /**
      * @Given A non-auth user with a valid checked token
      */
-    public function aNonAuthUserWithAValidCheckedToken()
+    public function aNonAuthUserWithAValidCheckedToken(): void
     {
         $this->aNonAuthUserWithAValidToken();
         $this->iCheckTheTokenValidity();
@@ -114,9 +114,10 @@ final class ChangePasswordContext implements Context
     /**
      * @When I request the password change
      */
-    public function iRequestThePasswordChange()
+    public function iRequestThePasswordChange(): void
     {
         $requestData = ['token' => $this->token, 'password' => 'n3wSecurePassword'];
+        $parsedData = json_encode($requestData);
         $request = Request::create(
             '/api/user/password/change',
             'PATCH',
@@ -124,7 +125,7 @@ final class ChangePasswordContext implements Context
             [],
             [],
             ['CONTENT-TYPE' => 'json/application'],
-            json_encode($requestData)
+            $parsedData ? $parsedData : null
         );
         $this->response = $this->kernel->handle($request);
     }
@@ -132,7 +133,7 @@ final class ChangePasswordContext implements Context
     /**
      * @Then The user should have password updated
      */
-    public function theUserShouldHavePasswordUpdated()
+    public function theUserShouldHavePasswordUpdated(): void
     {
         $this->iShouldGetOkResponse();
         /** @var DoctrineUser */
