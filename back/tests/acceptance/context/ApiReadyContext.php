@@ -26,7 +26,7 @@ final class ApiReadyContext implements Context
     /**
      * @Then I should have a response
      */
-    public function iShouldHaveAResponse()
+    public function iShouldHaveAResponse(): void
     {
         $responseCode = $this->session->getStatusCode();
         if ($responseCode !== 200) {
@@ -37,7 +37,7 @@ final class ApiReadyContext implements Context
     /**
      * @Then The response should be show the ready message
      */
-    public function theResponseShouldBeShowTheReadyMessage()
+    public function theResponseShouldBeShowTheReadyMessage(): void
     {
         $response = $this->session->getDriver()->getContent();
         $expectedResponse = json_encode(['ready' => true]);

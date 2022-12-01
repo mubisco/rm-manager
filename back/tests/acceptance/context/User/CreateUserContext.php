@@ -25,9 +25,8 @@ final class CreateUserContext implements Context
 
     private string $userName = '';
     private string $mail = '';
-    private array $roles = [];
 
-    public function __construct(private KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel)
     {
         $this->application = new Application($kernel);
         $this->output = new BufferedOutput();
@@ -37,7 +36,7 @@ final class CreateUserContext implements Context
     /**
      * @Given A sys admin with console access
      */
-    public function aSysAdminWithConsoleAccess()
+    public function aSysAdminWithConsoleAccess(): void
     {
         Assert::assertSame('cli', php_sapi_name());
     }
@@ -53,7 +52,6 @@ final class CreateUserContext implements Context
     ): void {
         $this->userName = $name;
         $this->mail = $mail;
-        $this->roles[] = $role;
         $command = "user:create";
         $input = new ArgvInput([
             'dummy-placeholder',
@@ -79,7 +77,7 @@ final class CreateUserContext implements Context
     /**
      * @Then I should have a user with proper data
      */
-    public function iShouldHaveAUserWithProperData()
+    public function iShouldHaveAUserWithProperData(): void
     {
         /** @var DoctrineUser */
         $createdUser = $this->userRepository->byUsername(new Username($this->userName));
@@ -89,7 +87,7 @@ final class CreateUserContext implements Context
     /**
      * @Then One event must be dispatched
      */
-    public function oneEventMustBeDispatched()
+    public function oneEventMustBeDispatched(): void
     {
         Assert::assertCount(1, $this->transport->getDispatchedMessages());
     }
