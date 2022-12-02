@@ -18,6 +18,9 @@ final class DoctrineUserConsoleCommandFactory implements UserFactory
     {
     }
 
+    /**
+     * @param array<array-key, mixed> $data
+     */
     public function make(array $data): User
     {
         $this->validateData($data);
@@ -36,6 +39,7 @@ final class DoctrineUserConsoleCommandFactory implements UserFactory
     }
 
     /**
+     * @param array<array-key, mixed> $data
      * @return array<array-key, mixed>
      */
     private function parseRoles(array $data): array
@@ -57,6 +61,9 @@ final class DoctrineUserConsoleCommandFactory implements UserFactory
         }
     }
 
+    /**
+     * @param array<array-key, mixed> $data
+     */
     private function validateData(array $data): void
     {
         if (!isset($data['mail']) || !isset($data['name']) || !isset($data['password'])) {
