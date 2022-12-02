@@ -25,7 +25,8 @@ class DoctrineUserTest extends TestCase
         $this->passwordEncryptor = $this->createMock(PasswordEncryptor::class);
         $this->sut = new DoctrineUser('some@email.net', 'existinguser', 'password', ['ROLE_USER'], null, null);
     }
-    public function testShouldReturnProperValues()
+
+    public function testShouldReturnProperValues(): void
     {
         $this->assertEquals($this->sut->user(), 'existinguser');
         $this->assertEquals('existinguser', $this->sut->getUsername());

@@ -117,7 +117,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
         $this->resetPasswordToken = $token->value();
         $this->resetPasswordRequestedAt = new DateTimeImmutable();
         $this->addEvent(new PasswordTokenWasRequested($this->userId->__toString()));
-        return $this->resetPasswordToken;
+        return $this->resetPasswordToken ?? '';
     }
 
     public function passwordResetToken(): string
