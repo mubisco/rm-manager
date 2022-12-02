@@ -47,7 +47,7 @@ final class ChangePasswordConsoleCommand extends Command
             $password = $input->getArgument('new-password');
             $command = new ChangeUserPasswordCommand($name, $password);
             $this->commandBus->dispatch($command);
-            $output->writeln('User created successfully');
+            $output->writeln('Password changed successfully');
             return Command::SUCCESS;
         } catch (PasswordChangeException $e) {
             $output->writeln($e->getMessage());
