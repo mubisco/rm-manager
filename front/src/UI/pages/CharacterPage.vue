@@ -66,5 +66,13 @@ const tab = ref('one')
         </v-window-item>
       </v-window>
     </v-card-text>
+    <v-card-actions>
+      <v-btn
+        variant="text"
+        :to="{ name: 'Dashboard' }"
+      >
+        Volver
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
