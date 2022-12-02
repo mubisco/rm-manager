@@ -27,6 +27,9 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
 
+    /**
+     * @param array<array-key, string> $roles
+     */
     public function __construct(
         private string $email,
         private string $username,
@@ -91,6 +94,7 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
     /**
      * @see UserInterface
      * @psalm-suppress MissingReturnType
+     * @return void
      */
     public function eraseCredentials()
     {

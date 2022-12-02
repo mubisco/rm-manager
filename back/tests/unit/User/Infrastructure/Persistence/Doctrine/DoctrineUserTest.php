@@ -18,6 +18,7 @@ use Symfony\Component\Uid\Ulid;
 class DoctrineUserTest extends TestCase
 {
     private DoctrineUser $sut;
+    /** @var PasswordEncryptor&MockObject */
     private PasswordEncryptor|MockObject $passwordEncryptor;
 
     protected function setUp(): void
