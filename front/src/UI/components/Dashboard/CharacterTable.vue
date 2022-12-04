@@ -58,6 +58,7 @@
       <v-btn
         append-icon="mdi-plus-circle-outline"
         variant="elevated"
+        :to="{ name: 'CreateCharacter' }"
       >
         Crear
       </v-btn>
