@@ -6,7 +6,7 @@ const steps = ref([
   { label: 'Profesión' },
   { label: 'Características' },
   { label: 'Raza & Cultura' },
-  { label: 'Habilidates & Talentos' },
+  { label: 'Habilidades & Talentos' },
   { label: 'Equipo' },
   { label: 'Detalles Finales' }
 ])
