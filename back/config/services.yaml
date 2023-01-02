@@ -3,52 +3,43 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+---
 parameters:
   frontBaseUrl: '%env(FRONT_BASE_URL)%'
-
 services:
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        bind:
-            $frontBaseUrl: '%frontBaseUrl%'
-
-    _instanceof:
-        App\Shared\Application\CommandHandlerInterface:
-            tags:
-                - { name: messenger.message_handler, bus: command.bus }
-
-        App\Shared\Application\QueryHandlerInterface:
-            tags:
-                - { name: messenger.message_handler, bus: query.bus }
-
-        App\Shared\Application\EventSyncHandlerInterface:
-            tags:
-                - { name: messenger.message_handler, bus: event.sync.bus, from_transport: sync }
-
-        App\Shared\Application\EventHandlerInterface:
-            tags:
-                - { name: messenger.message_handler, bus: event.async.bus, from_transport: async }
-
-        App\Shared\Infrastructure\ControllerInterface:
-            tags: ['controller.service_arguments']
-
-    unwrapper_transport_middleware:
-        class: App\Symfony\Infrastructure\Middleware\UnwrapperTransportMiddleware
-
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    Symfony\Component\Uid\Command\GenerateUlidCommand: ~
-    Symfony\Component\Uid\Command\GenerateUuidCommand: ~
-    Symfony\Component\Uid\Command\InspectUlidCommand: ~
-    Symfony\Component\Uid\Command\InspectUuidCommand: ~
-
-    App\User\Domain\UserRepository: '@App\User\Infrastructure\Persistence\Doctrine\DoctrineUserRepository'
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true  # Automatically injects dependencies in your services.
+    autoconfigure: true  # Automatically registers your services as commands, event subscribers, etc.
+    bind:
+      $frontBaseUrl: '%frontBaseUrl%'
+  _instanceof:
+    App\Shared\Application\CommandHandlerInterface:
+      tags:
+        - {name: messenger.message_handler, bus: command.bus}
+    App\Shared\Application\QueryHandlerInterface:
+      tags:
+        - {name: messenger.message_handler, bus: query.bus}
+    App\Shared\Application\EventSyncHandlerInterface:
+      tags:
+        - {name: messenger.message_handler, bus: event.sync.bus, from_transport: sync}
+    App\Shared\Application\EventHandlerInterface:
+      tags:
+        - {name: messenger.message_handler, bus: event.async.bus, from_transport: async}
+    App\Shared\Infrastructure\ControllerInterface:
+      tags: ['controller.service_arguments']
+  unwrapper_transport_middleware:
+    class: App\Symfony\Infrastructure\Middleware\UnwrapperTransportMiddleware
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
+  Symfony\Component\Uid\Command\GenerateUlidCommand: ~
+  Symfony\Component\Uid\Command\GenerateUuidCommand: ~
+  Symfony\Component\Uid\Command\InspectUlidCommand: ~
+  Symfony\Component\Uid\Command\InspectUuidCommand: ~
+  App\User\Domain\UserRepository: '@App\User\Infrastructure\Persistence\Doctrine\DoctrineUserRepository'

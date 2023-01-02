@@ -1,21 +1,18 @@
+---
 kernel:
-    resource: ../src/Kernel.php
-    type: annotation
-
+  resource: ../src/Kernel.php
+  type: annotation
 api_refresh_token:
-    path: /api/token/refresh
-
+  path: /api/token/refresh
 api_reset_password:
-    path: /api/user/reset-password
-    controller: App\User\Infrastructure\EntryPoint\Api\UserApiController::resetPassword
-    methods: PUT
-
+  path: /api/user/reset-password
+  controller: App\User\Infrastructure\EntryPoint\Api\UserApiController::resetPassword
+  methods: PUT
 api_check_password_token:
-    path: /api/user/check-password-token/{token}
-    controller: App\User\Infrastructure\EntryPoint\Api\CheckPasswordTokenController
-    methods: GET
-
+  path: /api/user/check-password-token/{token}
+  controller: App\User\Infrastructure\EntryPoint\Api\CheckPasswordTokenController
+  methods: GET
 api_change_password:
-    path: /api/user/password/change
-    controller: App\User\Infrastructure\EntryPoint\Api\ChangePasswordController
-    methods: PATCH
+  path: /api/user/password/change
+  controller: App\User\Infrastructure\EntryPoint\Api\ChangePasswordController
+  methods: PATCH

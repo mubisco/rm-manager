@@ -1,37 +1,37 @@
+---
 framework:
-    messenger:
-        failure_transport: failed
-        default_bus: command.bus
-        buses:
-            command.bus:
-              middleware:
-                  - validation
-                  - doctrine_transaction
-                  - unwrapper_transport_middleware
-            query.bus:
-              middleware:
-                  - validation
-                  - unwrapper_transport_middleware
-            event.sync.bus:
-              default_middleware: allow_no_handlers
-              middleware:
-                  - validation
-                  - doctrine_transaction
-            event.async.bus:
-              default_middleware: allow_no_handlers
-              middleware:
-                  - validation
-                  - doctrine_transaction
-        transports:
-            # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            failed: 'doctrine://default?queue_name=failed'
-            sync: 'sync://'
-
-        routing:
-            # Route your messages to the transports
-            'App\Shared\Domain\Event\PersistibleEvent': sync
-            'App\Shared\Domain\Event\DomainEvent': async
+  messenger:
+    failure_transport: failed
+    default_bus: command.bus
+    buses:
+      command.bus:
+        middleware:
+          - validation
+          - doctrine_transaction
+          - unwrapper_transport_middleware
+      query.bus:
+        middleware:
+          - validation
+          - unwrapper_transport_middleware
+      event.sync.bus:
+        default_middleware: allow_no_handlers
+        middleware:
+          - validation
+          - doctrine_transaction
+      event.async.bus:
+        default_middleware: allow_no_handlers
+        middleware:
+          - validation
+          - doctrine_transaction
+    transports:
+      # https://symfony.com/doc/current/messenger.html#transport-configuration
+      async: '%env(MESSENGER_TRANSPORT_DSN)%'
+      failed: 'doctrine://default?queue_name=failed'
+      sync: 'sync://'
+    routing:
+      # Route your messages to the transports
+      'App\Shared\Domain\Event\PersistibleEvent': sync
+      'App\Shared\Domain\Event\DomainEvent': async
 
 # when@test:
 #    framework:

@@ -1,23 +1,23 @@
+---
 when@dev:
-    _errors:
-        resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
-        prefix: /_error
+  _errors:
+    resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+    prefix: /_error
 api_ready:
-    path: /api/ready
-    controller: App\Ready\Infrastructure\EntryPoint\Api\ReadyController::index
-    methods: ['GET']
+  path: /api/ready
+  controller: App\Ready\Infrastructure\EntryPoint\Api\ReadyController::index
+  methods: ['GET']
 api_ready_admin:
-    path: /api/ready/admin
-    controller: App\Ready\Infrastructure\EntryPoint\Api\ReadyController::admin
-    methods: ['GET']
+  path: /api/ready/admin
+  controller: App\Ready\Infrastructure\EntryPoint\Api\ReadyController::admin
+  methods: ['GET']
 api_ready_master:
-    path: /api/ready/master
-    controller: App\Ready\Infrastructure\EntryPoint\Api\ReadyController::master
-    methods: ['GET']
+  path: /api/ready/master
+  controller: App\Ready\Infrastructure\EntryPoint\Api\ReadyController::master
+  methods: ['GET']
 api_ready_player:
-    path: /api/ready/player
-    controller: App\Ready\Infrastructure\EntryPoint\Api\ReadyController::player
-    methods: ['GET']
+  path: /api/ready/player
+  controller: App\Ready\Infrastructure\EntryPoint\Api\ReadyController::player
+  methods: ['GET']
 api_login:
-    path: /api/login
-
+  path: /api/login
