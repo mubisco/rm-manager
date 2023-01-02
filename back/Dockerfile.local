@@ -15,3 +15,6 @@ ENV HOME /home/developer
 
 RUN mkdir -p /home/developer/jwt
 RUN mkdir -p /home/developer/app
+
+COPY .docker/public.pem /home/developer/jwt
+COPY .docker/private.pem /home/developer/jwt

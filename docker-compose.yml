@@ -21,7 +21,10 @@ services:
   database:
     container_name: database
     image: mariadb:10.7.3
-    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
+    command: 
+      - '--character-set-server=utf8mb4'
+      - '--collation-server=utf8mb4_unicode_ci'
+      - '--default-authentication-plugin=mysql_native_password'
     environment:
       MYSQL_DATABASE: develop_db
       MYSQL_USER: developer

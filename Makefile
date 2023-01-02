@@ -1,6 +1,7 @@
 CURRENT_DIR:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-DOCKER = $(shell which docker)
-DOCKER_COMPOSE=USER_ID=${shell id -u} ${DOCKER} compose
+#DOCKER=$(shell which docker)
+#DOCKER_COMPOSE=USER_ID=${shell id -u} ${DOCKER} compose
+DOCKER_COMPOSE:=USER_ID=${shell id -u} docker compose
 dbStringConnection := -uroot --password='root'
 
 default: info
@@ -29,7 +30,7 @@ rebuild-common rebuild-db rebuild-back rebuild-front:
 
 
 doco stop start status build-images rebuild-images shell-front shell-back shell-back-root:
-	@$(DOCKER_COMPOSE) $(DOCKER_COMMAND)
+	$(DOCKER_COMPOSE) $(DOCKER_COMMAND)
 
 messenger-start:
 	@docker exec -i database bash -l -c "mysql ${dbStringConnection}" < .docker/mysql/clear-messenger-tables.sql
