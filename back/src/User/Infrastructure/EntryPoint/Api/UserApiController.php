@@ -11,6 +11,7 @@ use App\User\Domain\PasswordNotReseteableException;
 use App\User\Domain\UserNotFoundException;
 use App\User\Domain\UserRepositoryException;
 use App\User\Domain\WrongUsernameException;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,26 @@ final class UserApiController implements ControllerInterface
         private GenerateResetPasswordTokenCommandHandler $generateResetPasswordTokenCommandHandler
     ) {
     }
+    #[OA\RequestBody(
+        description: 'Returns the status of general API',
+        content: new OA\JsonContent(
+            type: 'object',
+            properties: [
+                new OA\Property(property: "username", type: "string")
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'When change password token was regenerated properly',
+        content: new OA\JsonContent(
+            type: 'object',
+            properties: [
+                new OA\Property(property: "message", type: "string")
+            ]
+        )
+    )]
+    #[OA\Tag(name: 'account')]
     public function resetPassword(Request $request): JsonResponse
     {
         $userName = $this->filterRequest($request);
@@ -42,7 +63,6 @@ final class UserApiController implements ControllerInterface
     private function filterRequest(Request $request): string
     {
         $rawContent = $request->getContent();
-        /** @var array */
         $content = json_decode($rawContent, true);
         /** @var string */
         $username = $content['username'] ?? '';
