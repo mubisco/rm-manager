@@ -16,4 +16,6 @@
     <file>src/</file>
     <file>tests/</file>
 
+    <exclude-pattern>*/src/Symfony/Infrastructure/Migrations/*\.php$</exclude-pattern>
+
 </ruleset>
