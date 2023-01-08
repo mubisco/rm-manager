@@ -54,4 +54,4 @@ jobs:
 
       - name: Unit testing
         working-directory: ./back
-        run: composer test-unit
+        run: composer tests-unit
