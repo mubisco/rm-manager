@@ -96,6 +96,9 @@
         "psalm": [
           "@php vendor/bin/psalm "
         ],
+        "phpstan": [
+          "@php vendor/bin/phpstan "
+        ],
         "behat": [
           "@php vendor/bin/behat "
         ],
