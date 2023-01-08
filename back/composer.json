@@ -136,6 +136,7 @@
         "symfony/maker-bundle": "^1.38",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/stopwatch": "6.0.*",
+        "symfony/var-exporter": "6.2.*",
         "symfony/web-profiler-bundle": "6.0.*"
     }
 }
