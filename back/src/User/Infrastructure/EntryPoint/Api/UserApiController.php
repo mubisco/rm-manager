@@ -63,6 +63,7 @@ final class UserApiController implements ControllerInterface
     private function filterRequest(Request $request): string
     {
         $rawContent = $request->getContent();
+        /** @var array<array-key, mixed> */
         $content = json_decode($rawContent, true);
         /** @var string */
         $username = $content['username'] ?? '';

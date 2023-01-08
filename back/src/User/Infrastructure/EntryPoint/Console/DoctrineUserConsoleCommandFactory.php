@@ -40,18 +40,20 @@ final class DoctrineUserConsoleCommandFactory implements UserFactory
 
     /**
      * @param array<array-key, mixed> $data
-     * @return array<array-key, mixed>
+     * @return array<array-key, string>
      */
     private function parseRoles(array $data): array
     {
         if (!isset($data['role'])) {
             return ['ROLE_USER'];
         }
+        $roles = [];
         /** @var string */
         foreach ($data['role'] as $role) {
             $this->validateRole($role);
+            $roles[] = $role;
         }
-        return (array) $data['role'];
+        return $roles;
     }
 
     private function validateRole(string $role): void

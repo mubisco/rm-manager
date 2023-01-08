@@ -55,7 +55,9 @@ final class CreateUserConsoleCommand extends Command
     {
         try {
             $data = $input->getArguments();
-            $data['role'] = $input->getOption('role');
+            /** @var string */
+            $role = $input->getOption('role');
+            $data['role'] = $role;
             $command = new CreateUserCommand($data);
             $this->commandBus->dispatch($command);
         } catch (InvalidArgumentException $e) {
