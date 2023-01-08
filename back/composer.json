@@ -1,4 +1,6 @@
 {
+    "name": "mubisco/rpgman-apirest",
+    "description": "REST API server for RpgMan",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
