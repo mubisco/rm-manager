@@ -35,9 +35,9 @@ jobs:
         working-directory: ./back
         run: composer install --prefer-dist --no-progress
 
-      - name: Build cache
+      - name: Build cache for dev environment
         working-directory: ./back
-        run: php bin/console cache:clear
+        run: php bin/console cache:clear --env=dev
 
       - name: Lint code
         working-directory: ./back
