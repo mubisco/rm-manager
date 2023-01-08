@@ -20,6 +20,7 @@ jobs:
         env:  # env available for only this steps
           ENV_KEY_APP_ENV: test
           ENV_KEY_APP_SECRET: someVeryStrangeSecret
+          ENV_KEY_DATABASE_URL: "mysql://user:pass@host:3306/db?serverVersion=mariadb-10.7.3&charset=utf8mb4"
       - name: Validate composer.json and composer.lock
         working-directory: ./back
         run: composer validate --strict
