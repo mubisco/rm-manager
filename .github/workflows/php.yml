@@ -27,7 +27,7 @@ jobs:
         id: composer-cache
         uses: actions/cache@v3
         with:
-          path: vendor
+          path: back/vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
@@ -35,8 +35,18 @@ jobs:
         working-directory: ./back
         run: composer install --prefer-dist --no-progress
 
-# Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-# Docs: https://getcomposer.org/doc/articles/scripts.md
+      - name: Lint code
+        working-directory: ./back
+        run: composer lint
 
-# - name: Run test suite
-#   run: composer run-script test
+      - name: Psalm Analysis
+        working-directory: ./back
+        run: composer psalm
+
+      - name: PhpStan Analysis
+        working-directory: ./back
+        run: composer phpstan
+
+      - name: Unit testing
+        working-directory: ./back
+        run: composer test-unit
