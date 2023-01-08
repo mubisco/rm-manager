@@ -13,12 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 class ChangePasswordControllerTest extends TestCase
 {
     private ChangePasswordController $sut;
-    private ChangePasswordCommandHandler|MockObject $commandHandler;
+    private ChangePasswordCommandHandler&MockObject $commandHandler;
     private Request $request;
 
     protected function setUp(): void
     {
-        $requestData = ['token' => 'token', 'password' => 'n3wSecurePassword'];
+        $rawRequestData = ['token' => 'token', 'password' => 'n3wSecurePassword'];
+        $requestData = json_encode($rawRequestData);
         $this->request = Request::create(
             '/api/user/password/change',
             'PATCH',
@@ -26,9 +27,9 @@ class ChangePasswordControllerTest extends TestCase
             [],
             [],
             ['CONTENT-TYPE' => 'json/application'],
-            json_encode($requestData)
+            $requestData ? $requestData : ''
         );
-        $this->commandHandler = $this->createStub(ChangePasswordCommandHandler::class);
+        $this->commandHandler = $this->createMock(ChangePasswordCommandHandler::class);
         $this->sut = new ChangePasswordController($this->commandHandler);
     }
     /**

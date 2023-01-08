@@ -17,7 +17,7 @@ use Symfony\Component\Mailer\MailerInterface;
 class SymfonyUserMailerTest extends TestCase
 {
     private SymfonyUserMailer $sut;
-    private MailerInterface|MockObject $mailer;
+    private MailerInterface&MockObject $mailer;
 
     protected function setUp(): void
     {

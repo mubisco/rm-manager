@@ -14,8 +14,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class SymfonyEventBusTest extends TestCase
 {
     private SymfonyEventBus $sut;
-    private MessageBusInterface|MockObject $asyncBusInterface;
-    private MessageBusInterface|MockObject $syncBusInterface;
+    private MessageBusInterface&MockObject $asyncBusInterface;
+    private MessageBusInterface&MockObject $syncBusInterface;
 
     protected function setUp(): void
     {
@@ -38,6 +38,7 @@ class SymfonyEventBusTest extends TestCase
     public function itShouldThrowInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        /** @phpstan-ignore-next-line */
         $this->sut->sendEvents(['asd']);
     }
 

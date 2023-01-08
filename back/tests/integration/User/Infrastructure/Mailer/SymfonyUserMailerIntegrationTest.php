@@ -17,6 +17,7 @@ final class SymfonyUserMailerIntegrationTest extends KernelTestCase
     {
         $kernel = self::createKernel();
         $kernel->boot();
+        /** @phpstan-ignore-next-line */
         $this->sut = $kernel->getContainer()->get('user.mailer');
     }
 

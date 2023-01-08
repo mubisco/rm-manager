@@ -16,8 +16,8 @@ use Symfony\Component\Uid\Ulid;
 class SendPasswordTokenEventHandlerTest extends TestCase
 {
     private SendPasswordTokenEventHandler $sut;
-    private UserRepository|MockObject $userRepository;
-    private PasswordTokenMailer|MockObject $tokenMailer;
+    private UserRepository&MockObject $userRepository;
+    private PasswordTokenMailer&MockObject $tokenMailer;
 
     protected function setUp(): void
     {

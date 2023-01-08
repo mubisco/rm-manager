@@ -12,6 +12,7 @@ final class DoctrineUserOM
     private string $email;
     private string $username;
     private string $password;
+    /** @var array<string> **/
     private array $roles;
     private ?string $resetPasswordToken;
     private ?DateTimeImmutable $resetPasswordRequestedAt;

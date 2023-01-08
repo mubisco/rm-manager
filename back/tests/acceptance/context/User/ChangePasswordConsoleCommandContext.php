@@ -25,7 +25,10 @@ final class ChangePasswordConsoleCommandContext implements Context
     {
         $this->application = new Application($kernel);
         $this->output = new BufferedOutput();
-        /** @var UserRepository */
+        /**
+         * @var UserRepository
+         * @phpstan-ignore-next-line
+         **/
         $userRepository = $kernel->getContainer()->get('test.userRepository');
         $this->userRepository = $userRepository;
     }

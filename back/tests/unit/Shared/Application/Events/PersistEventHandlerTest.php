@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class PersistEventHandlerTest extends TestCase
 {
     private PersistEventHandler $sut;
-    private PersistibleEventRepository|MockObject $eventRepository;
+    private PersistibleEventRepository&MockObject $eventRepository;
     private PersistibleEvent $event;
 
     protected function setUp(): void

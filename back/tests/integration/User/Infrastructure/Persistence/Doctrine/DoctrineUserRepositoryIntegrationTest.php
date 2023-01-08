@@ -66,7 +66,7 @@ class DoctrineUserRepositoryIntegrationTest extends KernelTestCase
     {
         $this->expectException(UserNotFoundException::class);
         $user = DoctrineUserOM::aUser()->build();
-        $this->sut->store($user, true);
+        $this->sut->store($user);
         $this->sut->remove($user, true);
         $this->sut->ofId($user->userId());
     }
@@ -107,9 +107,10 @@ class DoctrineUserRepositoryIntegrationTest extends KernelTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        // doing this is recommended to avoid memory leaks
-        $entityManager = $this->managerRegistry->getManager();
-        $entityManager->clear();
+        if ($this->managerRegistry) {
+            $entityManager = $this->managerRegistry->getManager();
+            $entityManager->clear();
+        }
         $this->managerRegistry = null;
     }
 }

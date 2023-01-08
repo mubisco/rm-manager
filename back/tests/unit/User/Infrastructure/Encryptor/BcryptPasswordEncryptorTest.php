@@ -15,7 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class BcryptPasswordEncryptorTest extends TestCase
 {
     private BcryptPasswordEncryptor $sut;
-    private UserPasswordHasherInterface|MockObject $hasher;
+    private UserPasswordHasherInterface&MockObject $hasher;
 
     protected function setUp(): void
     {

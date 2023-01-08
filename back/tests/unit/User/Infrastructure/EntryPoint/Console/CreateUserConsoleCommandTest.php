@@ -16,9 +16,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class CreateUserConsoleCommandTest extends TestCase
 {
     private CreateUserConsoleCommand $sut;
-    private InputInterface|MockObject $inputInterface;
-    private OutputInterface|MockObject $outputInterface;
-    private MessageBusInterface|MockObject $bus;
+    private InputInterface&MockObject $inputInterface;
+    private OutputInterface&MockObject $outputInterface;
+    private MessageBusInterface&MockObject $bus;
 
     protected function setUp(): void
     {

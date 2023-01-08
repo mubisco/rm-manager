@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 class UserCreatedEventHandlerTest extends TestCase
 {
     private UserCreatedEventHandler $sut;
-    private WelcomeUserMailer|MockObject $mailer;
+    private WelcomeUserMailer&MockObject $mailer;
 
     protected function setUp(): void
     {

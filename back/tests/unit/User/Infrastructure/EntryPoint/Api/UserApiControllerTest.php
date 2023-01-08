@@ -16,11 +16,11 @@ use Throwable;
 class UserApiControllerTest extends TestCase
 {
     private UserApiController $sut;
-    private MockObject|GenerateResetPasswordTokenCommandHandler $mockedCommandHandler;
+    private MockObject&GenerateResetPasswordTokenCommandHandler $mockedCommandHandler;
 
     protected function setUp(): void
     {
-        $this->mockedCommandHandler = $this->createStub(GenerateResetPasswordTokenCommandHandler::class);
+        $this->mockedCommandHandler = $this->createMock(GenerateResetPasswordTokenCommandHandler::class);
         $this->sut = new UserApiController($this->mockedCommandHandler);
     }
 

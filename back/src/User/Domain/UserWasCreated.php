@@ -25,7 +25,7 @@ final class UserWasCreated implements DomainEvent
             'name' => $this->name,
             'mail' => $this->mail,
         ];
-        return json_encode($data);
+        return json_encode($data, JSON_THROW_ON_ERROR);
     }
 
     public function occurredOn(): DateTimeImmutable

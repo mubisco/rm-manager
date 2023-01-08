@@ -20,8 +20,8 @@ class ChangePasswordCommandHandlerTest extends TestCase
     private const EXAMPLE_TOKEN = '99c54fef52e9b2db8085d0f588ef8c96f8eb0f3f473456e939eaade887183507';
     private const SECURE_PASS = 'aVeryS3cureP4ssw0rd';
     private ChangePasswordCommandHandler $sut;
-    private UserRepository|MockObject $userRepository;
-    private PasswordEncryptor|MockObject $passwordEncryptor;
+    private UserRepository&MockObject $userRepository;
+    private PasswordEncryptor&MockObject $passwordEncryptor;
 
     protected function setUp(): void
     {

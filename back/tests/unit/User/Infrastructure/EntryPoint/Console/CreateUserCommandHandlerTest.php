@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 class CreateUserCommandHandlerTest extends TestCase
 {
     private CreateUserCommandHandler $sut;
-    private UserFactory|MockObject $userFactory;
+    private UserFactory&MockObject $userFactory;
     private InMemoryUserRepository $userRepository;
     private SpyEventBus $spyEventBus;
 

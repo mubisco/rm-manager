@@ -17,16 +17,18 @@ final class ResetPasswordContext implements Context
 {
     private UserRepository $userRepository;
     private ?Response $response = null;
+    /** @var array<string, string> */
     private array $requestData = [];
 
     public function __construct(private KernelInterface $kernel)
     {
+        /** @phpstan-ignore-next-line */
         $this->userRepository = $kernel->getContainer()->get('test.userRepository');
     }
     /**
      * @Given A non existant user
      */
-    public function aNonExistantUser()
+    public function aNonExistantUser(): void
     {
         try {
             $this->userRepository->byUsername(new Username('agapito'));
@@ -39,20 +41,21 @@ final class ResetPasswordContext implements Context
     /**
      * @When I want to reset my password
      */
-    public function iWantToResetMyPassword()
+    public function iWantToResetMyPassword(): void
     {
         $this->makeRequest($this->requestData);
     }
 
     /**
-     * @Then I should receive a :statusCode response
+     * @Then I should receive a :expectedStatusCode response
      */
-    public function iShouldReceiveAResponse(int $statusCode)
+    public function iShouldReceiveAResponse(int $expectedStatusCode): void
     {
-        if ($this->response->getStatusCode() != $statusCode) {
+        $statusCode = $this->response?->getStatusCode();
+        if ($statusCode != $expectedStatusCode) {
             throw new RuntimeException(
-                'Response must be ' . $statusCode .
-                ' and received ' . $this->response->getStatusCode()
+                'Response must be ' . $expectedStatusCode .
+                ' and received ' . $statusCode
             );
         }
     }
@@ -60,7 +63,7 @@ final class ResetPasswordContext implements Context
     /**
      * @When I want to reset my password with no data
      */
-    public function iWantToResetMyPasswordWithNoData()
+    public function iWantToResetMyPasswordWithNoData(): void
     {
         $this->makeRequest([]);
     }
@@ -68,7 +71,7 @@ final class ResetPasswordContext implements Context
     /**
      * @Given A existing user
      */
-    public function aExistingUser()
+    public function aExistingUser(): void
     {
         $user = $this->userRepository->byUsername(new Username('existinguser'));
         if (!empty($user->passwordResetToken())) {
@@ -80,7 +83,7 @@ final class ResetPasswordContext implements Context
     /**
      * @Then The user should have reset password token
      */
-    public function theUserShouldHaveResetPasswordToken()
+    public function theUserShouldHaveResetPasswordToken(): void
     {
         $user = $this->userRepository->byUsername(new Username('existinguser'));
         if (empty($user->passwordResetToken())) {
@@ -88,8 +91,10 @@ final class ResetPasswordContext implements Context
         }
     }
 
+    /** @param array<string, string> $requestData */
     private function makeRequest(array $requestData): void
     {
+        $parsedResponse = json_encode($requestData);
         $request = Request::create(
             '/api/user/reset-password',
             'PUT',
@@ -97,7 +102,7 @@ final class ResetPasswordContext implements Context
             [],
             [],
             ['CONTENT-TYPE' => 'json/application'],
-            json_encode($requestData)
+            $parsedResponse ? $parsedResponse : ''
         );
         $this->response = $this->kernel->handle($request);
     }

@@ -22,6 +22,7 @@ final class ChangePasswordContext implements Context
 
     public function __construct(private KernelInterface $kernel)
     {
+        /** @phpstan-ignore-next-line */
         $this->userRepository = $kernel->getContainer()->get('test.userRepository');
     }
     /**

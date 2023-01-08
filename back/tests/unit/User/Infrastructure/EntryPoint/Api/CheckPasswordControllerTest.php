@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class CheckPasswordControllerTest extends TestCase
 {
     private CheckPasswordTokenController $sut;
-    private CheckPasswordTokenQueryHandler|MockObject $queryHandler;
+    private CheckPasswordTokenQueryHandler&MockObject $queryHandler;
 
     protected function setUp(): void
     {
-        $this->queryHandler = $this->createStub(CheckPasswordTokenQueryHandler::class);
+        $this->queryHandler = $this->createMock(CheckPasswordTokenQueryHandler::class);
         $this->sut = new CheckPasswordTokenController(
             $this->queryHandler
         );

@@ -27,7 +27,7 @@ class PasswordTokenTest extends TestCase
         for ($i = 0; $i < $iterations; $i++) {
             $sut = PasswordToken::fromEmpty();
             $token = $sut->value();
-            $this->assertFalse(in_array($token, $tokens), 'Failed on ' . $i + 1 . ' iteration');
+            $this->assertFalse(in_array($token, $tokens), 'Failed on ' . ($i + 1) . ' iteration');
             $tokens[] = $token;
         }
     }

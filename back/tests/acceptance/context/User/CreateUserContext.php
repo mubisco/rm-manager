@@ -30,6 +30,7 @@ final class CreateUserContext implements Context
     {
         $this->application = new Application($kernel);
         $this->output = new BufferedOutput();
+        /** @phpstan-ignore-next-line */
         $this->userRepository = $kernel->getContainer()->get('test.userRepository');
         $this->transport = $kernel->getContainer()->get('messenger.default_bus');
     }

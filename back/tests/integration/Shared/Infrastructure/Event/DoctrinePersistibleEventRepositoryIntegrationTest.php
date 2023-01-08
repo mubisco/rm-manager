@@ -8,10 +8,12 @@ use App\Shared\Domain\Event\PersistibleEventNotFoundException;
 use App\Shared\Domain\Event\PersistibleEventRepository;
 use App\Shared\Infrastructure\Event\DoctrinePersistibleEventRepository;
 use App\User\Domain\PasswordTokenWasRequested;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class DoctrinePersistibleEventRepositoryIntegrationTest extends KernelTestCase
 {
+    private ?ManagerRegistry $managerRegistry;
     private DoctrinePersistibleEventRepository $sut;
 
     protected function setUp(): void
@@ -50,5 +52,15 @@ class DoctrinePersistibleEventRepositoryIntegrationTest extends KernelTestCase
         $result = $this->sut->store($persistibleEvent);
         $this->sut->ofId($persistibleEvent->eventId());
         $this->assertSame($persistibleEvent, $result);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        if ($this->managerRegistry) {
+            $entityManager = $this->managerRegistry->getManager();
+            $entityManager->clear();
+        }
+        $this->managerRegistry = null;
     }
 }

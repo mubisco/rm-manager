@@ -12,7 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class DoctrineUserConsoleCommandFactoryTest extends TestCase
 {
     private DoctrineUserConsoleCommandFactory $sut;
-    private UserPasswordHasherInterface|MockObject $hasher;
+    private UserPasswordHasherInterface&MockObject $hasher;
 
     protected function setUp(): void
     {
@@ -78,7 +78,6 @@ class DoctrineUserConsoleCommandFactoryTest extends TestCase
     public function itShouldThrowExceptionIfWrongRoles(): void
     {
         $this->expectException(UserFactoryException::class);
-        /** @var DoctrineUser */
         $this->sut->make([
             'name' => 'agapito',
             'mail' => 'test@test.com',
@@ -93,7 +92,6 @@ class DoctrineUserConsoleCommandFactoryTest extends TestCase
     public function itShouldThrowExceptionIfMandatoryParamsNotPresent(): void
     {
         $this->expectException(UserFactoryException::class);
-        /** @var DoctrineUser */
         $this->sut->make([
             'name' => 'agapito',
             'password' => 'simple-password',

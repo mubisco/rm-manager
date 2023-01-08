@@ -17,7 +17,7 @@ class GenerateResetPasswordTokenCommandHandlerTest extends TestCase
 {
     private GenerateResetPasswordTokenCommandHandler $sut;
     private GenerateResetPasswordTokenCommand $command;
-    private MockObject|UserRepository $mockedRepository;
+    private MockObject&UserRepository $mockedRepository;
     private SpyEventBus $eventBus;
 
     protected function setUp(): void

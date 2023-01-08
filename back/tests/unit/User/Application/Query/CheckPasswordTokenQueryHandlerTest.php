@@ -16,7 +16,7 @@ class CheckPasswordTokenQueryHandlerTest extends TestCase
 {
     private const EXAMPLE_TOKEN = '99c54fef52e9b2db8085d0f588ef8c96f8eb0f3f473456e939eaade887183507';
     private CheckPasswordTokenQueryHandler $sut;
-    private UserRepository|MockObject $userRepository;
+    private UserRepository&MockObject $userRepository;
 
     protected function setUp(): void
     {

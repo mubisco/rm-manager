@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 class ChangeUserPasswordCommandHandlerTest extends TestCase
 {
     private ChangeUserPasswordCommandHandler $sut;
-    private UserRepository|MockObject $repository;
+    private UserRepository&MockObject $repository;
     private PasswordEncryptor $encryptor;
 
     protected function setUp(): void

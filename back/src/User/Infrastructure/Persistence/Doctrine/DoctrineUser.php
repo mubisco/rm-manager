@@ -24,7 +24,9 @@ class DoctrineUser implements UserInterface, PasswordAuthenticatedUserInterface,
 
     private const TOKEN_LIMIT_SECONDS = 3600;
     private Ulid $userId;
+    /** @phpstan-ignore-next-line */
     private DateTimeImmutable $createdAt;
+    /** @phpstan-ignore-next-line */
     private DateTimeImmutable $updatedAt;
 
     /**

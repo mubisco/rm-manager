@@ -39,6 +39,7 @@ final class ChangePasswordController extends AbstractController implements Contr
         return $command;
     }
 
+    /** @param array<string, mixed> $data */
     private function ensureRequestValue(array $data, string $key): string
     {
         if (!isset($data[$key])) {

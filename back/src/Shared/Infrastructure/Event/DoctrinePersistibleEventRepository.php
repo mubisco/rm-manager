@@ -13,6 +13,7 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 
+/** @extends ServiceEntityRepository<PersistibleEvent> */
 final class DoctrinePersistibleEventRepository extends ServiceEntityRepository implements PersistibleEventRepository
 {
     private ObjectManager $entityManager;
