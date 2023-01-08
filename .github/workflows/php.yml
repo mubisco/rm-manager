@@ -17,12 +17,8 @@ jobs:
           file-name: '.env'  # Optional (default : '.env')
           directory: 'back/'  # Optional (default: '.')
         env:  # env available for only this steps
-          DATABASE_URL: ''
-          APP_ENV: env
+          APP_ENV: test
           APP_SECRET: someVeryStrangeSecret
-          FRONT_BASE_URL: http://localhost:5000
-          JWT_PASSPHRASE: asdasdasdasdadasdadadasdasd
-          MESSENGER_TRANSPORT_DSN: doctrine://default
       - name: Validate composer.json and composer.lock
         working-directory: ./back
         run: composer validate --strict
