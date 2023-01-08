@@ -14,11 +14,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: iamsauravsharma/create-dotenv@v1.2.2
         with:
+          env-prefix: 'ENV_KEY_'
           file-name: '.env'  # Optional (default : '.env')
           directory: 'back/'  # Optional (default: '.')
         env:  # env available for only this steps
-          APP_ENV: test
-          APP_SECRET: someVeryStrangeSecret
+          ENV_KEY_APP_ENV: test
+          ENV_KEY_APP_SECRET: someVeryStrangeSecret
       - name: Validate composer.json and composer.lock
         working-directory: ./back
         run: composer validate --strict
