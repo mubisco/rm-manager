@@ -24,4 +24,4 @@ jobs:
         run: npm ci
       - name: Unit testing
         working-directory: ./front
-        run: npm test:unit
+        run: npm run test:unit
