@@ -111,7 +111,7 @@
         "general": "General",
         "influence": "Influence",
         "mystical": "Mystical",
-        "outdoor": "Outdorr",
+        "outdoor": "Outdoor",
         "physical": "Physical",
         "subterfuge": "Subterfuge",
         "spells": "Spells"
@@ -126,6 +126,27 @@
       "RE": "Reasoning",
       "IN": "Insight",
       "PR": "Presence"
+    },
+    "profession": {
+      "select": "Select profession",
+      "no-selected": "Select a profession to see details",
+      "abilities": "Professional Abilities",
+      "favored": "Favored Categories",
+      "key-stats": "Key Stats",
+      "free-category": "Free Choice",
+      "free-category-content": "Select {categories}, {ranks} each",
+      "note": "NOTE",
+      "names": {
+        "cleric": "Cleric",
+        "fighter": "Fighter",
+        "harper": "Harper",
+        "mage": "Mage",
+        "monk": "Monk",
+        "ranger": "Ranger",
+        "rogue": "Rogue",
+        "thief": "Thief",
+        "warriorMage": "Warrior Mage"
+      }
     }
   }
 }

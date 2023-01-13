@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
-import ProfessionSelector from '@/UI/components/Character/Creation/ProfessionSelector.vue'
+import { defineProps } from 'vue'
+import ProfessionStep from '@/UI/components/Character/Creation/Profession/ProfessionStep.vue'
 import StatsDefine from '@/UI/components/Character/Creation/StatsDefine.vue'
 import RaceSelector from '@/UI/components/Character/Creation/RaceSelector.vue'
 import SkillsSelector from '@/UI/components/Character/Creation/SkillsSelector.vue'
@@ -12,7 +12,7 @@ defineProps<{ currentStep: number }>()
 <template>
   <div>
     <v-fade-transition>
-      <ProfessionSelector v-if="currentStep === 0" />
+      <ProfessionStep v-if="currentStep === 0" />
     </v-fade-transition>
     <v-fade-transition>
       <StatsDefine v-if="currentStep === 1" />

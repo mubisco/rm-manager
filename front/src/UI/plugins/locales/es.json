@@ -126,6 +126,27 @@
       "RE": "Razonamiento",
       "IN": "Intuición",
       "PR": "Presencia"
+    },
+    "profession": {
+      "select": "Escoger profesión",
+      "no-selected": "Escoge una profesión para ver los detalles",
+      "abilities": "Capacidades profesionales",
+      "favored": "Categorías favorecidas",
+      "key-stats": "Características clave",
+      "free-category": "Libre elección",
+      "free-category-content": "Elige {categories} categorías, {ranks} en cada una",
+      "note": "NOTA",
+      "names": {
+        "cleric": "Clérigo",
+        "fighter": "Luchador",
+        "harper": "Arpista",
+        "mage": "Mago",
+        "monk": "Monje",
+        "ranger": "Explorador",
+        "rogue": "Bribón",
+        "thief": "Ladrón",
+        "warriorMage": "Mago Guerrero"
+      }
     }
   }
 }
