@@ -54,3 +54,7 @@ watch(messageCount, () => {
     <v-footer app />
   </v-app>
 </template>
+
+<style>
+p { margin-bottom: 1rem; }
+</style>

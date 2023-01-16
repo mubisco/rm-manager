@@ -129,12 +129,15 @@
     },
     "profession": {
       "select": "Escoger profesión",
+      "description": "Descripción",
+      "category": "Categoría",
+      "ranks": "Rangos",
       "no-selected": "Escoge una profesión para ver los detalles",
       "abilities": "Capacidades profesionales",
       "favored": "Categorías favorecidas",
       "key-stats": "Características clave",
       "free-category": "Libre elección",
-      "free-category-content": "Elige {categories} categorías, {ranks} en cada una",
+      "free-category-content": "Elige {categories} categorías, {ranks} rangos en cada una",
       "note": "NOTA",
       "names": {
         "cleric": "Clérigo",

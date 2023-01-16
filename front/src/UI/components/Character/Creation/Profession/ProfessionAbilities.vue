@@ -6,7 +6,9 @@ defineProps<{ abilities: string[], notes: string[] }>()
 </script>
 <template>
   <div>
-    <h2>{{ $t('character.profession.abilities') }}</h2>
+    <h3 class="text-h4">
+      {{ $t('character.profession.abilities') }}
+    </h3>
     <p
       v-for="(ability, index) in abilities"
       :key="index"
@@ -17,8 +19,12 @@ defineProps<{ abilities: string[], notes: string[] }>()
       v-for="(note, index) in notes"
       :key="index"
     >
-      <span><b>{{ $t('character.profession.note') }}</b></span>
-      {{ note }}
+      <span class="text-overline">
+        {{ $t('character.profession.note') }}:
+      </span>
+      <span class="text-caption">
+        {{ note }}
+      </span>
     </p>
   </div>
 </template>

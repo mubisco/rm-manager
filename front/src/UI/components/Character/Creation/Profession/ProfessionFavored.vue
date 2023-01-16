@@ -26,23 +26,50 @@ const parseCategoryKey = (key: string | number): string => {
 </script>
 <template>
   <div>
-    <h2>{{ $t('character.profession.favored') }}</h2>
-    <p
-      v-for="(category, key) in categories"
-      :key="key"
-    >
-      <span>
-        <b>{{ parseCategoryKey(key) }}: </b>
-      </span>
-      <span>{{ category }}</span>
+    <h3 class="text-h4">
+      {{ $t('character.profession.favored') }}
+    </h3>
+    <v-table class="mb-2">
+      <thead>
+        <tr>
+          <th class="text-left">
+            Categoría
+          </th>
+          <th class="text-left">
+            Rangos
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="(category, key) in categories"
+          :key="key"
+        >
+          <th>
+            {{ parseCategoryKey(key) }}
+          </th>
+          <td>
+            {{ category }}
+          </td>
+        </tr>
+        <tr
+          v-if="freeCategories.quantity > 0"
+        >
+          <th>
+            {{ $t('character.profession.free-category') }}
+          </th>
+          <td>
+            {{ $t('character.profession.free-category-content',
+                  { categories: freeCategories.quantity, ranks: freeCategories.ranks }) }}
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
+    <h3 class="text-h4">
+      {{ $t('character.profession.key-stats') }}
+    </h3>
+    <p class="body-1">
+      {{ parsedStats }}
     </p>
-    <p
-      v-if="freeCategories.quantity > 0"
-    >
-      <span><b>{{ $t('character.profession.free-category') }}: </b></span>
-      <span>{{ $t('character.profession.free-category-content', { categories: freeCategories.quantity, ranks: freeCategories.ranks }) }}</span>
-    </p>
-    <h3>{{ $t('character.profession.key-stats') }}</h3>
-    <p>{{ parsedStats }}</p>
   </div>
 </template>

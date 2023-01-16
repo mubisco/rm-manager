@@ -16,8 +16,12 @@ defineProps<{ profession: ProfessionData | null }>()
       {{ $t('character.profession.no-selected') }}
     </v-alert>
     <div v-if="profession !== null">
-      <h2>Descripción</h2>
-      <p>{{ profession.description }}</p>
+      <h2 class="text-h3">
+        {{ $t('character.profession.description' ) }}
+      </h2>
+      <p class="body-1">
+        {{ profession.description }}
+      </p>
       <ProfessionFavored
         :stats="profession.keyStats"
         :categories="profession.fixedCategories"

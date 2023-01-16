@@ -129,6 +129,9 @@
     },
     "profession": {
       "select": "Select profession",
+      "description": "Description",
+      "category": "Category",
+      "ranks": "Ranks",
       "no-selected": "Select a profession to see details",
       "abilities": "Professional Abilities",
       "favored": "Favored Categories",
