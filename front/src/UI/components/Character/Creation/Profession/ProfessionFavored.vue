@@ -33,10 +33,10 @@ const parseCategoryKey = (key: string | number): string => {
       <thead>
         <tr>
           <th class="text-left">
-            Categoría
+            {{ $t('character.profession.category') }}
           </th>
           <th class="text-left">
-            Rangos
+            {{ $t('character.profession.ranks') }}
           </th>
         </tr>
       </thead>
