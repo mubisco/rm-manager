@@ -150,6 +150,13 @@
         "thief": "Ladrón",
         "warriorMage": "Mago Guerrero"
       }
+    },
+    "stats-step": {
+      "method": {
+        "roll": "Tirar características",
+        "points-fixed": "Cantidad de puntos fija",
+        "points-rolled": "Puntos + extra tirada",
+      }
     }
   }
 }

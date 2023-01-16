@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import ProfessionStep from '@/UI/components/Character/Creation/Profession/ProfessionStep.vue'
-import StatsDefine from '@/UI/components/Character/Creation/StatsDefine.vue'
+import StatsCreationStep from '@/UI/components/Character/Creation/Stats/StatsCreationStep.vue'
 import RaceSelector from '@/UI/components/Character/Creation/RaceSelector.vue'
 import SkillsSelector from '@/UI/components/Character/Creation/SkillsSelector.vue'
 import EquipmentSelector from '@/UI/components/Character/Creation/EquipmentSelector.vue'
@@ -15,7 +15,7 @@ defineProps<{ currentStep: number }>()
       <ProfessionStep v-if="currentStep === 0" />
     </v-fade-transition>
     <v-fade-transition>
-      <StatsDefine v-if="currentStep === 1" />
+      <StatsCreationStep v-if="currentStep === 1" />
     </v-fade-transition>
     <v-fade-transition>
       <RaceSelector v-if="currentStep === 2" />

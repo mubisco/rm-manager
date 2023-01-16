@@ -137,7 +137,7 @@
       "favored": "Favored Categories",
       "key-stats": "Key Stats",
       "free-category": "Free Choice",
-      "free-category-content": "Select {categories}, {ranks} each",
+      "free-category-content": "Select {categories}, {ranks} ranks each",
       "note": "NOTE",
       "names": {
         "cleric": "Cleric",
@@ -149,6 +149,14 @@
         "rogue": "Rogue",
         "thief": "Thief",
         "warriorMage": "Warrior Mage"
+      }
+    },
+    "stats-step": {
+      "method": {
+        "roll": "Roll stats",
+        "points-fixed": "Fixed quantity",
+        "points-rolled": "Points with roll",
+
       }
     }
   }
