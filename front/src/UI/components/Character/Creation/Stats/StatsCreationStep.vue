@@ -1,29 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import StatsGenerationSelector from './StatsGenerationSelector.vue'
 
 const selectedMethod = ref('POINTS_FIXED')
+const availablePoints = ref(0)
 </script>
 <template>
   <div>
-    <v-radio-group
-      v-model="selectedMethod"
-      inline
-    >
-      <v-radio
-        :label="$t('character.stats-step.method.roll')"
-        color="primary"
-        value="ROLL"
-      />
-      <v-radio
-        :label="$t('character.stats-step.method.points-fixed')"
-        color="primary"
-        value="POINTS_FIXED"
-      />
-      <v-radio
-        :label="$t('character.stats-step.method.points-rolled')"
-        color="primary"
-        value="POINTS_WITH_ROLL"
-      />
-    </v-radio-group>
+    <StatsGenerationSelector
+      v-model:method="selectedMethod"
+      v-model:points="availablePoints"
+    />
+    <p>{{ selectedMethod }} - {{ availablePoints }}</p>
   </div>
 </template>

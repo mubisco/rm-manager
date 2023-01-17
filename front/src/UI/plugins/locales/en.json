@@ -157,7 +157,9 @@
         "points-fixed": "Fixed quantity",
         "points-rolled": "Points with roll",
 
-      }
+      },
+      "roll-info": "Click button or enter quantity",
+      "roll-action": "Roll 5d10",
     }
   }
 }

@@ -156,7 +156,9 @@
         "roll": "Tirar características",
         "points-fixed": "Cantidad de puntos fija",
         "points-rolled": "Puntos + extra tirada",
-      }
+      },
+      "roll-info": "Click en el botón o introducir manualmente",
+      "roll-action": "Tirar 5d10",
     }
   }
 }
