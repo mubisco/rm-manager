@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import StatsGenerationSelector from './StatsGenerationSelector.vue'
+import StatsAssignment from './StatsAssignment.vue'
 
 const selectedMethod = ref('POINTS_FIXED')
 const availablePoints = ref(0)
@@ -11,6 +12,9 @@ const availablePoints = ref(0)
       v-model:method="selectedMethod"
       v-model:points="availablePoints"
     />
-    <p>{{ selectedMethod }} - {{ availablePoints }}</p>
+    <StatsAssignment
+      :selected-method="selectedMethod"
+      :available-points="availablePoints"
+    />
   </div>
 </template>
