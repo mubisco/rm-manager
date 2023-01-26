@@ -30,22 +30,20 @@ export class Stat {
     return this._value
   }
 
-  increase (delta: number): void {
+  increase (delta: number): Stat {
     if (delta < 1) {
       throw new StatValueError('Cannot increase stat with negative value!!')
     }
     const updatedValue = this._value + delta
-    this.validateValue(updatedValue)
-    this._value = updatedValue
+    return new Stat(this._code, updatedValue)
   }
 
-  reduce (delta: number): void {
+  reduce (delta: number): Stat {
     if (delta < 1) {
       throw new StatValueError('Cannot reduce stat with negative value!!')
     }
     const updatedValue = this._value - delta
-    this.validateValue(updatedValue)
-    this._value = updatedValue
+    return new Stat(this._code, updatedValue)
   }
 
   bonus (): number {
