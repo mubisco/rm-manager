@@ -158,7 +158,13 @@
         "points-rolled": "Puntos + extra tirada",
       },
       "roll-info": "Click en el botón o introducir manualmente",
-      "roll-action": "Tirar 5d10",
+      "roll-action": "Tirar 10d10",
+      "stats-table": {
+        "name": "Característica",
+        "value": "Valor",
+        "bonus": "Bono",
+        "dp": "PD"
+      }
     }
   }
 }

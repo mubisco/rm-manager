@@ -4,7 +4,7 @@ import StatsGenerationSelector from './StatsGenerationSelector.vue'
 import StatsAssignment from './StatsAssignment.vue'
 
 const selectedMethod = ref('POINTS_FIXED')
-const availablePoints = ref(0)
+const availablePoints = ref(50)
 </script>
 <template>
   <div>
