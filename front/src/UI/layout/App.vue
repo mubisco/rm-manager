@@ -3,8 +3,10 @@ import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import NavigationBar from './NavigationBar.vue'
 import DrawerContent from './DrawerContent.vue'
+import DiceBag from '@/UI/components/DiceBag/DiceBag.vue'
 import { useSnackbarStore } from '@/UI/stores/snackbar'
 
+const rightDrawerOpened = ref(false)
 const drawerOpened = ref(false)
 const showSnackbar = ref(false)
 const snackbarType = ref('success')
@@ -30,9 +32,17 @@ watch(messageCount, () => {
     >
       <drawer-content />
     </v-navigation-drawer>
+    <v-navigation-drawer
+      v-model="rightDrawerOpened"
+      location="right"
+      temporary
+    >
+      <DiceBag />
+    </v-navigation-drawer>
     <navigation-bar
       :drawer-opened="drawerOpened"
       @drawer:toggle="drawerOpened = !drawerOpened"
+      @dicebag:toggle="rightDrawerOpened = !rightDrawerOpened"
     />
     <v-main>
       <v-container fluid>

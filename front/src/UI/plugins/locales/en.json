@@ -167,5 +167,13 @@
         "dp": "DP"
       }
     }
-  }
+  },
+  "diceBag": {
+    "title": "Dicebag",
+    "roll": "Roll {dice}",
+    "manual-input": "Or input result",
+    "confirm": "OK",
+    "results": "Results breakdown",
+    "total": "Total: {total}"
+  },
 }

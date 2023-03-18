@@ -3,9 +3,12 @@ import { defineEmits, defineProps } from 'vue'
 import { useLogout } from './useLogout'
 
 defineProps<{ drawerOpened: boolean }>()
-defineEmits<{(eventName: 'drawer:toggle'): void }>()
+defineEmits<{(eventName: 'drawer:toggle'): void,
+  (eventName: 'dicebag:toggle'): void
+}>()
 
 const { isLogged, onLogoutButtonClicked } = useLogout()
+
 </script>
 <template>
   <v-app-bar
@@ -24,6 +27,11 @@ const { isLogged, onLogoutButtonClicked } = useLogout()
       {{ $t('nav.title') }}
     </v-app-bar-title>
     <template #append>
+      <v-btn
+        color="white"
+        icon="mdi-dice-multiple"
+        @click="() => $emit('dicebag:toggle')"
+      />
       <v-btn
         v-if="!isLogged"
         v-cy:login-top-button

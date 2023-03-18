@@ -166,5 +166,13 @@
         "dp": "PD"
       }
     }
+  },
+  "diceBag": {
+    "title": "Bolsa de dados",
+    "roll": "Tirar {dice}",
+    "manual-input": "O escribe el resultado",
+    "confirm": "OK",
+    "results": "Desglose",
+    "total": "Total: {total}"
   }
 }
