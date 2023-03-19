@@ -37,7 +37,7 @@ export class DiceBag {
       breakdown.push(dice.roll())
     })
     return {
-      total: breakdown.reduce((sum, current) => sum + current, 0),
+      total: breakdown.reduce((sum, current) => sum + current, 0) + this._modifier,
       rollBreakdown: breakdown,
       modifier: this._modifier
     }

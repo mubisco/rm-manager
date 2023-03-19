@@ -1,4 +1,37 @@
 <script setup lang="ts">
+import { DiceBag } from '@/Domain/DiceBag/DiceBag'
+import { watch, defineEmits, ref } from 'vue'
+import RollBreakdown from './RollBreakdown.vue'
+
+const diceBag = ref<DiceBag>(DiceBag.fromString('1D10'))
+const rolledTotal = ref(0)
+const manualTotal = ref(null)
+const breakDown = ref<number[]>([])
+const modifier = ref(0)
+
+const emit = defineEmits<{(eventName: 'dicebag:rolled', totalValue: number): number }>()
+const props = defineProps<{ diceBagDefinition: string }>()
+
+watch(() => props.diceBagDefinition, () => {
+  diceBag.value = DiceBag.fromString('10d10+10')
+  rolledTotal.value = 0
+  manualTotal.value = null
+  breakDown.value = []
+  modifier.value = 0
+})
+
+const rollDice = () => {
+  const result = diceBag.value.roll()
+  manualTotal.value = null
+  rolledTotal.value = result.total
+  breakDown.value = result.rollBreakdown
+  modifier.value = result.modifier
+}
+
+const confirmRoll = () => {
+  const total = manualTotal.value ? manualTotal.value : rolledTotal.value
+  emit('dicebag:rolled', total)
+}
 </script>
 <template>
   <div class="pa-1 text-center">
@@ -9,59 +42,34 @@
       class="mb-6"
       variant="outlined"
       prepend-icon="mdi-dice-multiple"
+      :disabled="breakDown.length > 0"
+      @click="rollDice"
     >
-      {{ $t('diceBag.roll', { 'dice': '10d10 + 10' }) }}
+      {{ $t('diceBag.roll', { 'dice': diceBag.toString() }) }}
     </v-btn>
     <v-text-field
+      v-if="breakDown.length === 0"
+      v-model="manualTotal"
       :label="$t('diceBag.manual-input')"
       density="compact"
       type="number"
-      class="text-right"
     />
-    <v-expansion-panels
-      class="mb-6"
+    <RollBreakdown
+      v-if="breakDown.length > 0"
+      :roll-breakdown="breakDown"
+      :total-rolled="rolledTotal"
+      :modifier="modifier"
+    />
+    <div
+      v-if="manualTotal || breakDown.length > 0"
     >
-      <v-expansion-panel
-        :title="$t('diceBag.total', { total: '54' })"
+      <v-btn
+        block
+        prepend-icon="mdi-check-bold"
+        @click="confirmRoll"
       >
-        <v-expansion-panel-text>
-          <v-list
-            density="compact"
-            nav
-          >
-            <v-list-item
-              prepend-icon="mdi-dice-d10"
-              title="6"
-            />
-            <v-list-item
-              prepend-icon="mdi-dice-d10"
-              title="6"
-            />
-            <v-list-item
-              prepend-icon="mdi-dice-d10"
-              title="6"
-            />
-            <v-list-item
-              prepend-icon="mdi-dice-d10"
-              title="6"
-            />
-            <v-list-item
-              prepend-icon="mdi-plus"
-              title="10"
-            />
-            <v-list-item
-              prepend-icon="mdi-minus"
-              title="10"
-            />
-          </v-list>
-        </v-expansion-panel-text>
-      </v-expansion-panel>
-    </v-expansion-panels>
-    <v-btn
-      block
-      prepend-icon="mdi-check-bold"
-    >
-      {{ $t('diceBag.confirm') }}
-    </v-btn>
+        {{ $t('diceBag.confirm') }}
+      </v-btn>
+    </div>
   </div>
 </template>

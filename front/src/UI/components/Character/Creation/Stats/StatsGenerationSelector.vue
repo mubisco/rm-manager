@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { ref, defineProps, computed, defineEmits } from 'vue'
+import { watch, ref, defineProps, computed, defineEmits } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useDicebagStore } from '@/UI/stores/dicebag'
 
 const props = defineProps<{ method: string, points: number }>()
 
 const selectedMethod = ref(props.method ?? '')
 const availablePoints = ref(props.points ?? 0)
+const dicebagStore = useDicebagStore()
+const { totalRolled } = storeToRefs(dicebagStore)
+
+watch(totalRolled, () => {
+  manualPointsUpdate(totalRolled.value)
+})
 
 const emit = defineEmits<{(eventName: 'update:method', selectedOption: string): string,
   (eventName: 'update:points', selectedOption: number): number
@@ -12,7 +20,7 @@ const emit = defineEmits<{(eventName: 'update:method', selectedOption: string): 
 
 const manualPointsUpdate = (points: number): void => {
   availablePoints.value = points
-  updatePoints(points)
+  emit('update:points', points)
 }
 
 const updateMethod = (event: string) => {
@@ -27,25 +35,11 @@ const updateMethod = (event: string) => {
   }
   emit('update:method', event)
 }
-const updatePoints = (event: number) => {
-  emit('update:points', event)
-}
 
 const randomAvailable = computed((): boolean => {
   return selectedMethod.value === 'POINTS_WITH_ROLL'
 })
 
-const rollPoints = (): void => {
-  let total = 0
-  for (let i = 0; i < 10; i++) {
-    total += rollDice()
-  }
-  manualPointsUpdate(total)
-}
-
-const rollDice = (): number => {
-  return Math.floor(Math.random() * (10 - 1 + 1) + 1)
-}
 </script>
 <template>
   <div class="d-flex">
@@ -79,16 +73,16 @@ const rollDice = (): number => {
         <v-btn
           prepend-icon="mdi-dice-d10-outline"
           class="mr-4"
-          @click="rollPoints"
+          @click="dicebagStore.requestRoll('10d10')"
         >
           {{ $t('character.stats-step.roll-action') }}
         </v-btn>
         <v-text-field
           v-model="availablePoints"
           density="compact"
+          readonly
           type="number"
           class="text-right"
-          @update:model-value="updatePoints"
         />
       </div>
       <p class="text-caption m0">
