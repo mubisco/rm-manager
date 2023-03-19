@@ -1,9 +1,11 @@
+import { RollResultDto } from '@/Domain/DiceBag/RollResultDto'
 import { defineStore } from 'pinia'
 
 export const useDicebagStore = defineStore('dicebag', {
   state: () => ({
     totalRolled: 0,
-    dicebagDefinition: ''
+    dicebagDefinition: '',
+    breakdown: [] as number[]
   }),
   getters: {
     rolledValue: state => state.totalRolled,
@@ -13,9 +15,10 @@ export const useDicebagStore = defineStore('dicebag', {
     requestRoll (definition: string): void {
       this.dicebagDefinition = definition
     },
-    doRoll (totalRolled: number): void {
+    updateResult (rolledResult: RollResultDto): void {
       this.dicebagDefinition = ''
-      this.totalRolled = totalRolled
+      this.totalRolled = rolledResult.total
+      this.breakdown = rolledResult.rollBreakdown
     }
   }
 })
