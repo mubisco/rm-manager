@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Skill } from './SkillSet'
 import SkillRow from '@/UI/components/Character/Skills/SkillRow.vue'
-import { defineProps } from 'vue'
 
 defineProps<{
   skills: Skill[]

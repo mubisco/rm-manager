@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref, defineProps, computed, defineEmits } from 'vue'
+import { watch, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDicebagStore } from '@/UI/stores/dicebag'
 

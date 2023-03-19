@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue'
 defineProps<{ loading: boolean, enabled: boolean, buttonLabel: string }>()
 defineEmits<{(eventName: 'button-clicked'): void }>()
 </script>

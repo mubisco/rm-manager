@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { SkillSet } from './SkillSet'
 import SkillTable from '@/UI/components/Character/Skills/SkillTable.vue'
-import { ref, defineProps, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps<{
   skills: SkillSet

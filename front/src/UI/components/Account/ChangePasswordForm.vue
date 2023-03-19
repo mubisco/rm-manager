@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import LoadingButton from '@/UI/components/Shared/LoadingButton.vue'
-import { ref, computed, defineEmits, defineProps } from 'vue'
+import { ref, computed } from 'vue'
 
 defineProps<{ loading: boolean }>()
 defineEmits<{(eventName: 'send-password-clicked', newPassword: string): Promise<void> }>()

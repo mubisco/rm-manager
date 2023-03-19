@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, defineEmits, defineProps } from 'vue'
+import { ref, computed } from 'vue'
 import LoadingButton from '@/UI/components/Shared/LoadingButton.vue'
 
 defineProps<{ loading: boolean }>()

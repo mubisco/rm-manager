@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DiceBag } from '@/Domain/DiceBag/DiceBag'
 import { RollResultDto } from '@/Domain/DiceBag/RollResultDto'
-import { computed, watch, defineEmits, ref } from 'vue'
+import { computed, watch, ref } from 'vue'
 import RollBreakdown from './RollBreakdown.vue'
 
 const diceBag = ref<DiceBag>(DiceBag.fromString('1D10'))

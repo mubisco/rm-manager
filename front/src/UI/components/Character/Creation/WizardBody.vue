@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import ProfessionStep from '@/UI/components/Character/Creation/Profession/ProfessionStep.vue'
 import StatsCreationStep from '@/UI/components/Character/Creation/Stats/StatsCreationStep.vue'
 import RaceSelector from '@/UI/components/Character/Creation/RaceSelector.vue'

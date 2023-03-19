@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import { ProfessionData } from './ProfessionData'
 import ProfessionAbilities from './ProfessionAbilities.vue'
 import ProfessionFavored from './ProfessionFavored.vue'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ProfessionKey } from './ProfessionKey'
-import { ref, defineProps, defineEmits, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 interface TranslatedProfession {
