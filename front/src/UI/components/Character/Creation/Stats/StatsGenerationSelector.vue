@@ -36,10 +36,6 @@ const updateMethod = (event: string) => {
   emit('update:method', event)
 }
 
-const randomAvailable = computed((): boolean => {
-  return selectedMethod.value === 'POINTS_WITH_ROLL'
-})
-
 </script>
 <template>
   <div class="d-flex">
@@ -67,7 +63,7 @@ const randomAvailable = computed((): boolean => {
       </v-radio-group>
     </div>
     <div
-      v-show="randomAvailable"
+      v-show="selectedMethod === 'POINTS_WITH_ROLL'"
     >
       <div class="d-flex">
         <v-btn
@@ -77,21 +73,20 @@ const randomAvailable = computed((): boolean => {
         >
           {{ $t('character.stats-step.roll-action') }}
         </v-btn>
-        <v-text-field
-          v-model="availablePoints"
-          density="compact"
-          readonly
-          type="number"
-          class="text-right"
-        />
+        <div class="text-field-wrapper">
+          <v-text-field
+            v-model="availablePoints"
+            density="compact"
+            readonly
+            type="number"
+          />
+        </div>
       </div>
-      <p class="text-caption m0">
-        <v-icon
-          icon="mdi-information-outline"
-          size="x-small"
-        />
-        {{ $t('character.stats-step.roll-info') }}
-      </p>
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+.text-field-wrapper {
+  width: 100px;
+}
+</style>
