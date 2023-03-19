@@ -1,5 +1,4 @@
 import { DiceBag } from '@/Domain/DiceBag/DiceBag'
-import type { RollResultDto } from '@/Domain/DiceBag/RollResultDto'
 import { describe, test, expect } from 'vitest'
 
 describe('Testing DiceBag', () => {
@@ -28,5 +27,14 @@ describe('Testing DiceBag', () => {
     expect(result.total).not.toBeNull()
     expect(result.rollBreakdown.length).toBe(10)
     expect(result.modifier).toBe(-10)
+  })
+  test('It should return proper Result when lower Treshold defined', () => {
+    const oneSut = DiceBag.withTreshold('10D6', 5)
+    const result = oneSut.roll()
+    const breakdowns = result.rollBreakdown
+    for (let i = 0; i < 10; i++) {
+      const currentRoll = breakdowns[i]
+      expect(currentRoll).toBeGreaterThanOrEqual(5)
+    }
   })
 })

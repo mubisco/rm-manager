@@ -7,13 +7,18 @@ export class DiceBag {
   private _diceNumber: number
   private _diceSides: string
   private _modifier: number
+  private _treshold: number
   private _dices: Dice[]
 
-  public static fromString (value: string): DiceBag {
-    return new DiceBag(value)
+  public static withTreshold (value: string, treshold: number): DiceBag {
+    return new DiceBag(value, treshold)
   }
 
-  private constructor (value: string) {
+  public static fromString (value: string): DiceBag {
+    return new DiceBag(value, 0)
+  }
+
+  private constructor (value: string, treshold: number) {
     if (!BAG_REGEX.test(value)) {
       throw new RangeError(value + ' Value provided for Dicebag not valid')
     }
@@ -22,6 +27,7 @@ export class DiceBag {
     this._diceSides = result && result[2] ? result[2] : ''
     this._modifier = result && result[3] ? parseInt(result[3], 10) : 0
     this._dices = []
+    this._treshold = treshold
     this.createDices()
   }
 
@@ -34,13 +40,21 @@ export class DiceBag {
   roll (): RollResultDto {
     const breakdown:number[] = []
     this._dices.forEach((dice: Dice) => {
-      breakdown.push(dice.roll())
+      breakdown.push(this.rollDie(dice))
     })
     return {
       total: breakdown.reduce((sum, current) => sum + current, 0) + this._modifier,
       rollBreakdown: breakdown,
       modifier: this._modifier
     }
+  }
+
+  private rollDie (dice: Dice): number {
+    let rollValue = dice.roll()
+    while (rollValue < this._treshold) {
+      rollValue = dice.roll()
+    }
+    return rollValue
   }
 
   toString (): string {
