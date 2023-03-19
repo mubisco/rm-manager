@@ -12,7 +12,8 @@ const emit = defineEmits<{(eventName: 'dicebag:rolled', totalValue: RollResultDt
 const props = defineProps<{ diceBagDefinition: string }>()
 
 watch(() => props.diceBagDefinition, () => {
-  diceBag.value = DiceBag.fromString('10d10+10')
+  const definition = props.diceBagDefinition !== '' ? props.diceBagDefinition : '1D10'
+  diceBag.value = DiceBag.fromString(definition)
   manualTotal.value = null
   rolledResult.value = null
 })
