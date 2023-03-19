@@ -2,11 +2,16 @@
 import { watch, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDicebagStore } from '@/UI/stores/dicebag'
+import { v4 as uuidv4 } from 'uuid'
+
 const dicebagStore = useDicebagStore()
 const { totalRolled } = storeToRefs(dicebagStore)
+const rollKey = ref(uuidv4())
 
 watch(totalRolled, () => {
-  rolledResults.value = dicebagStore.breakdown
+  if (dicebagStore.rollKey === rollKey.value) {
+    rolledResults.value = dicebagStore.breakdown
+  }
 })
 
 defineProps<{ availablePoints: number, selectedMethod: string }>()
@@ -33,7 +38,7 @@ const rolledResults = ref<number[]>([])
           block
           prepend-icon="mdi-dice-d10-outline"
           class="mr-4"
-          @click="dicebagStore.requestRoll('8d100')"
+          @click="dicebagStore.requestRollWithTreshold(rollKey, '8d100', 40)"
         >
           Roll 8D100
         </v-btn>

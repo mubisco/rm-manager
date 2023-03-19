@@ -2,16 +2,20 @@
 import { watch, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDicebagStore } from '@/UI/stores/dicebag'
+import { v4 as uuidv4 } from 'uuid'
 
 const props = defineProps<{ method: string, points: number }>()
 
+const rollKey = ref(uuidv4())
 const selectedMethod = ref(props.method ?? '')
 const availablePoints = ref(props.points ?? 0)
 const dicebagStore = useDicebagStore()
 const { totalRolled } = storeToRefs(dicebagStore)
 
 watch(totalRolled, () => {
-  manualPointsUpdate(totalRolled.value)
+  if (dicebagStore.rollKey === rollKey.value) {
+    manualPointsUpdate(totalRolled.value)
+  }
 })
 
 const emit = defineEmits<{(eventName: 'update:method', selectedOption: string): string,
@@ -69,7 +73,7 @@ const updateMethod = (event: string) => {
         <v-btn
           prepend-icon="mdi-dice-d10-outline"
           class="mr-4"
-          @click="dicebagStore.requestRoll('10d10')"
+          @click="dicebagStore.requestRoll(rollKey, '10d10')"
         >
           {{ $t('character.stats-step.roll-action') }}
         </v-btn>

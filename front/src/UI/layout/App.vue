@@ -31,7 +31,6 @@ watch(dicebagDefinition, () => {
       temporary
     >
       <DiceBag
-        :dice-bag-definition="dicebagStore.dicebagDefinition"
         @dicebag:rolled="dicebagStore.updateResult"
       />
     </v-navigation-drawer>

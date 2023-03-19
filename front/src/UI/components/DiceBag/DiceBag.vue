@@ -3,17 +3,20 @@ import { DiceBag } from '@/Domain/DiceBag/DiceBag'
 import { RollResultDto } from '@/Domain/DiceBag/RollResultDto'
 import { computed, watch, ref } from 'vue'
 import RollBreakdown from './RollBreakdown.vue'
+import { useDicebagStore } from '@/UI/stores/dicebag'
+import { storeToRefs } from 'pinia'
 
 const diceBag = ref<DiceBag>(DiceBag.fromString('1D10'))
 const rolledResult = ref<RollResultDto | null>(null)
 const manualTotal = ref(null)
+const dicebagStore = useDicebagStore()
+const { definition } = storeToRefs(dicebagStore)
 
 const emit = defineEmits<{(eventName: 'dicebag:rolled', totalValue: RollResultDto): number }>()
-const props = defineProps<{ diceBagDefinition: string }>()
 
-watch(() => props.diceBagDefinition, () => {
-  const definition = props.diceBagDefinition !== '' ? props.diceBagDefinition : '1D10'
-  diceBag.value = DiceBag.fromString(definition)
+watch(definition, () => {
+  const parsedDefinition = definition.value !== '' ? definition.value : '1D10'
+  diceBag.value = DiceBag.withTreshold(parsedDefinition, dicebagStore.getTreshold)
   manualTotal.value = null
   rolledResult.value = null
 })

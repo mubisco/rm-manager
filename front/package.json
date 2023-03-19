@@ -23,6 +23,7 @@
     "path": "^0.12.7",
     "pinia": "^2.0.28",
     "roboto-fontface": "*",
+    "uuid": "^9.0.0",
     "vite-plugin-vuetify": "^1.0.1",
     "vue": "^3.2.45",
     "vue-i18n": "^9.2.2",
