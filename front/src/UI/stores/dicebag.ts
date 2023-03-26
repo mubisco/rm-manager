@@ -23,7 +23,6 @@ export const useDicebagStore = defineStore('dicebag', {
       this.treshold = 0
     },
     requestRollWithTreshold (key: string, definition: string, treshold: number): void {
-      console.log(key)
       this.key = key as string
       this.dicebagDefinition = definition
       this.treshold = treshold

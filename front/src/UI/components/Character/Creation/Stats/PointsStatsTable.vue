@@ -21,7 +21,6 @@ const stats = ref<{ [code: string]: Stat | null }>({
 const onStatIncreased = (code: string, amount: number): void => {
   const stat = stats.value[code]
   const updatedStat = stat?.increase(amount)
-  console.log(updatedStat)
   updateStat(updatedStat, code)
   emits('points:updated', -amount)
 }
