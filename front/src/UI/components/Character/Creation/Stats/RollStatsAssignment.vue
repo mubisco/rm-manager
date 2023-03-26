@@ -34,11 +34,8 @@ const onRollAssigned = (rollIndex: number): void => {
   <div>
     <v-row>
       <v-col cols="2">
-        <RollBoard
-          :rolled-results="rolledResults"
-          :assigned-rolls-index="assignedRollsIndex"
-        />
         <v-btn
+          v-if="rolledResults.length === 0"
           block
           prepend-icon="mdi-dice-d10-outline"
           class="mr-4"
@@ -46,6 +43,17 @@ const onRollAssigned = (rollIndex: number): void => {
         >
           Roll 8D100
         </v-btn>
+        <v-sheet
+          v-if="rolledResults.length !== 0"
+          class="text-center pa-2 mt-4"
+          border
+          rounded
+        >
+          <RollBoard
+            :rolled-results="rolledResults"
+            :assigned-rolls-index="assignedRollsIndex"
+          />
+        </v-sheet>
       </v-col>
       <v-col cols="10">
         <StatsTable

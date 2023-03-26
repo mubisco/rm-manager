@@ -3,7 +3,7 @@
 defineProps<{ availablePoints: number }>()
 </script>
 <template>
-  <div class="d-flex justify-space-between align-center mt-3">
+  <div class="d-flex justify-space-between align-center">
     {{ $t('character.stats-step.available-points') }}
     <v-chip
       color="primary"

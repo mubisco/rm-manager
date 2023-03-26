@@ -18,7 +18,13 @@ const onPointsUpdated = (amount: number): void => {
 <template>
   <v-row>
     <v-col cols="2">
-      <AvailablePoints :available-points="currentPoints" />
+      <v-sheet
+        class="text-center pa-2"
+        border
+        rounded
+      >
+        <AvailablePoints :available-points="currentPoints" />
+      </v-sheet>
     </v-col>
     <v-col cols="10">
       <PointsStatsTable
