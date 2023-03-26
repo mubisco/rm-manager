@@ -39,7 +39,7 @@ watch(dicebagDefinition, () => {
       @drawer:toggle="drawerOpened = !drawerOpened"
       @dicebag:toggle="rightDrawerOpened = !rightDrawerOpened"
     />
-    <v-main>
+    <v-main class="main-container">
       <v-container fluid>
         <router-view />
       </v-container>
@@ -51,4 +51,11 @@ watch(dicebagDefinition, () => {
 
 <style>
 p { margin-bottom: 1rem; }
+</style>
+
+<style scoped lang="scss">
+.main-container {
+  background: #E5E5E5;
+}
+
 </style>
