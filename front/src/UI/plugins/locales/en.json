@@ -160,11 +160,17 @@
       },
       "roll-info": "Click button or enter quantity",
       "roll-action": "Roll 10d10",
+      "available-points": "Available Points",
+      "dp-costs": {
+        "range": "Stat Range",
+        "cost": "Cost per Point"
+      },
       "stats-table": {
         "name": "Stat",
         "value": "Value",
         "bonus": "Bonus",
-        "dp": "DP"
+        "dp": "DP",
+        "points-spent": "Points Spent"
       }
     }
   },
