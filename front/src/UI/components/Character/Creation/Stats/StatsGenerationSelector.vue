@@ -18,8 +18,9 @@ watch(totalRolled, () => {
   }
 })
 
-const emit = defineEmits<{(eventName: 'update:method', selectedOption: string): string,
-  (eventName: 'update:points', selectedOption: number): number
+const emit = defineEmits<{
+ (eventName: 'update:method', selectedOption: string): string,
+ (eventName: 'update:points', selectedOption: number): number
 }>()
 
 const manualPointsUpdate = (points: number): void => {

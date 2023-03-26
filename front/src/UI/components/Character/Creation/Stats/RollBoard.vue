@@ -3,6 +3,9 @@
 const props = defineProps<{ rolledResults: number[], assignedRollsIndex: number[] }>()
 
 const drag = (event: DragEvent, rollIndex: number): void => {
+  if (event === null) {
+    return
+  }
   event.dataTransfer.setData('index', rollIndex + '')
   event.dataTransfer.setData('value', props.rolledResults[rollIndex] + '')
 }

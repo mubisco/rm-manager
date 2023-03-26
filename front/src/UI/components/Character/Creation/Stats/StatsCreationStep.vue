@@ -22,6 +22,7 @@ const availablePoints = ref(50)
     />
     <PointsWithRollStatsAssignment
       v-if="selectedMethod === 'POINTS_WITH_ROLL'"
+      :available-points="availablePoints"
     />
   </div>
 </template>

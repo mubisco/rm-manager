@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Stat } from '@/Domain/Character/Stat'
+import { StatCode } from '@/Domain/Character/StatCode'
 
 const assignedRolls = ref<{ originalIndex: number; roll: number }[]>([])
 
@@ -15,7 +16,7 @@ const drop = (event: DragEvent, rowIndex: number, code: string): void => {
     emit('roll:removed', assignedRolls.value[rowIndex].originalIndex)
   }
   assignedRolls.value[rowIndex] = { originalIndex: index, roll: value }
-  stats.value[code] = Stat.fromValue(code, value)
+  stats.value[code] = Stat.fromValue(code as StatCode, value)
   emit('roll:assigned', index)
 }
 
@@ -70,10 +71,10 @@ const stats = ref<{ [code: string]: Stat | null }>({
           </v-chip>
         </td>
         <td>
-          {{ stats[code] ? stats[code].bonus() : '-' }}
+          {{ stats && stats[code] ? stats[code].bonus() : '-' }}
         </td>
         <td>
-          {{ stats[code] ? stats[code].developmentPoints() : '-' }}
+          {{ stats && stats[code] ? stats[code].developmentPoints() : '-' }}
         </td>
       </tr>
     </tbody>
