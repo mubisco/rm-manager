@@ -17,7 +17,6 @@ onMounted(async () => {
 })
 
 const onValueUpdated = (event: string) => {
-  console.log('onValueUpdated', event)
   emit('update:modelValue', event as RaceCode)
 }
 

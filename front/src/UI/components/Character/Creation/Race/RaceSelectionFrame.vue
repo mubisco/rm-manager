@@ -13,5 +13,15 @@ const currentSelectedRace = ref<RaceCode | null>(props.selectedRace as RaceCode 
   <RaceSelector
     v-model="currentSelectedRace"
   />
-  <RaceDetails :selected-race="currentSelectedRace" />
+  <RaceDetails
+    v-if="currentSelectedRace"
+    :selected-race="currentSelectedRace"
+  />
+  <v-alert
+    v-else
+    type="info"
+    variant="tonal"
+  >
+    <p>Please select a race to view details</p>
+  </v-alert>
 </template>
