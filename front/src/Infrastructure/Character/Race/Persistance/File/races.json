@@ -24,6 +24,7 @@
     "lifespan": "Los Enanos son una raza longeva, con un promedio de entre 300 a 400 años de edad",
     "culture": "Los Enanos normalmente crean sus propias sociedades, que reflejan la cultura de las Cavernas Profundas, pero pueden encontrarse en cualquier cultura.",
     "defaultCultures": ["DEEP_WARREN"],
+    "selectableAbilities": {},
     "specialAbilities": {
       "GREATER_DARK_VISION": {
         "name": "Visión en la Oscuridad (Mayor)",
@@ -67,6 +68,7 @@
     "lifespan": "Fácilmente la más longeva de todas las razas, los Elfos normalmente viven por encima de los 500 años de edad, ¡con algunos casos de Elfos que han sobrevivido por encima de 600 años!",
     "culture": "Las sociedades élficas están normalmente estructuradas siguiendo de cerca la cultura Silvana, pero pueden encontrarse en cualquier cultura.",
     "defaultCultures": ["SYLVAN"],
+    "selectableAbilities": {},
     "specialAbilities": {
       "ENHANCED_SENSES": {
         "name": "Sentidos Aguzados",
@@ -110,6 +112,7 @@
     "lifespan": "Se ha sabido de Gnomos que viven tanto como 300 años, aunque el promedio está más cerca de los 250 años.",
     "culture": "Los Gnomos prefieren la Cultura de las Cavernas en Superficie.",
     "defaultCultures": ["SHALLOW_WARRENS"],
+    "selectableAbilities": {},
     "specialAbilities": {
       "DARK_VISION_LESSER": {
         "name": "Visión en la Oscuridad (Menor)",
@@ -153,6 +156,7 @@
     "lifespan": " Los Gryx tienen un promedio de esperanza de vida de cerca de 80 años, aunque unos poco individuos excepcionales han vivido tanto como 95 años.",
     "culture": "Los Gryx pueden encontrarse en cualquier comunidad, pero prefieren las culturas Silvana, Bajo las Colinas, o Rural.",
     "defaultCultures": ["SYLVAN", "UNDERHILL", "RURAL"],
+    "selectableAbilities": {},
     "specialAbilities": {
       "LIGHTNING_REFLEXES": {
         "name": "Reflejos de Relámpago",
@@ -196,6 +200,7 @@
     "lifespan": "Los Medianos tienden a vivir entre 100 y 150 años de edad, muy pocos alcanzan los 180 años.",
     "culture": "Las sociedades Medianas están muy a menudo estructuradas alrededor de una cultura Nómada. Aquellos Medianos que finalmente se han asentado prefieren a menudo la cultura Bajo las Colinas.",
     "defaultCultures": ["NOMAD", "UNDERHILL"],
+    "selectableAbilities": {},
     "specialAbilities": {
       "BLAZING_SPEED": {
         "name": "Velocidad Deslumbrante",

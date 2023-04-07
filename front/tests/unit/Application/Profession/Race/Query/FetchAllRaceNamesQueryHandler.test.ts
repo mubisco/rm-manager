@@ -3,7 +3,8 @@ import { RaceRepositoryError } from '@/Domain/Character/Profession/Race/RaceRepo
 import { beforeEach, describe, vi, test, expect } from 'vitest'
 
 const mockedRepository = {
-  fetchNames: vi.fn()
+  fetchNames: vi.fn(),
+  ofCode: vi.fn()
 }
 
 describe('Testing FetchAllRacesNamesQueryHandler', () => {

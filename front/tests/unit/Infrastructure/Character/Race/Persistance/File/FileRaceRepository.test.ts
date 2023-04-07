@@ -1,3 +1,4 @@
+import { RaceCode } from '@/Domain/Character/Profession/Race/RaceCode'
 import { FileRaceRepository } from '@/Infrastructure/Character/Race/Persistance/File/FileRaceRepository'
 import { describe, test, expect } from 'vitest'
 
@@ -22,5 +23,10 @@ describe('Testing FileRaceRepository', () => {
     expect(result[4].name).toBe('Halfling')
     expect(result[5].code).toBe('HUMAN')
     expect(result[5].name).toBe('Humano')
+  })
+  test('Should return proper race', async () => {
+    const sut = new FileRaceRepository()
+    const result = await sut.ofCode(RaceCode.HUMAN)
+    expect(result.code).toBe('HUMAN')
   })
 })
