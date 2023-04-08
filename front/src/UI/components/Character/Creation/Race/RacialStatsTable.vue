@@ -18,7 +18,7 @@ defineProps<{
           colspan="8"
           class="text-center"
         >
-          Características
+          {{ $t('character.races.stats') }}
         </th>
       </tr>
       <tr>
@@ -67,7 +67,7 @@ defineProps<{
     type="info"
     density="compact"
   >
-    Humans do not have fixed racial bonuses. Players of a human character have 10 points to divide any way they like between the 8 racial stat bonuses. No stat may have a bonus greater than +3
+    {{ $t('character.races.human-stats') }}
   </v-alert>
   <v-table>
     <thead>
@@ -78,24 +78,24 @@ defineProps<{
           colspan="3"
           class="text-center"
         >
-          Bono Resistencia
+          {{ $t('character.races.resistance-bonuses') }}
         </th>
       </tr>
       <tr>
         <th class="text-center">
-          Aguante
+          {{ $t('character.races.endurance') }}
         </th>
         <th class="text-center">
-          Puntos de Poder
+          {{ $t('character.races.power-points') }}
         </th>
         <th class="text-center">
-          Resistencia
+          {{ $t('character.races.stamina') }}
         </th>
         <th class="text-center">
-          Voluntad
+          {{ $t('character.races.will') }}
         </th>
         <th class="text-center">
-          Magia
+          {{ $t('character.races.magic') }}
         </th>
       </tr>
     </thead>

@@ -151,6 +151,20 @@
         "warriorMage": "Mago Guerrero"
       }
     },
+    "races": {
+      "stats": "Bonificadores Raciales a Características",
+      "human-stats": "Los humanos no tienen bonificaciones raciales fijas. Los jugadores con un personaje humano tienen 10 puntos para dividir de cualquier forma que les parezca entre las 8 bonificaciones raciales por característica. Ninguna característica puede tener una bonificación mayor que +3.",
+      "resistance-bonuses": "Bonificaciones de Resistencia",
+      "stamina": "Aguante",
+      "will": "Voluntad",
+      "magic": "Magia",
+      "power-points": "Puntos de Poder",
+      "endurance": "Fortaleza",
+      "demeanor": "Conducta",
+      "appearance": "Apariencia",
+      "lifespan": "Esperanza de vida",
+      "culture": "Cultura"
+    },
     "stats-step": {
       "method": {
         "roll": "Tirar características",

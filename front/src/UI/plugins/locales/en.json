@@ -151,6 +151,20 @@
         "warriorMage": "Warrior Mage"
       }
     },
+    "races": {
+      "stats": "Racial Stat Modifiers",
+      "human-stats": "Humans do not have fixed racial bonuses. Players of a human character have 10 points to divide any way they like between the 8 racial stat bonuses. No stat may have a bonus greater than +3",
+      "resistance-bonuses": "Resistance Bonuses",
+      "stamina": "Stamina",
+      "will": "Will",
+      "magic": "Magic",
+      "power-points": "Power Points",
+      "endurance": "Endurance",
+      "demeanor": "Demeanor",
+      "appearance": "Appearance",
+      "lifespan": "Lifespan",
+      "culture": "Culture"
+    },
     "stats-step": {
       "method": {
         "roll": "Roll stats",

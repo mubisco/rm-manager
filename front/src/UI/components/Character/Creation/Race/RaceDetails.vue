@@ -35,19 +35,19 @@ watch(() => props.selectedRace, () => {
       :resistance-bonuses="raceData.resistanceBonuses"
     />
     <p class="text-subtitle-2">
-      Conducta
+      {{ $t('character.races.demeanor') }}
     </p>
     <CustomMarkdown :content="raceData.demeanor" />
     <p class="text-subtitle-2">
-      Apariencia
+      {{ $t('character.races.appearance') }}
     </p>
     <CustomMarkdown :content="raceData.appearance" />
     <p class="text-subtitle-2">
-      Esperanza de vida
+      {{ $t('character.races.lifespan') }}
     </p>
     <CustomMarkdown :content="raceData.lifespan" />
     <p class="text-subtitle-2">
-      Cultura
+      {{ $t('character.races.culture') }}
     </p>
     <CustomMarkdown :content="raceData.culture" />
     <SpecialAbilitiesDisplay
