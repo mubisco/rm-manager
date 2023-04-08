@@ -1,8 +1,8 @@
 import { beforeEach, vi, describe, test, expect } from 'vitest'
-import { FetchRaceByCodeQueryHandler } from '@/Application/Profession/Race/Query/FetchRaceByCodeQueryHandler'
-import { RaceNotFoundError } from '@/Domain/Character/Profession/Race/RaceNotFoundError'
-import { FetchRaceByCodeQuery } from '@/Application/Profession/Race/Query/FetchRaceByCodeQuery'
-import { RaceCode } from '@/Domain/Character/Profession/Race/RaceCode'
+import { FetchRaceByCodeQueryHandler } from '@/Application/Race/Query/FetchRaceByCodeQueryHandler'
+import { RaceNotFoundError } from '@/Domain/Character/Race/RaceNotFoundError'
+import { FetchRaceByCodeQuery } from '@/Application/Race/Query/FetchRaceByCodeQuery'
+import { RaceCode } from '@/Domain/Character/Race/RaceCode'
 
 const mockedRepository = {
   fetchNames: vi.fn(),

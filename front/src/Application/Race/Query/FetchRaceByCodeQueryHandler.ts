@@ -1,6 +1,6 @@
-import { RaceCode } from '@/Domain/Character/Profession/Race/RaceCode'
-import { RaceDto } from '@/Domain/Character/Profession/Race/RaceDto'
-import { RaceRepository } from '@/Domain/Character/Profession/Race/RaceRepository'
+import { RaceCode } from '@/Domain/Character/Race/RaceCode'
+import { RaceDto } from '@/Domain/Character/Race/RaceDto'
+import { RaceRepository } from '@/Domain/Character/Race/RaceRepository'
 import { FetchRaceByCodeQuery } from './FetchRaceByCodeQuery'
 
 export class FetchRaceByCodeQueryHandler {

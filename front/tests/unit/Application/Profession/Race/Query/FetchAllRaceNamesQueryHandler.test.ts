@@ -1,5 +1,5 @@
-import { FetchAllRacesNamesQueryHandler } from '@/Application/Profession/Race/Query/FetchAllRacesNamesQueryHandler'
-import { RaceRepositoryError } from '@/Domain/Character/Profession/Race/RaceRepositoryError'
+import { FetchAllRacesNamesQueryHandler } from '@/Application/Race/Query/FetchAllRacesNamesQueryHandler'
+import { RaceRepositoryError } from '@/Domain/Character/Race/RaceRepositoryError'
 import { beforeEach, describe, vi, test, expect } from 'vitest'
 
 const mockedRepository = {

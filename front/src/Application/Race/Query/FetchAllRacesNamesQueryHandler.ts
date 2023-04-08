@@ -1,5 +1,5 @@
-import { RaceName } from '@/Domain/Character/Profession/Race/RaceName'
-import { RaceRepository } from '@/Domain/Character/Profession/Race/RaceRepository'
+import { RaceName } from '@/Domain/Character/Race/RaceName'
+import { RaceRepository } from '@/Domain/Character/Race/RaceRepository'
 
 export class FetchAllRacesNamesQueryHandler {
   private _repository: RaceRepository

@@ -1,4 +1,4 @@
-import { RaceCode } from '@/Domain/Character/Profession/Race/RaceCode'
+import { RaceCode } from '@/Domain/Character/Race/RaceCode'
 import type { RacialStatsModifiers } from './RacialStatsModifiers'
 import type { ResistanceBonuses } from './ResistanceBonuses'
 import type { Culture } from './Culture'

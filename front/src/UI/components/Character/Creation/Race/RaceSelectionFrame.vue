@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import RaceSelector from './RaceSelector.vue'
 import RaceDetails from './RaceDetails.vue'
-import { RaceCode } from '@/Domain/Character/Profession/Race/RaceCode'
+import { RaceCode } from '@/Domain/Character/Race/RaceCode'
 
 const props = defineProps<{ selectedRace: string }>()
 

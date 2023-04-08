@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { RacialStatsModifiers } from '@/Domain/Character/Profession/Race/RacialStatsModifiers'
-import { ResistanceBonuses } from '@/Domain/Character/Profession/Race/ResistanceBonuses'
+import { RacialStatsModifiers } from '@/Domain/Character/Race/RacialStatsModifiers'
+import { ResistanceBonuses } from '@/Domain/Character/Race/ResistanceBonuses'
 
 defineProps<{
   statModifiers: RacialStatsModifiers,

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { watch, ref } from 'vue'
-import { RaceCode } from '@/Domain/Character/Profession/Race/RaceCode'
-import { RaceDto } from '@/Domain/Character/Profession/Race/RaceDto'
-import { FetchRaceByCodeQueryHandler } from '@/Application/Profession/Race/Query/FetchRaceByCodeQueryHandler'
-import { FetchRaceByCodeQuery } from '@/Application/Profession/Race/Query/FetchRaceByCodeQuery'
+import { RaceCode } from '@/Domain/Character/Race/RaceCode'
+import { RaceDto } from '@/Domain/Character/Race/RaceDto'
+import { FetchRaceByCodeQueryHandler } from '@/Application/Race/Query/FetchRaceByCodeQueryHandler'
+import { FetchRaceByCodeQuery } from '@/Application/Race/Query/FetchRaceByCodeQuery'
 import { FileRaceRepository } from '@/Infrastructure/Character/Race/Persistance/File/FileRaceRepository'
 import CustomMarkdown from '@/UI/components/Shared/CustomMarkdown.vue'
 import SpecialAbilitiesDisplay from './SpecialAbilitiesDisplay.vue'

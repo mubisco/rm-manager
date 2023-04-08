@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { FetchAllRacesNamesQueryHandler } from '@/Application/Profession/Race/Query/FetchAllRacesNamesQueryHandler'
+import { FetchAllRacesNamesQueryHandler } from '@/Application/Race/Query/FetchAllRacesNamesQueryHandler'
 import { FileRaceRepository } from '@/Infrastructure/Character/Race/Persistance/File/FileRaceRepository'
-import type { RaceName } from '@/Domain/Character/Profession/Race/RaceName'
-import { RaceCode } from '@/Domain/Character/Profession/Race/RaceCode'
+import type { RaceName } from '@/Domain/Character/Race/RaceName'
+import { RaceCode } from '@/Domain/Character/Race/RaceCode'
 
 const props = defineProps<{ modelValue: RaceCode | null }>()
 const emit = defineEmits<{(eventName: 'update:modelValue', selectedRace: RaceCode): void }>()

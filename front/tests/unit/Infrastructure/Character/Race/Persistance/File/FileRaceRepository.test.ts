@@ -1,4 +1,4 @@
-import { RaceCode } from '@/Domain/Character/Profession/Race/RaceCode'
+import { RaceCode } from '@/Domain/Character/Race/RaceCode'
 import { FileRaceRepository } from '@/Infrastructure/Character/Race/Persistance/File/FileRaceRepository'
 import { describe, test, expect } from 'vitest'
 

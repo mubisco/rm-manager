@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SpecialAbilityDescription } from '@/Domain/Character/Profession/Race/SpecialAbilityDescription'
+import { SpecialAbilityDescription } from '@/Domain/Character/Race/SpecialAbilityDescription'
 
 defineProps<{
   abilities: { [key: string]: SpecialAbilityDescription },
