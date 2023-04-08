@@ -1,0 +1,190 @@
+[
+  {
+    "code": "DEEP_WARRENS",
+    "name": "Cavernas Profundas",
+    "description": "La cultura de Cavernas Profundas se asienta firmemente sobre los ideales de una ética inquebrantable y un estoicismo que está presente en cada aspecto singular de sus vidas. Los ideales de las Cavernas Profundas acentúan el trabajo sin descanso y la celebración jovial cuando el día ha concluido. La cultura también valora la artesanía casi de cualquier tipo, ya sea el trabajo de metal o gemas, o incluso algo tan simple como la talla de madera. Cada miembro de la cultura posee habilidad en una o más artesanías, e individuos particularmente capaces serán competentes en muchas.",
+    "preferred-locations": "Este tipo de sociedad prefiere construir comunidades subterráneas, cobijadas dentro de ásperas colinas o bajo montañas. La mayoría se encontrará cerca de substanciales depósitos de metales preciosos o gemas.",
+    "clothing-decoration": "La vestimenta que sea áspera, duradera y coloreada en sombríos tonos de tierra es la norma. Los varones con barba tienden a trenzar sus cabellos y decorarlos con colorísticos abalorios. La situación social de un individuo puede ser determinada por lo ornamentada que tenga su barba.",
+    "demeanor": "Los individuos de este tipo de cultura son desconfiados por naturaleza hacia los extraños, y son lentos en hacer amigos. Una vez hecha la amistad, sin embargo, las comunidades de Cavernas Profundas tratarán a los recién llegados como familia.",
+    "starting-languages": {
+      "RACIAL": { "spoken": 6, "written": 5 },
+      "COMMON": { "spoken": 4, "written": 3 }
+    },
+    "skills": {
+      "appraisal": 1,
+      "armor": 2,
+      "climbing": 1,
+      "crafts": 3,
+      "endurance": 3,
+      "locks-traps": 2,
+      "mundane-lore": 1,
+      "perception": 1,
+      "runes": 1,
+      "weapon-skills": 3,
+      "weapon-skills-missile": 2
+    }
+  },
+  {
+    "code": "SHALLOW_WARRENS",
+    "name": "Cavernas en Superficie",
+    "description": "La Cultura de Cavernas en Superficie está salpicada por la insaciable curiosidad, creatividad y sentido del humor de sus mismos habitantes. Al preferir hacer sus comunidades subterráneas (ocultas por un camuflaje profuso), es casi imposible descubrir la entrada a una Caverna en Superficie, a menos que uno conozca exactamente qué buscar. Igualmente, esta cultura valora el estudio de la magia, e investigar con ingenuidad y humor. Disfrutan plenamente de la magia de la vida y se quedan completamente estupefactos cuando los miembros de otras razas no lo hacen.",
+    "preferred-locations": "Estas sociedades prefieren hacer sus cavernas en colinas ásperas y en terrenos duros, que les proporcionan protección natural e incontables oportunidades para ejercitar su amor por los trucos sobre algún que otro desafortunado transeúnte.",
+    "clothing-decoration": "Los de esta cultura disfrutan vistiendo chillonamente, ataviándose de la cabeza a los pies con colores brillantes y patrones contrastantes. Al considerarlo sólo como otra burla, se complacen viendo cómo otros se estremecen ante su desfachatez.\n\nGeneralmente llevan poca joyería, pero la que eligen llevar es a menudo de naturaleza mágica.",
+    "demeanor": "Los habitantes de esta cultura son joviales, con un fuerte amor a la vida y verdadera adoración por bromas de toda clase, un rasgo que la mayor parte de las otras razas encuentran terriblemente enojoso. Raramente sus burlas tienen la intención de perjudicar, y una persona de esta cultura inmediatamente desistirá si es vista como una molestia para sus amigos.",
+    "starting-languages": {
+      "RACIAL": { "spoken": 6, "written": 5 },
+      "COMMON": { "spoken": 4, "written": 3 }
+    },
+    "skills": {
+      "ambush": 1,
+      "appraisal": 2,
+      "attunement": 2,
+      "climbing": 1,
+      "endurance": 1,
+      "jumping": 1,
+      "mundane-lore": 2,
+      "perception": 2,
+      "runes": 2,
+      "stalking-hiding": 3,
+      "weapon-skills": 1,
+      "weapon-skills-missile": 2
+    }
+  },
+  {
+    "code": "SYLVAN",
+    "name": "Silvana",
+    "description": "La cultura Silvana reverencia a la naturaleza y a la belleza por encima de todo. Las comunidades de este tipo se afanan en hacer cualquier intrusión en el mundo natural tan discreta como sea posible.",
+    "preferred-locations": "Las comunidades Silvanas normalmente se edifican o a la sombra de los lindes de un bosque o encaramadas en lo alto de las ramas de grandes árboles. Estos asentamientos se construyen para sacar ventaja de los recursos y complementar la belleza natural del entorno.",
+    "clothing-decoration": "Los miembros de la cultura Silvana se visten con delicadas telas que combinan con matices del bosque, para fundirse mejor con el entorno. Cualquier joya que lleven la llevan entonces con moderación.",
+    "demeanor": "Las culturas Silvanas a menudo se separan y aíslan de los asuntos de las otras. En su lugar, prefieren atender a los bosques, cobijados de las preocupaciones del mundo exterior.",
+    "starting-languages": {
+      "RACIAL": { "spoken": 6, "written": 5 },
+      "COMMON": { "spoken": 4, "written": 3 }
+    },
+    "skills": {
+      "armor": 1,
+      "attunement": 1,
+      "climbing": 2,
+      "endurance": 1,
+      "herbcraft": 1,
+      "mundane-lore": 1,
+      "perception": 1,
+      "riding": 1,
+      "runes": 2,
+      "stalking-hiding": 3,
+      "swimming": 1,
+      "tracking": 2,
+      "weapon-skills": 2,
+      "weapon-skills-missile": 1
+    }
+  },
+  {
+    "code": "UNDERHILL",
+    "name": "Bajo las Colinas",
+    "description": "La cultura Bajo las Colinas favorece una vida relajada y pastoril, llena de labores granjeras y jardineras. Sus comunidades se encuentran generalmente labradas en los flancos de colinas de tierras bajas, con pequeñas tierras de jardines y granjas salpicando la campiña.",
+    "preferred-locations": "Las comunidades Bajo las Colinas pueden encontrarse en bajas y ondulantes colinas de la campiña, siendo cada hacienda una unidad individual. Al preferir la protección y seguridad que se encuentra en culturas mayores, la mayoría de las comunidades Bajo las Colinas existen en las lindes de centros urbanos.",
+    "clothing-decoration": "La gente Bajo las Colinas prefiere ropa duradera, de tonos térreos, reservando sus coloridos atavíos para celebraciones y otras ocasiones especiales.",
+    "demeanor": "Las personalidades Bajo las Colinas son una intrigante mezcla de curiosidad y contención. Aunque generalmente satisfechos con el statu quo, se sienten irresistiblemente atraídos por acertijos y enigmas, un rasgo de personalidad que les es inculcado en la juventud.",
+    "starting-languages": {
+      "RACIAL": { "spoken": 6, "written": 5 },
+      "COMMON": { "spoken": 4, "written": 3 }
+    },
+    "skills": {
+      "climbing": 2,
+      "crafts": 2,
+      "endurance": 2,
+      "jumping": 1,
+      "locks-traps": 2,
+      "mundane-lore": 2,
+      "perception": 2,
+      "stalking-hiding": 3,
+      "swimming": 1,
+      "weapon-skills": 1,
+      "weapon-skills-missile": 2
+    }
+  },
+  {
+    "code": "NOMAD",
+    "name": "Nómada",
+    "description": "Las culturas Nómadas cubren un amplio rango de posibilidades. Como gitanos despreocupados deambulan de pueblo en pueblo, demorándose sólo lo suficiente para ganar unas pocas monedas antes de seguir adelante. Como tribus que caminan por las llanuras siguen rebaños de animales, cazando para comer. Como gentes del desierto vagabundean de oasis en oasis, llevando sólo lo suficiente para reponer los suministros necesarios para el siguiente paso de su viaje. O quizás sean refugiados de una tierra extranjera, en busca de un nuevo hogar – esperando alguno comparable a aquel que tuvieron que abandonar a la fuerza.",
+    "preferred-locations": "Las culturas Nómadas nunca se demoran en un área lo suficiente como para tener una ubicación preferida.",
+    "clothing-decoration": "Las ropas Nómadas varían ampliamente de color, peso y tipo de tela. Los Nómadas se cubren de acuerdo al clima y a los recursos disponibles en su última ubicación. Por ejemplo, las tribus Nómadas que cazan venados a lo largo de las llanuras tienden a vestirse de la cabeza a los pies con simple cuero – pieles despellejadas de sus exitosas matanzas.",
+    "demeanor": "Los tipos de personalidad Nómada pueden abarcar desde gitanos despreocupados hasta una conquistadora horda Mongola. Su disposición se ve influenciada bastante a menudo por las condiciones ambientales. Casi todas las ideologías nómadas contienen el centrarse al menos un atisbo en lo individual, mientras que se centran al mismo tiempo en las necesidades y responsabilidades del grupo.",
+    "starting-languages": {
+      "RACIAL": { "spoken": 6, "written": 5 },
+      "COMMON": { "spoken": 4, "written": 3 }
+    },
+    "skills": {
+      "animal-handling": 2,
+      "armor": 1,
+      "endurance": 2,
+      "herbcraft": 1,
+      "mundane-lore": 1,
+      "navigation": 2,
+      "perception": 1,
+      "riding": 2,
+      "stalking-hiding": 1,
+      "swimming": 1,
+      "tracking": 2,
+      "weapon-skills": 2,
+      "weapon-skills-missile": 2
+    }
+  },
+  {
+    "code": "RURAL",
+    "name": "Rural",
+    "description": "Las comunidades Rurales están llenas de granjeros, pastores, leñadores y semejantes. Al gastar la mayor parte de su tiempo aprendiendo y puliendo sus destrezas y habilidades de oficio, estas gentes viven aparte del ajetreo y el bullicio de la vida de ciudad. Irónicamente, son sus habilidades las que a menudo suplen los bienes y servicios que las ciudades requieren para su prosperidad y supervivencia.",
+    "preferred-locations": "Las comunidades Rurales pueden encontrarse a pocos días de viaje de una ciudad, y a veces tan sólo a unas pocas horas de camino.",
+    "clothing-decoration": "Los individuos prefieren ásperas ropas de tonos de tierra y bosque, capaces de hacer frente a los elementos y los afanes fatigosos en el día a día.",
+    "demeanor": "Aquellos que viven dentro de una cultura Rural son a menudo bonachones y amables entre amigos, pero generalmente un poco reservados en presencia de extraños.",
+    "starting-languages": {
+      "RACIAL": { "spoken": 6, "written": 5 },
+      "COMMON": { "spoken": 4, "written": 3 }
+    },
+    "skills": {
+      "animal-handling": 1,
+      "armor": 1,
+      "crafts": 3,
+      "endurance": 1,
+      "healing": 1,
+      "herbcraft": 1,
+      "mundane-lore": 2,
+      "navigation": 1,
+      "perception": 1,
+      "riding": 1,
+      "stalking-hiding": 1,
+      "swimming": 2,
+      "tracking": 1,
+      "weapon-skills": 1,
+      "weapon-skills-missile": 2
+    }
+  },
+  {
+    "code": "URBAN",
+    "name": "Urbana",
+    "description": "La vida en el interior de los muros de una ciudad es muy diferente a la de cualquier otra ubicación. Repleta de un repertorio de desafíos y una vibración que no se encuentran en otras culturas, simplemente pasar cada día, y sobrevivir la noche en ella, ¡puede ser una aventura en sí misma!",
+    "preferred-locations": "Las culturas Urbanas a menudo se ubican cerca de grandes vías fluviales o costas, facilitando el comercio. Estas comunidades también brotan cerca de grandes recursos naturales en general.",
+    "clothing-decoration": "Los miembros de la Urbe se atavían en una variedad que abarca desde gentes de bajo origen, escondidos en harapos, hasta aquellos de sangre noble, vestidos con galas extravagantes.",
+    "demeanor": "Tan variada como la vestimenta, casi cualquier disposición o motivación puede encontrarse entre los ciudadanos de un centro Urbano.",
+    "starting-languages": {
+      "RACIAL": { "spoken": 6, "written": 5 },
+      "ADDITIONAL": { "spoken": 4, "written": 3 }
+    },
+    "skills": {
+      "appraisal": 2,
+      "armor": 1,
+      "crafts": 3,
+      "endurance": 1,
+      "healing": 1,
+      "jumping": 1,
+      "mundane-lore": 2,
+      "navigation": 1,
+      "perception": 1,
+      "runes": 1,
+      "stalking-hiding": 1,
+      "swimming": 2,
+      "weapon-skills": 2,
+      "weapon-skills-missile": 1
+    }
+  }
+]

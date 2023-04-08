@@ -23,7 +23,7 @@
     "appearance": "Los Enanos varones se sitúan alrededor de los 4’5” [1.35 m.] de alto, con hembras en un intervalo ligeramente menor (4’ 3” [1.3 m.]). Una raza muy robusta, los Enanos parecen como si hubieran sido comprimidos, con cuerpos que se expanden a lo ancho. Pesando a menudo dos veces lo que cabría esperar para alguien de su tamaño, en los Enanos generalmente el promedio está en 200 libras [90.7 kg.].\n\nLos Enanos varones también se encariñan mucho con sus barbas, ¡que pueden crecer tanto como para colgar más allá de sus cinturas! Para muchos Enanos, tanto varones como hembras, el cabello y la barba están casi siempre trenzados, entrelazados con piedras de colores y abalorios como adornos. Sólo los Enanos varones tienen barba y, mientras que su cabello generalmente alcanza hasta el hombro, no es raro que el cabello de las Enanas sobrepase sus cinturas.",
     "lifespan": "Los Enanos son una raza longeva, con un promedio de entre 300 a 400 años de edad",
     "culture": "Los Enanos normalmente crean sus propias sociedades, que reflejan la cultura de las Cavernas Profundas, pero pueden encontrarse en cualquier cultura.",
-    "defaultCultures": ["DEEP_WARREN"],
+    "defaultCultures": ["DEEP_WARRENS"],
     "selectableAbilities": {},
     "specialAbilities": {
       "GREATER_DARK_VISION": {
