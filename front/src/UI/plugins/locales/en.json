@@ -217,6 +217,7 @@
       }
     },
     "races": {
+      "race-unselected": "Select a Race to see details",
       "stats": "Racial Stat Modifiers",
       "human-stats": "Humans do not have fixed racial bonuses. Players of a human character have 10 points to divide any way they like between the 8 racial stat bonuses. No stat may have a bonus greater than +3",
       "resistance-bonuses": "Resistance Bonuses",
@@ -231,6 +232,7 @@
       "culture": "Culture"
     },
     "culture": {
+      "culture-unselected": "Select a Culture to see details",
       "preferred-locations": "Preferred Locations",
       "clothing-decoration": "Clothing & Decoration",
       "demeanor": "Demeanor",

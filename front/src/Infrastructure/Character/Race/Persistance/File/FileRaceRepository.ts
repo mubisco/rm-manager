@@ -1,4 +1,4 @@
-import { Culture } from '@/Domain/Character/Race/Culture'
+import { CultureCode } from '@/Domain/Character/Culture/CultureCode'
 import { RaceCode } from '@/Domain/Character/Race/RaceCode'
 import { RaceDto } from '@/Domain/Character/Race/RaceDto'
 import { RaceName } from '@/Domain/Character/Race/RaceName'
@@ -37,7 +37,7 @@ export class FileRaceRepository implements RaceRepository {
       appearance: raceData.appearance,
       lifespan: raceData.lifespan,
       culture: raceData.culture,
-      defaultCultures: raceData.defaultCultures as Culture[],
+      defaultCultures: raceData.defaultCultures as CultureCode[],
       specialAbilities: raceData.specialAbilities,
       selectableAbilities: null
     }

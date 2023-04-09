@@ -104,7 +104,7 @@
     }
   },
   {
-    "code": "NOMAD",
+    "code": "NOMADIC",
     "name": "Nómada",
     "description": "Las culturas Nómadas cubren un amplio rango de posibilidades. Como gitanos despreocupados deambulan de pueblo en pueblo, demorándose sólo lo suficiente para ganar unas pocas monedas antes de seguir adelante. Como tribus que caminan por las llanuras siguen rebaños de animales, cazando para comer. Como gentes del desierto vagabundean de oasis en oasis, llevando sólo lo suficiente para reponer los suministros necesarios para el siguiente paso de su viaje. O quizás sean refugiados de una tierra extranjera, en busca de un nuevo hogar – esperando alguno comparable a aquel que tuvieron que abandonar a la fuerza.",
     "preferred-locations": "Las culturas Nómadas nunca se demoran en un área lo suficiente como para tener una ubicación preferida.",

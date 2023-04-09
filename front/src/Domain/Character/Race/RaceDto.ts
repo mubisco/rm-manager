@@ -1,7 +1,7 @@
 import { RaceCode } from '@/Domain/Character/Race/RaceCode'
+import { CultureCode } from '@/Domain/Character/Culture/CultureCode'
 import type { RacialStatsModifiers } from './RacialStatsModifiers'
 import type { ResistanceBonuses } from './ResistanceBonuses'
-import type { Culture } from './Culture'
 import type { SpecialAbilityDescription } from './SpecialAbilityDescription'
 
 type SpecialAbilities = {
@@ -19,7 +19,7 @@ export type RaceDto = {
   appearance: string,
   lifespan: string,
   culture: string,
-  defaultCultures: Culture[],
+  defaultCultures: CultureCode[],
   specialAbilities: SpecialAbilities,
   selectableAbilities: SpecialAbilities | null
 }
