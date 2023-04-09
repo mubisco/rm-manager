@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { FetchAllRacesNamesQueryHandler } from '@/Application/Race/Query/FetchAllRacesNamesQueryHandler'
-import { FileRaceRepository } from '@/Infrastructure/Character/Race/Persistance/File/FileRaceRepository'
-import type { RaceName } from '@/Domain/Character/Race/RaceName'
 import { RaceCode } from '@/Domain/Character/Race/RaceCode'
+import { FileRaceReadModel } from '@/Infrastructure/Character/Race/ReadModel/File/FileRaceReadModel'
+import { RaceName } from '@/Application/Race/Query/RaceName';
 
 const props = defineProps<{ modelValue: RaceCode | null }>()
 const emit = defineEmits<{(eventName: 'update:modelValue', selectedRace: RaceCode): void }>()
@@ -12,7 +12,7 @@ const value = ref(props.modelValue ?? '')
 const raceNames = ref<RaceName[]>([])
 
 onMounted(async () => {
-  const handler = new FetchAllRacesNamesQueryHandler(new FileRaceRepository())
+  const handler = new FetchAllRacesNamesQueryHandler(new FileRaceReadModel())
   raceNames.value = await handler.handle()
 })
 
