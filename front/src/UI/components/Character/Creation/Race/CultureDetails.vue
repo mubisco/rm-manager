@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { watch, ref } from 'vue'
 import { CultureCode } from '@/Domain/Character/Culture/CultureCode'
-import { CultureDto } from '@/Domain/Character/Culture/CultureDto'
-import { FetchCultureByCodeQueryHandler } from '@/Application/Culture/Query/FetchCultureByCodeQueryHandler'
-import { FileCultureRepository } from '@/Infrastructure/Character/Culture/Persistance/File/FileCultureRepository'
 import { FetchCultureByCodeQuery } from '@/Application/Culture/Query/FetchCultureByCodeQuery'
 import CustomMarkdown from '@/UI/components/Shared/CustomMarkdown.vue'
 import CultureLanguageDisplay from './CultureLanguagesDisplay.vue'
 import CultureSkillsTable from './CultureSkillsTable.vue'
+import { FetchCultureByCodeQueryHandler } from '@/Application/Culture/Query/FetchCultureByCodeQueryHandler'
+import { FileCultureReadModel } from '@/Infrastructure/Character/Culture/ReadModel/File/FileCultureReadModel'
+import { CultureDto } from '@/Application/Culture/Query/CultureDto'
 
 const props = defineProps<{ selectedCulture: CultureCode }>()
 const cultureData = ref<CultureDto | null>(null)
 
 const loadRaceDetails = async () => {
-  const handler = new FetchCultureByCodeQueryHandler(new FileCultureRepository())
+  const handler = new FetchCultureByCodeQueryHandler(new FileCultureReadModel())
   const query = new FetchCultureByCodeQuery(props.selectedCulture)
   cultureData.value = await handler.handle(query)
 }

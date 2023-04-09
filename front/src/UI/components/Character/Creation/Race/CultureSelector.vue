@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { CultureName } from '@/Domain/Character/Culture/CultureName'
+import { CultureName } from '@/Application/Culture/Query/CultureName'
+import { FetchAllCultureNamesQueryHandler } from '@/Application/Culture/Query/FetchAllCultureNamesQueryHandler'
 import { CultureCode } from '@/Domain/Character/Culture/CultureCode'
-import { FetchAllCultureNamesQueryHandler } from '@/Application/Culture/Query/FetchAllCultureNamesQuery'
-import { FileCultureRepository } from '@/Infrastructure/Character/Culture/Persistance/File/FileCultureRepository'
+import { FileCultureReadModel } from '@/Infrastructure/Character/Culture/ReadModel/File/FileCultureReadModel'
 import { ref, onMounted } from 'vue'
 
 const props = defineProps<{ modelValue: CultureCode | null }>()
@@ -12,7 +12,7 @@ const value = ref(props.modelValue ?? '')
 const cultureNames = ref<CultureName[]>([])
 
 onMounted(async () => {
-  const handler = new FetchAllCultureNamesQueryHandler(new FileCultureRepository())
+  const handler = new FetchAllCultureNamesQueryHandler(new FileCultureReadModel())
   cultureNames.value = await handler.handle()
 })
 
