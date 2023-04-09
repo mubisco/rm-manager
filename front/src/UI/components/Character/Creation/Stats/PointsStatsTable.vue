@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Stat } from '@/Domain/Character/Stat'
-import { StatCode } from '@/Domain/Character/StatCode'
+import { Stat } from '@/Domain/Character/Stat/Stat'
+import { StatCode } from '@/Domain/Character/Stat/StatCode'
 import StatPointInput from './StatPointInput.vue'
 
 defineProps<{ availablePoints: number }>()

@@ -1,7 +1,7 @@
-import { Stat } from '@/Domain/Character/Stat'
-import { StatCode } from '@/Domain/Character/StatCode'
-import { StatOutOfBoundsError } from '@/Domain/Character/StatOutOfBoundsError'
-import { StatValueError } from '@/Domain/Character/StatValueError'
+import { Stat } from '@/Domain/Character/Stat/Stat'
+import { StatCode } from '@/Domain/Character/Stat/StatCode'
+import { StatOutOfBoundsError } from '@/Domain/Character/Stat/StatOutOfBoundsError'
+import { StatValueError } from '@/Domain/Character/Stat/StatValueError'
 import { describe, test, expect } from 'vitest'
 
 const EQUIVALENCES = [

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Stat } from '@/Domain/Character/Stat'
-import { StatCode } from '@/Domain/Character/StatCode'
+import { Stat } from '@/Domain/Character/Stat/Stat'
+import { StatCode } from '@/Domain/Character/Stat/StatCode'
 
 const assignedRolls = ref<{ originalIndex: number; roll: number }[]>([])
 
@@ -10,6 +10,9 @@ const emit = defineEmits<{(eventName: 'roll:assigned', originalIndex: number): v
 }>()
 
 const drop = (event: DragEvent, rowIndex: number, code: string): void => {
+  if (event.dataTransfer === null) {
+    return
+  }
   const index = parseInt(event.dataTransfer.getData('index'), 10)
   const value = parseInt(event.dataTransfer.getData('value'), 10)
   if (assignedRolls.value[rowIndex]) {
@@ -40,6 +43,29 @@ const stats = ref<{ [code: string]: Stat | null }>({
   IN: null,
   PR: null
 })
+
+const parseStatBonusFromCode = (code: string): number | string => {
+  if (stats.value === null) {
+    return '-'
+  }
+  const currentStat = stats.value[code]
+  if (currentStat === null) {
+    return '-'
+  }
+  return currentStat.bonus()
+}
+
+const parseStatDevelopmentPointsFromCode = (code: string): number | string => {
+  if (stats.value === null) {
+    return '-'
+  }
+  const currentStat = stats.value[code]
+  if (currentStat === null) {
+    return '-'
+  }
+  return currentStat.developmentPoints()
+}
+
 </script>
 <template>
   <v-table>
@@ -71,10 +97,10 @@ const stats = ref<{ [code: string]: Stat | null }>({
           </v-chip>
         </td>
         <td>
-          {{ stats && stats[code] ? stats[code].bonus() : '-' }}
+          {{ parseStatBonusFromCode(code) }}
         </td>
         <td>
-          {{ stats && stats[code] ? stats[code].developmentPoints() : '-' }}
+          {{ parseStatDevelopmentPointsFromCode(code) }}
         </td>
       </tr>
     </tbody>
