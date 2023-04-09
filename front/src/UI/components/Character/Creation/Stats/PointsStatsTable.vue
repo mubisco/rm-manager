@@ -57,20 +57,20 @@ const updateStat = (stat: Stat | undefined, code: string): void => {
         <td>{{ $t('character.stats.' + code) }}</td>
         <td>
           <StatPointInput
-            :current-stat-value="stat.spentPoints()"
+            :current-stat-value="stat?.spentPoints() ?? 0"
             :available-points="availablePoints"
             @stat:increase="onStatIncreased(code as string, $event)"
             @stat:decrease="onStatDecreased(code as string, $event)"
           />
         </td>
         <td>
-          {{ stat.rawValue() }}
+          {{ stat?.rawValue() ?? '' }}
         </td>
         <td>
-          {{ stat.bonus() }}
+          {{ stat?.bonus() ?? '' }}
         </td>
         <td>
-          {{ stat.developmentPoints() }}
+          {{ stat?.developmentPoints() ?? '' }}
         </td>
       </tr>
     </tbody>
