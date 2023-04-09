@@ -1,4 +1,4 @@
-export enum ProfessionKey {
+export enum ProfessionCode {
   CLERIC = 'cleric',
   FIGHTER = 'fighter',
   HARPER = 'harper',

@@ -1,10 +1,11 @@
-import { Stat } from '@/Domain/Character/Stat/Stat'
+import { ProfessionCode } from '@/Domain/Character/Profession/ProfessionCode'
 import { FreeCategory } from './FreeCategory'
 
-export interface ProfessionData {
+export type ProfessionDto = {
+  code: ProfessionCode,
   name: string
   description: string
-  keyStats: Stat[]
+  keyStats: string[]
   fixedCategories: { [key: string]: number }
   freeCategories: FreeCategory
   professionalAbilities: string[]

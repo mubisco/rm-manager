@@ -11,6 +11,7 @@ defineProps<{ profession: ProfessionData | null }>()
     <v-alert
       v-if="profession === null"
       type="info"
+      variant="tonal"
     >
       {{ $t('character.profession.no-selected') }}
     </v-alert>

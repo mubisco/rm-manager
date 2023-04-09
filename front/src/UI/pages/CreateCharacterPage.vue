@@ -3,7 +3,7 @@ import WizardHeader from '@/UI/components/Character/Creation/WizardHeader.vue'
 import WizardBody from '@/UI/components/Character/Creation/WizardBody.vue'
 import { ref } from 'vue'
 
-const currentStep = ref(2)
+const currentStep = ref(0)
 
 </script>
 <template>
