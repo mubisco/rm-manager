@@ -1,38 +1,25 @@
 <script setup lang="ts">
-import { ProfessionKey } from './ProfessionKey'
-import { ref, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { ref, onMounted } from 'vue'
+import { FetchAllProfessionNamesQueryHandler } from '@/Application/Profession/Query/FetchAllProfessionNamesQueryHandler'
+import { FileProfessionReadModel } from '@/Infrastructure/Character/Profession/ReadModel/File/FileProfessionReadModel'
+import { ProfessionName } from '@/Application/Profession/Query/ProfessionName'
+import { ProfessionCode } from '@/Domain/Character/Profession/ProfessionCode'
 
-interface TranslatedProfession {
-  title: string,
-  value: string
-}
+const professionNames = ref<ProfessionName[]>([])
 
-const { t } = useI18n()
-
-const props = defineProps<{ options: ProfessionKey[], modelValue: ProfessionKey | null }>()
+const props = defineProps<{ modelValue: ProfessionCode | null }>()
 
 const value = ref(props.modelValue ?? '')
 
-const emit = defineEmits<{(eventName: 'update:modelValue', selectedProfession: string): ProfessionKey }>()
+const emit = defineEmits<{(eventName: 'update:modelValue', selectedProfession: string): ProfessionCode }>()
 
-const parsedOptions = computed((): TranslatedProfession[] => {
-  const translatedProfessions: TranslatedProfession[] = []
-  for (const option of props.options) {
-    translatedProfessions.push(
-      {
-        value: option,
-        title: t('character.profession.names.' + option)
-      }
-    )
-  }
-  return translatedProfessions.sort(
-    (a: TranslatedProfession, b: TranslatedProfession): number => a.title < b.title ? -1 : 1
-  )
+onMounted(async () => {
+  const handler = new FetchAllProfessionNamesQueryHandler(new FileProfessionReadModel())
+  professionNames.value = await handler.handle()
 })
 
-const updateValue = (event: string) => {
-  emit('update:modelValue', event)
+const onValueUpdated = (event: string) => {
+  emit('update:modelValue', event as ProfessionCode)
 }
 
 </script>
@@ -40,9 +27,9 @@ const updateValue = (event: string) => {
   <v-select
     v-model="value"
     :label="$t('character.profession.select')"
-    :items="parsedOptions"
-    item-title="title"
-    item-value="value"
-    @update:model-value="updateValue"
+    :items="professionNames"
+    item-title="name"
+    item-value="code"
+    @update:model-value="onValueUpdated"
   />
 </template>

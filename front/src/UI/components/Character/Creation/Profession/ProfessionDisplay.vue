@@ -1,36 +1,50 @@
 <script setup lang="ts">
-import { ProfessionData } from './ProfessionData'
+import { ref, watch } from 'vue'
 import ProfessionAbilities from './ProfessionAbilities.vue'
 import ProfessionFavored from './ProfessionFavored.vue'
+import { FetchProfessionByCodeQueryHandler } from '@/Application/Profession/Query/FetchProfessionByCodeQueryHandler'
+import { FileProfessionReadModel } from '@/Infrastructure/Character/Profession/ReadModel/File/FileProfessionReadModel'
+import { FetchProfessionByCodeQuery } from '@/Application/Profession/Query/FetchProfessionByCodeQuery'
+import { ProfessionDto } from '@/Application/Profession/Query/ProfessionDto'
+import FavoredCategoriesTable from './FavoredCategoriesTable.vue'
 
-defineProps<{ profession: ProfessionData | null }>()
+const props = defineProps<{ professionKey: string }>()
+const professionData = ref<ProfessionDto | null>(null)
+
+const loadProfessionDetails = async () => {
+  const handler = new FetchProfessionByCodeQueryHandler(new FileProfessionReadModel())
+  const query = new FetchProfessionByCodeQuery(props.professionKey)
+  professionData.value = await handler.handle(query)
+}
+
+watch(() => props.professionKey, () => {
+  loadProfessionDetails()
+})
 
 </script>
 <template>
-  <div>
-    <v-alert
-      v-if="profession === null"
-      type="info"
-      variant="tonal"
-    >
-      {{ $t('character.profession.no-selected') }}
-    </v-alert>
-    <div v-if="profession !== null">
-      <h2 class="text-h3">
-        {{ $t('character.profession.description' ) }}
-      </h2>
+  <div v-if="professionData !== null">
+    <div>
       <p class="body-1">
-        {{ profession.description }}
+        {{ professionData.description }}
       </p>
-      <ProfessionFavored
-        :stats="profession.keyStats"
-        :categories="profession.fixedCategories"
-        :free-categories="profession.freeCategories"
-      />
-      <ProfessionAbilities
-        :abilities="profession.professionalAbilities"
-        :notes="profession.notes"
-      />
+      <v-row>
+        <v-col cols="8">
+          <ProfessionFavored
+            :stats="professionData.keyStats"
+          />
+          <ProfessionAbilities
+            :abilities="professionData.professionalAbilities"
+            :notes="professionData.notes"
+          />
+        </v-col>
+        <v-col cols="4">
+          <FavoredCategoriesTable
+            :categories="professionData.fixedCategories"
+            :free-categories="professionData.freeCategories"
+          />
+        </v-col>
+      </v-row>
     </div>
   </div>
 </template>

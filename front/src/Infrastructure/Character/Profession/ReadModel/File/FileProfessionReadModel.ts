@@ -8,6 +8,7 @@ import professionsData from './professions.json'
 
 export class FileProfessionReadModel implements ProfessionReadModel, ProfessionNameReadModel {
   ofCode (code: ProfessionCode): Promise<ProfessionDto> {
+    // eslint-disable-next-line
     const filteredRaces = professionsData.filter((rawData: any) => rawData.code === code)
     if (filteredRaces.length === 0) {
       return Promise.reject(new ProfessionNotFoundError(`Profession with code ${code} not found!!!`))

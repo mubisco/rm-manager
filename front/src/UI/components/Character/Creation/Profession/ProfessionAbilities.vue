@@ -4,7 +4,7 @@ defineProps<{ abilities: string[], notes: string[] }>()
 </script>
 <template>
   <div>
-    <h3 class="text-h4">
+    <h3 class="text-h5">
       {{ $t('character.profession.abilities') }}
     </h3>
     <p

@@ -1,32 +1,30 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import professionsData from './professions.json'
+import { ref } from 'vue'
 import ProfessionSelector from './ProfessionSelector.vue'
 import ProfessionDisplay from './ProfessionDisplay.vue'
-import { ProfessionData } from './ProfessionData'
-import { ProfessionKey } from './ProfessionKey'
+import { ProfessionCode } from '@/Domain/Character/Profession/ProfessionCode'
 
-const professionKeys = ref(Object.keys(professionsData))
-const selectedProfessionKey = ref<ProfessionKey | null>(null)
+const selectedProfessionKey = ref<ProfessionCode | null>(null)
 
-const selectedProfession = computed((): ProfessionData | null => {
-  if (!selectedProfessionKey.value) {
-    return null
-  }
-  return professionsData[selectedProfessionKey.value] ?? null
-})
 </script>
 <template>
   <v-row>
     <v-col cols="4">
       <ProfessionSelector
         v-model="selectedProfessionKey"
-        :options="professionKeys"
       />
     </v-col>
     <v-col cols="8">
+      <v-alert
+        v-if="selectedProfessionKey === null"
+        type="info"
+        variant="tonal"
+      >
+        {{ $t('character.profession.no-selected') }}
+      </v-alert>
       <ProfessionDisplay
-        :profession="selectedProfession"
+        v-else
+        :profession-key="selectedProfessionKey"
       />
     </v-col>
   </v-row>
