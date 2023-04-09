@@ -1,14 +1,14 @@
 import { RaceCode } from '@/Domain/Character/Race/RaceCode'
-import { FileRaceRepository } from '@/Infrastructure/Character/Race/Persistance/File/FileRaceRepository'
+import { FileRaceReadModel } from '@/Infrastructure/Character/Race/ReadModel/File/FileRaceReadModel'
 import { describe, test, expect } from 'vitest'
 
 describe('Testing FileRaceRepository', () => {
   test('Should be of proper class', () => {
-    const sut = new FileRaceRepository()
-    expect(sut).toBeInstanceOf(FileRaceRepository)
+    const sut = new FileRaceReadModel()
+    expect(sut).toBeInstanceOf(FileRaceReadModel)
   })
   test('Should return proper RaceNames', async () => {
-    const sut = new FileRaceRepository()
+    const sut = new FileRaceReadModel()
     const result = await sut.fetchNames()
     expect(result.length).toBe(6)
     expect(result[0].code).toBe('ELF')
@@ -25,7 +25,7 @@ describe('Testing FileRaceRepository', () => {
     expect(result[5].name).toBe('Humano')
   })
   test('Should return proper race', async () => {
-    const sut = new FileRaceRepository()
+    const sut = new FileRaceReadModel()
     const result = await sut.ofCode(RaceCode.HUMAN)
     expect(result.code).toBe('HUMAN')
   })

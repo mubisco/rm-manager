@@ -1,19 +1,19 @@
 import { RaceCode } from '@/Domain/Character/Race/RaceCode'
-import { RaceDto } from '@/Domain/Character/Race/RaceDto'
-import { RaceRepository } from '@/Domain/Character/Race/RaceRepository'
 import { FetchRaceByCodeQuery } from './FetchRaceByCodeQuery'
+import { RaceDto } from './RaceDto'
+import { RaceReadModel } from './RaceReadModel'
 
 export class FetchRaceByCodeQueryHandler {
-  private _repository: RaceRepository
+  private _readModel: RaceReadModel
 
-  constructor (repository: RaceRepository) {
-    this._repository = repository
+  constructor (readModel: RaceReadModel) {
+    this._readModel = readModel
   }
 
   async handle (query: FetchRaceByCodeQuery): Promise<RaceDto> {
     if (!Object.values(RaceCode).includes(query.raceCode as RaceCode)) {
       return Promise.reject(new TypeError('Value provided por RaceCode not valid!!'))
     }
-    return this._repository.ofCode(query.raceCode as RaceCode)
+    return this._readModel.ofCode(query.raceCode as RaceCode)
   }
 }

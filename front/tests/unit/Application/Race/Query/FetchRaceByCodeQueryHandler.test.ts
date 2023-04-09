@@ -1,10 +1,10 @@
 import { beforeEach, vi, describe, test, expect } from 'vitest'
 import { FetchRaceByCodeQueryHandler } from '@/Application/Race/Query/FetchRaceByCodeQueryHandler'
-import { RaceNotFoundError } from '@/Domain/Character/Race/RaceNotFoundError'
 import { FetchRaceByCodeQuery } from '@/Application/Race/Query/FetchRaceByCodeQuery'
 import { RaceCode } from '@/Domain/Character/Race/RaceCode'
+import { RaceNotFoundError } from '@/Application/Race/Query/RaceNotFoundError'
 
-const mockedRepository = {
+const mockedReadModel = {
   fetchNames: vi.fn(),
   ofCode: vi.fn()
 }
@@ -13,7 +13,7 @@ describe('Testing FetchRaceByCodeQueryHandler', () => {
   let sut: FetchRaceByCodeQueryHandler
 
   beforeEach(() => {
-    sut = new FetchRaceByCodeQueryHandler(mockedRepository)
+    sut = new FetchRaceByCodeQueryHandler(mockedReadModel)
   })
   test('It should be of proper class', () => {
     expect(sut).toBeInstanceOf(FetchRaceByCodeQueryHandler)
@@ -22,7 +22,7 @@ describe('Testing FetchRaceByCodeQueryHandler', () => {
     expect(sut.handle(new FetchRaceByCodeQuery('asd'))).rejects.toThrow(TypeError)
   })
   test('It should throw error when race with code does not exists', () => {
-    mockedRepository.ofCode.mockRejectedValue(new RaceNotFoundError('Async test error'))
+    mockedReadModel.ofCode.mockRejectedValue(new RaceNotFoundError('Async test error'))
     expect(sut.handle(new FetchRaceByCodeQuery('ELF'))).rejects.toThrow(RaceNotFoundError)
   })
   test('It should return proper Dto', async () => {
@@ -40,7 +40,7 @@ describe('Testing FetchRaceByCodeQueryHandler', () => {
       defaultCultures: [],
       specialAbilities: {}
     }
-    mockedRepository.ofCode.mockResolvedValue(fakeDto)
+    mockedReadModel.ofCode.mockResolvedValue(fakeDto)
     const result = await sut.handle(new FetchRaceByCodeQuery('ELF'))
     expect(result.code).not.toBeUndefined()
     expect(result.name).not.toBeUndefined()

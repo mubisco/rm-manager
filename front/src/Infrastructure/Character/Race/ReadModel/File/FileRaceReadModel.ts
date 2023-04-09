@@ -1,14 +1,14 @@
-import { CultureCode } from '@/Domain/Character/Culture/CultureCode'
+import { RaceDto } from '@/Application/Race/Query/RaceDto'
+import { RaceName } from '@/Application/Race/Query/RaceName'
+import { RaceNameReadModel } from '@/Application/Race/Query/RaceNamesReadModel'
+import { RaceNotFoundError } from '@/Application/Race/Query/RaceNotFoundError'
+import { RaceReadModel } from '@/Application/Race/Query/RaceReadModel'
+import { RacialStatsModifiers } from '@/Application/Race/Query/RacialStatsModifiers'
+import { ResistanceBonuses } from '@/Application/Race/Query/ResistanceBonuses'
 import { RaceCode } from '@/Domain/Character/Race/RaceCode'
-import { RaceDto } from '@/Domain/Character/Race/RaceDto'
-import { RaceName } from '@/Domain/Character/Race/RaceName'
-import { RaceNotFoundError } from '@/Domain/Character/Race/RaceNotFoundError'
-import { RaceRepository } from '@/Domain/Character/Race/RaceRepository'
-import { RacialStatsModifiers } from '@/Domain/Character/Race/RacialStatsModifiers'
-import { ResistanceBonuses } from '@/Domain/Character/Race/ResistanceBonuses'
 import racesData from './races.json'
 
-export class FileRaceRepository implements RaceRepository {
+export class FileRaceReadModel implements RaceReadModel, RaceNameReadModel {
   fetchNames (): Promise<RaceName[]> {
     const values = this.parseRaceNamesFromSource()
     return Promise.resolve(values)
@@ -37,7 +37,7 @@ export class FileRaceRepository implements RaceRepository {
       appearance: raceData.appearance,
       lifespan: raceData.lifespan,
       culture: raceData.culture,
-      defaultCultures: raceData.defaultCultures as CultureCode[],
+      defaultCultures: raceData.defaultCultures,
       specialAbilities: raceData.specialAbilities,
       selectableAbilities: null
     }

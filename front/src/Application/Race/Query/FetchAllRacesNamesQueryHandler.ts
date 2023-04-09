@@ -1,14 +1,14 @@
-import { RaceName } from '@/Domain/Character/Race/RaceName'
-import { RaceRepository } from '@/Domain/Character/Race/RaceRepository'
+import { RaceName } from './RaceName'
+import { RaceNameReadModel } from './RaceNamesReadModel'
 
 export class FetchAllRacesNamesQueryHandler {
-  private _repository: RaceRepository
+  private _readModel: RaceNameReadModel
 
-  constructor (repository: RaceRepository) {
-    this._repository = repository
+  constructor (readModel: RaceNameReadModel) {
+    this._readModel = readModel
   }
 
   async handle (): Promise<RaceName[]> {
-    return this._repository.fetchNames()
+    return this._readModel.fetchNames()
   }
 }

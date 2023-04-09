@@ -1,5 +1,5 @@
 import { FetchAllRacesNamesQueryHandler } from '@/Application/Race/Query/FetchAllRacesNamesQueryHandler'
-import { RaceRepositoryError } from '@/Domain/Character/Race/RaceRepositoryError'
+import { RaceNameReadModelError } from '@/Application/Race/Query/RaceNameReadModelError'
 import { beforeEach, describe, vi, test, expect } from 'vitest'
 
 const mockedRepository = {
@@ -17,8 +17,8 @@ describe('Testing FetchAllRacesNamesQueryHandler', () => {
     expect(sut).toBeInstanceOf(FetchAllRacesNamesQueryHandler)
   })
   test('It should throw error when query fails', () => {
-    mockedRepository.fetchNames.mockRejectedValue(new RaceRepositoryError('Async test error'))
-    expect(sut.handle()).rejects.toThrow(RaceRepositoryError)
+    mockedRepository.fetchNames.mockRejectedValue(new RaceNameReadModelError('Async test error'))
+    expect(sut.handle()).rejects.toThrow(RaceNameReadModelError)
   })
   test('It should return proper RaceNames', async () => {
     const expectedResponse = [
