@@ -217,6 +217,7 @@
       }
     },
     "races": {
+      "select-race": "Selecciona una raza...",
       "race-unselected": "Selecciona una raza para ver los detalles",
       "stats": "Bonificadores Raciales a Características",
       "human-stats": "Los humanos no tienen bonificaciones raciales fijas. Los jugadores con un personaje humano tienen 10 puntos para dividir de cualquier forma que les parezca entre las 8 bonificaciones raciales por característica. Ninguna característica puede tener una bonificación mayor que +3.",
@@ -232,11 +233,24 @@
       "culture": "Cultura"
     },
     "culture": {
+      "select-culture": "Escoge una cultura...",
       "culture-unselected": "Selecciona una cultura para ver los detalles",
       "preferred-locations": "Ubicaciones Preferidas",
       "clothing-decoration": "Vestimenta & Adornos",
       "demeanor": "Conducta",
       "starting-languages": "Idiomas de Inicio",
+      "skill-table": {
+        "title": "Rangos de Habilidad en la Adolescencia",
+        "skill": "Habilidad",
+        "ranks": "Rangos"
+      }
+    },
+    "languages": {
+      "RACIAL": "Lenguaje racial",
+      "COMMON": "Lenguaje común",
+      "ADDITIONAL": "Otro lenguaje",
+      "spoken": "Hablado",
+      "written": "Escrito"
     },
     "stats-step": {
       "method": {

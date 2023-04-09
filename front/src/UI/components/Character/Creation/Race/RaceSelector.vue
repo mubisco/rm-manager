@@ -24,7 +24,7 @@ const onValueUpdated = (event: string) => {
 <template>
   <v-select
     v-model="value"
-    label="Escoge raza"
+    :label="$t('character.races.select-race')"
     :items="raceNames"
     item-title="name"
     item-value="code"

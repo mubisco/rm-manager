@@ -11,7 +11,7 @@ defineProps<{
 
 </script>
 <template>
-  <v-table>
+  <v-table density="compact">
     <thead>
       <tr>
         <th
@@ -69,7 +69,7 @@ defineProps<{
   >
     {{ $t('character.races.human-stats') }}
   </v-alert>
-  <v-table>
+  <v-table density="compact">
     <thead>
       <tr>
         <th />

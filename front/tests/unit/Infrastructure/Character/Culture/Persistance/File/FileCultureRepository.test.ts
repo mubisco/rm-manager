@@ -1,3 +1,4 @@
+import { CultureCode } from '@/Domain/Character/Culture/CultureCode'
 import { FileCultureRepository } from '@/Infrastructure/Character/Culture/Persistance/File/FileCultureRepository'
 import { describe, test, expect } from 'vitest'
 
@@ -24,5 +25,10 @@ describe('Testing FileCultureRepository', () => {
     expect(result[5].name).toBe('Silvana')
     expect(result[6].code).toBe('URBAN')
     expect(result[6].name).toBe('Urbana')
+  })
+  test('Should return proper race', async () => {
+    const sut = new FileCultureRepository()
+    const result = await sut.ofCode(CultureCode.SYLVAN)
+    expect(result.code).toBe('SYLVAN')
   })
 })

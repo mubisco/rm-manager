@@ -22,6 +22,6 @@ const currentSelectedRace = ref<RaceCode | null>(props.selectedRace as RaceCode 
     type="info"
     variant="tonal"
   >
-    <p>{{ $t('character.race.race-unselected') }}</p>
+    <p>{{ $t('character.races.race-unselected') }}</p>
   </v-alert>
 </template>

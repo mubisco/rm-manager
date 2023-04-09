@@ -217,6 +217,7 @@
       }
     },
     "races": {
+      "select-race": "Select a race...",
       "race-unselected": "Select a Race to see details",
       "stats": "Racial Stat Modifiers",
       "human-stats": "Humans do not have fixed racial bonuses. Players of a human character have 10 points to divide any way they like between the 8 racial stat bonuses. No stat may have a bonus greater than +3",
@@ -232,11 +233,24 @@
       "culture": "Culture"
     },
     "culture": {
+      "select-culture": "Select a culture...",
       "culture-unselected": "Select a Culture to see details",
       "preferred-locations": "Preferred Locations",
       "clothing-decoration": "Clothing & Decoration",
       "demeanor": "Demeanor",
       "starting-languages": "Starting Languages",
+      "skill-table": {
+        "title": "Adolescence Skill Ranks",
+        "skill": "Skill",
+        "ranks": "Ranks"
+      }
+    },
+    "languages": {
+      "RACIAL": "Racial Language",
+      "COMMON": "Common Language",
+      "ADDITIONAL": "Other Language",
+      "spoken": "Spoken",
+      "written": "Written"
     },
     "stats-step": {
       "method": {
