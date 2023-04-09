@@ -1,11 +1,12 @@
+import { CultureDto } from '@/Application/Culture/Query/CultureDto'
+import { CultureName } from '@/Application/Culture/Query/CultureName'
+import { CultureNameReadModel } from '@/Application/Culture/Query/CultureNameReadModel'
+import { CultureNotFoundError } from '@/Application/Culture/Query/CultureNotFoundError'
+import { CultureReadModel } from '@/Application/Culture/Query/CultureReadModel'
 import { CultureCode } from '@/Domain/Character/Culture/CultureCode'
-import { CultureName } from '@/Domain/Character/Culture/CultureName'
-import { CultureNotFoundError } from '@/Domain/Character/Culture/CultureNotFoundError'
-import { CultureRepository } from '@/Domain/Character/Culture/CultureRepository'
-import { CultureDto } from '@/Domain/Character/CultureCultureDto'
 import cultureData from './cultures.json'
 
-export class FileCultureRepository implements CultureRepository {
+export class FileCultureReadModel implements CultureReadModel, CultureNameReadModel {
   fetchNames (): Promise<CultureName[]> {
     const values = this.parseCultureNamesFromSource()
     return Promise.resolve(values)

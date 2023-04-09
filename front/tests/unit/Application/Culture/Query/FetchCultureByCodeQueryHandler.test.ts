@@ -1,10 +1,9 @@
+import { CultureNotFoundError } from '@/Application/Culture/Query/CultureNotFoundError'
 import { FetchCultureByCodeQuery } from '@/Application/Culture/Query/FetchCultureByCodeQuery'
 import { FetchCultureByCodeQueryHandler } from '@/Application/Culture/Query/FetchCultureByCodeQueryHandler'
-import { CultureNotFoundError } from '@/Domain/Character/Culture/CultureNotFoundError'
 import { beforeEach, vi, describe, test, expect } from 'vitest'
 
-const mockedRepository = {
-  fetchNames: vi.fn(),
+const mockedReadModel = {
   ofCode: vi.fn()
 }
 
@@ -12,7 +11,7 @@ describe('Testing FetchCultureByCodeQueryHandler', () => {
   let sut: FetchCultureByCodeQueryHandler
 
   beforeEach(() => {
-    sut = new FetchCultureByCodeQueryHandler(mockedRepository)
+    sut = new FetchCultureByCodeQueryHandler(mockedReadModel)
   })
   test('It should be of proper class', () => {
     expect(sut).toBeInstanceOf(FetchCultureByCodeQueryHandler)
@@ -21,7 +20,7 @@ describe('Testing FetchCultureByCodeQueryHandler', () => {
     expect(sut.handle(new FetchCultureByCodeQuery('asd'))).rejects.toThrow(TypeError)
   })
   test('It should throw error when race with code does not exists', () => {
-    mockedRepository.ofCode.mockRejectedValue(new CultureNotFoundError('Async test error'))
+    mockedReadModel.ofCode.mockRejectedValue(new CultureNotFoundError('Async test error'))
     expect(sut.handle(new FetchCultureByCodeQuery('DEEP_WARRENS'))).rejects.toThrow(CultureNotFoundError)
   })
   test('It should return proper Dto', async () => {
@@ -41,7 +40,7 @@ describe('Testing FetchCultureByCodeQueryHandler', () => {
         climbing: 2
       }
     }
-    mockedRepository.ofCode.mockResolvedValue(fakeDto)
+    mockedReadModel.ofCode.mockResolvedValue(fakeDto)
     const result = await sut.handle(new FetchCultureByCodeQuery('DEEP_WARRENS'))
     expect(result.code).not.toBeUndefined()
     expect(result.name).not.toBeUndefined()

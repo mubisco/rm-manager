@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { FetchAllRacesNamesQueryHandler } from '@/Application/Race/Query/FetchAllRacesNamesQueryHandler'
 import { RaceCode } from '@/Domain/Character/Race/RaceCode'
 import { FileRaceReadModel } from '@/Infrastructure/Character/Race/ReadModel/File/FileRaceReadModel'
-import { RaceName } from '@/Application/Race/Query/RaceName';
+import { RaceName } from '@/Application/Race/Query/RaceName'
 
 const props = defineProps<{ modelValue: RaceCode | null }>()
 const emit = defineEmits<{(eventName: 'update:modelValue', selectedRace: RaceCode): void }>()
