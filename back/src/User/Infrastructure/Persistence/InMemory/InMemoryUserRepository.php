@@ -14,8 +14,10 @@ use App\User\Domain\Username;
 use App\User\Domain\UserNotFoundException;
 use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
 use DateTimeImmutable;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-final class InMemoryUserRepository implements UserRepository
+final class InMemoryUserRepository implements UserRepository, UserProviderInterface
 {
     /** @var User[] */
     private array $users;
@@ -90,5 +92,26 @@ final class InMemoryUserRepository implements UserRepository
             throw new PasswordTokenExpiredException("Token {$token->value()} expired!!!");
         }
         return $userWithToken;
+    }
+
+    public function refreshUser(UserInterface $user): UserInterface
+    {
+        return $user;
+    }
+
+    public function supportsClass(string $class): bool
+    {
+        throw new \RuntimeException(sprintf('Implement %s', __METHOD__));
+    }
+
+    public function loadUserByIdentifier(string $identifier): UserInterface
+    {
+        /** @var DoctrineUser */
+        foreach ($this->users as $user) {
+            if ($user->user() == $identifier) {
+                return $user;
+            }
+        }
+        throw new UserNotFoundException("User {$identifier} not found!!!");
     }
 }

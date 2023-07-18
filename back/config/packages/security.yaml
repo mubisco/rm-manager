@@ -17,14 +17,17 @@ security:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
+    login:
+      pattern: ^/api/login
+      stateless: true
+      json_login:
+        check_path: /api/login_check
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
     api:
       pattern: ^/api
       stateless: true
       entry_point: jwt
-      json_login:
-        check_path: /api/login
-        success_handler: lexik_jwt_authentication.handler.authentication_success
-        failure_handler: lexik_jwt_authentication.handler.authentication_failure
       jwt: ~
       refresh_jwt:
         check_path: /api/token/refresh
@@ -54,3 +57,15 @@ when@test:
         cost: 4  # Lowest possible value for bcrypt
         time_cost: 3  # Lowest possible value for argon
         memory_cost: 10  # Lowest possible value for argon
+    providers:
+      inmemory_user_provider:
+        id: App\User\Infrastructure\Persistence\InMemory\InMemoryUserRepository
+    firewalls:
+      api:
+        jwt:
+          provider: inmemory_user_provider
+        refresh_jwt:
+          provider: inmemory_user_provider
+      login:
+        json_login:
+          provider: inmemory_user_provider

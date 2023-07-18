@@ -16,3 +16,8 @@ api_change_password:
   path: /api/user/password/change
   controller: App\User\Infrastructure\EntryPoint\Api\ChangePasswordController
   methods: PATCH
+
+api_character:
+  resource: 'routes/character_professions.yaml'
+  prefix: /api/{lang}/character
+  name_prefix: api_character_

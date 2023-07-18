@@ -1,0 +1,5 @@
+---
+profession_names:
+  path: /profession/names
+  controller: App\Character\Infrastructure\EntryPoint\Api\ProfessionNamesController::index
+  methods: GET
