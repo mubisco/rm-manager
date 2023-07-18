@@ -9,6 +9,7 @@ default:
         - App\Tests\acceptance\context\User\ResetPasswordContext
         - App\Tests\acceptance\context\User\ChangePasswordContext
         - App\Tests\acceptance\context\User\ChangePasswordConsoleCommandContext
+        - App\Tests\acceptance\context\Character\Professions\ProfessionNamesContext
 
   extensions:
     FriendsOfBehat\SymfonyExtension:
