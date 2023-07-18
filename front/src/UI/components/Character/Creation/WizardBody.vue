@@ -2,7 +2,7 @@
 import ProfessionStep from '@/UI/components/Character/Creation/Profession/ProfessionStep.vue'
 import StatsCreationStep from '@/UI/components/Character/Creation/Stats/StatsCreationStep.vue'
 import RaceCultureStep from '@/UI/components/Character/Creation/Race/RaceCultureStep.vue'
-import SkillsSelector from '@/UI/components/Character/Creation/SkillsSelector.vue'
+import SkillsSelector from '@/UI/components/Character/Creation/Skills/SkillsSelector.vue'
 import EquipmentSelector from '@/UI/components/Character/Creation/EquipmentSelector.vue'
 import FinalTouches from '@/UI/components/Character/Creation/FinalTouches.vue'
 
