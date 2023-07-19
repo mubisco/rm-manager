@@ -2,9 +2,11 @@
 
 namespace App\Tests\unit\Character\Infrastructure\Persistence\File;
 
+use App\Character\Domain\Profession\ProfessionCode;
 use App\Character\Domain\Profession\ProfessionLanguage;
 use App\Character\Domain\Profession\ProfessionNamesReadException;
 use App\Character\Domain\Profession\ProfessionNamesReadModel;
+use App\Character\Domain\Profession\ProfessionReadModel;
 use App\Character\Infrastructure\Persistence\File\FileProfessionNamesReadModel;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -17,6 +19,7 @@ class FileProfessionNamesReadModelTest extends TestCase
         $sut = new FileProfessionNamesReadModel(__DIR__ . '/example.json');
         $this->assertInstanceOf(FileProfessionNamesReadModel::class, $sut);
         $this->assertInstanceOf(ProfessionNamesReadModel::class, $sut);
+        $this->assertInstanceOf(ProfessionReadModel::class, $sut);
     }
 
     /** @test */
@@ -56,5 +59,21 @@ class FileProfessionNamesReadModelTest extends TestCase
             $itemResult = $result[$key];
             $this->assertEqualsCanonicalizing($item, $itemResult);
         }
+    }
+
+    /** @test */
+    public function itShouldReturnProperDataOfSingleProfession(): void
+    {
+        $sut = new FileProfessionNamesReadModel(__DIR__ . '/example.json');
+        $result = $sut->ofCode(
+            ProfessionLanguage::fromString('es'),
+            ProfessionCode::MONK
+        );
+        $this->assertIsArray($result);
+        $this->assertEquals($result['code'], 'monk');
+        $this->assertStringStartsWith(
+            'Un maestro del cuerpo, el Monje es, bastante literiamente',
+            $result['description']
+        );
     }
 }

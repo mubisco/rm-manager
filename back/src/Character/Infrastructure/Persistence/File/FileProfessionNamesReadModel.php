@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace App\Character\Infrastructure\Persistence\File;
 
+use App\Character\Domain\Profession\ProfessionCode;
 use App\Character\Domain\Profession\ProfessionLanguage;
 use App\Character\Domain\Profession\ProfessionNamesReadException;
 use App\Character\Domain\Profession\ProfessionNamesReadModel;
+use App\Character\Domain\Profession\ProfessionNotFoundException;
+use App\Character\Domain\Profession\ProfessionReadModel;
 use InvalidArgumentException;
 use JsonException;
 
-final class FileProfessionNamesReadModel implements ProfessionNamesReadModel
+final class FileProfessionNamesReadModel implements ProfessionNamesReadModel, ProfessionReadModel
 {
     public function __construct(private readonly string $jsonDataFilePath)
     {
@@ -72,5 +75,36 @@ final class FileProfessionNamesReadModel implements ProfessionNamesReadModel
             'code' => (string) $item['code'],
             'name' => (string) $item['name'][$lang->value()]
         ];
+    }
+
+    public function ofCode(ProfessionLanguage $lang, ProfessionCode $code): array
+    {
+        $simpleProfession = $this->filterByCode($code);
+        return $this->filterTranslations($simpleProfession, $lang);
+    }
+    /**
+     * @return array<string,mixed>
+     */
+    private function filterByCode(ProfessionCode $code): array
+    {
+        $data = $this->parseFileContent();
+        foreach ($data as $item) {
+            if ($item['code'] == $code->value) {
+                return $item;
+            }
+        }
+        throw new ProfessionNotFoundException("{$code->value} not found inside data");
+    }
+    /**
+     * @param array<string,mixed> $dataItem
+     * @return array<string,mixed>
+     */
+    private function filterTranslations(array $dataItem, ProfessionLanguage $lang): array
+    {
+        $dataItem['name'] = $dataItem['name'][$lang->value()];
+        $dataItem['description'] = $dataItem['description'][$lang->value()];
+        $dataItem['professionalAbilities'] = $dataItem['professionalAbilities'][$lang->value()];
+        $dataItem['notes'] = $dataItem['notes'][$lang->value()];
+        return $dataItem;
     }
 }
