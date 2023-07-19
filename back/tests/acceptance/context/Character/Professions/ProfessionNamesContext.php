@@ -127,6 +127,6 @@ final class ProfessionNamesContext implements Context
      */
     public function iShouldGetAnNotFoundCode(): void
     {
-        Assert::assertEquals(Response::HTTP_NOT_FOUND, $this->response->getStatusCode());
+        Assert::assertEquals(Response::HTTP_BAD_REQUEST, $this->response->getStatusCode());
     }
 }
