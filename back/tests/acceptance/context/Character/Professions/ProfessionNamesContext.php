@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\acceptance\context\Character\Professions;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use App\User\Domain\UserRepository;
 use App\User\Infrastructure\Persistence\Doctrine\DoctrineUser;
 use Behat\Behat\Context\Context;
@@ -111,5 +112,21 @@ final class ProfessionNamesContext implements Context
             ["code" => "warriorMage", "name" =>  "Warrior Mage"]
         ];
         Assert::assertEqualsCanonicalizing($expectedResult, $parsedResponse);
+    }
+
+    /**
+     * @Then I should get profession data response
+     */
+    public function iShouldGetProfessionDataResponse(): void
+    {
+        Assert::assertEquals(Response::HTTP_OK, $this->response->getStatusCode());
+    }
+
+    /**
+     * @Then I should get an not-found code
+     */
+    public function iShouldGetAnNotFoundCode(): void
+    {
+        Assert::assertEquals(Response::HTTP_NOT_FOUND, $this->response->getStatusCode());
     }
 }
