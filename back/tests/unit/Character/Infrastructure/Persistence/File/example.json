@@ -1,0 +1,117 @@
+[
+  {
+    "code": "cleric",
+    "name": {"es": "Clérigo", "en": "Cleric"},
+    "description": "El Clérigo es un sacerdote y un sabio que ha dominado el uso de la magia divina. Los Clérigos generalmente rinden homenaje a una deidad, aunque algunos adoran panteones completos. Los conjuros de un Clérigo reflejan la naturaleza de su dios. Mientras muchos permanecen enclaustrados y resguardados en monasterios, una parte de ellos se ha convertido en aventureros, deambulando de lugar en lugar, predicando las palabras de su deidad a los infieles.",
+    "keyStats": ["IN", "RE"],
+    "fixedCategories": {"general": 3, "mystical": 8, "physical": 3},
+    "freeCategories": { "quantity": 2, "ranks": 3 },
+    "professionalAbilities": [
+      "Un Clérigo puede seleccionar 20 conjuros para conformar su lista básica, pero al menos cinco de esos conjuros deben provenir de la esfera del Clérigo.",
+      "Cualquier lista básica de conjuros seleccionada por el Clérigo debe estar alineada con los intereses de su deidad. El Clérigo puede también seleccionar dos categorías como Categorías Favorecidas, bajo la aprobación del DJ, basándose en los intereses de su deidad.",
+      "Empezando en el 1er nivel y luego por cada 7o nivel en adelante (p.ej., 7o, 14o, etc.), un Clérigo recibe una bonificación de + 10 para cualquier habilidad de las categorías de su elección. Ninguna habilidad puede tener más que una bonificación de +30 para esta capacidad."
+    ],
+    "notes": [
+      "La selección de la categoría de habilidad Combate como Categoría Favorecida significa que el Clérigo puede considerarse un Paladín o Guerrero Santo de esa deidad, o un Sacerdote de un Dios de la Guerra.",
+      "Los Jugadores deberían consultar a su Director de Juego para determinar si alguna variación digna de destacar ha sido ya aplicada en el escenario – muchos DJs habrán creado sus propias órdenes religiosas y esferas de conjuros para las deidades y religiones de su mundo. El DJ es el árbitro final para determinar qué conjuros pueden o no ser apropriados."
+    ]
+  },
+  {
+    "code": "fighter",
+    "name": {"es": "Luchador", "en": "Fighter"},
+    "description": "El Luchador se gana la vida con su habilidad en las armas, viviendo para la emoción del combate. Los Luchadores se encuentran normalmente en la línea de frente de cualquier lucha, y favorecen la fuerza y la rapidez del cuerpo más allá de agudizar una mente delicada. Ocupan todos los caminos de la vida: desde caballeros en la corte de un rey, o soldados que completan los puestos en el ejército de la nación, o como matones asaltando carros para lucrarse.",
+    "keyStats": ["ST", "AG", "CO", "QU"],
+    "fixedCategories": {"athletic": 2, "combat": 8, "general": 2, "physical": 8},
+    "freeCategories": { "quantity": 0, "ranks": 0 },
+    "professionalAbilities": [
+      "Todos los Luchadores pueden escoger dos capacidades de la siguiente lista: Tiro Cercano, Reflejos de Relámpago, Adiestramiento de Escudo y Veloz en Cargar.",
+      "Comenzando en el primer nivel, y luego por cada quinto nivel en adelante (5o, 10o, etc.), los Luchadores obtienen una bonificación de +10 a cualquier habilidad de Combate de su elección. Ninguna habilidad en armas puede tener una bonificación de más de +30 para esta capacidad. Comenzando en el primer nivel, y luego por cada tercer nivel en adelante (3o, 6o, etc.), los Luchadores obtienen también una bonificación de +5 para una habilidad cualquiera de las categorías de Atletismo o de Físicas. Ninguna habilidad puede tener una bonificación mayor de +25 para esta capacidad."
+    ],
+    "notes": []
+  },
+  {
+    "code": "harper",
+    "name": {"es": "Harpista", "en": "Harper"},
+    "description": "Tanto en el aprendizaje del saber como en la narración de relatos de tierras salvajes, el Arpista trabaja una clase especial de magia para ayudar a apoyar sus interpretaciones. Ya que muchos Arpistas son también caminantes errantes por naturaleza, nunca se demoran en una área demasiado tiempo, subsisten únicamente por la generosidad de sus audiencias. Los Arpistas son atraídos por la aventura como polillas por la llama, por cada experiencia, cada nuevo paso a lo largo del camino, tienen otra maravillosa historia que anotar.",
+    "keyStats": ["RE", "IN", "PR"],
+    "fixedCategories": {"artistic": 4, "combat": 3, "influence": 4, "general": 3, "physical": 3, "mystical": 3},
+    "freeCategories": { "quantity": 0, "ranks": 0 },
+    "professionalAbilities": [
+      "Los Arpistas pueden aprender cualquier conjuro que se encuentre en la esfera del Arpista. Comenzando en el primer nivel, y desde ahí por cada séptimo nivel en adelante (7o, 14o, etc), los Arpistas obtienen una bonificación de +10 para cualquier habilidad Artística o en la habilidad de Saber Mundano, a su elección. Ninguna habilidad puede tener una bonificación mayor de +30 para esta capacidad."
+    ],
+    "notes": []
+  },
+  {
+    "code": "mage",
+    "name": {"es": "Mago", "en": "Mage"},
+    "description": "Un tejedor sin igual de magia, un Mago es tanto un poderoso lanzador de conjuros como un portador de conocimiento secreto. Los Magos han sacrificado incontables horas (y a veces más que mero tiempo) para lograr su maestría en magia. Al depender del intenso estudio, la magia no es un simple talento, sino una habilidosa arte que ha sido pulida hacia la perfección. Muchos son buscadores de poder y conocimiento. A los Magos se les llama también Practicantes de Magia.",
+    "keyStats": ["RE", "IN"],
+    "fixedCategories": {"artistic": 2, "influence": 2, "mystical": 10, "general": 4, "physical": 2},
+    "freeCategories": { "quantity": 0, "ranks": 0 },
+    "professionalAbilities": [
+      "Los Magos pueder obtener cualquier conjuro de la esfera del Mago (también conocida como Círculo de Magia). Todos los Magos tienen el Talento de Sentir Magia y la capacidad de Versatilidad del Practicante de Magia. Véase abajo la nota Versatilidad del Practicante de Magia para información adicional sobre esta capacidad."
+    ],
+    "notes": []
+  },
+  {
+    "code": "monk",
+    "name": {"es": "Monje", "en": "Monk"},
+    "description": "Un maestro del cuerpo, el Monje es, bastante literiamente, un arma viviente. Capaz de exceder las limitaciones normales del mortal a través de un rigoroso adiestramiento marcial e intensos niveles de disciplina, aprendiendo cómo externalizar su energía Chi de variadas maneras, un Monje probablemente vea cualquier aventura como una prueba personal. A lo largo del camino un Monje buscará ávidamente oportunidades para avanzar en su entendimiento del mundo circundante, mientras que al mismo tiempo recorre la rígida senda de su disciplina.",
+    "keyStats": ["PR", "SD", "QU"],
+    "fixedCategories": {"athletic": 4, "combat": 5, "general": 3, "physical": 3, "concentration": 5},
+    "freeCategories": { "quantity": 0, "ranks": 0 },
+    "professionalAbilities": [
+      "Comenzando en el primer nivel, y desde ahí por cada quinto nivel en adelante (5o, 10o, etc.), los Monjes obtienen una bonificación de +10 para cualquier estilo de Artes Marciales o habilidad Chi de su elección. Ninguna habilidad o estilo puede tener más que una bonificación de +30 para esta capacidad. Comenzando también en el primer nivel, y luego por cada tercer nivel en adelante (3o, 6o, etc.), la penalización por usar Defensa Chi se reduce en 5 puntos (hasta un mínimo de cero). Los ataques de Artes Marciales en el Monje son Ataques Medios más que Ataques Pequeños. Véase Ataques de Monje debajo para información adicional sobre las capacidades de ataque de Artes Marciales en el Monje."
+    ],
+    "notes": []
+  },
+  {
+    "code": "ranger",
+    "name": {"es": "Explorador", "en": "Ranger"},
+    "description": "Como en casa en medio de las tierras salvajes, el Explorador es un amigo de la naturaleza. Muchos Exploradores aceptan el papel de guardianes, vigilando a aquellos que viven o viajan por tierras remotas. Los Exploradores tienen las habilidades necesarias para sobrevivir indefinidamente en tierras salvajes, y – en su elemento – pueden incluso moverse sin ser detectados. Muchos son también feroces guerreros de habilidad sin par, capaces de usar el terreno circundante en su ventaja.",
+    "keyStats": ["IN", "ST", "AG"],
+    "fixedCategories": {"outdoor": 6, "combat": 4, "mystical": 3, "general": 3, "subterfuge": 2, "physical": 2},
+    "freeCategories": { "quantity": 0, "ranks": 0 },
+    "professionalAbilities": [
+      "Los Exploradores pueden aprender cualquier conjuro de la esfera del Explorador. Comenzando en el primer nivel, y luego por cada séptimo nivel en adelante (7o, 14o, etc.), los Exploradores obtienen una bonificación +10 para cualquier habilidad de Exteriores de su elección. Ninguna habilidad puede tener más que una bonificación de +30 para esta capacidad."
+    ],
+    "notes": []
+  },
+  {
+    "code": "rogue",
+    "name": {"es": "Bribón", "en": "Rogue"},
+    "description": "A menudo vistos como aprendices de todo, el Bribón es uno de los personajes más versátiles de todos. Los Bribones son generalmente habilidosos realizando tareas que nadie quiere realizar, o encontrando entradas a lugares no permitidos a nadie. Para un Bribón todo se considera un desafío.",
+    "keyStats": ["IN", "ST", "AG"],
+    "fixedCategories": {"athletic": 3, "combat": 3, "mystical": 2, "outdoor": 3, "general": 3, "physical": 3, "subterfuge": 3},
+    "freeCategories": { "quantity": 0, "ranks": 0 },
+    "professionalAbilities": [
+      "Comenzando en el primer nivel, y luego por cada tercer nivel en adelante (3o, 6o, etc), los Bribones obtienen una bonificación de +5 para cualquier habilidad de sus Categorías Favorecidas. Ninguna habilidad puede tener una bonificación mayor de +25 para esta capacidad."
+    ],
+    "notes": []
+  },
+  {
+    "code": "thief",
+    "name": {"es": "Ladrón", "en": "Thief"},
+    "description": "Un Ladrón es un maestro del subterfugio y el engaño. Habilidoso en las artes del hurto, el Ladrón hace del aligerarle la bolsa a un noble una tarea simple. Se les encuentra en cada esquina del mundo: a los Ladrones les atraen las áreas de comercio, pero son rápidos a la hora de unirse a una aventura, ya que encuentran difícil resistir el señuelo del oro o del tesoro.",
+    "keyStats": ["IN", "ST", "AG"],
+    "fixedCategories": {"athletic": 3, "combat": 3, "subterfuge": 6, "influence": 2, "general": 3, "physical": 3},
+    "freeCategories": { "quantity": 0, "ranks": 0 },
+    "professionalAbilities": [
+      "Los Ladrones pueden escoger uno de los siguientes talentos: Adiestramiento de Asesino, Maestro Ratero o Maestro Carterista. Comenzando en el primer nivel, y luego por cada quinto nivel (5o, 10o, etc.), los Ladrones obtienen una bonificación de +10 para cualquier habilidad de Subterfugio de su elección. Ninguna habilidad puede tener más que una bonificación mayor de +30 para esta capacidad."
+    ],
+    "notes": []
+  },
+  {
+    "code": "warriorMage",
+    "name": {"es": "Mago Guerrero", "en": "Warrior Mage"},
+    "description": "El Mago Guerrero salta audazmente entre dos mundos, Luchador y Mago a partes iguales. Se especializa en magia que ayuda y amplía sus capacidades marciales naturales. Un Mago Guerrero también mantiene un repertorio de conjuros que le dan la necesaria ventaja sobre sus adversarios.",
+    "keyStats": ["RE", "ST", "AG"],
+    "fixedCategories": {"combat": 6, "mystical": 6, "general": 3, "physical": 5},
+    "freeCategories": { "quantity": 0, "ranks": 0 },
+    "professionalAbilities": [
+      "Los Magos Guerreros pueden aprender conjuros de la esfera del Mago Guerrero. En el nivel 1o, los Magos Guerreros obtienen los Magos Guerreros obtienen una bonificación de +10 para una habilidad cualquiera de su elección. Comenzando en el primer nivel, y luego por cada séptimo nivel (7o, 14o, etc) los Magos Guerreros obtienen una bonificación de +10 para una habilidad cualquiera de Combate de su elección. Ninguna habilidad de Combate puede tener más que una bonificación de +30 para esta capacidad."
+    ],
+    "notes": []
+  }
+]
+

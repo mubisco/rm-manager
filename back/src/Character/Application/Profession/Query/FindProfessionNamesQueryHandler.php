@@ -16,7 +16,7 @@ class FindProfessionNamesQueryHandler implements QueryHandlerInterface
     {
     }
     /**
-     * @return array<int, string>
+     * @return array<int, mixed>
      * @throws InvalidArgumentException
      * @throws ProfessionNamesReadException
      */

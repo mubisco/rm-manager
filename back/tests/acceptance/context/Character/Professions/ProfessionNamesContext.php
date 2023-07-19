@@ -97,10 +97,19 @@ final class ProfessionNamesContext implements Context
     {
         $content = $this->response->getContent();
         Assert::assertEquals(Response::HTTP_OK, $this->response->getStatusCode());
-        // ['code' => 'cleric', 'name' => 'Clérigo']
         $content = $content ? $content : '';
         $parsedResponse = json_decode($content, true, JSON_THROW_ON_ERROR);
-        Assert::assertIsArray($parsedResponse);
-        Assert::assertCount(7, $parsedResponse);
+        $expectedResult = [
+            ["code" => "cleric", "name" =>  "Cleric"],
+            ["code" => "fighter", "name" =>  "Fighter"],
+            ["code" => "harper", "name" =>  "Harper"],
+            ["code" => "mage", "name" =>  "Mage"],
+            ["code" => "monk", "name" =>  "Monk"],
+            ["code" => "ranger", "name" =>  "Ranger"],
+            ["code" => "rogue", "name" =>  "Rogue"],
+            ["code" => "thief", "name" =>  "Thief"],
+            ["code" => "warriorMage", "name" =>  "Warrior Mage"]
+        ];
+        Assert::assertEqualsCanonicalizing($expectedResult, $parsedResponse);
     }
 }
