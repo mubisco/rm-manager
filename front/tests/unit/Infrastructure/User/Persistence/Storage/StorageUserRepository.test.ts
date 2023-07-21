@@ -1,5 +1,6 @@
 import { User } from '@/Domain/User/User'
 import { Username } from '@/Domain/User/Username'
+import { UserNotFoundError } from '@/Domain/User/UserNotFoundError'
 import { UserRole } from '@/Domain/User/UserRole'
 import { StorageUserRepository } from '@/Infrastructure/User/Persistence/Storage/StorageUserRepository'
 import { describe, test, expect } from 'vitest'
@@ -35,5 +36,27 @@ describe('Testing StorageUserRepository', () => {
     expect(rawData).toBeNull()
     const token = localStorage.getItem('refreshToken')
     expect(token).toBeNull()
+  })
+
+  test('Should throw error when user not found', () => {
+    const sut = new StorageUserRepository()
+    expect(sut.get()).rejects.toThrowError(UserNotFoundError)
+  })
+
+  test('Should return proper user when exists', async () => {
+    const sut = new StorageUserRepository()
+    const userData = {
+      username: 'mubisco',
+      role: 'USER',
+      token: 'aVeryLargeToken'
+    }
+    localStorage.setItem('userData', JSON.stringify(userData))
+    localStorage.setItem('refreshToken', 'anotherVeryLargeToken')
+    const user = await sut.get()
+    expect(user).toBeInstanceOf(User)
+    expect(user.username()).toBe('mubisco')
+    expect(user.role()).toBe(UserRole.USER)
+    expect(user.token()).toBe('aVeryLargeToken')
+    expect(user.refreshToken()).toBe('anotherVeryLargeToken')
   })
 })
