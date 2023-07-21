@@ -8,8 +8,8 @@ const baseApiUrl = import.meta.env.VITE_API_URL
 export class AxiosProfessionReadModel implements ProfessionNameReadModel {
   async fetchNames (): Promise<ProfessionName[]> {
     try {
-      const response = await axios.get(baseApiUrl + '/api/es/character/profession/names')
-      return Promise.resolve(response)
+      const response = await axios.get<ProfessionName[]>(baseApiUrl + '/api/es/character/profession/names')
+      return Promise.resolve(response.data)
     } catch (err: unknown) {
       const error = err as AxiosError
       throw new ProfessionNameReadModelError(error.message)

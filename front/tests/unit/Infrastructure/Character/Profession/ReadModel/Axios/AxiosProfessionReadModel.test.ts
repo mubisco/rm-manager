@@ -47,8 +47,8 @@ describe('Testing AxiosProfessionReadModel', () => {
   test('Should return proper values', async () => {
     axios.get.mockResolvedValue({ data: professionNamesData })
     const result = await sut.fetchNames()
-    expect(result.data).toHaveLength(3)
-    result.data.forEach((item: ProfessionName) => {
+    expect(result).toHaveLength(3)
+    result.forEach((item: ProfessionName) => {
       expect(item.code).toBeDefined()
       expect(item.name).toBeDefined()
       expect(Object.values(ProfessionCode).includes(item.code)).toBeTruthy()
