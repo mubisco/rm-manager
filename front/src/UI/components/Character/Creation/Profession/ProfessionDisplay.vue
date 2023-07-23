@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import ProfessionAbilities from './ProfessionAbilities.vue'
 import ProfessionFavored from './ProfessionFavored.vue'
 import { FetchProfessionByCodeQueryHandler } from '@/Application/Profession/Query/FetchProfessionByCodeQueryHandler'
@@ -16,6 +16,10 @@ const loadProfessionDetails = async () => {
   const query = new FetchProfessionByCodeQuery(props.professionKey)
   professionData.value = await handler.handle(query)
 }
+
+onMounted(() => {
+  loadProfessionDetails()
+})
 
 watch(() => props.professionKey, () => {
   loadProfessionDetails()
