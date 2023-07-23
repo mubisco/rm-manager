@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { FetchAllProfessionNamesQueryHandler } from '@/Application/Profession/Query/FetchAllProfessionNamesQueryHandler'
-import { FileProfessionReadModel } from '@/Infrastructure/Character/Profession/ReadModel/File/FileProfessionReadModel'
+import { ProfessionNamesQueryHandlerProvider } from '@/Infrastructure/Character/Provider/ProfessionNamesQueryHandlerProvider'
 import { ProfessionName } from '@/Application/Profession/Query/ProfessionName'
 import { ProfessionCode } from '@/Domain/Character/Profession/ProfessionCode'
 
@@ -14,7 +13,8 @@ const value = ref(props.modelValue ?? '')
 const emit = defineEmits<{(eventName: 'update:modelValue', selectedProfession: string): ProfessionCode }>()
 
 onMounted(async () => {
-  const handler = new FetchAllProfessionNamesQueryHandler(new FileProfessionReadModel())
+  const provider = new ProfessionNamesQueryHandlerProvider()
+  const handler = provider.provide()
   professionNames.value = await handler.handle()
 })
 
