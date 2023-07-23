@@ -16,14 +16,25 @@ const currentStep = ref(0)
         :current-step="currentStep"
       />
     </v-card-text>
-    <v-card-actions class="justify-space-between">
+    <v-card-actions
+      :class="currentStep == 0 ? 'justify-end' : 'justify-space-between'"
+    >
       <v-btn
+        v-show="currentStep > 0"
         @click="currentStep--"
       >
-        Anterior
+        {{ $t('character.creation.previous') }}
       </v-btn>
-      <v-btn @click="currentStep++">
-        Siguiente
+      <v-btn
+        v-if="currentStep < 6"
+        @click="currentStep++"
+      >
+        {{ $t('character.creation.next') }}
+      </v-btn>
+      <v-btn
+        v-else
+      >
+        {{ $t('character.creation.finish') }}
       </v-btn>
     </v-card-actions>
   </v-card>

@@ -31,6 +31,11 @@
     "error": "Error loading token, please try to reset again"
   },
   "character": {
+    "creation": {
+      "previous": "Previous",
+      "next": "Next",
+      "finish": "Finish",
+    },
     "tabs": {
       "summary": "Summary",
       "skills": "Skills",
