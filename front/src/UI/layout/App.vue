@@ -1,17 +1,22 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onBeforeMount } from 'vue'
 import { storeToRefs } from 'pinia'
 import NavigationBar from './NavigationBar.vue'
 import GlobalSnackbar from './GlobalSnackbar.vue'
 import DrawerContent from './DrawerContent.vue'
 import DiceBag from '@/UI/components/DiceBag/DiceBag.vue'
 import { useDicebagStore } from '@/UI/stores/dicebag'
+import { useUserStore } from '@/UI/stores/user'
 
 const rightDrawerOpened = ref(false)
 const drawerOpened = ref(false)
 const dicebagStore = useDicebagStore()
 const { dicebagDefinition } = storeToRefs(dicebagStore)
+const userStore = useUserStore()
 
+onBeforeMount(() => {
+  userStore.refresh()
+})
 watch(dicebagDefinition, () => {
   rightDrawerOpened.value = dicebagStore.dicebagDefinition !== ''
 })
