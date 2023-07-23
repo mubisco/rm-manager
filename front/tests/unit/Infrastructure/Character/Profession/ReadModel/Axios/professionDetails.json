@@ -1,0 +1,25 @@
+{
+  "code": "monk",
+  "name": "Monje",
+  "description": "Un maestro del cuerpo, el Monje es, bastante literiamente, un arma viviente. Capaz de exceder las limitaciones normales del mortal a trav\u00e9s de un rigoroso adiestramiento marcial e intensos niveles de disciplina, aprendiendo c\u00f3mo externalizar su energ\u00eda Chi de variadas maneras, un Monje probablemente vea cualquier aventura como una prueba personal. A lo largo del camino un Monje buscar\u00e1 \u00e1vidamente oportunidades para avanzar en su entendimiento del mundo circundante, mientras que al mismo tiempo recorre la r\u00edgida senda de su disciplina.",
+  "keyStats": [
+    "PR",
+    "SD",
+    "QU"
+  ],
+  "fixedCategories": {
+    "athletic": 4,
+    "combat": 5,
+    "general": 3,
+    "physical": 3,
+    "concentration": 5
+  },
+  "freeCategories": {
+    "quantity": 0,
+    "ranks": 0
+  },
+  "professionalAbilities": [
+    "Comenzando en el primer nivel, y desde ah\u00ed por cada quinto nivel en adelante (5o, 10o, etc.), los Monjes obtienen una bonificaci\u00f3n de +10 para cualquier estilo de Artes Marciales o habilidad Chi de su elecci\u00f3n. Ninguna habilidad o estilo puede tener m\u00e1s que una bonificaci\u00f3n de +30 para esta capacidad. Comenzando tambi\u00e9n en el primer nivel, y luego por cada tercer nivel en adelante (3o, 6o, etc.), la penalizaci\u00f3n por usar Defensa Chi se reduce en 5 puntos (hasta un m\u00ednimo de cero). Los ataques de Artes Marciales en el Monje son Ataques Medios m\u00e1s que Ataques Peque\u00f1os. V\u00e9ase Ataques de Monje debajo para informaci\u00f3n adicional sobre las capacidades de ataque de Artes Marciales en el Monje."
+  ],
+  "notes": []
+}
